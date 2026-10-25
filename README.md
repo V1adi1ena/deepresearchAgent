@@ -72,7 +72,7 @@
 
 - 基于 `asyncio` + `Semaphore` 实现 **DAG 拓扑并发执行**
 - **9 状态状态机**：IDLE → PLANNING → DISPATCHING → COLLECTING → SYNTHESIZING → ADVERSARIAL → DONE
-- **三级降级策略**：单任务超时标记继续 → >50% 失败触发 replan → 全局超时强制合成
+- **分级降级策略**：任务超时与失败依赖按规则处理 → 失败比例触发有界 replan → 在收尾预算内合成部分报告，否则返回已有结果和未完成原因
 
 ### ⚔️ 2. Red-Blue 对抗降噪 —— 主动抑制幻觉
 
@@ -96,7 +96,7 @@
 - 写前自动**去重**（cosine > 0.92）
 - **矛盾检测**：启发式反义词 + 语义对立识别
 - 三种**矛盾消解策略**：Majority Vote / Source Weight / LLM Judge
-- **Session 隔离**：不同用户/会话的记忆物理隔离
+- **Session 隔离**：共享 SQLite 中按会话逻辑过滤，并以运行/任务作用域管理结果；不等同于物理数据库隔离
 
 ### 🔌 5. 多后端 LLM 路由 —— 零源码切换模型
 
@@ -118,7 +118,7 @@ model:
 
 ### 📊 6. 完整的深度研究评测体系
 
-> 不做"跑几个例子看看"的评测，做**可复现、可量化、有统计显著性**的评测。
+> 评测入口与统计工具已提供；有效结论需要对应样本、配置与原始记录。本轮仅做离线回归和组件核验，不声明统计显著性。
 
 | 评测层级                        | 方法                                          | 特点                              |
 | ------------------------------- | --------------------------------------------- | --------------------------------- |
@@ -127,18 +127,20 @@ model:
 | 🏗️ **自建评测集**       | ResearchBench 35 题 × 11 领域                | 含 expected_topics + ground_truth |
 | 👨‍⚖️ **LLM-as-Judge** | MiMo 5 维度 0-10 分深度评分                   | 定性+定量互补                     |
 | 🥊 **Head-to-Head**       | Agent vs 单轮 LLM 直接对比                    | pairwise 更可靠                   |
-| 📈 **统计显著性**         | Bootstrap 95% CI + Cohen's d + t-test         | 拒绝"随机波动"                    |
+| 📈 **统计工具**           | Bootstrap CI + Cohen's d + t-test             | 预留分析能力，不代表已有显著性结论 |
 
 ---
 
 ## 🚀 快速开始
+
+当前代码与验证范围见 [实施记录](docs/implementation-status.md)：最新 55 个离线测试通过，真实 embedding 与合成错值审查已有记录；首次多题运行暴露了环境依赖、空输出及验收判定问题，已修复并重新验证，尚无多题效果收益结论。测试与验证脚本使用独立数据库和目录。
 
 ### 环境准备
 
 ```bash
 # 1. 克隆项目
 git clone https://github.com/qiqihezh/deepresearch-agent.git
-cd deep_research_agent
+cd deepresearch-agent
 
 # 2. 创建 uv 虚拟环境并激活
 uv venv .venv
@@ -148,11 +150,21 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 # 4. 配置 API Key（复制模板后填入）
-cp .env.example .env
+cp .env.template .env
 # 编辑 .env：填入 DEEPSEEK_API_KEY、BOCHA_API_KEY 等
 ```
 
 ### 三种运行方式
+
+本机 Windows 若 `.venv` 解释器写入被拒绝，可在项目根目录使用匹配 Python 版本的 `(base)` 环境：
+
+```powershell
+python scripts/run_interview_checks.py --smoke --timeout 90
+python scripts/run_interview_checks.py --count 1 --compare 1 --timeout 90
+python scripts/run_interview_checks.py --question-id tech_002 --count 1 --compare 0 --timeout 90
+```
+
+检查入口和 `run_single.py` 会加载 `.venv/Lib/site-packages` 中已安装的项目依赖，无需激活 `.venv`。完整检查会先核验真实 embedding；`technical_chain_success` 要求完整非空报告、来源、任务完成、无执行异常以及所需审查完成，不代表事实和引用已人工核验。运行记录保存在 `docs/runs`。
 
 **🎯 单条 Query（单次深度研究）**
 
@@ -252,7 +264,7 @@ deep_research_agent/
 - [X] 语义级上下文压缩
 - [X] 跨 Agent 共享记忆
 - [X] 多后端 LLM 路由
-- [X] 完整评测体系（规则 + Judge + 统计显著性）
+- [X] 评测入口与指标口径修复（规则 + 可选 Judge；效果结论另行验收）
 - [X] REPL 交互式会话
 - [ ] 实验结果填充（进行中 🔥）
 - [ ] Web UI（Gradio/Streamlit）
