@@ -1,15 +1,5 @@
 <div align="center">
 
-# 🚀 DeepResearch Agent
-
-### *从复杂 Query 到结构化深度研究报告，全链路自动化*
-
-[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Async](https://img.shields.io/badge/Async-asyncio-orange.svg)](https://docs.python.org/3/library/asyncio.html)
-
-</div>
-
 ---
 
 ## 📖 项目背景
@@ -29,6 +19,7 @@
 > **"如果一个 Agent 只能回答简单问题，那它和搜索引擎有什么区别？"**
 
 我们的动机是：**让 AI 真正具备"深度研究"的能力**——不只是检索信息，而是像人类研究员一样：
+
 - 🧩 **拆解复杂问题** → 将模糊的研究目标分解为可执行的子任务
 - 🔍 **多源信息整合** → 从网页、论文、数据库等多渠道收集证据
 - ⚖️ **批判性审视** → 主动发现并修正报告中的错误和偏见
@@ -40,14 +31,14 @@
 
 ### 六大模块协同工作
 
-| 模块 | 职责 | 核心技术 |
-|------|------|---------|
-| 🎛️ **M1 Orchestrator** | 多智能体编排与调度 | 自研 asyncio + DAG 执行引擎，9 状态状态机 |
-| 🗺️ **M2 Planner** | 复杂问题拆解 | JSON DAG 动态规划，支持执行中 replan |
-| 🗜️ **M3 Compressor** | 长上下文压缩 | Embedding 语义三级过滤 + TextRank 关键句提取 |
-| 🧠 **M4 Memory Store** | 跨 Agent 共享记忆 | SQLite + numpy 向量索引，去重/矛盾检测/LRU 淘汰 |
-| ⚔️ **M5 Adversarial Loop** | 对抗降噪 | Red-Blue 循环攻击-修复，内置收敛与震荡检测 |
-| 🧬 **M6 Evolution Engine** | 在线自进化 | GRPO 强化学习 + 符号规则学习（预留接口） |
+| 模块                               | 职责               | 核心技术                                        |
+| ---------------------------------- | ------------------ | ----------------------------------------------- |
+| 🎛️ **M1 Orchestrator**     | 多智能体编排与调度 | 自研 asyncio + DAG 执行引擎，9 状态状态机       |
+| 🗺️ **M2 Planner**          | 复杂问题拆解       | JSON DAG 动态规划，支持执行中 replan            |
+| 🗜️ **M3 Compressor**       | 长上下文压缩       | Embedding 语义三级过滤 + TextRank 关键句提取    |
+| 🧠 **M4 Memory Store**       | 跨 Agent 共享记忆  | SQLite + numpy 向量索引，去重/矛盾检测/LRU 淘汰 |
+| ⚔️ **M5 Adversarial Loop** | 对抗降噪           | Red-Blue 循环攻击-修复，内置收敛与震荡检测      |
+| 🧬 **M6 Evolution Engine**   | 在线自进化         | GRPO 强化学习 + 符号规则学习（预留接口）        |
 
 ### 数据流全景
 
@@ -129,14 +120,14 @@ model:
 
 > 不做"跑几个例子看看"的评测，做**可复现、可量化、有统计显著性**的评测。
 
-| 评测层级 | 方法 | 特点 |
-|---------|------|------|
-| 📏 **规则指标** | 事实准确率 / 幻觉率 / 引用覆盖率 / 逻辑一致性 | 免费、可复现、零 API 成本 |
-| 📚 **公共数据集** | HotpotQA 多跳 QA 深度研究变体 | 传统 EM/F1 + 新增语义覆盖度 |
-| 🏗️ **自建评测集** | ResearchBench 35 题 × 11 领域 | 含 expected_topics + ground_truth |
-| 👨‍⚖️ **LLM-as-Judge** | MiMo 5 维度 0-10 分深度评分 | 定性+定量互补 |
-| 🥊 **Head-to-Head** | Agent vs 单轮 LLM 直接对比 | pairwise 更可靠 |
-| 📈 **统计显著性** | Bootstrap 95% CI + Cohen's d + t-test | 拒绝"随机波动" |
+| 评测层级                        | 方法                                          | 特点                              |
+| ------------------------------- | --------------------------------------------- | --------------------------------- |
+| 📏 **规则指标**           | 事实准确率 / 幻觉率 / 引用覆盖率 / 逻辑一致性 | 免费、可复现、零 API 成本         |
+| 📚 **公共数据集**         | HotpotQA 多跳 QA 深度研究变体                 | 传统 EM/F1 + 新增语义覆盖度       |
+| 🏗️ **自建评测集**       | ResearchBench 35 题 × 11 领域                | 含 expected_topics + ground_truth |
+| 👨‍⚖️ **LLM-as-Judge** | MiMo 5 维度 0-10 分深度评分                   | 定性+定量互补                     |
+| 🥊 **Head-to-Head**       | Agent vs 单轮 LLM 直接对比                    | pairwise 更可靠                   |
+| 📈 **统计显著性**         | Bootstrap 95% CI + Cohen's d + t-test         | 拒绝"随机波动"                    |
 
 ---
 
@@ -164,6 +155,7 @@ cp .env.example .env
 ### 三种运行方式
 
 **🎯 单条 Query（单次深度研究）**
+
 ```bash
 python scripts/run_single.py \
     --query "2024-2025年大模型Agent技术趋势与落地案例研究" \
@@ -171,12 +163,14 @@ python scripts/run_single.py \
 ```
 
 **💬 交互式 REPL（支持 Session 继承与连续追问）**
+
 ```bash
 python scripts/run_repl.py
 # 交互命令: ls / sessions / save / q
 ```
 
 **🔬 批量实验（全量评测体系，overnight 可跑完）**
+
 ```bash
 python scripts/run_all_experiments.py \
     --report_file outputs/reports1/report_xxx.md \
@@ -238,28 +232,28 @@ deep_research_agent/
 
 ## 🛠️ 技术栈
 
-| 层级 | 技术 |
-|------|------|
-| 🐍 语言 | Python 3.11 |
-| ⚡ 异步框架 | asyncio |
-| 🧠 LLM 后端 | DeepSeek API / MiMo 2.5 Pro / vLLM / OpenAI |
+| 层级        | 技术                                         |
+| ----------- | -------------------------------------------- |
+| 🐍 语言     | Python 3.11                                  |
+| ⚡ 异步框架 | asyncio                                      |
+| 🧠 LLM 后端 | DeepSeek API / MiMo 2.5 Pro / vLLM / OpenAI  |
 | 🔢 嵌入模型 | sentence-transformers (`all-MiniLM-L6-v2`) |
-| 💾 持久化 | SQLite + numpy 向量索引 |
-| 🎓 训练框架 | veRL (GRPO) |
-| 🔭 可观测性 | LangSmith |
-| 📦 虚拟环境 | uv |
+| 💾 持久化   | SQLite + numpy 向量索引                      |
+| 🎓 训练框架 | veRL (GRPO)                                  |
+| 🔭 可观测性 | LangSmith                                    |
+| 📦 虚拟环境 | uv                                           |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] 自研编排引擎（asyncio + DAG）
-- [x] Red-Blue 对抗降噪
-- [x] 语义级上下文压缩
-- [x] 跨 Agent 共享记忆
-- [x] 多后端 LLM 路由
-- [x] 完整评测体系（规则 + Judge + 统计显著性）
-- [x] REPL 交互式会话
+- [X] 自研编排引擎（asyncio + DAG）
+- [X] Red-Blue 对抗降噪
+- [X] 语义级上下文压缩
+- [X] 跨 Agent 共享记忆
+- [X] 多后端 LLM 路由
+- [X] 完整评测体系（规则 + Judge + 统计显著性）
+- [X] REPL 交互式会话
 - [ ] 实验结果填充（进行中 🔥）
 - [ ] Web UI（Gradio/Streamlit）
 - [ ] 用户反馈闭环
