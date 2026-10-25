@@ -477,8 +477,10 @@ class ResearchBench:
         expected_topics = q.get("expected_topics", [])
         ground_truth = q.get("ground_truth", {})
 
-        factual_str = RuleBasedMetrics.fact_accuracy(report, ground_truth)
-        factual_sem = RuleBasedMetrics.semantic_fact_accuracy(report, ground_truth, threshold=0.65)
+        factual_str = RuleBasedMetrics.reference_fact_match(report, ground_truth)
+        # Semantic similarity is optional coverage, not fact correctness.
+        factual_sem = None
+        semantic_backend = "not_evaluated"
         hallucination = RuleBasedMetrics.hallucination_rate(report)
         citation = RuleBasedMetrics.citation_coverage(report)
         logic = RuleBasedMetrics.logical_consistency(report)
@@ -488,7 +490,7 @@ class ResearchBench:
         bias_score = max(0.0, 1.0 - hallucination)
 
         metrics = {
-            "factual_accuracy_str": factual_str,
+            "reference_fact_match": factual_str,
             "factual_accuracy_sem": factual_sem,
             "logical_consistency": logic,
             "citation_coverage": citation,
@@ -504,6 +506,8 @@ class ResearchBench:
             "metrics": metrics,
             "composite_score": composite,
             "hallucination_rate": hallucination,
+            "semantic_backend": semantic_backend,
+            "metric_scope": "reference agreement and formatting heuristics; not factual correctness",
         }
 
     def batch_evaluate(

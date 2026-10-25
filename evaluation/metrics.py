@@ -18,6 +18,7 @@ from typing import Any
 
 
 class ResearchMetrics:
+    # Legacy demonstration only. Active evaluators use evaluation.metrics.rule_based.
     """研究报告质量评测指标集合。"""
 
     # -----------------------------------------------------------------------

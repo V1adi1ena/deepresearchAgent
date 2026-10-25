@@ -23,23 +23,63 @@ class RuleBasedMetrics:
     # 1. 事实准确性 (Factual Accuracy) — 字符串匹配版（快速但粗糙）
     # -----------------------------------------------------------------------
     @staticmethod
-    def fact_accuracy(report: str, ground_truth: dict[str, Any] | None = None) -> float:
-        """
-        计算报告中的关键事实与 ground_truth 的匹配程度。
+    def reference_fact_match(report: str, ground_truth: dict | None = None) -> float:
+        """Literal entity/value agreement in supported clauses, NOT factual truth.
 
-        当前实现采用简单启发式：统计报告中包含的 ground_truth 关键短语比例。
-        若无 ground_truth，则返回 0.0（需外部 Judge LLM 补充评估）。
+        Values may be strings, numbers, or {value: number, tolerance: absolute_error}.
+        Unsupported paraphrases count as unmatched. Sources require a separate check.
         """
         if not ground_truth:
             return 0.0
-
-        report_lower = report.lower()
+        clauses = re.split(r"[。！？；，、;\n]|(?<!\d)\.(?!\d)", report.casefold())
         matched = 0
-        for key_fact in ground_truth.keys():
-            if key_fact.lower() in report_lower:
-                matched += 1
+        for entity, expected in ground_truth.items():
+            key = entity.casefold()
+            pattern = re.escape(key)
+            if key.isascii():
+                pattern = r"(?<![a-z0-9_])" + pattern + r"(?![a-z0-9_])"
+            tolerance = expected.get("tolerance", 0.0) if isinstance(expected, dict) else 0.0
+            value = expected.get("value") if isinstance(expected, dict) else expected
+            for clause in clauses:
+                hit = re.search(pattern, clause)
+                if not hit:
+                    continue
+                tail = clause[hit.end():]
+                # A=20 and B=10 must not match A=10 merely because 10 occurs later.
+                for other in ground_truth:
+                    if other == entity:
+                        continue
+                    other_pattern = re.escape(other.casefold())
+                    if other.isascii():
+                        other_pattern = r"(?<![a-z0-9_])" + other_pattern + r"(?![a-z0-9_])"
+                    boundary = re.search(other_pattern, tail)
+                    if boundary:
+                        tail = tail[:boundary.start()]
+                if re.search(r"不是|并非|不等于|未|\bnot\b|n't|非由", tail):
+                    continue
+                if isinstance(value, (int, float)) or re.fullmatch(r"-?\d+(?:\.\d+)?", str(value)):
+                    numbers = re.findall(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])", tail)
+                    ok = bool(numbers) and abs(float(numbers[0])-float(value)) <= tolerance
+                else:
+                    ok = re.sub(r"\s+", "", str(value).casefold()) in re.sub(r"\s+", "", tail)
+                if ok:
+                    matched += 1
+                    break
+        return matched / len(ground_truth)
 
-        return matched / len(ground_truth) if ground_truth else 0.0
+    # Compatibility only; the supported metric is reference agreement, not accuracy.
+    fact_accuracy = reference_fact_match
+
+    @staticmethod
+    def citation_traceability(report: str, sources: list[dict]) -> float:
+        """Fraction of cited URLs/IDs present in supplied sources; not entailment."""
+        refs = re.findall(r"https?://[^\s)\]<>]+|\[(\d+|s_[a-f0-9]+)\]", report)
+        urls = re.findall(r"https?://[^\s)\]<>]+", report)
+        ids = [r for r in refs if r]
+        known_urls = {s.get("url") for s in sources}
+        known_ids = {str(i) for i in range(1, len(sources)+1)} | {s.get("source_id") for s in sources}
+        count = len(urls)+len(ids)
+        return (sum(u in known_urls for u in urls)+sum(i in known_ids for i in ids))/count if count else 0.0
 
     # -----------------------------------------------------------------------
     # 1b. 语义事实准确性 (Semantic Factual Accuracy) — 面试强化版
@@ -51,7 +91,7 @@ class RuleBasedMetrics:
         threshold: float = 0.65,
     ) -> float:
         """
-        基于 embedding 语义相似度的事实准确性验证。
+        基于真实 embedding 的参考内容相似度覆盖；不判断事实正确或引用支持。
 
         改进点（相比字符串匹配）：
         1. 把 ground_truth 的 key + description 编码为语义向量
@@ -59,7 +99,7 @@ class RuleBasedMetrics:
         3. 计算每个 ground_truth 条目与报告中最相似 chunk 的 cosine similarity
         4. 超过阈值（默认 0.65）才判定为"事实被覆盖"
 
-        这样能避免"GPT-4o 是 Google 发布的"这种关键词命中但语义错误的误报。
+        相似度不能可靠区分错值或否定，不用于替代参考事实匹配与证据核对。
 
         Args:
             report: 研究报告全文
@@ -82,12 +122,11 @@ class RuleBasedMetrics:
         if not chunks:
             return 0.0
 
-        # 批量编码 chunk（Sentencetransformer 支持批量）
-        try:
-            chunk_embs = np.array(embedder._load_model().encode(chunks, normalize_embeddings=True))
-        except Exception:
-            # fallback：逐条编码
-            chunk_embs = np.array([embedder.encode(c) for c in chunks])
+        # A random fallback has no semantic interpretation and must not be scored.
+        model = embedder._load_model()
+        if model is None or embedder.backend != "sentence_transformers":
+            raise RuntimeError("Semantic metric unavailable: real embedding model required")
+        chunk_embs = np.array(model.encode(chunks, normalize_embeddings=True))
 
         matched = 0
         for key_fact, expected_desc in ground_truth.items():
@@ -266,7 +305,7 @@ class RuleBasedMetrics:
         - comprehensiveness: 0.15
         """
         default_weights = {
-            "factual_accuracy": 0.25,
+            "reference_fact_match": 0.25,
             "logical_consistency": 0.20,
             "citation_coverage": 0.20,
             "bias": 0.20,
@@ -278,7 +317,9 @@ class RuleBasedMetrics:
         total_weight = 0.0
 
         for key, weight in w.items():
-            value = metrics.get(key, 0.0)
+            if key not in metrics:
+                raise ValueError(f"Missing required metric: {key}")
+            value = metrics[key]
             total_score += value * weight
             total_weight += weight
 
