@@ -52,7 +52,7 @@ def evaluate_with_rules(report: str, qid: str, bench: ResearchBench) -> dict[str
     expected_topics = q.get("expected_topics", [])
     ground_truth = q.get("ground_truth", {})
 
-    factual = RuleBasedMetrics.fact_accuracy(report, ground_truth)
+    factual = RuleBasedMetrics.reference_fact_match(report, ground_truth)
     hallucination = RuleBasedMetrics.hallucination_rate(report)
     citation = RuleBasedMetrics.citation_coverage(report)
     logic = RuleBasedMetrics.logical_consistency(report)
@@ -60,7 +60,7 @@ def evaluate_with_rules(report: str, qid: str, bench: ResearchBench) -> dict[str
     bias_score = max(0.0, 1.0 - hallucination)
 
     metrics = {
-        "factual_accuracy": factual,
+        "reference_fact_match": factual,
         "logical_consistency": logic,
         "citation_coverage": citation,
         "bias": bias_score,

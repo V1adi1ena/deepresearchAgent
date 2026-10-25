@@ -17,6 +17,15 @@ import asyncio
 import logging
 import os
 import sys
+import json
+from dataclasses import asdict
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+from scripts._project_env import use_project_packages
+use_project_packages(PROJECT_ROOT)
 
 from src.core.runner import initialize_modules, load_config, run_research, save_report, setup_logging
 
@@ -35,6 +44,7 @@ def main() -> None:
     parser.add_argument("--config", type=str, default=None, help="自定义配置文件路径")
     parser.add_argument("--output_dir", type=str, default="outputs/reports", help="报告输出目录")
     parser.add_argument("--session_id", type=str, default="", help="会话 ID（用于 memory store 隔离）")
+    parser.add_argument("--memory_db", type=str, default=None, help="Override memory database (use an isolated path for tests)")
     parser.add_argument("--log_level", type=str, default="INFO", choices=["DEBUG", "INFO", "WARNING", "ERROR"])
     args = parser.parse_args()
 
@@ -71,12 +81,22 @@ def main() -> None:
 
     try:
         config = load_config(args.config)
+        if args.memory_db:
+            config.setdefault("memory", {})["db_path"] = args.memory_db
         logger.info(f"配置加载完成: {args.config or 'configs/default.yaml'}")
 
         modules = initialize_modules(config, session_id=args.session_id)
         report = asyncio.run(run_research(args.query, config, modules))
 
         filepath = save_report(report, args.query, args.output_dir)
+        record = {"query": args.query, "report": asdict(modules["last_report"]),
+                  "events": modules["orchestrator"].events, "model_calls": modules.get("model_calls", []),
+                  "tool_calls": modules.get("tool_calls", []),
+                  "tasks": [{"task_id": r.task_id, "status": r.status.value,
+                             "tool_calls": [t.get("name") for t in r.trajectory if t.get("role") == "tool"]}
+                            for r in modules["orchestrator"]._results],
+                  "quality_review": {"answers_question": None, "citations_support_claims": None}}
+        Path(filepath).with_suffix(".json").write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
         logger.info(f"报告已保存: {filepath}")
 
         print("\n" + "=" * 60)
