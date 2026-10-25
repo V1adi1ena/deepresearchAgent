@@ -14,13 +14,12 @@ import hashlib
 import logging
 import os
 import random
+from pathlib import Path
 from typing import Optional
 
 import numpy as np
 
-# 国内环境自动使用 HuggingFace 镜像（hf-mirror.com）
-if os.environ.get("HF_ENDPOINT", "").strip() == "":
-    os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+# Honor an explicit HF_ENDPOINT; otherwise use the model's official host.
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +42,7 @@ class Embedder:
     _model_name: str = "sentence-transformers/all-MiniLM-L6-v2"
     _embedding_dim: int = 384  # all-MiniLM-L6-v2 输出维度
 
-    def __init__(self, model_name: Optional[str] = None) -> None:
+    def __init__(self, model_name: Optional[str] = None, allow_random: bool = False) -> None:
         """
         初始化 Embedder。
 
@@ -51,27 +50,38 @@ class Embedder:
             model_name: 指定 sentence-transformers 模型名，None 使用默认 all-MiniLM-L6-v2
         """
         self.model_name = model_name or self._model_name
+        self.allow_random = allow_random
         self._model: Optional[object] = None
         self._available = _SENTENCE_TRANSFORMERS_AVAILABLE
+        self.backend = "unloaded"
 
     def _load_model(self) -> object:
         """懒加载模型，返回 SentenceTransformer 实例或 None（fallback 模式）。"""
         if not self._available:
+            self.backend = "random"
             return None
         if self._model is not None:
             return self._model
         # 尝试加载类缓存
         if Embedder._model_instance is not None:
             self._model = Embedder._model_instance
+            self.backend = "sentence_transformers"
             return self._model
         try:
-            Embedder._model_instance = SentenceTransformer(self.model_name)
+            cache = os.getenv("SENTENCE_TRANSFORMERS_HOME") or str(Path(__file__).resolve().parents[2] / ".cache/huggingface/hub")
+            try:
+                model = SentenceTransformer(self.model_name, cache_folder=cache, local_files_only=True)
+            except OSError:
+                model = SentenceTransformer(self.model_name, cache_folder=cache)
+            Embedder._model_instance = model
             self._model = Embedder._model_instance
+            self.backend = "sentence_transformers"
             logger.info(f"Loaded embedding model: {self.model_name}")
         except Exception as e:
             logger.error(f"Failed to load embedding model: {e}")
             self._available = False
             self._model = None
+            self.backend = "random"
         return self._model
 
     def encode(self, text: str) -> list[float]:
@@ -96,7 +106,11 @@ class Embedder:
             except Exception as e:
                 logger.warning(f"Model encode failed, fallback to random: {e}")
 
-        # Fallback: deterministic random embedding（基于文本 hash）
+        if not self.allow_random:
+            self.backend = "unavailable"
+            raise RuntimeError("Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only.")
+        self.backend = "random"
+        # Explicit test-only fallback.
         return self._fallback_embedding(text)
 
     def _fallback_embedding(self, text: str) -> list[float]:

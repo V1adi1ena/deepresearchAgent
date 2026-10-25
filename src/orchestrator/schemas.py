@@ -131,6 +131,11 @@ class ResearchReport:
     num_replan: int = 0
     adversarial_rounds: int = 0
     final_score: float = 0.0
+    status: str = "completed"
+    incomplete_tasks: list[str] = field(default_factory=list)
+    run_id: str = ""
+    review_history: list[dict] = field(default_factory=list)
+    review_status: str = "not_requested"
 
 
 @dataclass
@@ -151,3 +156,5 @@ class RunConfig:
     max_sub_questions: int = 8
     enable_adversarial: bool = True
     enable_evolution: bool = False
+    synthesis_reserve_seconds: float = 30.0
+    max_subagent_retries: int = 1

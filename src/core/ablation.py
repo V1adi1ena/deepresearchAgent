@@ -111,7 +111,8 @@ class AblationStudy:
                         "report_length": len(report),
                         "system": name,
                     })
-                    scores.append(1.0)  # 占位，实际分数由外部 evaluator 填充
+                    from evaluation.benchmarks.research_bench import ResearchBench
+                    scores.append(ResearchBench().evaluate_report(report, qid)["composite_score"])
                     logger.info(f"    → 成功, time={elapsed:.1f}s, len={len(report)}")
 
                 except Exception as e:
@@ -188,7 +189,8 @@ class AblationStudy:
 
                 try:
                     report = asyncio.run(run_research(query, cfg, modules))
-                    scores.append(1.0)  # 占位
+                    from evaluation.benchmarks.research_bench import ResearchBench
+                    scores.append(ResearchBench().evaluate_report(report, qid)["composite_score"])
                     details.append({
                         "question_id": qid,
                         "query": query,

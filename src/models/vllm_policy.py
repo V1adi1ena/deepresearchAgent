@@ -11,9 +11,11 @@ from __future__ import annotations
 
 import json
 import re
+import time
+from src.utils.async_call import model_call_records, request_deadline
 from typing import Optional
 
-from openai import OpenAI
+from openai import OpenAI, APIConnectionError, APITimeoutError
 
 
 __all__ = ["VLLMPolicy", "OpenAICompatibleDict"]
@@ -53,8 +55,9 @@ class VLLMPolicy:
         top_p: float = 1.0,
         max_tokens: int = 1024,
         tools: Optional[list[dict]] = None,
+        thinking: Optional[str] = None,
     ):
-        raw_client = OpenAI(base_url=base_url, api_key=api_key)
+        raw_client = OpenAI(base_url=base_url, api_key=api_key, timeout=60.0, max_retries=0)
         # 如果 LangSmith 追踪开启，自动包装 client 以追踪所有 LLM 调用
         from ..utils.tracing import maybe_wrap_openai_client
         self.client = maybe_wrap_openai_client(raw_client)
@@ -63,6 +66,9 @@ class VLLMPolicy:
         self.top_p = top_p
         self.max_tokens = max_tokens
         self.tools = tools
+        if thinking not in (None, "enabled", "disabled"):
+            raise ValueError("thinking must be enabled, disabled or None")
+        self.thinking = thinking
         # [污染标记] 一旦发生过主动截断，整条 trajectory 作废
         self.was_truncated = False
 
@@ -202,11 +208,32 @@ class VLLMPolicy:
         if self.tools:
             kwargs["tools"] = self.tools
             kwargs["tool_choice"] = "auto"
+        if self.thinking is not None:
+            kwargs["extra_body"] = {"thinking": {"type": self.thinking}}
+        deadline = request_deadline.get()
+        if deadline is not None:
+            remaining = deadline-time.monotonic()
+            if remaining <= 0:
+                raise TimeoutError("Run deadline reached before model request")
+            kwargs["timeout"] = min(60.0, remaining)
 
+        record = {"model": self.model_name, "status": "running", "usage": None}
+        records = model_call_records.get()
+        if records is not None:
+            records.append(record)
+        started = time.monotonic()
         try:
             resp = self.client.chat.completions.create(**kwargs)
+            record.update(status="completed", elapsed_seconds=time.monotonic()-started,
+                          usage=resp.usage.model_dump() if resp.usage else None)
             raw_msg = resp.choices[0].message
             content = raw_msg.content or ""
+            finish_reason = resp.choices[0].finish_reason
+            record.update(finish_reason=finish_reason, content_chars=len(content), max_tokens=self.max_tokens)
+            if finish_reason in ("length", "content_filter", "insufficient_system_resource", "aborted"):
+                raise RuntimeError(f"Incomplete model output (finish_reason={finish_reason})")
+            if not content.strip() and not raw_msg.tool_calls:
+                raise RuntimeError("Empty model output: no answer or tool calls")
 
             # 4. [FORBIDDEN] 检测 assistant 是否输出了不该出现的模板标记
             for forbidden in FORBIDDEN_TEMPLATE_TOKENS:
@@ -237,11 +264,14 @@ class VLLMPolicy:
 
             # 6. 返回万能对象
             result = OpenAICompatibleDict(role="assistant", content=content, tool_calls=final_tool_calls)
+            result["usage"] = resp.usage.model_dump() if resp.usage else None
+            result["finish_reason"] = finish_reason
             if getattr(raw_msg, "reasoning_content", None):
                 result["reasoning_content"] = raw_msg.reasoning_content
             return result
 
         except Exception as e:
+            record.update(status="failed", elapsed_seconds=time.monotonic()-started, error_type=type(e).__name__)
             err_str = str(e)
             err_lower = err_str.lower()
             print(f"Policy Error: {err_str}")
@@ -254,9 +284,7 @@ class VLLMPolicy:
                     f"[CONTEXT_LENGTH_EXCEEDED] n_msgs={n_msgs}, est_chars={total_chars}: {err_str}"
                 ) from e
 
-            # 其他错误（网络抖动、vLLM 临时 busy 等）：返回假 assistant，让 trajectory 有机会继续
-            return OpenAICompatibleDict(
-                role="assistant",
-                content=f"Error: {err_str}",
-                tool_calls=[]
-            )
+            # Never turn an API failure into a successful assistant answer.
+            if isinstance(e, (APIConnectionError, APITimeoutError)) or getattr(e, "status_code", 0) in (429, 500, 502, 503, 504):
+                raise ConnectionError(f"Transient model request failure ({type(e).__name__})") from e
+            raise RuntimeError(f"Model request failed ({type(e).__name__})") from e

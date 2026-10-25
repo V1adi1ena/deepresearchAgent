@@ -26,6 +26,8 @@ from src.adversarial.verdict import (
 )
 from src.orchestrator.schemas import ResearchReport
 from src.utils.tracing import trace_chain
+from src.utils.async_call import model_budget
+import hashlib
 
 
 __all__ = ["AdversarialLoop"]
@@ -53,6 +55,7 @@ class AdversarialLoop:
         max_rounds: int = 3,
         score_threshold: float = 8.0,
         delta_threshold: float = 0.3,
+        max_model_calls: int = 24,
     ):
         self.red_agent = red_agent
         self.blue_agent = blue_agent
@@ -60,6 +63,7 @@ class AdversarialLoop:
         self.max_rounds = max(max_rounds, 1)
         self.score_threshold = score_threshold
         self.delta_threshold = delta_threshold
+        self.max_model_calls = max_model_calls
 
     @trace_chain(name="adversarial_loop.run", tags=["m5", "loop", "adversarial"])
     async def run(
@@ -83,80 +87,60 @@ class AdversarialLoop:
             fix_operations, resolved_count, oscillation_detected, stop_reason
         """
         current = copy.deepcopy(report)
-        history: list[dict[str, Any]] = []
-        prev_scores: dict[Dimension, float] | None = None
-        resolved_issues: set[Issue] = set()  # 已修复的 issue 集合
-        oscillation_detected = False
-        stop_reason = ""
-
-        for round_idx in range(1, self.max_rounds + 1):
-            logger.info(f"[AdversarialLoop] Round {round_idx} starting...")
-
-            # ---- Step 1: Red Attack ----
+        history = []
+        budget = {"used": 0, "limit": self.max_model_calls, "exhausted": False}
+        token = model_budget.set(budget)
+        try:
             verdict = await self.red_agent.attack(current)
-            logger.info(
-                f"[AdversarialLoop] Red attack done: overall={verdict.overall_score:.2f}, "
-                f"issues={len(verdict.issues)}"
-            )
-
-            # ---- Step 2: 震荡检测 ----
-            # 如果当前 issues 中有已修复过的 issue 重新出现，判定震荡
-            reappeared = resolved_issues.intersection(set(verdict.issues))
-            if reappeared:
-                oscillation_detected = True
-                logger.warning(
-                    f"[AdversarialLoop] Oscillation detected at round {round_idx}: "
-                    f"{len(reappeared)} previously resolved issues reappeared."
-                )
-                stop_reason = f"oscillation_at_round_{round_idx}"
-                history.append(self._build_round_record(
-                    round_idx, verdict, [], len(reappeared), oscillation_detected, stop_reason
-                ))
-                break
-
-            # ---- Step 3: Blue Defend ----
-            fixed_report, operations = await self.blue_agent.defend(current, verdict)
-            logger.info(
-                f"[AdversarialLoop] Blue defend done: operations={len(operations)}"
-            )
-
-            # 将本轮被修复的 issues 加入 resolved 集合
-            for op in operations:
-                if op.success:
-                    resolved_issues.add(op.issue)
-
-            # ---- Step 4: 计算 delta ----
-            delta = 0.0
-            if prev_scores is not None:
-                delta = VerdictEngine.compute_delta(prev_scores, verdict.dimension_scores)
-            prev_scores = copy.deepcopy(verdict.dimension_scores)
-
-            # ---- Step 5: 记录本轮 ----
-            stop_reason = self._check_convergence(round_idx, verdict.overall_score, delta)
-            record = self._build_round_record(
-                round_idx=round_idx,
-                verdict=verdict,
-                operations=operations,
-                resolved_count=len(resolved_issues),
-                oscillation=oscillation_detected,
-                stop_reason=stop_reason,
-            )
-            history.append(record)
-
-            # 更新当前报告为修复后的版本
-            current = fixed_report
-            current.adversarial_rounds = round_idx
-
-            # ---- Step 6: 判断是否停止 ----
-            if stop_reason:
-                logger.info(f"[AdversarialLoop] Stopping: {stop_reason}")
-                break
-
-        # 循环结束后写入最终分数
-        if history:
-            current.final_score = history[-1]["overall_score"]
-
-        return current, history
+            current.final_score = verdict.overall_score
+            for round_idx in range(1, self.max_rounds + 1):
+                if not verdict.issues or verdict.overall_score >= self.score_threshold:
+                    break
+                if budget["exhausted"] or budget["used"] >= budget["limit"]:
+                    history.append({"round": round_idx, "stop_reason": "model_budget_exhausted",
+                                    "candidate_published": False, "model_calls": budget["used"]})
+                    break
+                before = copy.deepcopy(current)
+                budget["post_review_calls"] = len(getattr(self.red_agent, "dimensions", []))
+                fixed, operations = await self.blue_agent.defend(current, verdict)
+                if not operations:
+                    reason = ("insufficient_fix_budget" if budget["limit"] - budget["used"] <
+                              2 + budget["post_review_calls"] else "no_fix_performed")
+                    history.append({"round": round_idx, "stop_reason": reason,
+                                    "candidate_published": False, "model_calls": budget["used"],
+                                    "issues_count": len(verdict.issues)})
+                    break
+                # Re-evaluate the exact candidate before publishing it or its score.
+                after = await self.red_agent.attack(fixed)
+                if budget["exhausted"]:
+                    history.append({"round": round_idx, "stop_reason": "model_budget_exhausted",
+                                    "candidate_published": False, "model_calls": budget["used"]})
+                    break
+                delta = VerdictEngine.compute_delta(verdict.dimension_scores, after.dimension_scores)
+                reason = self._check_convergence(round_idx, after.overall_score, delta)
+                if fixed.content == before.content:
+                    reason = "no_change"
+                record = self._build_round_record(round_idx, after, operations, sum(op.success for op in operations), False, reason)
+                record.update({"content_before": before.content, "content_after": fixed.content,
+                    "before_version": hashlib.sha256(before.content.encode()).hexdigest(),
+                    "after_version": hashlib.sha256(fixed.content.encode()).hexdigest(),
+                    "score_before": verdict.overall_score, "sources_after": copy.deepcopy(fixed.sources),
+                    "model_calls": budget["used"], "candidate_published": True})
+                history.append(record)
+                current, verdict = fixed, after
+                current.final_score = after.overall_score
+                current.adversarial_rounds = len(history)
+                if reason:
+                    break
+            return current, history
+        except RuntimeError:
+            if not budget["exhausted"]:
+                raise
+            history.append({"stop_reason": "model_budget_exhausted", "candidate_published": False,
+                            "model_calls": budget["used"]})
+            return current, history
+        finally:
+            model_budget.reset(token)
 
     def _check_convergence(
         self, round_idx: int, overall_score: float, delta: float

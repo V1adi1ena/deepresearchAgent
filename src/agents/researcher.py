@@ -10,6 +10,7 @@
   - 工具结果回写后自动继续，直到模型不再调用工具或达到 max_turns
 """
 from __future__ import annotations
+from ..utils.async_call import call_sync
 
 import asyncio
 import json
@@ -74,8 +75,10 @@ class ResearcherAgent(BaseAgent):
                 {"role": "user", "content": task_desc},
             ]
             try:
-                response = self.policy(messages)
+                response = await call_sync(self.policy, messages)
                 content = response.get("content", "") or ""
+                if not content.strip():
+                    raise RuntimeError("Direct analysis returned empty model output")
                 return AgentResult(
                     task_id=task.task_id,
                     status=AgentStatus.SUCCESS,
@@ -84,6 +87,8 @@ class ResearcherAgent(BaseAgent):
                     token_usage=len(content) // 3,
                     confidence=self._extract_confidence(content),
                 )
+            except ConnectionError:
+                raise
             except Exception as e:
                 return AgentResult(
                     task_id=task.task_id,
@@ -125,7 +130,11 @@ class ResearcherAgent(BaseAgent):
 
             try:
                 # 使用线程池执行同步 policy，避免阻塞 asyncio 事件循环
-                response = await asyncio.to_thread(self.policy, messages)
+                compressor = context.get("compressor")
+                if compressor:
+                    # Only tool payloads are compressed: roles, call IDs and pairings stay intact.
+                    messages = await call_sync(compressor.compress_messages, messages, task.description)
+                response = await call_sync(self.policy, messages)
             except RuntimeError as e:
                 # 上下文长度超限等致命错误
                 trajectory.append({"turn": turn, "error": str(e)})
@@ -153,6 +162,12 @@ class ResearcherAgent(BaseAgent):
 
             # 无工具调用 → 任务完成
             if not tool_calls:
+                if not content.strip():
+                    return AgentResult(task.task_id, AgentStatus.FAILED,
+                        output="Research returned empty model output", trajectory=trajectory, confidence=0.0)
+                if not any(t.get("role") == "tool" and t.get("result") for t in trajectory):
+                    messages.append({"role": "user", "content": "No evidence has been retrieved. Call an available search tool before answering."})
+                    continue
                 # B方案：检测 LLM 回复是否包含明显的工具失败说明
                 if self._is_tool_failure_explanation(content):
                     return AgentResult(
@@ -270,9 +285,12 @@ class ResearcherAgent(BaseAgent):
         )
 
     def _system_prompt(self) -> str:
+        target_chars = max(256, getattr(self.policy, "max_tokens", 2048) // 3)
         return (
             "You are a meticulous research assistant. "
             "Your job is to gather and analyze information using the RIGHT tool for each task. "
+            f"Keep the final subtask findings under {target_chars} characters. "
+            "Return supported facts, source links and evidence gaps; do not write a full report for a subtask. "
             "\n\nAVAILABLE TOOLS:\n"
             "- web_search: General web search for news, market data, industry reports, current events. "
             "  Use this as the FIRST tool for most tasks.\n"
@@ -301,12 +319,14 @@ class ResearcherAgent(BaseAgent):
         )
 
     def _system_prompt_direct_analysis(self) -> str:
+        target_chars = max(256, getattr(self.policy, "max_tokens", 2048) // 3)
         return (
             "You are a thoughtful analyst. "
             "The user has asked a question that cannot be answered by web search "
             "(e.g., analyzing a specific private individual, personal advice, or subjective judgment). "
             "Your job is to provide a reasoned analysis based ONLY on the information already provided in the context. "
             "Do NOT make up facts. Clearly state what is known, what can be reasonably inferred, and what remains unknown. "
+            f"Keep the analysis under {target_chars} characters. "
             "End with a confidence score (0-1)."
         )
 
@@ -399,11 +419,14 @@ class ResearcherAgent(BaseAgent):
         ])
         if task.search_hints:
             lines.insert(1, f"Search hints (MUST use these as primary keywords): {', '.join(task.search_hints)}")
-        if task.context_keys:
+        keys = list(dict.fromkeys([f"dep:{dep}" for dep in task.dependencies] + task.context_keys + ["research_memory"]))
+        if keys:
             ctx_parts = []
-            for key in task.context_keys:
+            for key in keys:
                 if key in context:
-                    ctx_parts.append(f"- {key}: {context[key]}")
+                    value = context[key]
+                    value = value.output if isinstance(value, AgentResult) else value
+                    ctx_parts.append(f"- {key}: {value}")
             if ctx_parts:
                 lines.append("\n## Context:")
                 lines.extend(ctx_parts)

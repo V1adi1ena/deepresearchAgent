@@ -7,9 +7,12 @@ Red Agent 的职责是对研究报告进行多维度"攻击"，找出事实错�
 设计决策：
 1. 每个维度独立调用 LLM，避免单条 Prompt 过长导致模型注意力分散。
 2. 输出强制要求结构化 JSON，降低解析失败率。
-3. 对解析失败的维度返回保守分数（5.0）并记录原始输出，避免对抗循环崩溃。
+3. 调用或解析失败时明确报告失败，由编排器保留原报告。
 """
 from __future__ import annotations
+from src.utils.async_call import call_model
+import copy
+import math
 
 import json
 import re
@@ -256,7 +259,7 @@ class RedAgent:
         max_tokens: 单维度评估的最大输出 token 数。
     """
 
-    def __init__(self, policy, max_tokens: int = 2048):
+    def __init__(self, policy, max_tokens: int = 2048, dimensions=None):
         """初始化 Red Agent。
 
         Args:
@@ -265,6 +268,7 @@ class RedAgent:
         """
         self.policy = policy
         self.max_tokens = max_tokens
+        self.dimensions = tuple(dimensions) if dimensions is not None else (Dimension.FACTUAL, Dimension.HALLUCINATION)
 
     @trace_agent(name="red_agent.attack", tags=["m5", "red", "adversarial"])
     async def attack(self, report: ResearchReport) -> RedVerdict:
@@ -286,13 +290,15 @@ class RedAgent:
         raw_feedbacks: list[str] = []
 
         # 截断报告内容，避免单条 prompt 超过上下文限制
-        content_truncated = report.content[:4000] if len(report.content) > 4000 else report.content
-        if len(report.content) > 4000:
-            content_truncated += "\n\n[报告已截断，仅显示前 4000 字符]"
+        if len(report.content) > 16000:
+            raise RuntimeError("Report exceeds full-review input limit; original retained")
+        content_truncated = report.content
         
-        sources_text = self._format_sources(report.sources, max_items=15)
+        sources_text = self._format_sources(report.sources)
 
         for dim, prompt_template in DIMENSION_PROMPTS.items():
+            if dim not in self.dimensions:
+                continue
             # 使用安全替换，避免 report.content/sources_text 中的 { 被 format 误解析
             prompt = prompt_template
             prompt = prompt.replace("{query}", report.query)
@@ -305,12 +311,10 @@ class RedAgent:
 
             try:
                 # 临时调大 max_tokens 以容纳长输出
-                old_max = getattr(self.policy, "max_tokens", None)
-                if old_max is not None:
-                    self.policy.max_tokens = self.max_tokens
-                resp = self.policy(messages)
-                if old_max is not None:
-                    self.policy.max_tokens = old_max
+                policy = copy.copy(self.policy)
+                if hasattr(policy, "max_tokens"):
+                    policy.max_tokens = self.max_tokens
+                resp = await call_model(policy, messages)
 
                 raw = resp.content or ""
                 raw_feedbacks.append(f"[{dim.value}]\n{raw}\n")
@@ -318,18 +322,8 @@ class RedAgent:
                 dimension_scores[dim] = score
                 all_issues.extend(issues)
             except Exception as e:
-                # 解析或调用失败时返回保守分数，避免循环崩溃
-                dimension_scores[dim] = 5.0
-                raw_feedbacks.append(f"[{dim.value}]\nERROR: {e}\n")
-                all_issues.append(
-                    Issue(
-                        severity=Severity.MINOR,
-                        dimension=dim,
-                        description=f"Red Agent 解析失败: {e}",
-                        location="",
-                        fix_type=FixType.IN_PLACE,
-                    )
-                )
+                # A failed review must retain the original report, not invent a score.
+                raise RuntimeError(f"Review evaluation failed ({dim.value}): {e}") from e
 
         overall = VerdictEngine.compute_overall(dimension_scores)
         return RedVerdict(
@@ -339,7 +333,7 @@ class RedAgent:
             raw_feedback="\n".join(raw_feedbacks),
         )
 
-    def _format_sources(self, sources: list[dict], max_items: int = 15) -> str:
+    def _format_sources(self, sources: list[dict], max_items: int | None = None) -> str:
         """将来源列表格式化为文本，供 Prompt 使用。截断以避免上下文膨胀。"""
         if not sources:
             return "（无来源）"
@@ -348,8 +342,8 @@ class RedAgent:
             title = s.get("title", "未知标题")
             url = s.get("url", "")
             snippet = s.get("snippet", "")[:300]  # 截断 snippet
-            lines.append(f"[{i}] {title}\nURL: {url}\nSnippet: {snippet}\n")
-        if len(sources) > max_items:
+            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nSnippet: {snippet}\n")
+        if max_items is not None and len(sources) > max_items:
             lines.append(f"... 还有 {len(sources) - max_items} 个来源未显示")
         return "\n".join(lines)
 
@@ -360,7 +354,7 @@ class RedAgent:
         1. 先尝试从整个输出中提取第一个 JSON 对象。
         2. 如果失败，尝试用正则提取 ```json ... ``` 块。
         3. 如果仍失败，尝试修复常见 JSON 格式错误（如尾随逗号、单引号）。
-        4. 如果仍失败，返回保守分数 5.0 和空 issues。
+        4. 如果仍失败，明确报告审查失败，保留原报告。
 
         Args:
             raw: 模型原始输出文本。
@@ -371,7 +365,7 @@ class RedAgent:
         """
         raw = raw.strip()
         if not raw:
-            return 5.0, []
+            raise ValueError("Empty review output")
 
         # 尝试 1: 直接解析整个文本
         try:
@@ -409,8 +403,7 @@ class RedAgent:
                 except json.JSONDecodeError:
                     continue
 
-        # 全部失败：保守返回
-        return 5.0, []
+        raise ValueError("Invalid review JSON")
 
     def _fix_common_json_errors(self, raw: str) -> str | None:
         """修复常见的 JSON 格式错误。"""
@@ -438,7 +431,11 @@ class RedAgent:
 
     def _extract_from_dict(self, data: dict, dimension: Dimension) -> tuple[float, list[Issue]]:
         """从解析后的 dict 中提取 score 和 issues。"""
-        score = float(data.get("score", 5.0))
+        if not isinstance(data, dict) or "score" not in data or not isinstance(data.get("issues"), list):
+            raise ValueError("Review requires score and an issues list")
+        score = float(data["score"])
+        if not math.isfinite(score):
+            raise ValueError("Review score must be finite")
         score = max(0.0, min(10.0, score))
 
         # severity/fix_type 容错映射

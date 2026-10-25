@@ -10,7 +10,10 @@
 from __future__ import annotations
 
 import json
+import copy
 import re
+from ..utils.async_call import call_sync
+from ..utils.sources import result_sources
 from typing import Any
 
 from .base_agent import BaseAgent
@@ -47,11 +50,12 @@ class SummarizerAgent(BaseAgent):
         query = context.get("query", "")
         results: list[AgentResult] = context.get("results", [])
 
-        if not results:
+        if not results or not result_sources(results):
             report = ResearchReport(
                 query=query,
-                content="No sub-task results available to synthesize.",
+                content="No retrieved evidence available to synthesize.",
                 confidence=0.0,
+                status="failed",
             )
             return AgentResult(
                 task_id=task.task_id,
@@ -64,6 +68,13 @@ class SummarizerAgent(BaseAgent):
 
         # 构建 synthesis prompt
         prompt = self._build_synthesis_prompt(query, results)
+        compressor = context.get("compressor")
+        if compressor:
+            texts = [str(r.output) for r in results]
+            compressed = await call_sync(compressor.compress, texts, query)
+            prompt = "# Question\n" + query + "\n# Findings\n" + "\n".join(compressed)
+        # Stable evidence records stay outside compression, and generated URLs are not new sources.
+        prompt += "\n# Retrieved sources\n" + json.dumps(result_sources(results), ensure_ascii=False)
         messages = [
             {"role": "system", "content": self._system_prompt()},
             {"role": "user", "content": prompt},
@@ -71,10 +82,9 @@ class SummarizerAgent(BaseAgent):
 
         try:
             # 合成任务不需要工具调用，临时禁用 tools 避免模型进入 tool-calling 模式
-            old_tools = getattr(self.policy, "tools", None)
-            self.policy.tools = None
-            response = self.policy(messages)
-            self.policy.tools = old_tools
+            policy = copy.copy(self.policy)
+            policy.tools = None
+            response = await call_sync(policy, messages)
         except RuntimeError as e:
             return AgentResult(
                 task_id=task.task_id,
@@ -86,6 +96,9 @@ class SummarizerAgent(BaseAgent):
             )
 
         content = response.get("content", "") or ""
+        if not content.strip() or response.get("finish_reason") in ("length", "content_filter", "aborted", "insufficient_system_resource"):
+            return AgentResult(task.task_id, AgentStatus.FAILED,
+                output="Synthesis returned empty or incomplete model output", confidence=0.0)
         token_usage = len(content) // 3  # 简化估算
 
         # 解析报告内容，提取来源和置信度
@@ -101,12 +114,15 @@ class SummarizerAgent(BaseAgent):
         )
 
     def _system_prompt(self) -> str:
+        target_chars = max(512, getattr(self.policy, "max_tokens", 4096) // 2)
         return (
             "You are an expert research synthesizer. "
             "Your task is to integrate multiple research findings into a coherent, well-structured report. "
             "Use Markdown formatting. Cite sources explicitly. "
-            "The report body MUST be at least 3000 Chinese characters (or 2000 English words) long. "
-            "Write in depth: include background, key findings, detailed analysis, comparisons, and implications. "
+            "Use only the supplied evidence. State gaps explicitly; do not invent facts to meet a length target. "
+            f"Keep the entire report, including references, under {target_chars} characters. "
+            "Prioritize the answer, supported comparisons and evidence gaps; avoid repetitive background or restating the question. "
+            "Use compact inline source IDs and list only sources actually cited, not the full retrieved inventory. "
             "DO NOT describe what you will do — directly output the synthesized report. "
             "At the end, provide an overall confidence score (0-1) and a summary of key sources."
         )
@@ -130,8 +146,8 @@ class SummarizerAgent(BaseAgent):
         parts.append(
             "\n# Instructions\n"
             "1. Directly write the synthesized report based on the findings above. Do NOT say 'I will synthesize'.\n"
-            "2. The report MUST be comprehensive and detailed (at least 3000 Chinese characters or 2000 English words).\n"
-            "3. Structure: Executive Summary → Background → Key Findings (with details) → Analysis → Comparisons → Implications → Conclusion.\n"
+            "2. Report only supported findings; state missing evidence and unresolved contradictions.\n"
+            "3. Structure: Summary → Supported Findings/Comparisons → Evidence Gaps → Cited Sources. Stay within the system output budget.\n"
             "4. Resolve any contradictions between sources.\n"
             "5. Explicitly list all sources cited.\n"
             "6. End with: Overall Confidence: X.XX"
@@ -158,42 +174,7 @@ class SummarizerAgent(BaseAgent):
         confidence = llm_confidence * (success_rate ** 0.5)
         confidence = round(max(0.0, min(1.0, confidence)), 2)
 
-        # 收集来源（从各个子结果的轨迹中提取）
-        sources: list[dict] = []
-        for r in results:
-            if r.status != AgentStatus.SUCCESS:
-                continue
-            # 简单启发式：从 trajectory 的 tool 结果中提取 url
-            for step in r.trajectory:
-                if step.get("role") == "tool" and isinstance(step.get("result"), dict):
-                    res = step["result"]
-                    if "results" in res and isinstance(res["results"], list):
-                        for item in res["results"]:
-                            if isinstance(item, dict) and "url" in item:
-                                sources.append({
-                                    "url": item["url"],
-                                    "title": item.get("title", ""),
-                                    "snippet": item.get("snippet", ""),
-                                    "task_id": r.task_id,
-                                })
-                    elif "papers" in res and isinstance(res["papers"], list):
-                        for paper in res["papers"]:
-                            if isinstance(paper, dict) and "pdf_url" in paper:
-                                sources.append({
-                                    "url": paper["pdf_url"],
-                                    "title": paper.get("title", ""),
-                                    "snippet": paper.get("summary", "")[:200],
-                                    "task_id": r.task_id,
-                                })
-
-        # 去重
-        seen = set()
-        unique_sources = []
-        for s in sources:
-            key = s["url"]
-            if key not in seen:
-                seen.add(key)
-                unique_sources.append(s)
+        unique_sources = result_sources(results)
 
         # 统计实际工具调用次数（遍历所有子任务的 trajectory）
         num_searches = sum(

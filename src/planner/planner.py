@@ -59,7 +59,7 @@ Return a JSON object with this exact structure (no markdown, no extra text):
 1. task_type must be one of: search, analyze, verify
 2. dependencies must reference existing task_id values
 3. The graph must be a DAG (no cycles)
-4. Generate 3 to 8 sub_tasks
+4. Generate 1 to {max_tasks} sub_tasks; this is a hard limit. Combine related research angles when the budget is small.
 5. More fundamental/information-gathering tasks should have fewer dependencies
 6. Verification tasks should depend on analysis tasks
 7. Use concise but clear descriptions
@@ -96,6 +96,7 @@ Return a JSON object with new sub_tasks. You may:
 2. Add new tasks to fill gaps
 3. Remove tasks that are no longer needed
 4. Keep dependencies consistent
+5. The total task set, including preserved tasks, must not exceed {max_tasks} tasks.
 
 Structure:
 {{
@@ -197,6 +198,7 @@ class Planner:
             failed_tasks_json=failed_json,
             preserved_results_json=preserved_json,
             reason=reason,
+            max_tasks=getattr(self, "max_tasks", 8),
         )
         messages = [
             {"role": "system", "content": "You are a research planning assistant. Output valid JSON only."},
@@ -212,7 +214,10 @@ class Planner:
         self._last_raw_json = content
         self.budget_tracker.track(len(content) // 3)
 
-        return self._parse_plan(content)
+        old_map = getattr(self, "_last_task_map", {})
+        completed = {r.task_id: old_map[r.task_id] for r in existing_results
+                     if r.status.value == "success" and r.task_id in old_map}
+        return self._parse_plan(content, preserved_tasks=completed)
 
     # ------------------------------------------------------------------
     # 内部方法
@@ -220,14 +225,14 @@ class Planner:
 
     def _build_prompt(self, query: str, memory: str) -> str:
         """构建初始规划 prompt。"""
-        # 首次运行（无历史记忆）时，提示 Planner 更激进地拆解子任务
+        # Keep every decomposition hint consistent with the actual execution budget.
         has_memory = bool(memory and memory.strip() and memory != "None")
         if not has_memory:
             extra_hint = (
                 "\n## Note\n"
                 "No previous research memory is available for this topic. "
-                "Please be MORE AGGRESSIVE in decomposition: generate 6-10 sub_tasks to thoroughly cover the topic, "
-                "rather than the usual 3-5. Each sub-task should focus on a distinct angle or data source.\n"
+                "Cover distinct angles or data sources within the hard task limit; "
+                "combine related comparisons rather than creating a task per item.\n"
                 "IMPORTANT: Each sub-task description must directly reflect the user's original intent. "
                 "If the user asks about 'internship application strategies', do NOT generate tasks about '2025 tech trends' or 'annual science summary'."
             )
@@ -237,9 +242,10 @@ class Planner:
                 "Use the preserved successful results above to inform new sub-tasks. "
                 "New tasks should fill gaps and avoid duplicating existing coverage."
             )
-        return INITIAL_PLAN_PROMPT.format(query=query, memory_context=memory or "None") + extra_hint
+        limit = getattr(self, "max_tasks", 8)
+        return INITIAL_PLAN_PROMPT.format(query=query, memory_context=memory or "None", max_tasks=limit) + extra_hint
 
-    def _parse_plan(self, json_str: str) -> DAG:
+    def _parse_plan(self, json_str: str, preserved_tasks=None) -> DAG:
         """健壮性 JSON 解析：处理 markdown 代码块、多余换行等噪声。
 
         解析策略:
@@ -299,6 +305,19 @@ class Planner:
         if not isinstance(sub_tasks_raw, list):
             raise PlanParseError(f"'sub_tasks' must be a list, got {type(sub_tasks_raw)}")
 
+        if not sub_tasks_raw:
+            raise PlanParseError("Plan must contain at least one task")
+        task_map = {}
+        for item in sub_tasks_raw:
+            if not isinstance(item, dict) or not isinstance(item.get("task_id"), str) or not item["task_id"].strip():
+                raise PlanParseError("Each task needs a nonempty task_id")
+            task = self._deserialize_subtask(item)
+            if task.task_id in task_map:
+                raise PlanParseError(f"Duplicate task_id: {task.task_id}")
+            if task.timeout_seconds <= 0:
+                raise PlanParseError("Task timeout must be positive")
+            task.context_keys = [f"dep:{dep}" for dep in task.dependencies]
+            task_map[task.task_id] = task
         dag = DAG()
         for item in sub_tasks_raw:
             task = self._deserialize_subtask(item)
@@ -309,8 +328,10 @@ class Planner:
             task_id = item.get("task_id", "")
             for dep in item.get("dependencies", []):
                 if not dag.has_node(dep):
-                    # 依赖指向不存在的任务，创建占位节点
+                    if dep not in (preserved_tasks or {}):
+                        raise PlanParseError(f"Unknown dependency: {dep}")
                     dag.add_node(dep)
+                    task_map[dep] = preserved_tasks[dep]
                 dag.add_edge(dep, task_id)  # dep -> task_id (task_id 依赖 dep)
 
         # 验证无环
@@ -319,6 +340,7 @@ class Planner:
         except DAGCycleError as e:
             raise PlanParseError(f"Planner generated a cyclic graph: {e}") from e
 
+        self._last_task_map = task_map
         return dag
 
     def _deserialize_subtask(self, item: dict[str, Any]) -> SubTask:
@@ -346,6 +368,8 @@ class Planner:
 
         通常在 generate_plan 后由编排器调用。
         """
+        if hasattr(self, "_last_task_map"):
+            return dict(self._last_task_map)
         # 复用 _parse_plan 中的解析逻辑，但返回映射
         # 这里重新解析 raw_json 以获取完整 SubTask 信息
         raw = raw_json.strip()

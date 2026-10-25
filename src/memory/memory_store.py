@@ -241,6 +241,7 @@ class SharedMemoryStore:
             if existing and entry.confidence > existing.confidence:
                 # 用新 entry 更新，但保留旧 ID
                 entry.entry_id = duplicate_id
+                entry.session_id = existing.session_id
                 entry.timestamp = max(entry.timestamp, existing.timestamp)
                 self.lt.insert_entry(entry)
                 self._remove_from_index(duplicate_id)
@@ -279,7 +280,11 @@ class SharedMemoryStore:
         best_idx = int(np.argmax(sims))
         best_sim = float(sims[best_idx])
         if best_sim > _DEDUP_THRESHOLD:
-            return self._entry_ids[best_idx]
+            existing = self._entries_cache[self._entry_ids[best_idx]]
+            # Similarity proposes a candidate; changed values/negation must not merge.
+            normalize = lambda text: re.sub(r"\s+", "", text).casefold()
+            if normalize(existing.claim) == normalize(entry.claim):
+                return existing.entry_id
         return None
 
     def _detect_conflicts(self, new_entry: MemoryEntry) -> None:

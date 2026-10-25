@@ -9,6 +9,8 @@ Blue Agent 接收 Red Agent 的 Verdict，按优先级排序并执行三类修�
 修复后执行 self_verify，确保不引入新矛盾。
 """
 from __future__ import annotations
+from src.utils.async_call import call_model, model_budget
+from src.utils.sources import extract_sources
 
 import copy
 from typing import Any
@@ -67,7 +69,7 @@ PROMPT_IN_PLACE_FIX = """请根据以下审查意见，对研究报告进行【�
 1. 仅修改与 source 不一致的具体数字、日期、名字等事实性内容。
 2. 保持原文结构和叙述风格不变。
 3. 所有修改必须基于提供的 sources，不能引入新信息。
-4. 输出修正后的完整段落。
+4. 输出修正后的完整报告，保留不涉及该问题的其余内容，不额外扩写。
 
 请按以下 JSON 格式输出：
 {
@@ -160,10 +162,14 @@ class BlueAgent:
         max_tokens: 单次修复调用的最大输出 token。
     """
 
-    def __init__(self, policy, tools: list[Any] | None = None, max_tokens: int = 4096):
+    def __init__(self, policy, tools: list[Any] | None = None, max_tokens: int = 4096,
+                 max_fixes_per_round: int = 1):
         self.policy = policy
         self.tools = tools or []
         self.max_tokens = max_tokens
+        if max_fixes_per_round < 1:
+            raise ValueError("max_fixes_per_round must be positive")
+        self.max_fixes_per_round = max_fixes_per_round
         # 缓存搜索工具
         self._search_tool = self._find_search_tool()
 
@@ -209,15 +215,31 @@ class BlueAgent:
 
         original_content = report.content
 
-        for issue in sorted_issues:
+        for issue in sorted_issues[:self.max_fixes_per_round]:
+            budget = model_budget.get()
+            if budget is not None and budget["limit"] - budget["used"] < 2 + budget.get("post_review_calls", 0):
+                # A fix needs generation + self-verification, followed by Red's
+                # evaluation of the exact candidate. Preserve the last verified version.
+                break
+            before = copy.deepcopy(current)
             op = await self._fix_single_issue(current, issue)
+            op.detail = {"detail": op.detail, "before": before.content, "after": current.content,
+                         "sources": copy.deepcopy(current.sources), "evidence": issue.evidence}
             operations.append(op)
+            if current.content == before.content:
+                op.success = False
+                op.detail["no_change"] = True
+            if not op.success:
+                continue
 
             # self_verify：检查修复是否引入新矛盾
             verify_pass, verify_issues = await self._self_verify(
-                original_content, current.content, operations
+                original_content, current.content, operations, sources=current.sources
             )
             if not verify_pass:
+                current = before
+                op.success = False
+                op.detail["reverted"] = True
                 # 引入新问题：记录但继续（优先处理高优先级 issue，避免死锁）
                 for vi in verify_issues:
                     operations.append(
@@ -263,15 +285,18 @@ class BlueAgent:
         self, report: ResearchReport, issue: Issue
     ) -> FixOperation:
         """执行原地修正。"""
+        if not report.sources or not issue.evidence:
+            return FixOperation(issue=issue, action="evidence_missing", success=False,
+                                detail="No retrieved evidence; unsupported assertion not rewritten")
         prompt = PROMPT_IN_PLACE_FIX
         prompt = prompt.replace("{issue_desc}", issue.description)
         prompt = prompt.replace("{content}", self._truncate_content(report.content))
-        prompt = prompt.replace("{sources}", self._format_sources(report.sources, max_items=15))
+        prompt = prompt.replace("{sources}", self._format_sources(report.sources))
         messages = [
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
         ]
-        resp = self.policy(messages)
+        resp = await call_model(self.policy, messages)
         raw = resp.content or ""
 
         fixed_content, changes = self._parse_fix_json(raw)
@@ -310,11 +335,16 @@ class BlueAgent:
                         sr = None
                 else:
                     sr = None
-                search_results = str(sr) if sr else "（搜索工具未返回结果）"
+                new_sources = extract_sources(sr)
+                if not new_sources:
+                    return FixOperation(issue=issue, action="search_no_evidence", success=False,
+                                        detail="Supplementary search returned no usable evidence")
+                report.sources = list({s["url"]: s for s in report.sources + new_sources}.values())
+                search_results = str(sr)
             except Exception as e:
-                search_results = f"（搜索失败: {e}）"
+                return FixOperation(issue=issue, action="search_failed", success=False, detail=type(e).__name__)
         else:
-            search_results = "（无可用搜索工具）"
+            return FixOperation(issue=issue, action="search_unavailable", success=False, detail="No search tool")
 
         prompt = PROMPT_SUPPLEMENTARY_SEARCH
         prompt = prompt.replace("{issue_desc}", issue.description)
@@ -322,11 +352,12 @@ class BlueAgent:
         # 截断搜索结果避免膨胀
         search_results = search_results[:2000] if len(search_results) > 2000 else search_results
         prompt = prompt.replace("{search_results}", search_results)
+        prompt += "\nRetrieved source records:\n" + self._format_sources(report.sources)
         messages = [
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
         ]
-        resp = self.policy(messages)
+        resp = await call_model(self.policy, messages)
         raw = resp.content or ""
 
         fixed_content, changes = self._parse_fix_json(raw)
@@ -356,7 +387,7 @@ class BlueAgent:
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
         ]
-        resp = self.policy(messages)
+        resp = await call_model(self.policy, messages)
         raw = resp.content or ""
 
         fixed_content, removed = self._parse_removal_json(raw)
@@ -376,7 +407,7 @@ class BlueAgent:
         )
 
     async def _self_verify(
-        self, original: str, revised: str, operations: list[FixOperation]
+        self, original: str, revised: str, operations: list[FixOperation], sources=None
     ) -> tuple[bool, list[Issue]]:
         """修复后自验证，检查是否引入新矛盾。
 
@@ -387,18 +418,19 @@ class BlueAgent:
             return True, []
 
         fixes_text = "\n".join(
-            f"- [{op.issue.dimension.value}] {op.action}: {op.detail[:200]}"
+            f"- [{op.issue.dimension.value}] {op.action}: {str(op.detail)[:200]}"
             for op in operations[-5:]  # 只取最近5条，避免 prompt 过长
         )
         prompt = PROMPT_SELF_VERIFY
-        prompt = prompt.replace("{original}", original[:2000])
-        prompt = prompt.replace("{revised}", revised[:2000])
+        prompt = prompt.replace("{original}", self._truncate_content(original))
+        prompt = prompt.replace("{revised}", self._truncate_content(revised))
         prompt = prompt.replace("{fixes}", fixes_text)
+        prompt += "\nAuthoritative evidence for checking corrections (the original may be wrong):\n" + self._format_sources(sources or [])
         messages = [
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
         ]
-        resp = self.policy(messages)
+        resp = await call_model(self.policy, messages)
         raw = resp.content or ""
 
         try:
@@ -419,10 +451,10 @@ class BlueAgent:
                 )
             return not has_new, new_issues
         except Exception:
-            # self_verify 解析失败视为通过，避免阻塞修复流程
-            return True, []
+            # Unverifiable repairs are reverted by defend().
+            return False, []
 
-    def _format_sources(self, sources: list[dict], max_items: int = 15) -> str:
+    def _format_sources(self, sources: list[dict], max_items: int | None = None) -> str:
         """格式化来源列表，截断以避免上下文膨胀。"""
         if not sources:
             return "（无来源）"
@@ -431,16 +463,16 @@ class BlueAgent:
             title = s.get("title", "未知标题")
             url = s.get("url", "")
             snippet = s.get("snippet", "")[:300]
-            lines.append(f"[{i}] {title}\nURL: {url}\nSnippet: {snippet}\n")
-        if len(sources) > max_items:
+            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nSnippet: {snippet}\n")
+        if max_items is not None and len(sources) > max_items:
             lines.append(f"... 还有 {len(sources) - max_items} 个来源未显示")
         return "\n".join(lines)
 
-    def _truncate_content(self, content: str, max_len: int = 4000) -> str:
-        """截断报告内容，避免 prompt 过长。"""
-        if len(content) <= max_len:
-            return content
-        return content[:max_len] + "\n\n[报告已截断，仅显示前 {} 字符]".format(max_len)
+    def _truncate_content(self, content: str, max_len: int = 16000) -> str:
+        """Keep the complete report, or fail rather than rewrite a truncated prefix."""
+        if len(content) > max_len:
+            raise RuntimeError("Report exceeds full-repair input limit; original retained")
+        return content
 
     def _parse_fix_json(self, raw: str) -> tuple[str, list[dict]]:
         """解析 in_place / search 修复的 JSON 输出。"""

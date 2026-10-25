@@ -160,7 +160,7 @@ class FixOperation:
     issue: Issue
     action: str = ""
     success: bool = False
-    detail: str = ""
+    detail: Any = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {

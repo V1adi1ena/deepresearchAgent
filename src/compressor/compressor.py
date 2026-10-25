@@ -88,6 +88,32 @@ class ContextCompressor:
         total_chars = sum(len(t) for t in texts)
         return int(total_chars / _CHARS_PER_TOKEN)
 
+    def compress_messages(self, messages: list[dict], query: str) -> list[dict]:
+        """Compress tool contents without deleting or reordering protocol messages."""
+        import copy
+        import json
+        from src.utils.sources import extract_sources
+        result = copy.deepcopy(messages)
+        indices = [i for i, m in enumerate(result) if m.get("role") == "tool"]
+        if not indices:
+            return result
+        texts = [str(result[i].get("content", "")) for i in indices]
+        if self.calculate_tokens(texts) <= self.available_budget * _L1_THRESHOLD:
+            return result
+        # Per-message compression keeps each tool_call_id paired, including discarded payloads.
+        per_message_budget = max(1, self.available_budget // len(indices))
+        for i in indices:
+            original = str(result[i].get("content", ""))
+            try:
+                sources = extract_sources(json.loads(original))
+            except (ValueError, TypeError):
+                sources = []
+            compressed = self.compress([original], query)
+            payload = "\n".join(compressed)[:int(per_message_budget * _CHARS_PER_TOKEN)]
+            source_refs = [{"source_id": s["source_id"], "url": s["url"], "title": s["title"]} for s in sources]
+            result[i]["content"] = json.dumps({"evidence": payload, "sources": source_refs}, ensure_ascii=False)
+        return result
+
     @trace_chain(name="compressor.compress", tags=["m3", "compressor"])
     def compress(
         self,
@@ -197,13 +223,13 @@ class ContextCompressor:
 
         # 自适应阈值：从 0.25 开始，若不够严格则递减
         best_result: list[str] = []
-        for threshold in [0.25, 0.20, 0.15]:
+        for threshold in [0.15, 0.20, 0.25, 0.40, 0.60, 0.80]:
             filtered = [t for t, s in scored if s >= threshold]
             tokens = self.calculate_tokens(filtered)
             if tokens <= budget * 0.8:
                 best_result = filtered
                 break
-            if threshold == 0.15:
+            if threshold == 0.80:
                 best_result = filtered
 
         # 保底策略：若过滤后为空但原始有内容，至少保留相似度最高的 1 篇

@@ -19,6 +19,8 @@ DeepResearch Agent 核心运行逻辑。
 from __future__ import annotations
 
 import logging
+import copy
+import uuid
 import os
 import re
 import sys
@@ -118,7 +120,9 @@ def _create_tools_factory(config: dict):
     tools["notepad"] = NotepadTool()
 
     # 返回列表形式（AgentPool 和 Agent 构造函数需要 list）
-    return list(tools.values())
+    allowed = tools_cfg.get("allowed", list(tools))
+    from src.utils.async_call import track_tool
+    return [track_tool(tool) for name, tool in tools.items() if name in allowed]
 
 
 # ---------------------------------------------------------------------------
@@ -195,7 +199,7 @@ def initialize_modules(config: dict, session_id: str = "") -> dict[str, Any]:
         llm_policy=compressor_policy,
         budget=compressor_cfg.get("max_context_length", 16000),
         output_reserve=compressor_cfg.get("output_reserve_tokens", 2048),
-    )
+    ) if compressor_cfg.get("enable_multilevel", True) else None
     modules["compressor"] = compressor
     logger.info("[M3] Compressor 模块已初始化")
 
@@ -205,8 +209,8 @@ def initialize_modules(config: dict, session_id: str = "") -> dict[str, Any]:
     memory_cfg = config.get("memory", {})
     memory_store = SharedMemoryStore(
         db_path=memory_cfg.get("db_path", "data/memory.db"),
-        session_id=session_id,
-    )
+        session_id=session_id or uuid.uuid4().hex,
+    ) if memory_cfg.get("enabled", True) else None
     modules["memory_store"] = memory_store
     logger.info(f"[M4] Memory Store 模块已初始化 (session={session_id})")
 
@@ -225,7 +229,8 @@ def initialize_modules(config: dict, session_id: str = "") -> dict[str, Any]:
     adversarial_cfg = config.get("adversarial", {})
 
     red_agent = RedAgent(policy=red_policy)
-    blue_agent = BlueAgent(policy=blue_policy, tools=tools_list)
+    blue_agent = BlueAgent(policy=blue_policy, tools=tools_list,
+        max_fixes_per_round=adversarial_cfg.get("max_fixes_per_round", 1))
     adversarial_loop = AdversarialLoop(
         red_agent=red_agent,
         blue_agent=blue_agent,
@@ -233,6 +238,7 @@ def initialize_modules(config: dict, session_id: str = "") -> dict[str, Any]:
         max_rounds=adversarial_cfg.get("max_rounds", 3),
         score_threshold=adversarial_cfg.get("score_threshold", 8.0),
         delta_threshold=adversarial_cfg.get("delta_threshold", 0.3),
+        max_model_calls=adversarial_cfg.get("max_model_calls", 24),
     )
     modules["adversarial"] = adversarial_loop
     logger.info("[M5] Adversarial 模块已初始化")
@@ -242,7 +248,7 @@ def initialize_modules(config: dict, session_id: str = "") -> dict[str, Any]:
     from src.orchestrator.agent_pool import AgentPool
 
     agent_pool = AgentPool(
-        policy_factory=lambda: modules.get("solver_policy", default_policy),
+        policy_factory=lambda: copy.copy(modules.get("solver_policy", default_policy)),
         tools_factory=lambda: list(modules["tools"]),
         max_idle=3,
     )
@@ -309,25 +315,38 @@ async def run_research(query: str, config: dict, modules: dict[str, Any]) -> str
         global_timeout_seconds=config.get("orchestrator", {}).get("global_timeout_seconds", 600),
         max_replan_rounds=config.get("orchestrator", {}).get("max_replan_rounds", 3),
         max_sub_questions=config.get("orchestrator", {}).get("max_sub_questions", 8),
+        synthesis_reserve_seconds=config.get("orchestrator", {}).get("synthesis_reserve_seconds", 30),
+        max_subagent_retries=config.get("orchestrator", {}).get("max_subagent_retries", 1),
         enable_adversarial=config.get("adversarial", {}).get("enabled", True),
         enable_evolution=config.get("evolution", {}).get("enabled", False),
     )
 
-    report = await orchestrator.run(query, config=run_cfg)
+    from src.utils.async_call import model_call_records, tool_call_records
+    calls = []
+    tools = []
+    call_token = model_call_records.set(calls)
+    tool_token = tool_call_records.set(tools)
+    try:
+        report = await orchestrator.run(query, config=run_cfg)
+    finally:
+        model_call_records.reset(call_token)
+        tool_call_records.reset(tool_token)
+        modules["model_calls"] = calls
+        modules["tool_calls"] = tools
+        from src.tools.web_search import WebSearchTool
+        await WebSearchTool.close_session()
+    report.num_searches = len(tools)
     logger.info(
         f"[Orchestrator] 报告生成完成 | 置信度={report.confidence:.2f} | "
         f"搜索轮数={report.num_searches} | 重规划={report.num_replan} | 对抗轮数={report.adversarial_rounds}"
     )
+    modules["last_report"] = report
 
     # Step 4/5: 进化优化（如启用且已训练）
     if run_cfg.enable_evolution:
         logger.info("[Evolution] 进化优化已启用（预留接口）")
     else:
         logger.info("[Evolution] 进化优化已跳过")
-
-    # 关闭 WebSearchTool 连接池
-    from src.tools.web_search import WebSearchTool
-    await WebSearchTool.close_session()
 
     elapsed = time.time() - start_time
     logger.info(f"研究完成，耗时: {elapsed:.2f} 秒")
@@ -361,7 +380,9 @@ def _format_report(report, elapsed: float) -> str:
         "## 元信息",
         "",
         f"- **置信度**: {report.confidence:.2f}",
-        f"- **搜索轮数**: {report.num_searches}",
+        f"- **状态**: {report.status}",
+        f"- **运行 ID**: {report.run_id}",
+        f"- **工具调用尝试**: {report.num_searches}",
         f"- **重规划次数**: {report.num_replan}",
         f"- **对抗轮数**: {report.adversarial_rounds}",
         f"- **总耗时**: {elapsed:.2f} 秒",

@@ -81,6 +81,7 @@ class AgentPool:
 
         # 新建 Agent
         agent = self._create_agent(type_key)
+        agent._pool_type = type_key
         self._created_count[type_key] += 1
         self._active_count[type_key] += 1
         return agent
@@ -99,7 +100,7 @@ class AgentPool:
         self._active_count[type_key] = max(0, self._active_count.get(type_key, 0) - 1)
 
         # 健康检查
-        if hasattr(agent, "policy") and getattr(agent.policy, "was_truncated", False):
+        if getattr(agent, "_discard", False) or (hasattr(agent, "policy") and getattr(agent.policy, "was_truncated", False)):
             self._degraded_count[type_key] = self._degraded_count.get(type_key, 0) + 1
             return  # 不回收
 
@@ -149,6 +150,8 @@ class AgentPool:
     def _infer_type_key(self, agent: "BaseAgent") -> str:
         """从 Agent 实例推断其类型键。"""
         # 简单启发式：通过类名推断
+        if hasattr(agent, "_pool_type"):
+            return agent._pool_type
         cls_name = agent.__class__.__name__
         if "Summarizer" in cls_name:
             return "synthesize"
