@@ -1,0 +1,1188 @@
+{
+  "question_id": "med_002",
+  "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+    "content": "# GLP-1受体激动剂减重外应用评估\n\n## 心血管保护（证据最强）\n- **司美格鲁肽**：SELECT试验（非糖尿病超重/肥胖+CVD）显示MACE风险降低约20%[s_c52e943773a4][s_2350feaaafdc][s_4095ddfd26a9]；关于“获益部分独立于体重下降”的机制声明，现有来源未提供直接证据支持，标注为**未经证实**。SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致[s_de957f2966e4][s_e1c9df85bab8]。\n- **替尔泊肽**：Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡[s_01082c42a9dd][s_374bfeef9f27]。\n- **缺口**：SURPASS-CVOT具体结果数值、各试验精确HR/CI未获取；替尔泊肽在非糖尿病肥胖人群的硬终点RCT证据有限。\n\n## 认知功能（证据偏阴性/早期）\n- **司美格鲁肽**：III期EVOKE/EVOKE+（早期症状性AD）**未能延缓AD进展**，主要认知终点未达[s_5c2ea559487d][s_6388952ac807]；观察性靶试验模拟提示AD诊断风险方向性降低[s_ded0b30184df]。\n- **利拉鲁肽**：IIb期RCT（轻中度AD）已开展[s_33d8348e975e][s_f4232a439b24]；系统综述/Meta分析汇总利拉鲁肽与艾塞那肽认知结局[s_c50e62313c9b]。\n- **替尔泊肽**：无认知/AD/PD的RCT证据，仅机制综述与观察性数据[s_d517f172d0a2]。\n- **缺口**：EVOKE效应量与安全性细节未获取；PD无大型RCT。\n\n## 成瘾治疗\n**检索证据中无成瘾治疗相关数据**，无法评估。\n\n## 结论\n心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）；认知领域III期结果为阴性，神经保护仍属假说；成瘾治疗缺乏证据。\n\n**总体置信度：0.65**\n\n**关键来源**：SELECT（Lancet 2026；Nat Med 2024）、SUSTAIN/PIONEER 6汇总（PMID 40704485）、Meta分析（PMID 39345822、38734847）、EVOKE/EVOKE+（Lancet；Nat Med 2026）、利拉鲁肽IIb期（Nat Med）、Pharmaceutics 2026 Meta分析。",
+    "sources": [
+      {
+        "source_id": "s_da91ac3d0c43",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41207920/",
+        "title": "Cardiovascular outcomes of semaglutide and tirzepatide for patients with type 2 diabetes in clinical practice",
+        "snippet": "Cardiovascular\noutcome\ntrials\nof\nthe\nincretin-based\nmedicines\ntirzepatide\nand\nsemaglutide\nhave\nshown",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_e995df2266f4",
+        "url": "https://doi.org/10.3389%2Ffendo.2021.645566",
+        "title": "Frontiers  Cardiovascular Safety and Benefits of Semaglutide in Patients With Type 2 Diabetes: Findings From SUSTAIN 6 and PIONEER 6",
+        "snippet": "Diabetes Division, Katholisches Kinikum Bochum, St. Josef-Hospital, Ruhr-University of Bochum, Bochu",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_85175246f29a",
+        "url": "https://www.x-mol.com/paper/1214201977723056128",
+        "title": "Semaglutide (SUSTAIN and PIONEER) reduces cardiovascular events in type 2 diabetes across varying cardiovascular risk.,Diabetes, Obesity",
+        "snippet": "AIMTo investigate the effects of semaglutide versus comparators on major adverse cardiovascular even",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_de957f2966e4",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/40704485/",
+        "title": "Effect of semaglutide versus placebo on cardiorenal outcomes by prior cardiovascular disease and baseline body mass index: Pooled post hoc analysis of SUSTAIN 6 and PIONEER 6",
+        "snippet": "Abstract\nAims:\nCardiorenal\neffects\nof\nsemaglutide\nin\npeople\nwith\ntype\n2\ndiabetes\n(T2D)\nat\nhigh\ncardi",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_20f9aac4d35a",
+        "url": "http://paper.medlive.cn/literature/4346991",
+        "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+        "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_e1c9df85bab8",
+        "url": "https://europepmc.org/article/PMC/PMC11015952",
+        "title": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 trials",
+        "snippet": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 t",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5cb93dd3e12d",
+        "url": "https://paper.medlive.cn/literature/4346990",
+        "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+        "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c52e943773a4",
+        "url": "https://link.springer.com/article/10.1038/s41591-024-03015-5",
+        "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+        "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_01082c42a9dd",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39345822/",
+        "title": "Risk of major adverse cardiovascular events and all-cause mortality under treatment with GLP-1 RAs or the dual GIP/GLP-1 receptor agonist tirzepatide in overweight or obese adults without diabetes: a systematic review and meta-analysis",
+        "snippet": "Background:\nAmong\nthe\ncurrently\napproved\nantiobesity\nmedications,\nthe\nglucagon-like-peptide-1\nrecept",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c4f37d65b744",
+        "url": "https://link.springer.com/article/10.1007/s10557-024-07547-3",
+        "title": "Association Between the Magnitude of Glycemic Control and Body Weight Loss With GLP-1 Receptor Agonists and Risk of Atherosclerotic Cardiovascular",
+        "snippet": "Abstract Purpose Reduction of major atherosclerotic cardiovascular events (MACE) has not been consis",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_374bfeef9f27",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38734847/",
+        "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+        "snippet": "Background:\nGLP-1\nreceptor\nagonists\n(GLP-1\nRAs)\nhave\nemerged\nas\nan\neffective\ntherapeutic\nclass\nfor\nw",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_325dc20552e5",
+        "url": "https://doc.wendoc.com/b06c1e161cf2f761f63fb00d7-3.html",
+        "title": "Non-glycaemic effects mediated via GLP-1 receptor agonists_文档下载",
+        "snippet": "DIABETES,OBESITYANDMETABOLISM reviewarticle expressionincardiactissues,andcouldoccurindependentlyofw",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c1ee12d83fe9",
+        "url": "https://www.nature.com/articles/s41598-021-89620-7?fromPaywallRec=true",
+        "title": "Systematic review and meta-analysis for prevention of cardiovascular complications using GLP-1 receptor agonists and SGLT-2 inhibitors in obese",
+        "snippet": "Download PDF Download PDF Abstract Patients with type 2 diabetes mellitus (T2DM) and obesity are at ",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_095893d47ff0",
+        "url": "https://doi.org/10.3390/jcm13164674",
+        "title": "Cardiovascular Protective Properties of GLP-1 Receptor Agonists: More than Just Diabetic and Weight Loss Drugs",
+        "snippet": "by Richard Le Richard Le Mau T. Nguyen Mau T. Nguyen Momina A. Allahwala Momina A. Allahwala James P",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_313281825971",
+        "url": "https://www.sciencedirect.com/science/article/pii/S1050173824000197",
+        "title": "The cardiovascular effects of GLP-1 receptor agonists beyond obesity and type 2 diabetes: An anti-atherosclerotic action - ScienceDirect",
+        "snippet": "Author links open overlay panel Kleopatra Alexiadou a , Adam Hartley b , Tricia M-M Tan a , Ramzi Kh",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5c42818d4f67",
+        "url": "https://www.antpedia.com/journal/documentDetails-1281021-10.html",
+        "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+        "snippet": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A ",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_d517f172d0a2",
+        "url": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2026.1906426/abstract",
+        "title": "Frontiers | GLP-1 and GIP class drugs have neuroprotective properties in Alzheimer&#39;s and Parkinson&#39;s disease",
+        "snippet": "REVIEW\narticleFront.\nNeurosci.\nSec.\nNeuroendocrine\nScienceAbstractAlzheimer's\nand\nParkinson's\ndiseas",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_c55e41b6073a",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/42325226/",
+        "title": "Semaglutide in cognitive dysfunction: neuroprotective potential, clinical trial limitations, and a prevention-focused framework",
+        "snippet": "Abstract\nMetabolic\ndysfunction\nis\nincreasingly\nrecognized\nas\na\npivotal\nfactor\nin\ncognitive\ndecline\na",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_f4232a439b24",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41326666/",
+        "title": "Liraglutide in mild to moderate Alzheimer's disease: a phase 2b clinical trial",
+        "snippet": "Abstract\nLiraglutide,\na\nglucagon-like\npeptide\n1\n(GLP-1)\nagonist\nand\nantidiabetic\ndrug,\nhas\nshown\nneu",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_ded0b30184df",
+        "url": "https://www.ablesci.com/scholar/paper?id=E4VAoyxqr",
+        "title": "Associations of semaglutide with first‐time diagnosis of Alzheimer's disease in patients with type 2 diabetes: Target trial emulation using",
+        "snippet": "Abstract INTRODUCTION Emerging preclinical evidence suggests that semaglutide, a glucagon‐like pepti",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_056102e208cd",
+        "url": "https://www.researchgate.net/publication/7890383_Rivastigmine_for_vascular_cognitive_impairment_10100214651858CD004744pub2",
+        "title": "Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.pub2  Request PDF",
+        "snippet": "Article Literature Review Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.p",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_dd1c204b6413",
+        "url": "https://www.pharnexcloud.com/data/lcsy_f3f62d84b1251469cb9c9ecb372a0249.html",
+        "title": "司美格鲁肽片临床III期随机化双盲试验_摩熵医药(原药融云)",
+        "snippet": "【CTR20212849】一项研究Semaglutide用于早期阿尔茨海默病患者的试验性研究(EVOKE plus) 基本信息 登记号 CTR20212849 试验状态 进行中(招募中) 药物名称 司",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_91903fb81a17",
+        "url": "https://paper.medlive.cn/literature/1019714",
+        "title": "司马西特治疗阿尔茨海默病_N Engl J Med_期刊文献_医脉通",
+        "snippet": "司马西特治疗阿尔茨海默病\n译者:vivian2\nSemagacestat\nfor\ntreatment\nof\nAlzheimer's\ndisease.\nN\nEngl\nJ\nMed\n2013\nOct\n24;",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_2cac1122b10b",
+        "url": "https://www.doc88.com/p-7718296366007.html",
+        "title": "P4-363 A randomized clinical trial of vitamin E and memantine in Alzheimer's disease - 道客巴巴",
+        "snippet": "下载积分: 2000 内容提示: safety and pharmacokinetics of tarenflurbil in subjects with varying de-grees of he",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_c50e62313c9b",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41599176/",
+        "title": "Liraglutide and Exenatide in Alzheimer's Disease and Mild Cognitive Impairment: A Systematic Review and Meta-Analysis of Cognitive Outcomes",
+        "snippet": "Pharmaceutics. 2026 Jan 4;18(1):69. doi: 10.3390/pharmaceutics18010069.\nLiraglutide and Exenatide in",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_33d8348e975e",
+        "url": "https://preview-www.nature.com/articles/s41591-025-04106-7",
+        "title": "Liraglutide in mild to moderate Alzheimer’s disease: a phase 2b clinical trial | Nature Medicine",
+        "snippet": "Study\nprotocol\nand\npopulationBetween\nMarch\n2014\nand\nJanuary\n2021,\nwe\nconducted\na\n12-month,\nmulticent",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_c81e39a3a583",
+        "url": "https://bydrug.pharmcube.com/news/detail/46586e6afbd03f3cbd1f2f47cf63fcef",
+        "title": "口服司美格鲁肽折戟AD,也许没想象中的那么坏医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "最重要的证据是2022年发表在Alzheimer’s\nDement.的文章(DOI:\n10.1002/trc2.12268)。对多个随机控制临床(RCT),总计超过15,000名心血管疾病或高危患者进",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_5c2ea559487d",
+        "url": "https://preview-www.nature.com/articles/d41591-026-00018-2",
+        "title": "GLP-1 receptor agonist fails to halt Alzheimer’s disease",
+        "snippet": "RESEARCH\nHIGHLIGHT\n31\nMarch\n2026\nGLP-1\nreceptor\nagonist\nfails\nto\nhalt\nAlzheimer’s\ndisease\nIn\nthe\npha",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_4cd063afafb0",
+        "url": "https://www.healio.com/news/neurology/20260519/video-updates-on-semaglutide-use-in-alzheimers-disease",
+        "title": "VIDEO: Updates on semaglutide use in Alzheimer’s disease",
+        "snippet": "VIDEO:\nUpdates\non\nsemaglutide\nuse\nin\nAlzheimer’s\ndisease\nAdd\ntopic\nto\nemail\nalerts\nReceive\nan\nemail\n",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_6388952ac807",
+        "url": "https://paper.medlive.cn/literature/4351976",
+        "title": "Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials._Lancet_期刊文献_医脉通",
+        "snippet": "摘要\nBACKGROUND:Evidence,\nincluding\nanimal,\nclinical,\nand\nreal-world\nstudies\nin\nindividuals\nwith\ntype\n",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_6002b357f2e7",
+        "url": "https://zhishi.shangxueba.com/D242C90F.html",
+        "title": "以下关于DECLARE研究描述,错误的是() - 上学吧竞赛试题",
+        "snippet": "A.共纳入17160名患者 B.中位随访时间4.7年 C.MACE终点阴性 D.研究中有部分中国人群 答案 B、中位随访时间4.7年 收藏 更多“以下关于DECLARE研究描述,错误的是()”相关的问",
+        "task_id": ""
+      },
+      {
+        "source_id": "s_7614313b1075",
+        "url": "https://blog.csdn.net/weixin_35776153/article/details/116152779",
+        "title": "三阶段dea模型 matlab源程序,三阶段DEA模型SFA二阶段剔除过程-CSDN博客",
+        "snippet": "楼主你好,跑出来的ce值都小于1,啥子情况?对各个值也不清楚如何分析?头疼死了,可以推荐相关资料么 the final mle estimates are : coefficient     stan",
+        "task_id": ""
+      },
+      {
+        "source_id": "s_4095ddfd26a9",
+        "url": "https://finance.china.com/yiyao/13004692/20230809/45281342.html",
+        "title": "司美格鲁肽降低20%心血管事件风险_财经频道_中华网",
+        "snippet": "8月8日,诺和诺德公布了心血管结局试验SELECT的主要结果。此项双盲试验旨在评估每周一次皮下注射司美格鲁肽(2.4mg)在超重或肥胖合并心血管疾病且不伴糖尿病的患者中预防主要不良心血管事件(MACE",
+        "task_id": ""
+      },
+      {
+        "source_id": "s_2350feaaafdc",
+        "url": "http://case.medlive.cn/all/info-progress/show-202349_129.html",
+        "title": "SELECT里程碑式试验结果发布!“减肥神药”司美格鲁肽可显著降低肥胖或超重患者的心血管事件风险20%_司美格鲁肽_医脉通",
+        "snippet": "SELECT关键试验结果显示,与服用安慰剂的患者相比,“减肥神药”司美格鲁肽(2.4 mg)可将患者的主要心血管不良事件(MACE)风险显著降低20%。这是首项证实一种批准用于慢性体重管理的药物可降低",
+        "task_id": ""
+      },
+      {
+        "source_id": "s_1e8c6c6519eb",
+        "url": "https://cloud.tencent.com/developer/ask/sof/107897179",
+        "title": "在同一数据集中,MAPE和MAE的值显著不同-腾讯云开发者社区-腾讯云",
+        "snippet": "目前,我正在同一数据集上运行不同预测方法的回归。对于DT,MAE略高于AB模型,而MAPE则显著高于AB模型。我意识到,较低的MAE并不一定会导致更低的MAE,但这种差异是相当显著的,让我怀疑我是否做",
+        "task_id": ""
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 5,
+    "num_replan": 0,
+    "adversarial_rounds": 1,
+    "final_score": 6.5,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "a71020fd30024369bdcf784bd298a307",
+    "review_history": [
+      {
+        "round": 1,
+        "dimension_scores": {
+          "fact_check": 6.5,
+          "hallucination": 6.5
+        },
+        "overall_score": 6.5,
+        "issues_count": 18,
+        "fix_operations": [
+          {
+            "issue": {
+              "severity": "major",
+              "dimension": "fact_check",
+              "description": "报告称SELECT试验MACE降低约20%，但来源s_c52e943773a4的摘要仅提及SELECT试验先前报告了20%的MACE降低，未提供具体数值或置信区间；且报告引用的s_20f9aac4d35a和s_c52e943773a4均未明确支持‘获益部分独立于体重下降’这一具体机制声明，该声明缺乏直接来源。",
+              "location": "心血管保护部分，司美格鲁肽条目",
+              "fix_type": "search",
+              "evidence": "s_c52e943773a4摘要：'The SELECT trial previously reported a 20% reduction in major adverse cardiovascular events...' 未提及独立于体重下降的机制分析。"
+            },
+            "action": "supplementary_search: [{'location': '心血管保护 - 司美格鲁肽段落', 'action': 'modified', 'detail': '将“MACE降低约20%，且获益部分独立于体重下降[s_20f9aac4d35a][s_c52e943773a4]”修改为：MACE风险降低约20%[s_c52e943773a4][s_2350feaaafdc][s_4095ddfd26a9]；删除“获益部分独立于体重下降”的引用支撑，并标注该机制声明为“未经证实”。原引用s_20f9aac4d35a和s_c52e943773a4均未明确支持该机制声明。新增s_2350feaaafdc和s_4095ddfd26a9作为20% MACE降低的补充来源。'}]",
+            "success": true,
+            "detail": {
+              "detail": "search_results_len=1398, changes=[{'location': '心血管保护 - 司美格鲁肽段落', 'action': 'modified', 'detail': '将“MACE降低约20%，且获益部分独立于体重下降[s_20f9aac4d35a][s_c52e943773a4]”修改为：MACE风险降低约20%[s_c52e943773a4][s_2350feaaafdc][s_4095ddfd26a9]；删除“获益部分独立于体重下降”的引用支撑，并标注该机制声明为“未经证实”。原引用s_20f9aac4d35a和s_c52e943773a4均未明确支持该机制声明。新增s_2350feaaafdc和s_4095ddfd26a9作为20% MACE降低的补充来源。'}]",
+              "before": "# GLP-1受体激动剂减重外应用评估\n\n## 心血管保护（证据最强）\n- **司美格鲁肽**：SELECT试验（非糖尿病超重/肥胖+CVD）MACE降低约20%，且获益部分独立于体重下降[s_20f9aac4d35a][s_c52e943773a4]；SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致[s_de957f2966e4][s_e1c9df85bab8]。\n- **替尔泊肽**：Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡[s_01082c42a9dd][s_374bfeef9f27]。\n- **缺口**：SURPASS-CVOT具体结果数值、各试验精确HR/CI未获取；替尔泊肽在非糖尿病肥胖人群的硬终点RCT证据有限。\n\n## 认知功能（证据偏阴性/早期）\n- **司美格鲁肽**：III期EVOKE/EVOKE+（早期症状性AD）**未能延缓AD进展**，主要认知终点未达[s_5c2ea559487d][s_6388952ac807]；观察性靶试验模拟提示AD诊断风险方向性降低[s_ded0b30184df]。\n- **利拉鲁肽**：IIb期RCT（轻中度AD）已开展[s_33d8348e975e][s_f4232a439b24]；系统综述/Meta分析汇总利拉鲁肽与艾塞那肽认知结局[s_c50e62313c9b]。\n- **替尔泊肽**：无认知/AD/PD的RCT证据，仅机制综述与观察性数据[s_d517f172d0a2]。\n- **缺口**：EVOKE效应量与安全性细节未获取；PD无大型RCT。\n\n## 成瘾治疗\n**检索证据中无成瘾治疗相关数据**，无法评估。\n\n## 结论\n心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）；认知领域III期结果为阴性，神经保护仍属假说；成瘾治疗缺乏证据。\n\n**总体置信度：0.65**\n\n**关键来源**：SELECT（Lancet 2026；Nat Med 2024）、SUSTAIN/PIONEER 6汇总（PMID 40704485）、Meta分析（PMID 39345822、38734847）、EVOKE/EVOKE+（Lancet；Nat Med 2026）、利拉鲁肽IIb期（Nat Med）、Pharmaceutics 2026 Meta分析。",
+              "after": "# GLP-1受体激动剂减重外应用评估\n\n## 心血管保护（证据最强）\n- **司美格鲁肽**：SELECT试验（非糖尿病超重/肥胖+CVD）显示MACE风险降低约20%[s_c52e943773a4][s_2350feaaafdc][s_4095ddfd26a9]；关于“获益部分独立于体重下降”的机制声明，现有来源未提供直接证据支持，标注为**未经证实**。SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致[s_de957f2966e4][s_e1c9df85bab8]。\n- **替尔泊肽**：Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡[s_01082c42a9dd][s_374bfeef9f27]。\n- **缺口**：SURPASS-CVOT具体结果数值、各试验精确HR/CI未获取；替尔泊肽在非糖尿病肥胖人群的硬终点RCT证据有限。\n\n## 认知功能（证据偏阴性/早期）\n- **司美格鲁肽**：III期EVOKE/EVOKE+（早期症状性AD）**未能延缓AD进展**，主要认知终点未达[s_5c2ea559487d][s_6388952ac807]；观察性靶试验模拟提示AD诊断风险方向性降低[s_ded0b30184df]。\n- **利拉鲁肽**：IIb期RCT（轻中度AD）已开展[s_33d8348e975e][s_f4232a439b24]；系统综述/Meta分析汇总利拉鲁肽与艾塞那肽认知结局[s_c50e62313c9b]。\n- **替尔泊肽**：无认知/AD/PD的RCT证据，仅机制综述与观察性数据[s_d517f172d0a2]。\n- **缺口**：EVOKE效应量与安全性细节未获取；PD无大型RCT。\n\n## 成瘾治疗\n**检索证据中无成瘾治疗相关数据**，无法评估。\n\n## 结论\n心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）；认知领域III期结果为阴性，神经保护仍属假说；成瘾治疗缺乏证据。\n\n**总体置信度：0.65**\n\n**关键来源**：SELECT（Lancet 2026；Nat Med 2024）、SUSTAIN/PIONEER 6汇总（PMID 40704485）、Meta分析（PMID 39345822、38734847）、EVOKE/EVOKE+（Lancet；Nat Med 2026）、利拉鲁肽IIb期（Nat Med）、Pharmaceutics 2026 Meta分析。",
+              "sources": [
+                {
+                  "source_id": "s_da91ac3d0c43",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/41207920/",
+                  "title": "Cardiovascular outcomes of semaglutide and tirzepatide for patients with type 2 diabetes in clinical practice",
+                  "snippet": "Cardiovascular\noutcome\ntrials\nof\nthe\nincretin-based\nmedicines\ntirzepatide\nand\nsemaglutide\nhave\nshown",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_e995df2266f4",
+                  "url": "https://doi.org/10.3389%2Ffendo.2021.645566",
+                  "title": "Frontiers  Cardiovascular Safety and Benefits of Semaglutide in Patients With Type 2 Diabetes: Findings From SUSTAIN 6 and PIONEER 6",
+                  "snippet": "Diabetes Division, Katholisches Kinikum Bochum, St. Josef-Hospital, Ruhr-University of Bochum, Bochu",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_85175246f29a",
+                  "url": "https://www.x-mol.com/paper/1214201977723056128",
+                  "title": "Semaglutide (SUSTAIN and PIONEER) reduces cardiovascular events in type 2 diabetes across varying cardiovascular risk.,Diabetes, Obesity",
+                  "snippet": "AIMTo investigate the effects of semaglutide versus comparators on major adverse cardiovascular even",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_de957f2966e4",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/40704485/",
+                  "title": "Effect of semaglutide versus placebo on cardiorenal outcomes by prior cardiovascular disease and baseline body mass index: Pooled post hoc analysis of SUSTAIN 6 and PIONEER 6",
+                  "snippet": "Abstract\nAims:\nCardiorenal\neffects\nof\nsemaglutide\nin\npeople\nwith\ntype\n2\ndiabetes\n(T2D)\nat\nhigh\ncardi",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_20f9aac4d35a",
+                  "url": "http://paper.medlive.cn/literature/4346991",
+                  "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+                  "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_e1c9df85bab8",
+                  "url": "https://europepmc.org/article/PMC/PMC11015952",
+                  "title": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 trials",
+                  "snippet": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 t",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_5cb93dd3e12d",
+                  "url": "https://paper.medlive.cn/literature/4346990",
+                  "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+                  "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_c52e943773a4",
+                  "url": "https://link.springer.com/article/10.1038/s41591-024-03015-5",
+                  "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+                  "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_01082c42a9dd",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/39345822/",
+                  "title": "Risk of major adverse cardiovascular events and all-cause mortality under treatment with GLP-1 RAs or the dual GIP/GLP-1 receptor agonist tirzepatide in overweight or obese adults without diabetes: a systematic review and meta-analysis",
+                  "snippet": "Background:\nAmong\nthe\ncurrently\napproved\nantiobesity\nmedications,\nthe\nglucagon-like-peptide-1\nrecept",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_c4f37d65b744",
+                  "url": "https://link.springer.com/article/10.1007/s10557-024-07547-3",
+                  "title": "Association Between the Magnitude of Glycemic Control and Body Weight Loss With GLP-1 Receptor Agonists and Risk of Atherosclerotic Cardiovascular",
+                  "snippet": "Abstract Purpose Reduction of major atherosclerotic cardiovascular events (MACE) has not been consis",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_374bfeef9f27",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/38734847/",
+                  "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+                  "snippet": "Background:\nGLP-1\nreceptor\nagonists\n(GLP-1\nRAs)\nhave\nemerged\nas\nan\neffective\ntherapeutic\nclass\nfor\nw",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_325dc20552e5",
+                  "url": "https://doc.wendoc.com/b06c1e161cf2f761f63fb00d7-3.html",
+                  "title": "Non-glycaemic effects mediated via GLP-1 receptor agonists_文档下载",
+                  "snippet": "DIABETES,OBESITYANDMETABOLISM reviewarticle expressionincardiactissues,andcouldoccurindependentlyofw",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_c1ee12d83fe9",
+                  "url": "https://www.nature.com/articles/s41598-021-89620-7?fromPaywallRec=true",
+                  "title": "Systematic review and meta-analysis for prevention of cardiovascular complications using GLP-1 receptor agonists and SGLT-2 inhibitors in obese",
+                  "snippet": "Download PDF Download PDF Abstract Patients with type 2 diabetes mellitus (T2DM) and obesity are at ",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_095893d47ff0",
+                  "url": "https://doi.org/10.3390/jcm13164674",
+                  "title": "Cardiovascular Protective Properties of GLP-1 Receptor Agonists: More than Just Diabetic and Weight Loss Drugs",
+                  "snippet": "by Richard Le Richard Le Mau T. Nguyen Mau T. Nguyen Momina A. Allahwala Momina A. Allahwala James P",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_313281825971",
+                  "url": "https://www.sciencedirect.com/science/article/pii/S1050173824000197",
+                  "title": "The cardiovascular effects of GLP-1 receptor agonists beyond obesity and type 2 diabetes: An anti-atherosclerotic action - ScienceDirect",
+                  "snippet": "Author links open overlay panel Kleopatra Alexiadou a , Adam Hartley b , Tricia M-M Tan a , Ramzi Kh",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_5c42818d4f67",
+                  "url": "https://www.antpedia.com/journal/documentDetails-1281021-10.html",
+                  "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+                  "snippet": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A ",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_d517f172d0a2",
+                  "url": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2026.1906426/abstract",
+                  "title": "Frontiers | GLP-1 and GIP class drugs have neuroprotective properties in Alzheimer&#39;s and Parkinson&#39;s disease",
+                  "snippet": "REVIEW\narticleFront.\nNeurosci.\nSec.\nNeuroendocrine\nScienceAbstractAlzheimer's\nand\nParkinson's\ndiseas",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_c55e41b6073a",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/42325226/",
+                  "title": "Semaglutide in cognitive dysfunction: neuroprotective potential, clinical trial limitations, and a prevention-focused framework",
+                  "snippet": "Abstract\nMetabolic\ndysfunction\nis\nincreasingly\nrecognized\nas\na\npivotal\nfactor\nin\ncognitive\ndecline\na",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_f4232a439b24",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/41326666/",
+                  "title": "Liraglutide in mild to moderate Alzheimer's disease: a phase 2b clinical trial",
+                  "snippet": "Abstract\nLiraglutide,\na\nglucagon-like\npeptide\n1\n(GLP-1)\nagonist\nand\nantidiabetic\ndrug,\nhas\nshown\nneu",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_ded0b30184df",
+                  "url": "https://www.ablesci.com/scholar/paper?id=E4VAoyxqr",
+                  "title": "Associations of semaglutide with first‐time diagnosis of Alzheimer's disease in patients with type 2 diabetes: Target trial emulation using",
+                  "snippet": "Abstract INTRODUCTION Emerging preclinical evidence suggests that semaglutide, a glucagon‐like pepti",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_056102e208cd",
+                  "url": "https://www.researchgate.net/publication/7890383_Rivastigmine_for_vascular_cognitive_impairment_10100214651858CD004744pub2",
+                  "title": "Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.pub2  Request PDF",
+                  "snippet": "Article Literature Review Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.p",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_dd1c204b6413",
+                  "url": "https://www.pharnexcloud.com/data/lcsy_f3f62d84b1251469cb9c9ecb372a0249.html",
+                  "title": "司美格鲁肽片临床III期随机化双盲试验_摩熵医药(原药融云)",
+                  "snippet": "【CTR20212849】一项研究Semaglutide用于早期阿尔茨海默病患者的试验性研究(EVOKE plus) 基本信息 登记号 CTR20212849 试验状态 进行中(招募中) 药物名称 司",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_91903fb81a17",
+                  "url": "https://paper.medlive.cn/literature/1019714",
+                  "title": "司马西特治疗阿尔茨海默病_N Engl J Med_期刊文献_医脉通",
+                  "snippet": "司马西特治疗阿尔茨海默病\n译者:vivian2\nSemagacestat\nfor\ntreatment\nof\nAlzheimer's\ndisease.\nN\nEngl\nJ\nMed\n2013\nOct\n24;",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_2cac1122b10b",
+                  "url": "https://www.doc88.com/p-7718296366007.html",
+                  "title": "P4-363 A randomized clinical trial of vitamin E and memantine in Alzheimer's disease - 道客巴巴",
+                  "snippet": "下载积分: 2000 内容提示: safety and pharmacokinetics of tarenflurbil in subjects with varying de-grees of he",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_c50e62313c9b",
+                  "url": "https://pubmed.ncbi.nlm.nih.gov/41599176/",
+                  "title": "Liraglutide and Exenatide in Alzheimer's Disease and Mild Cognitive Impairment: A Systematic Review and Meta-Analysis of Cognitive Outcomes",
+                  "snippet": "Pharmaceutics. 2026 Jan 4;18(1):69. doi: 10.3390/pharmaceutics18010069.\nLiraglutide and Exenatide in",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_33d8348e975e",
+                  "url": "https://preview-www.nature.com/articles/s41591-025-04106-7",
+                  "title": "Liraglutide in mild to moderate Alzheimer’s disease: a phase 2b clinical trial | Nature Medicine",
+                  "snippet": "Study\nprotocol\nand\npopulationBetween\nMarch\n2014\nand\nJanuary\n2021,\nwe\nconducted\na\n12-month,\nmulticent",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_c81e39a3a583",
+                  "url": "https://bydrug.pharmcube.com/news/detail/46586e6afbd03f3cbd1f2f47cf63fcef",
+                  "title": "口服司美格鲁肽折戟AD,也许没想象中的那么坏医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+                  "snippet": "最重要的证据是2022年发表在Alzheimer’s\nDement.的文章(DOI:\n10.1002/trc2.12268)。对多个随机控制临床(RCT),总计超过15,000名心血管疾病或高危患者进",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_5c2ea559487d",
+                  "url": "https://preview-www.nature.com/articles/d41591-026-00018-2",
+                  "title": "GLP-1 receptor agonist fails to halt Alzheimer’s disease",
+                  "snippet": "RESEARCH\nHIGHLIGHT\n31\nMarch\n2026\nGLP-1\nreceptor\nagonist\nfails\nto\nhalt\nAlzheimer’s\ndisease\nIn\nthe\npha",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_4cd063afafb0",
+                  "url": "https://www.healio.com/news/neurology/20260519/video-updates-on-semaglutide-use-in-alzheimers-disease",
+                  "title": "VIDEO: Updates on semaglutide use in Alzheimer’s disease",
+                  "snippet": "VIDEO:\nUpdates\non\nsemaglutide\nuse\nin\nAlzheimer’s\ndisease\nAdd\ntopic\nto\nemail\nalerts\nReceive\nan\nemail\n",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_6388952ac807",
+                  "url": "https://paper.medlive.cn/literature/4351976",
+                  "title": "Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials._Lancet_期刊文献_医脉通",
+                  "snippet": "摘要\nBACKGROUND:Evidence,\nincluding\nanimal,\nclinical,\nand\nreal-world\nstudies\nin\nindividuals\nwith\ntype\n",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_6002b357f2e7",
+                  "url": "https://zhishi.shangxueba.com/D242C90F.html",
+                  "title": "以下关于DECLARE研究描述,错误的是() - 上学吧竞赛试题",
+                  "snippet": "A.共纳入17160名患者 B.中位随访时间4.7年 C.MACE终点阴性 D.研究中有部分中国人群 答案 B、中位随访时间4.7年 收藏 更多“以下关于DECLARE研究描述,错误的是()”相关的问",
+                  "task_id": ""
+                },
+                {
+                  "source_id": "s_7614313b1075",
+                  "url": "https://blog.csdn.net/weixin_35776153/article/details/116152779",
+                  "title": "三阶段dea模型 matlab源程序,三阶段DEA模型SFA二阶段剔除过程-CSDN博客",
+                  "snippet": "楼主你好,跑出来的ce值都小于1,啥子情况?对各个值也不清楚如何分析?头疼死了,可以推荐相关资料么 the final mle estimates are : coefficient     stan",
+                  "task_id": ""
+                },
+                {
+                  "source_id": "s_4095ddfd26a9",
+                  "url": "https://finance.china.com/yiyao/13004692/20230809/45281342.html",
+                  "title": "司美格鲁肽降低20%心血管事件风险_财经频道_中华网",
+                  "snippet": "8月8日,诺和诺德公布了心血管结局试验SELECT的主要结果。此项双盲试验旨在评估每周一次皮下注射司美格鲁肽(2.4mg)在超重或肥胖合并心血管疾病且不伴糖尿病的患者中预防主要不良心血管事件(MACE",
+                  "task_id": ""
+                },
+                {
+                  "source_id": "s_2350feaaafdc",
+                  "url": "http://case.medlive.cn/all/info-progress/show-202349_129.html",
+                  "title": "SELECT里程碑式试验结果发布!“减肥神药”司美格鲁肽可显著降低肥胖或超重患者的心血管事件风险20%_司美格鲁肽_医脉通",
+                  "snippet": "SELECT关键试验结果显示,与服用安慰剂的患者相比,“减肥神药”司美格鲁肽(2.4 mg)可将患者的主要心血管不良事件(MACE)风险显著降低20%。这是首项证实一种批准用于慢性体重管理的药物可降低",
+                  "task_id": ""
+                },
+                {
+                  "source_id": "s_1e8c6c6519eb",
+                  "url": "https://cloud.tencent.com/developer/ask/sof/107897179",
+                  "title": "在同一数据集中,MAPE和MAE的值显著不同-腾讯云开发者社区-腾讯云",
+                  "snippet": "目前,我正在同一数据集上运行不同预测方法的回归。对于DT,MAE略高于AB模型,而MAPE则显著高于AB模型。我意识到,较低的MAE并不一定会导致更低的MAE,但这种差异是相当显著的,让我怀疑我是否做",
+                  "task_id": ""
+                }
+              ],
+              "evidence": "s_c52e943773a4摘要：'The SELECT trial previously reported a 20% reduction in major adverse cardiovascular events...' 未提及独立于体重下降的机制分析。"
+            }
+          }
+        ],
+        "resolved_count": 1,
+        "oscillation_detected": false,
+        "stop_reason": "max_rounds_reached(1)",
+        "raw_feedback": "[fact_check]\n{\n  \"score\": 6.5,\n  \"issues\": [\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称SELECT试验显示MACE风险降低约20%，但引用的来源[s_c52e943773a4]仅提及SELECT试验先前报告了20%的MACE降低，并未提供原始数据或详细结果；其他引用来源[s_2350feaaafdc][s_4095ddfd26a9]为新闻或二手报道，并非同行评议原始文献。核心数值缺乏直接、权威的一手来源支撑。\",\n      \"location\": \"心血管保护部分，司美格鲁肽条目\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源[s_c52e943773a4]摘要仅称“SELECT试验先前报告了20%的主要不良心血管事件降低”，未给出具体风险比或置信区间；[s_2350feaaafdc]和[s_4095ddfd26a9]为中文新闻网站，非原始研究。\"\n    },\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称“SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致”，但引用的来源[s_de957f2966e4]和[s_e1c9df85bab8]仅涉及心肾结局和HbA1c亚组分析，未明确支持“跨CVD状态、BMI及HbA1c水平一致”的全面结论。该声明存在过度概括。\",\n      \"location\": \"心血管保护部分，司美格鲁肽条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_de957f2966e4]标题为“Effect of semaglutide versus placebo on cardiorenal outcomes by prior cardiovascular disease and baseline body mass index”，仅涉及CVD状态和BMI；[s_e1c9df85bab8]仅涉及HbA1c。无来源同时涵盖三者并得出“一致”结论。\"\n    },\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称“Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡”，但引用的来源[s_01082c42a9dd]和[s_374bfeef9f27]均为Meta分析，并非针对替尔泊肽的专门RCT证据。报告在结论中承认“替尔泊肽以Meta分析为主”，但正文表述易误导读者认为替尔泊肽有直接证据。\",\n      \"location\": \"心血管保护部分，替尔泊肽条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_01082c42a9dd]标题为“Risk of major adverse cardiovascular events and all-cause mortality under treatment with GLP-1 RAs or the dual GIP/GLP-1 receptor agonist tirzepatide...: a systematic review and meta-analysis”，明确为Meta分析；[s_374bfeef9f27]亦为Meta分析。\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"description\": \"报告称“III期EVOKE/EVOKE+（早期症状性AD）未能延缓AD进展，主要认知终点未达”，但引用的来源[s_5c2ea559487d]为Nature Medicine的研究亮点（Research Highlight），并非原始试验论文；[s_6388952ac807]为医脉通对Lancet论文的摘要翻译，非直接来源。核心阴性结果缺乏一手文献直接支撑。\",\n      \"location\": \"认知功能部分，司美格鲁肽条目\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源[s_5c2ea559487d]类型为“RESEARCH HIGHLIGHT”，是对他人研究的评论；[s_6388952ac807]为中文二次文献平台。均非EVOKE/EVOKE+的原始同行评议论文。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“观察性靶试验模拟提示AD诊断风险方向性降低”，引用来源[s_ded0b30184df]为学术社交平台上的论文摘要，非原始期刊页面，证据等级较低。\",\n      \"location\": \"认知功能部分，司美格鲁肽条目\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源[s_ded0b30184df]URL为ablesci.com（科研社交平台），非期刊官方页面。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“利拉鲁肽IIb期RCT（轻中度AD）已开展”，引用来源[s_33d8348e975e]和[s_f4232a439b24]均指向同一项研究，但[s_33d8348e975e]为Nature Medicine预览页面，[s_f4232a439b24]为PubMed摘要，未提供试验结果或状态更新。表述“已开展”模糊，未说明是否已完成。\",\n      \"location\": \"认知功能部分，利拉鲁肽条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_33d8348e975e]标题为“Liraglutide in mild to moderate Alzheimer’s disease: a phase 2b clinical trial”，摘要提及“we conducted a 12-month, multicent...”表明试验已实施，但报告未引用结果。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“替尔泊肽：无认知/AD/PD的RCT证据，仅机制综述与观察性数据”，引用来源[s_d517f172d0a2]为Frontiers综述，但该来源标题明确提及“GLP-1 and GIP class drugs have neuroprotective properties in Alzheimer's and Parkinson's disease”，可能包含替尔泊肽相关临床前或观察性数据，报告未区分证据类型。\",\n      \"location\": \"认知功能部分，替尔泊肽条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_d517f172d0a2]为综述文章，摘要提及“Alzheimer's and Parkinson's diseas...”，未明确排除替尔泊肽的RCT证据，但报告断言“无RCT证据”需更全面检索确认。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告结论中“总体置信度：0.65”缺乏明确的方法学依据，未说明置信度评估标准或来源，属于主观判断。\",\n      \"location\": \"结论部分\",\n      \"fix_type\": \"removal\",\n      \"evidence\": \"无来源支持0.65这一具体数值。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告关键来源列表提及“SELECT（Lancet 2026；Nat Med 2024）”，但正文引用中[s_c52e943773a4]为Nature Medicine 2024，[s_20f9aac4d35a]和[s_5cb93dd3e12d]为Lancet 2026，来源标注基本一致，但Lancet 2026的SELECT论文在正文中未被直接引用为MACE降低20%的证据，存在引用错配。\",\n      \"location\": \"关键来源列表\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"正文中MACE降低20%的引用为[s_c52e943773a4]（Nat Med 2024）、[s_2350feaaafdc]（新闻）、[s_4095ddfd26a9]（新闻），未引用Lancet 2026的SELECT论文。\"\n    }\n  ]\n}\n\n[hallucination]\n{\n  \"score\": 6.5,\n  \"issues\": [\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称SELECT试验显示MACE风险降低约20%，但引用的来源[s_c52e943773a4]仅提及SELECT试验先前报告了20%的MACE降低，未提供具体数值或置信区间；其他来源[s_2350feaaafdc][s_4095ddfd26a9]为新闻或二手报道，非原始研究。该数字虽在来源中有提及，但缺乏原始试验数据的直接支撑，且未标注为二手信息。\",\n      \"location\": \"心血管保护部分，司美格鲁肽段落\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源[s_c52e943773a4]摘要仅称“SELECT trial previously reported a 20% reduction in major adverse...”，未给出HR或CI；[s_2350feaaafdc]和[s_4095ddfd26a9]为新闻网站，非同行评议原始文献。\"\n    },\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称“汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致”，引用[s_de957f2966e4]和[s_e1c9df85bab8]。但[s_de957f2966e4]标题仅涉及按CVD状态和BMI的汇总分析，[s_e1c9df85bab8]标题涉及按HbA1c的汇总分析，两者均未明确提及“心肾获益”或“一致”的结论。该陈述可能过度解读来源。\",\n      \"location\": \"心血管保护部分，司美格鲁肽段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_de957f2966e4]标题为“Effect of semaglutide versus placebo on cardiorenal outcomes by prior cardiovascular disease and baseline body mass index”，[s_e1c9df85bab8]标题为“Semaglutide and cardiovascular outcomes by baseline HbA1c”，均未在摘要片段中明确支持“一致”的结论。\"\n    },\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称“Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡”，引用[s_01082c42a9dd]和[s_374bfeef9f27]。但[s_374bfeef9f27]标题为“Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials”，未明确提及替尔泊肽或全因死亡；[s_01082c42a9dd]标题提及替尔泊肽和全因死亡，但报告将两者合并陈述，可能混淆来源。\",\n      \"location\": \"心血管保护部分，替尔泊肽段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_374bfeef9f27]标题未包含“tirzepatide”或“all-cause mortality”；[s_01082c42a9dd]标题包含“tirzepatide”和“all-cause mortality”，但报告未区分两者贡献。\"\n    },\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称“III期EVOKE/EVOKE+（早期症状性AD）未能延缓AD进展，主要认知终点未达”，引用[s_5c2ea559487d]和[s_6388952ac807]。但[s_5c2ea559487d]为研究亮点（Research Highlight），非原始试验报告；[s_6388952ac807]为Lancet文献摘要，但片段未明确显示“未能延缓”或“主要终点未达”的结论。该陈述可能基于二手解读。\",\n      \"location\": \"认知功能部分，司美格鲁肽段落\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源[s_5c2ea559487d]标题为“GLP-1 receptor agonist fails to halt Alzheimer’s disease”，但为Nature Medicine的研究亮点，非原始数据；[s_6388952ac807]摘要片段未包含阴性结果的具体表述。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“观察性靶试验模拟提示AD诊断风险方向性降低”，引用[s_ded0b30184df]。该来源标题提及“Associations of semaglutide with first-time diagnosis of Alzheimer's disease”，但片段未明确显示“方向性降低”的具体结果。该陈述为合理推断但未标注。\",\n      \"location\": \"认知功能部分，司美格鲁肽段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_ded0b30184df]摘要片段仅提及“Emerging preclinical evidence suggests...”，未给出风险降低的方向或数值。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“利拉鲁肽IIb期RCT（轻中度AD）已开展”，引用[s_33d8348e975e]和[s_f4232a439b24]。但[s_33d8348e975e]为Nature Medicine预览页，[s_f4232a439b24]为PubMed摘要，均未明确显示试验结果或“已开展”的状态。该陈述为事实性描述但缺乏直接证据。\",\n      \"location\": \"认知功能部分，利拉鲁肽段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_33d8348e975e]片段显示“we conducted a 12-month, multicent...”，表明试验已进行，但未明确“IIb期”或“轻中度AD”的结论；[s_f4232a439b24]标题为“Liraglutide in mild to moderate Alzheimer's disease: a phase 2b clinical trial”，支持该陈述。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“替尔泊肽：无认知/AD/PD的RCT证据，仅机制综述与观察性数据”，引用[s_d517f172d0a2]。但该来源为Frontiers综述，标题提及“GLP-1 and GIP class drugs have neuroprotective properties”，未明确区分替尔泊肽的RCT证据缺失。该陈述为合理推断但未标注。\",\n      \"location\": \"认知功能部分，替尔泊肽段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_d517f172d0a2]为综述文章，未提供替尔泊肽RCT证据的具体检索或声明。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“成瘾治疗：检索证据中无成瘾治疗相关数据”，但来源列表中确实无成瘾治疗相关文献。该陈述准确，但未说明检索策略或范围，可能误导读者认为全面检索后无证据。\",\n      \"location\": \"成瘾治疗部分\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源列表中无任何标题或摘要涉及成瘾治疗。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告结论称“心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）”，但替尔泊肽的Meta分析来源[s_01082c42a9dd]和[s_374bfeef9f27]均未在片段中明确显示硬终点结果，该结论可能过度概括。\",\n      \"location\": \"结论部分\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_01082c42a9dd]和[s_374bfeef9f27]摘要片段未提供具体MACE或死亡率的数值结果。\"\n    }\n  ]\n}\n",
+        "content_before": "# GLP-1受体激动剂减重外应用评估\n\n## 心血管保护（证据最强）\n- **司美格鲁肽**：SELECT试验（非糖尿病超重/肥胖+CVD）MACE降低约20%，且获益部分独立于体重下降[s_20f9aac4d35a][s_c52e943773a4]；SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致[s_de957f2966e4][s_e1c9df85bab8]。\n- **替尔泊肽**：Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡[s_01082c42a9dd][s_374bfeef9f27]。\n- **缺口**：SURPASS-CVOT具体结果数值、各试验精确HR/CI未获取；替尔泊肽在非糖尿病肥胖人群的硬终点RCT证据有限。\n\n## 认知功能（证据偏阴性/早期）\n- **司美格鲁肽**：III期EVOKE/EVOKE+（早期症状性AD）**未能延缓AD进展**，主要认知终点未达[s_5c2ea559487d][s_6388952ac807]；观察性靶试验模拟提示AD诊断风险方向性降低[s_ded0b30184df]。\n- **利拉鲁肽**：IIb期RCT（轻中度AD）已开展[s_33d8348e975e][s_f4232a439b24]；系统综述/Meta分析汇总利拉鲁肽与艾塞那肽认知结局[s_c50e62313c9b]。\n- **替尔泊肽**：无认知/AD/PD的RCT证据，仅机制综述与观察性数据[s_d517f172d0a2]。\n- **缺口**：EVOKE效应量与安全性细节未获取；PD无大型RCT。\n\n## 成瘾治疗\n**检索证据中无成瘾治疗相关数据**，无法评估。\n\n## 结论\n心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）；认知领域III期结果为阴性，神经保护仍属假说；成瘾治疗缺乏证据。\n\n**总体置信度：0.65**\n\n**关键来源**：SELECT（Lancet 2026；Nat Med 2024）、SUSTAIN/PIONEER 6汇总（PMID 40704485）、Meta分析（PMID 39345822、38734847）、EVOKE/EVOKE+（Lancet；Nat Med 2026）、利拉鲁肽IIb期（Nat Med）、Pharmaceutics 2026 Meta分析。",
+        "content_after": "# GLP-1受体激动剂减重外应用评估\n\n## 心血管保护（证据最强）\n- **司美格鲁肽**：SELECT试验（非糖尿病超重/肥胖+CVD）显示MACE风险降低约20%[s_c52e943773a4][s_2350feaaafdc][s_4095ddfd26a9]；关于“获益部分独立于体重下降”的机制声明，现有来源未提供直接证据支持，标注为**未经证实**。SUSTAIN 6/PIONEER 6在T2D中降低MACE，汇总分析显示心肾获益跨CVD状态、BMI及HbA1c水平一致[s_de957f2966e4][s_e1c9df85bab8]。\n- **替尔泊肽**：Meta分析提示超重/肥胖无糖尿病人群中GLP-1 RA及替尔泊肽降低MACE与全因死亡[s_01082c42a9dd][s_374bfeef9f27]。\n- **缺口**：SURPASS-CVOT具体结果数值、各试验精确HR/CI未获取；替尔泊肽在非糖尿病肥胖人群的硬终点RCT证据有限。\n\n## 认知功能（证据偏阴性/早期）\n- **司美格鲁肽**：III期EVOKE/EVOKE+（早期症状性AD）**未能延缓AD进展**，主要认知终点未达[s_5c2ea559487d][s_6388952ac807]；观察性靶试验模拟提示AD诊断风险方向性降低[s_ded0b30184df]。\n- **利拉鲁肽**：IIb期RCT（轻中度AD）已开展[s_33d8348e975e][s_f4232a439b24]；系统综述/Meta分析汇总利拉鲁肽与艾塞那肽认知结局[s_c50e62313c9b]。\n- **替尔泊肽**：无认知/AD/PD的RCT证据，仅机制综述与观察性数据[s_d517f172d0a2]。\n- **缺口**：EVOKE效应量与安全性细节未获取；PD无大型RCT。\n\n## 成瘾治疗\n**检索证据中无成瘾治疗相关数据**，无法评估。\n\n## 结论\n心血管保护证据最充分（司美格鲁肽硬终点明确，替尔泊肽以Meta分析为主）；认知领域III期结果为阴性，神经保护仍属假说；成瘾治疗缺乏证据。\n\n**总体置信度：0.65**\n\n**关键来源**：SELECT（Lancet 2026；Nat Med 2024）、SUSTAIN/PIONEER 6汇总（PMID 40704485）、Meta分析（PMID 39345822、38734847）、EVOKE/EVOKE+（Lancet；Nat Med 2026）、利拉鲁肽IIb期（Nat Med）、Pharmaceutics 2026 Meta分析。",
+        "before_version": "3b36654fe330d302118162d5683adfb4a0f68eb162bd86127bca010e8cee656a",
+        "after_version": "cb3082412a5743437baabb31ed3ab7cff6e16a3306ba27988f133ded6a0b054a",
+        "score_before": 6.5,
+        "sources_after": [
+          {
+            "source_id": "s_da91ac3d0c43",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/41207920/",
+            "title": "Cardiovascular outcomes of semaglutide and tirzepatide for patients with type 2 diabetes in clinical practice",
+            "snippet": "Cardiovascular\noutcome\ntrials\nof\nthe\nincretin-based\nmedicines\ntirzepatide\nand\nsemaglutide\nhave\nshown",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_e995df2266f4",
+            "url": "https://doi.org/10.3389%2Ffendo.2021.645566",
+            "title": "Frontiers  Cardiovascular Safety and Benefits of Semaglutide in Patients With Type 2 Diabetes: Findings From SUSTAIN 6 and PIONEER 6",
+            "snippet": "Diabetes Division, Katholisches Kinikum Bochum, St. Josef-Hospital, Ruhr-University of Bochum, Bochu",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_85175246f29a",
+            "url": "https://www.x-mol.com/paper/1214201977723056128",
+            "title": "Semaglutide (SUSTAIN and PIONEER) reduces cardiovascular events in type 2 diabetes across varying cardiovascular risk.,Diabetes, Obesity",
+            "snippet": "AIMTo investigate the effects of semaglutide versus comparators on major adverse cardiovascular even",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_de957f2966e4",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/40704485/",
+            "title": "Effect of semaglutide versus placebo on cardiorenal outcomes by prior cardiovascular disease and baseline body mass index: Pooled post hoc analysis of SUSTAIN 6 and PIONEER 6",
+            "snippet": "Abstract\nAims:\nCardiorenal\neffects\nof\nsemaglutide\nin\npeople\nwith\ntype\n2\ndiabetes\n(T2D)\nat\nhigh\ncardi",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_20f9aac4d35a",
+            "url": "http://paper.medlive.cn/literature/4346991",
+            "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+            "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_e1c9df85bab8",
+            "url": "https://europepmc.org/article/PMC/PMC11015952",
+            "title": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 trials",
+            "snippet": "Semaglutide and cardiovascular outcomes by baseline HbA1c in diabetes: the SUSTAIN 6 and PIONEER 6 t",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_5cb93dd3e12d",
+            "url": "https://paper.medlive.cn/literature/4346990",
+            "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+            "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_c52e943773a4",
+            "url": "https://link.springer.com/article/10.1038/s41591-024-03015-5",
+            "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+            "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_01082c42a9dd",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/39345822/",
+            "title": "Risk of major adverse cardiovascular events and all-cause mortality under treatment with GLP-1 RAs or the dual GIP/GLP-1 receptor agonist tirzepatide in overweight or obese adults without diabetes: a systematic review and meta-analysis",
+            "snippet": "Background:\nAmong\nthe\ncurrently\napproved\nantiobesity\nmedications,\nthe\nglucagon-like-peptide-1\nrecept",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_c4f37d65b744",
+            "url": "https://link.springer.com/article/10.1007/s10557-024-07547-3",
+            "title": "Association Between the Magnitude of Glycemic Control and Body Weight Loss With GLP-1 Receptor Agonists and Risk of Atherosclerotic Cardiovascular",
+            "snippet": "Abstract Purpose Reduction of major atherosclerotic cardiovascular events (MACE) has not been consis",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_374bfeef9f27",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/38734847/",
+            "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+            "snippet": "Background:\nGLP-1\nreceptor\nagonists\n(GLP-1\nRAs)\nhave\nemerged\nas\nan\neffective\ntherapeutic\nclass\nfor\nw",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_325dc20552e5",
+            "url": "https://doc.wendoc.com/b06c1e161cf2f761f63fb00d7-3.html",
+            "title": "Non-glycaemic effects mediated via GLP-1 receptor agonists_文档下载",
+            "snippet": "DIABETES,OBESITYANDMETABOLISM reviewarticle expressionincardiactissues,andcouldoccurindependentlyofw",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_c1ee12d83fe9",
+            "url": "https://www.nature.com/articles/s41598-021-89620-7?fromPaywallRec=true",
+            "title": "Systematic review and meta-analysis for prevention of cardiovascular complications using GLP-1 receptor agonists and SGLT-2 inhibitors in obese",
+            "snippet": "Download PDF Download PDF Abstract Patients with type 2 diabetes mellitus (T2DM) and obesity are at ",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_095893d47ff0",
+            "url": "https://doi.org/10.3390/jcm13164674",
+            "title": "Cardiovascular Protective Properties of GLP-1 Receptor Agonists: More than Just Diabetic and Weight Loss Drugs",
+            "snippet": "by Richard Le Richard Le Mau T. Nguyen Mau T. Nguyen Momina A. Allahwala Momina A. Allahwala James P",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_313281825971",
+            "url": "https://www.sciencedirect.com/science/article/pii/S1050173824000197",
+            "title": "The cardiovascular effects of GLP-1 receptor agonists beyond obesity and type 2 diabetes: An anti-atherosclerotic action - ScienceDirect",
+            "snippet": "Author links open overlay panel Kleopatra Alexiadou a , Adam Hartley b , Tricia M-M Tan a , Ramzi Kh",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_5c42818d4f67",
+            "url": "https://www.antpedia.com/journal/documentDetails-1281021-10.html",
+            "title": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A Meta-analysis of Randomized Controlled Trials",
+            "snippet": "Cardiovascular Benefits of GLP-1 Receptor Agonists in Patients Living with Obesity or Overweight: A ",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_d517f172d0a2",
+            "url": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2026.1906426/abstract",
+            "title": "Frontiers | GLP-1 and GIP class drugs have neuroprotective properties in Alzheimer&#39;s and Parkinson&#39;s disease",
+            "snippet": "REVIEW\narticleFront.\nNeurosci.\nSec.\nNeuroendocrine\nScienceAbstractAlzheimer's\nand\nParkinson's\ndiseas",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_c55e41b6073a",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/42325226/",
+            "title": "Semaglutide in cognitive dysfunction: neuroprotective potential, clinical trial limitations, and a prevention-focused framework",
+            "snippet": "Abstract\nMetabolic\ndysfunction\nis\nincreasingly\nrecognized\nas\na\npivotal\nfactor\nin\ncognitive\ndecline\na",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_f4232a439b24",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/41326666/",
+            "title": "Liraglutide in mild to moderate Alzheimer's disease: a phase 2b clinical trial",
+            "snippet": "Abstract\nLiraglutide,\na\nglucagon-like\npeptide\n1\n(GLP-1)\nagonist\nand\nantidiabetic\ndrug,\nhas\nshown\nneu",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_ded0b30184df",
+            "url": "https://www.ablesci.com/scholar/paper?id=E4VAoyxqr",
+            "title": "Associations of semaglutide with first‐time diagnosis of Alzheimer's disease in patients with type 2 diabetes: Target trial emulation using",
+            "snippet": "Abstract INTRODUCTION Emerging preclinical evidence suggests that semaglutide, a glucagon‐like pepti",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_056102e208cd",
+            "url": "https://www.researchgate.net/publication/7890383_Rivastigmine_for_vascular_cognitive_impairment_10100214651858CD004744pub2",
+            "title": "Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.pub2  Request PDF",
+            "snippet": "Article Literature Review Rivastigmine for vascular cognitive impairment 10.1002/14651858.CD004744.p",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_dd1c204b6413",
+            "url": "https://www.pharnexcloud.com/data/lcsy_f3f62d84b1251469cb9c9ecb372a0249.html",
+            "title": "司美格鲁肽片临床III期随机化双盲试验_摩熵医药(原药融云)",
+            "snippet": "【CTR20212849】一项研究Semaglutide用于早期阿尔茨海默病患者的试验性研究(EVOKE plus) 基本信息 登记号 CTR20212849 试验状态 进行中(招募中) 药物名称 司",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_91903fb81a17",
+            "url": "https://paper.medlive.cn/literature/1019714",
+            "title": "司马西特治疗阿尔茨海默病_N Engl J Med_期刊文献_医脉通",
+            "snippet": "司马西特治疗阿尔茨海默病\n译者:vivian2\nSemagacestat\nfor\ntreatment\nof\nAlzheimer's\ndisease.\nN\nEngl\nJ\nMed\n2013\nOct\n24;",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_2cac1122b10b",
+            "url": "https://www.doc88.com/p-7718296366007.html",
+            "title": "P4-363 A randomized clinical trial of vitamin E and memantine in Alzheimer's disease - 道客巴巴",
+            "snippet": "下载积分: 2000 内容提示: safety and pharmacokinetics of tarenflurbil in subjects with varying de-grees of he",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_c50e62313c9b",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/41599176/",
+            "title": "Liraglutide and Exenatide in Alzheimer's Disease and Mild Cognitive Impairment: A Systematic Review and Meta-Analysis of Cognitive Outcomes",
+            "snippet": "Pharmaceutics. 2026 Jan 4;18(1):69. doi: 10.3390/pharmaceutics18010069.\nLiraglutide and Exenatide in",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_33d8348e975e",
+            "url": "https://preview-www.nature.com/articles/s41591-025-04106-7",
+            "title": "Liraglutide in mild to moderate Alzheimer’s disease: a phase 2b clinical trial | Nature Medicine",
+            "snippet": "Study\nprotocol\nand\npopulationBetween\nMarch\n2014\nand\nJanuary\n2021,\nwe\nconducted\na\n12-month,\nmulticent",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_c81e39a3a583",
+            "url": "https://bydrug.pharmcube.com/news/detail/46586e6afbd03f3cbd1f2f47cf63fcef",
+            "title": "口服司美格鲁肽折戟AD,也许没想象中的那么坏医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+            "snippet": "最重要的证据是2022年发表在Alzheimer’s\nDement.的文章(DOI:\n10.1002/trc2.12268)。对多个随机控制临床(RCT),总计超过15,000名心血管疾病或高危患者进",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_5c2ea559487d",
+            "url": "https://preview-www.nature.com/articles/d41591-026-00018-2",
+            "title": "GLP-1 receptor agonist fails to halt Alzheimer’s disease",
+            "snippet": "RESEARCH\nHIGHLIGHT\n31\nMarch\n2026\nGLP-1\nreceptor\nagonist\nfails\nto\nhalt\nAlzheimer’s\ndisease\nIn\nthe\npha",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_4cd063afafb0",
+            "url": "https://www.healio.com/news/neurology/20260519/video-updates-on-semaglutide-use-in-alzheimers-disease",
+            "title": "VIDEO: Updates on semaglutide use in Alzheimer’s disease",
+            "snippet": "VIDEO:\nUpdates\non\nsemaglutide\nuse\nin\nAlzheimer’s\ndisease\nAdd\ntopic\nto\nemail\nalerts\nReceive\nan\nemail\n",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_6388952ac807",
+            "url": "https://paper.medlive.cn/literature/4351976",
+            "title": "Efficacy and safety of oral semaglutide 14 mg (flexible dose) in early-stage symptomatic Alzheimer's disease (evoke and evoke+): two phase 3, randomised, placebo-controlled trials._Lancet_期刊文献_医脉通",
+            "snippet": "摘要\nBACKGROUND:Evidence,\nincluding\nanimal,\nclinical,\nand\nreal-world\nstudies\nin\nindividuals\nwith\ntype\n",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_6002b357f2e7",
+            "url": "https://zhishi.shangxueba.com/D242C90F.html",
+            "title": "以下关于DECLARE研究描述,错误的是() - 上学吧竞赛试题",
+            "snippet": "A.共纳入17160名患者 B.中位随访时间4.7年 C.MACE终点阴性 D.研究中有部分中国人群 答案 B、中位随访时间4.7年 收藏 更多“以下关于DECLARE研究描述,错误的是()”相关的问",
+            "task_id": ""
+          },
+          {
+            "source_id": "s_7614313b1075",
+            "url": "https://blog.csdn.net/weixin_35776153/article/details/116152779",
+            "title": "三阶段dea模型 matlab源程序,三阶段DEA模型SFA二阶段剔除过程-CSDN博客",
+            "snippet": "楼主你好,跑出来的ce值都小于1,啥子情况?对各个值也不清楚如何分析?头疼死了,可以推荐相关资料么 the final mle estimates are : coefficient     stan",
+            "task_id": ""
+          },
+          {
+            "source_id": "s_4095ddfd26a9",
+            "url": "https://finance.china.com/yiyao/13004692/20230809/45281342.html",
+            "title": "司美格鲁肽降低20%心血管事件风险_财经频道_中华网",
+            "snippet": "8月8日,诺和诺德公布了心血管结局试验SELECT的主要结果。此项双盲试验旨在评估每周一次皮下注射司美格鲁肽(2.4mg)在超重或肥胖合并心血管疾病且不伴糖尿病的患者中预防主要不良心血管事件(MACE",
+            "task_id": ""
+          },
+          {
+            "source_id": "s_2350feaaafdc",
+            "url": "http://case.medlive.cn/all/info-progress/show-202349_129.html",
+            "title": "SELECT里程碑式试验结果发布!“减肥神药”司美格鲁肽可显著降低肥胖或超重患者的心血管事件风险20%_司美格鲁肽_医脉通",
+            "snippet": "SELECT关键试验结果显示,与服用安慰剂的患者相比,“减肥神药”司美格鲁肽(2.4 mg)可将患者的主要心血管不良事件(MACE)风险显著降低20%。这是首项证实一种批准用于慢性体重管理的药物可降低",
+            "task_id": ""
+          },
+          {
+            "source_id": "s_1e8c6c6519eb",
+            "url": "https://cloud.tencent.com/developer/ask/sof/107897179",
+            "title": "在同一数据集中,MAPE和MAE的值显著不同-腾讯云开发者社区-腾讯云",
+            "snippet": "目前,我正在同一数据集上运行不同预测方法的回归。对于DT,MAE略高于AB模型,而MAPE则显著高于AB模型。我意识到,较低的MAE并不一定会导致更低的MAE,但这种差异是相当显著的,让我怀疑我是否做",
+            "task_id": ""
+          }
+        ],
+        "model_calls": 6,
+        "candidate_published": true
+      }
+    ],
+    "review_status": "completed"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 1.937
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "state": "collecting",
+      "elapsed": 8.578
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 8.578
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 12.718
+    },
+    {
+      "state": "done",
+      "elapsed": 50.687
+    }
+  ],
+  "elapsed_seconds": 50.73399999999674,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 328,
+        "prompt_tokens": 608,
+        "total_tokens": 936,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 608
+      },
+      "elapsed_seconds": 1.9369999999980791,
+      "finish_reason": "stop",
+      "content_chars": 1216,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 143,
+        "prompt_tokens": 1303,
+        "total_tokens": 1446,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 535
+      },
+      "elapsed_seconds": 1.0,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 154,
+        "prompt_tokens": 1289,
+        "total_tokens": 1443,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 521
+      },
+      "elapsed_seconds": 1.6719999999986612,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 494,
+        "prompt_tokens": 3094,
+        "total_tokens": 3588,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 1686
+      },
+      "elapsed_seconds": 3.7969999999986612,
+      "finish_reason": "stop",
+      "content_chars": 973,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 702,
+        "prompt_tokens": 3250,
+        "total_tokens": 3952,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 1842
+      },
+      "elapsed_seconds": 4.436999999998079,
+      "finish_reason": "stop",
+      "content_chars": 1376,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 617,
+        "prompt_tokens": 5018,
+        "total_tokens": 5635,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5018
+      },
+      "elapsed_seconds": 4.139999999999418,
+      "finish_reason": "stop",
+      "content_chars": 1040,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1109,
+        "prompt_tokens": 3959,
+        "total_tokens": 5068,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 3703
+      },
+      "elapsed_seconds": 5.921999999998661,
+      "finish_reason": "stop",
+      "content_chars": 2663,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1580,
+        "prompt_tokens": 3918,
+        "total_tokens": 5498,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 3790
+      },
+      "elapsed_seconds": 8.015999999995984,
+      "finish_reason": "stop",
+      "content_chars": 3582,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 887,
+        "prompt_tokens": 5043,
+        "total_tokens": 5930,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5043
+      },
+      "elapsed_seconds": 4.969000000004598,
+      "finish_reason": "stop",
+      "content_chars": 1521,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 5177,
+        "total_tokens": 5195,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5177
+      },
+      "elapsed_seconds": 0.8119999999980791,
+      "finish_reason": "stop",
+      "content_chars": 48,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1708,
+        "prompt_tokens": 4570,
+        "total_tokens": 6278,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4314
+      },
+      "elapsed_seconds": 9.015999999995984,
+      "finish_reason": "stop",
+      "content_chars": 3870,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1749,
+        "prompt_tokens": 4529,
+        "total_tokens": 6278,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4273
+      },
+      "elapsed_seconds": 8.906000000002678,
+      "finish_reason": "stop",
+      "content_chars": 4014,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3600000000005821
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.18699999999807915
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.2190000000045984
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3280000000013388
+    }
+  ],
+  "source_fingerprint": "51620987e715965fee8dca190df5d65cfdd67d4983759f6af2b20760eb57011a"
+}

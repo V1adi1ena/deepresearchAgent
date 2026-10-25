@@ -1,0 +1,114 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "fixed",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "# AI 芯片市场格局与竞争力分析：NVIDIA、AMD、Intel 与华为昇腾、寒武纪\n\n> **证据说明（必读）**：本次检索仅返回 5 条来源，全部为中文财经/科技媒体与自媒体的**摘要级片段**，且内容高度集中于**中国市场与国产厂商梯队**。关于 NVIDIA、AMD、Intel 的产品规格、出货量、财务数据、训练/推理基准测试，**检索结果中没有任何实质性证据**。因此本报告在涉及这三家厂商的部分，只能给出**结构性分析与证据缺口标注**，不做数值化断言。凡属分析推断而非来源直述的内容，均以「〔推断〕」标记。\n\n---\n\n## 一、执行摘要\n\n1. **需求结构正在从训练主导向推理主导迁移。** 来源称 2026 年 AI 基础设施正经历\"从训练驱动向推理驱动的结构性转变\"，推理计算需求已达训练需求的 **4–5 倍**，推理算力整体市场空间**超过 3000 亿元人民币** [s_6982add1fb8c]。这是理解各厂商竞争力分化的最重要背景变量。\n2. **中国市场已形成清晰的国产梯队。** 华为昇腾被定位为\"第一梯队/绝对龙头\"，特征是\"全栈 + 集群 + 生态 + 产能碾压\"；寒武纪为\"第二梯队绝对龙头\"，仅次于昇腾，领先海光、昆仑芯、壁仞、沐曦 [s_947b4a3f0d39]。\n3. **份额格局出现标志性变化。** 2025 年中国 GPU 市场中华为与英伟达**并列第一**，寒武纪、海光、平头哥、昆仑芯\"多元并进\" [s_d2fdf7b423fe]。同源引述复旦大学刘典的判断：\"英伟达依赖时代已经结束\"，代之以国内厂商为核心的多方生态 [s_d2fdf7b423fe]。\n4. **推理专用化成为国产厂商的产品路线。** 昇腾推理产品线被列为 910B/C、**950PR（推理专用）**、950DT（2026Q4），并已进入\"大规模量产/亿级订单\"阶段 [s_71a7b2f7b745]。\n5. **最大证据缺口**：AMD 与 Intel 在本次检索中**完全没有出现**；NVIDIA 仅以\"并列第一\"和被替代的叙事出现，无产品层面信息；寒武纪的具体产品型号与性能数据亦被截断。因此\"训练 vs 推理\"的五方横向对比，**只能对华为、寒武纪给出有证据的定位，其余三方为空白**。\n\n---\n\n## 二、背景：为什么\"训练 vs 推理\"是本次分析的主轴\n\n来源给出的关键量化判断是：推理计算需求为训练需求的 4–5 倍，推理算力市场空间超 3000 亿元 [s_6982add1fb8c]。这一条数据本身构成了市场格局分析的基本框架：\n\n- **训练场景**的经济特征是资本密集、集群规模大、软件栈锁定强、单客户采购集中（云厂商与国家级算力中心）。来源对华为昇腾\"全栈 + 集群 + 生态 + 产能碾压\"的描述 [s_947b4a3f0d39]，正对应训练场景所需的能力组合〔推断〕。\n- **推理场景**的经济特征是成本敏感、碎片化、对能效与单位 token 成本敏感、部署形态多样（云、边缘、私有化）。来源中\"推理专用\"芯片（昇腾 950PR）与\"通用计算到推理专用\"的行业观察标题 [s_71a7b2f7b745][s_6982add1fb8c]，说明产业已开始为推理场景做专用化分工〔推断〕。\n- **",
+    "sources": [
+      {
+        "source_id": "s_947b4a3f0d39",
+        "url": "https://caifuhao.eastmoney.com/news/20260810094041374098950",
+        "title": "寒武纪在国产竞品里面表现咋样?_财富号_东方财富网",
+        "snippet": "国产AI芯片第二梯队绝对龙头,仅次于华为昇腾,领先海光/昆仑芯/壁仞/沐曦等。\n一、整体地位(2026年)\n-\n梯队划分\n-\n第一梯队:华为昇腾(全栈+集群+生态+产能碾压)\n-\n第二梯队:寒武纪(商",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_71a7b2f7b745",
+        "url": "https://www.tgb.cn/a/2r6gSvK9wQ7",
+        "title": "Ai芯片国内排序_卓礼传_ 淘股吧",
+        "snippet": "一、国内主流推理芯片厂商(按梯队+核心产品)第一梯队(头部、大规模量产/亿级订单)1.\n华为昇腾(绝对龙头)◦\n核心推理产品:昇腾910B/C、950PR(推理专用)、950DT(2026Q4);主打",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_6982add1fb8c",
+        "url": "https://www.ithome.com/1/008/847.htm",
+        "title": "2026国内AI算力厂商梯度观察:从通用计算到推理专用 - IT之家",
+        "snippet": "2026\n年,AI\n基础设施正经历从训练驱动向推理驱动的结构性转变。行业数据显示,AI\n推理计算需求已达训练需求的\n4\n至\n5\n倍,推理算力的整体市场空间超过\n3000\n亿元。在这一背景下,国内\nAI",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_d2fdf7b423fe",
+        "url": "https://finance.sina.com.cn/stock/marketresearch/2026-01-05/doc-inhfxrmm3703786.shtml",
+        "title": "2025年中国GPU市场格局:华为、英伟达并列第一,寒武纪、海光、平头哥、昆仑芯多元并进_新浪财经_新浪网",
+        "snippet": "来源:自主可控新鲜事\n  “中国的算力格局正在经历结构性转变。可以说,‘英伟达依赖时代’已经结束,取而代之的是一个以国内厂商为核心、多元并进的生态体系。”复旦大学中国研究院副研究员刘典在此前接受采访时",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_574028e53683",
+        "url": "https://www.askci.com/news/chanye/20251210/083609276532696704680614_3.shtml",
+        "title": "2026年中国AI芯片行业市场前景预测研究报告(简版)-中商情报网",
+        "snippet": "5.企业排行榜\n随着人工智能、自动驾驶、云计算等领域的快速发展,AI芯片企业在训练、推理、边缘计算等关键领域取得显著进展,推动中国AI芯片产业的自主可控和高质量发展。2025年中国AI芯片前五企业分别",
+        "task_id": "fixed_search"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 1,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [],
+  "elapsed_seconds": 11.906000000002678,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 1668,
+        "total_tokens": 3268,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 770,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1668
+      },
+      "elapsed_seconds": 11.468999999997322
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.35900000000401633
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

@@ -1,0 +1,425 @@
+{
+  "question_id": "med_002",
+  "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+    "content": "\n\nIncomplete tasks: task_2",
+    "sources": [
+      {
+        "source_id": "s_284005eebc56",
+        "url": "https://bydrug.pharmcube.com/news/detail/1cd33d00bb0e2c8131248ede9373d4de",
+        "title": "替尔泊肽、司美格鲁肽勿反复停药!体重反弹外心血管风险同步走高医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "GLP-1\n受体激动剂如今已经成为\n2\n型糖尿病与肥胖管理当中非常重要的治疗选择,替尔泊肽、司美格鲁肽、埃诺格鲁肽等药物在临床中应用广泛,凭借明确的降糖、减重、改善多重代谢指标的能力被大量患者选择。\n",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c9f113420f6f",
+        "url": "https://m.163.com/dy/article/KI3VS36D053296CT.html",
+        "title": "Cell系列综述:司美格鲁肽等GLP-1类药物在神经和精神疾病中的应用|glp|中枢神经系统|司美格鲁肽|心血管疾病|性疾病|治疗|精神疾病|糖尿病_手机网易网",
+        "snippet": "撰文丨王聪编辑丨王多鱼排版丨水成文GLP-1\n类药物,定义为全部或部分通过激活胰高血糖素样肽-1\n受体(GLP-1R)发挥药效的药物,已获批用于治疗\n2\n型糖尿病、肥胖症,以及相关心血管疾病、肾脏疾病",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5ea3e71def6b",
+        "url": "https://bydrug.pharmcube.com/news/detail/3b36d80130bd33a0dc5f6c76214c1fbb",
+        "title": "GLP-1受体激动剂:六大药物非临床研究对比深度解析医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "近年来,以司美格鲁肽为代表的胰高血糖素样肽\n‐1\n(\nGLP‐1\n)受体激动剂,凭借其确切的降糖疗效及显著的减重获益,在代谢性疾病治疗中获得了广泛临床应用。\n一、药效学:降糖与减重。\n尽管六款药物的分",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_88f142764d95",
+        "url": "https://www.cndzys.com/xshcore/quanwei_ztart/1es_2877744.html",
+        "title": "【glp1是司美格鲁肽吗】 - 大众医疗",
+        "snippet": "GLP-1受体激动剂是一种用于治疗2型糖尿病的药物类别,司美格鲁肽是其中的一种。这种药物通过模拟人体自然产生的胰高血糖素样肽-1(GLP-1)的作用,增强胰岛素分泌,降低胰高血糖素水平,从而帮助控制血",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_33af116e4c6f",
+        "url": "https://www.medsci.cn/search?q=GLP-1%E5%8F%97%E4%BD%93%E6%BF%80%E5%8A%A8%E5%89%82",
+        "title": "GLP-1受体激动剂相关资讯-临床研究进展,文献-MedSci.cn",
+        "snippet": "目前,我国已上市的GLP-1受体激动剂包括艾塞那肽、利拉鲁肽、贝那鲁肽、利司那肽和艾塞那肽周制剂。为使我国临床医生及时、全面了解该类药物的最新临床证据,并在临床实践中更好的发挥该类药物的作用,我国部分",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_4b7fcdaca1c0",
+        "url": "https://cnki.com.cn/Article/CJFDTotal-YLBS202411007.htm",
+        "title": "胰高血糖素样肽1受体激动剂在药物成瘾中的作用研究进展--《中国药理学与毒理学杂志》2024年11期",
+        "snippet": "药物成瘾是全球性的重大医学生物学和社会问题,目前临床上尚缺乏理想的治疗药物。胰高血糖素样肽1(GLP-1)作为一种关键的肠脑肽,其受体激动剂目前已被批准用于治疗2型糖尿病和肥胖症。近年来,GLP-1受",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_abf641515b07",
+        "url": "https://www.zeruibio.com/cn/product.php?kid=3",
+        "title": "GLP-1, GLP-1/GIP 激动剂",
+        "snippet": "GLP-1、GLP-1/GIP系列是长效剂型,对2型糖尿病的治疗效果较好。 产品编号 产品名称 结构式 CAS# S06 司美格鲁肽 查看大图 910463-68-2 ZL03 司美格鲁肽主链,氨基酸",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_7dbeb54ecf14",
+        "url": "https://www.163.com/dy/article/JF9UP3BB055631LP.html",
+        "title": "司美格鲁肽等类似药能治物质使用障碍吗成瘾受体治疗激动剂glp_网易订阅",
+        "snippet": "近年来最突出的医学进展之一是出现了一类被称为胰高血糖素样肽-1 受体激动剂(GLP-1 RAs)的药物。其中最为知名的药物当属司美格鲁肽(Ozempic),这是一种用于治疗糖尿病的药,因其超说明书使用",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_20f9aac4d35a",
+        "url": "http://paper.medlive.cn/literature/4346991",
+        "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+        "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5cb93dd3e12d",
+        "url": "https://paper.medlive.cn/literature/4346990",
+        "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+        "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c52e943773a4",
+        "url": "https://link.springer.com/article/10.1038/s41591-024-03015-5",
+        "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+        "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_da91ac3d0c43",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41207920/",
+        "title": "Cardiovascular outcomes of semaglutide and tirzepatide for patients with type 2 diabetes in clinical practice",
+        "snippet": "Cardiovascular\noutcome\ntrials\nof\nthe\nincretin-based\nmedicines\ntirzepatide\nand\nsemaglutide\nhave\nshown",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_2b7e36fe817c",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39181597/",
+        "title": "Semaglutide and cardiovascular outcomes in patients with obesity and prevalent heart failure: a prespecified analysis of the SELECT trial",
+        "snippet": "SELECT\nTrial\nInvestigators:\nMitsunori\nAbe,\nRajpal\nK\nAbhaichand,\nWalter\nP\nAbhayaratna,\nAtul\nAbhyankar",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_13bce67cb41b",
+        "url": "https://europepmc.org/article/PMC/PMC10684505",
+        "title": "Semaglutide and Tirzepatide reduce alcohol consumption in individuals with obesity",
+        "snippet": "Semaglutide and Tirzepatide reduce alcohol consumption in individuals with obesity\nQuddos Fatima 1 2",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_9fb80d49af7b",
+        "url": "https://www.nature.com/articles/s41591-024-03015-5",
+        "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+        "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+        "task_id": "task_1"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 4,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "partial",
+    "incomplete_tasks": [
+      "task_2"
+    ],
+    "run_id": "b6b367497d724113981b65567d579a53",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 4.266
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "error": "RuntimeError",
+      "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 15.438
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 27.219
+    },
+    {
+      "review": "timeout; original report retained"
+    },
+    {
+      "state": "done",
+      "elapsed": 90.0
+    }
+  ],
+  "elapsed_seconds": 90.21899999999732,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 765,
+        "prompt_tokens": 633,
+        "total_tokens": 1398,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 415,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 633
+      },
+      "elapsed_seconds": 4.26600000000326
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 161,
+        "prompt_tokens": 1289,
+        "total_tokens": 1450,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 521
+      },
+      "elapsed_seconds": 1.2180000000007567
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1200,
+        "prompt_tokens": 3316,
+        "total_tokens": 4516,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 899,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 1908
+      },
+      "elapsed_seconds": 9.5
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 2552,
+        "total_tokens": 4152,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1600,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2552
+      },
+      "elapsed_seconds": 11.781000000002678
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1074,
+        "prompt_tokens": 2085,
+        "total_tokens": 3159,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 352,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1829
+      },
+      "elapsed_seconds": 6.75
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 2048,
+        "prompt_tokens": 2044,
+        "total_tokens": 4092,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 2048,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1788
+      },
+      "elapsed_seconds": 14.35899999999674
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 4096,
+        "prompt_tokens": 1891,
+        "total_tokens": 5987,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 4096,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1891
+      },
+      "elapsed_seconds": 22.06300000000192
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1537,
+        "prompt_tokens": 756,
+        "total_tokens": 2293,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 763,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 756
+      },
+      "elapsed_seconds": 9.360000000000582
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 2679,
+        "total_tokens": 3703,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1024,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2679
+      },
+      "elapsed_seconds": 6.23399999999674
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "failed",
+      "usage": null,
+      "elapsed_seconds": 3.4839999999967404,
+      "error_type": "APITimeoutError"
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.2819999999992433
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.31199999999807915
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.39100000000325963
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

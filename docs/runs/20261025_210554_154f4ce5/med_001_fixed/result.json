@@ -1,0 +1,157 @@
+{
+  "question_id": "med_001",
+  "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+  "system": "fixed",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+    "content": "# mRNA癌症疫苗（2023–2024）进展综述\n\n## 摘要\n现有证据仅支持有限结论：mRNA癌症疫苗被视为肿瘤免疫治疗的重要方向，2024–2025年进入“爆发期”，在黑色素瘤、胰腺癌、脑癌等难治肿瘤中“取得重大成果”[s_c659f005e2b1][s_34b241935a4b]。但检索结果多为摘要或媒体转述，缺乏可核验的2023–2024年具体试验数据。\n\n## 支持性发现\n- **技术原理**：利用mRNA使免疫系统识别并攻击癌细胞[s_5c3a644d2e16][s_c659f005e2b1]；mRNA技术在新冠疫苗中的成功推动了癌症疫苗研发[s_928ce48e3853]。\n- **时间判断**：中信证券研报认为2025年或为mRNA肿瘤疫苗“商业化元年”[s_5c3a644d2e16][s_472738d89710]；另有报道称2029年或正式进入临床[s_c659f005e2b1][s_34b241935a4b]。二者并不矛盾：前者指商业化起点，后者指广泛临床应用。\n- **挑战**：安全性/实际应用仍待深思[s_472738d89710]；《实用肿瘤杂志》2023年综述主题即包含“挑战及展望”[s_928ce48e3853]。\n\n## 证据缺口\n- 无具体试验编号、样本量、疗效（如ORR、OS）或安全性数据。\n- 2023–2024年试验进展缺乏一手来源，多为2025年视角的二手报道。\n- 技术原理细节（抗原设计、递送系统）未提供。\n\n## 引用来源\n[s_928ce48e3853] 实用肿瘤杂志2023(03)；[s_5c3a644d2e16][s_472738d89710] 搜狐（引中信证券研报）；[s_c659f005e2b1] 医药魔方；[s_34b241935a4b] 网易。\n\nOverall Confidence: 0.35",
+    "sources": [
+      {
+        "source_id": "s_928ce48e3853",
+        "url": "https://www.cnki.com.cn/Article/CJFDTOTAL-SYZZ202303003.htm",
+        "title": "癌症mRNA疫苗的研究现状、挑战及展望--《实用肿瘤杂志》2023年03期",
+        "snippet": "【摘要】: 经过多年发展,癌症疫苗逐渐成为肿瘤免疫治疗的重要组成部分,并且在当今时代的背景下呈现出更加迅猛的发展势头。随着信使RNA(messenger RNA,mRNA)技术在新型冠状病毒疫苗中取得",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_5c3a644d2e16",
+        "url": "https://www.sohu.com/a/811130619_121956423",
+        "title": "2025年,mRNA肿瘤疫苗能否改变治疗格局?_癌症_未来_技术",
+        "snippet": "根据中信证券的最新研报,2025年可能会被认为是mRNA肿瘤疫苗的商业化元年,这一点引发了广泛关注和讨论。简单来说,它利用了mRNA技术让我们的免疫系统识别并攻击癌细胞。这种疫苗在临床试验中展现出比传",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_472738d89710",
+        "url": "https://www.sohu.com/a/811130375_121956423",
+        "title": "mRNA肿瘤疫苗:2025年扭转癌症治疗的关键一年?_技术_trans_朋友",
+        "snippet": "中信证券的最新研报指出,2025年可能成为mRNA肿瘤疫苗商业化的元年。这一消息让人心潮澎湃,也同时引发了我们对于其实际应用与安全性的深思。 癌症,作为全球范围内的主要健康问题之一,导致了数百万人的早",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_c659f005e2b1",
+        "url": "https://bydrug.pharmcube.com/news/detail/5c268bb4d42b5a38b7b2037780ff70ab",
+        "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "摘要:\nRNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。\n2024-2025\n年,这项技术迎来爆发期,\n在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_34b241935a4b",
+        "url": "https://c.m.163.com/news/a/KEB0I91Q0532CO9S.html",
+        "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床",
+        "snippet": "摘要:RNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。2024-2025\n年,这项技术迎来爆发期,在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成果,其",
+        "task_id": "fixed_search"
+      }
+    ],
+    "confidence": 0.35,
+    "num_searches": 1,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "",
+    "review_history": [],
+    "review_status": "not_requested"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [],
+  "elapsed_seconds": 3.5,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 470,
+        "prompt_tokens": 1614,
+        "total_tokens": 2084,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1614
+      },
+      "elapsed_seconds": 3.139999999999418,
+      "finish_reason": "stop",
+      "content_chars": 792,
+      "max_tokens": 4096
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3280000000013388
+    }
+  ],
+  "source_fingerprint": "51620987e715965fee8dca190df5d65cfdd67d4983759f6af2b20760eb57011a"
+}

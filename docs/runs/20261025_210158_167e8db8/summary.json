@@ -1,0 +1,419 @@
+[
+  {
+    "question_id": "tech_001",
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "default": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "red_agent": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "blue_agent": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "compressor": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "adversarial_config": {
+      "enabled": true,
+      "max_rounds": 1,
+      "score_threshold": 9.5,
+      "delta_threshold": 0.2,
+      "save_logs": true,
+      "max_model_calls": 12,
+      "max_fixes_per_round": 1
+    },
+    "runtime": {
+      "executable": "D:\\Anaconda\\python.exe",
+      "python_version": "3.12.7"
+    },
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+      "content": "Synthesis incomplete (RuntimeError); available findings follow.\n\n## task_1\n## 调研总结：GPT-4o / Claude 3.5 / Gemini 1.5 / Qwen2.5 在中文推理、代码生成、长上下文任务上的官方报告与基准结果\n\n### 一、检索到的可用信息\n\n**1. GPT-4o — 中文推理**\n- SuperCLUE 推理任务评测：GPT-4o 整体得分 **81.73**，超过 GPT-4 Turbo，成为当时中文推理任务最强模型。\n- 其中 SC-Math6 数学基准得分约 **91**（分项最高），在数学与代码子项上刷新最好成绩。\n- 来源：51CTO 转载的 SuperCLUE 实测文章（二手转述，非 OpenAI 官方报告）。\n\n**2. Qwen2.5 / Qwen2.5-Coder — 代码生成**\n- Qwen2.5-Coder-32B-Instruct：**HumanEval 92.7%**、**MBPP 90.2%**，被描述为\"开源模型最高/刷新开源历史最佳\"。\n- Qwen2.5 系列支持 **128K 上下文**（长文本），Qwen2.5-Coder 小模型（1.5B）为 **32K 上下文**，可用于长代码库定位。\n- 来源：PHP 中文网 FAQ、CSDN 博客（二手整理，非阿里云官方技术报告原文）。\n\n**3. Claude 3.5 / Gemini 1.5 — 代码生成与长上下文**\n- 检索结果中**未获得** Claude 3.5 Sonnet 与 Gemini 1.5 Pro 的官方基准数字（如 HumanEval、MBPP、SWE-bench、1M-token NIAH 等）。\n- 仅命中若干\"Claude API vs GPT-4o vs Gemini 代码生成同题评测\"类工程向博客（掘金），属主观实测，无权威分数。\n- Gemini 1.5 的 1M/2M token 上下文能力仅在第三方模型库页面被间接提及（且多为 Gemini 2.5 条目）。\n\n### 二、关键缺口（需注意）\n| 项目 | 状态 |\n|---|---|\n| OpenAI GPT-4o 官方 System Card / 技术报告原文 | ❌ 未检索到 |\n| Anthropic Claude 3.5 Sonnet Model Card 基准 | ❌ 未检索到 |\n| Google Gemini 1.5 技术报告（1M 上下文 NIAH、MMLU-Pro） | ❌ 未检索到 |\n| 阿里 Qwen2.5 Technical Report（arXiv 2412.15115）原文 | ❌ 未检索到（仅二手数字） |\n| 中文推理统一横评（SuperCLUE/CMMLU） | ⚠️ 仅 GPT-4o 一项，且为二手 |\n\n### 三、结论\n本次检索仅能确认两组可引用数字：**GPT-4o 在 SuperCLUE 推理任务 81.73 分（SC-Math6 ≈91）**，以及 **Qwen2.5-Coder-32B-Instruct 在 HumanEval 92.7% / MBPP 90.2%、Qwen2.5 支持 128K 上下文**。Claude 3.5 与 Gemini 1.5 的官方基准数据、以及四家模型的官方技术报告原文均未在本次检索中取得，现有结果多为中文技术博客的二手转述，建议后续直接访问 arXiv（Qwen2.5: 2412.15115；Gemini 1.5: 2403.05530）、Anthropic Model Card 与 OpenAI System Card 页面核实原始数值。\n\n**置信度：0.42**（数字来源为二手博客，四模型覆盖不完整，官方报告缺失）",
+      "sources": [
+        {
+          "source_id": "s_adf98f8ddbfb",
+          "url": "https://blog.51cto.com/u_15671528/10977607",
+          "title": "实测:GPT-4o登顶中文推理基准,总分81.73,刷新数学和代码最好成绩_qq62985c01d4e12的技术博客_51CTO博客",
+          "snippet": "先说结论 结论1:在完成SuperCLUE推理任务时,GPT-4o的整体得分为81.73,超过GPT-4 Turbo成为中文推理任务最强模型。 结论2:GPT-4o在SC-Math6数学基准上得分91",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_68b896b85ae6",
+          "url": "https://m.datalearner.com:8443/ai-models/pretrained-models/Gemini-2_5-Pro",
+          "title": "Gemini 2.5 Pro Experimental 03-25",
+          "snippet": "模型参数(Parameters)\n 未披露 \n最高上下文长度(Context Length)\n2000K\n是否支持中文\n 支持 \n推理能力(Reasoning)\n模型基本信息\n是否支持推理过程\n支持\n",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_0fa26b660224",
+          "url": "https://blog.csdn.net/InitPulse/article/details/163238455",
+          "title": "文心一言VS GPT-4o中文长文本推理实测:23项基准测试数据曝光,第9项结果颠覆行业认知-CSDN博客",
+          "snippet": "更多请点击:\nhttps://codechina.net\n第一章:文心一言VS\nGPT-4o中文长文本推理实测总览\n本章聚焦于文心一言(ERNIE\nBot\n4.5)与GPT-4o在中文长文本推理任务上",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_911fe3a7fda6",
+          "url": "https://juejin.cn/post/7659706081526825011",
+          "title": "Claude API vs GPT-4o vs Gemini:一次面向工程落地的代码生成同题评测AI 代码生成模型的评测 - 掘金",
+          "snippet": "AI\n代码生成模型的评测,如果只看回答是否完整,很容易得出偏主观的结论。真正落到工程里,我们更关心的是:API\n调用后是否稳定、输出代码是否可运行、是否遵守项目约束、是否方便接入自动化流程。\n这次评测",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_95a45419605f",
+          "url": "https://juejin.cn/post/7654903983508602890",
+          "title": "Gemini 2.5 Pro 程序员向评测:代码生成 + 长文档问答能打吗?Google 的 Gemini 在程序员圈子 - 掘金",
+          "snippet": "Google\n的\nGemini\n在程序员圈子里一直是个\"背景板\"——大家都知道它存在,但没几个人真用。\n今年\n3\n月\nGemini\n2.5\nPro\n发布后,外网评价不错。我花了两个晚上实测,拿它跟\nD",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_b873dab51647",
+          "url": "https://www.eefocus.com/article/2003523.html",
+          "title": "GPT-5.5 - OpenAI推出的长上下文多模态推理大语言模型 - 与非网",
+          "snippet": "GPT-5.5——OpenAI推出的长上下文多模态推理大语言模型,4月23号刚发布,我第一时间在库拉AI聚合平台c.kulaai.cn上对比测试了几个主流模型,说说真实感受。\n从\"聊天\"到\"干活\",这",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_15f7dfa63c87",
+          "url": "https://devpress.csdn.net/user/2501_91868913",
+          "title": "2501_91868913 个人主页",
+          "snippet": "2025\n年必看!15\n款热门\nAI\n大模型测评,总有一款适合你\nGPT-4o\n堪称\nAI\n界的\n“瑞士军刀”,支持多语言生成、代码调试、数据分析,甚至能制作专业级\nPPT。:AI\n工具的终极答案,从",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_57646184322e",
+          "url": "https://xie.infoq.cn/article/5c499078771cc8de43a60c982",
+          "title": "GPT-5技术解析:多版本模型与软件生成能力_人工智能_qife122_InfoQ写作社区",
+          "snippet": "某机构正式推出\nGPT-5\n大型语言模型系列,包含四个不同规格版本:GPT-5:全功能推理模型,适用于通用高质量任务GPT-5\nPro:增强版推理模型,支持并行计算,面向复杂企业/研究环境GPT-5\n",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c79d76e1b354",
+          "url": "https://xueqiu.com/5999183282/282116653",
+          "title": "长文本能力拓宽大模型应用场景大模型上下文窗口长度持续突破。文本生成以 token 作为处理文本的单位,复杂汉字(如&#... - 雪球",
+          "snippet": "大模型上下文窗口长度持续突破。 文本生成以 token 作为处理文本的单位,复杂汉字(如\"夔\")可能会分解为若干 token 的组合,\" 中国 \" 等短且常见的短语则可能使用单个 token。通常而言",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_2b51828f1cd0",
+          "url": "https://devpress.csdn.net/user/As3310010",
+          "title": "As3310010 个人主页",
+          "snippet": "国内外大模型体验与评测:全面解析与实践指南\n大模型评测研究综述\n摘要:本文系统梳理了当前大模型技术的发展现状与评测方法。国际领先模型如GPT-4、Claude系列和Gemini在多语言理解、逻辑推理等",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_7e29f1d5a43f",
+          "url": "https://www.php.cn/faq/2527242.html",
+          "title": "千问Qwen2.5-Coder在代码生成基准测试HumanEval和MBPP上的得分是多少?-人工智能-PHP中文网",
+          "snippet": "Qwen2.5-Coder-32B-Instruct在HumanEval基准得分为92.7%,为开源模型最高;在MBPP基准得分为90.2%,同样刷新开源历史最佳。\n☞☞☞AI\n智能聊天,\n问答助手,",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_8d90af8a31f0",
+          "url": "https://www.php.cn/faq/2518468.html",
+          "title": "千问Qwen 128K长上下文窗口管理的最佳实践是什么?-人工智能-PHP中文网",
+          "snippet": "Qwen模型128K上下文优化需五步:一、显存感知型KV\nCache分块加载;二、RoPE缩放适配NTK-aware;三、滑动窗口+摘要回填;四、流式输出保活控制;五、多卡KV一致性校验。\n☞☞☞AI",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c40d8ebb04f4",
+          "url": "https://blog.csdn.net/weixin_36303305/article/details/157056239",
+          "title": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果-CSDN博客",
+          "snippet": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果\n1.\n引言:长文本处理的挑战与机遇\n在信息爆炸的时代,处理万字以上的技术文档已成为许多专业人士的日常挑战。以一份典型的技术白皮书为",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_03c835319a63",
+          "url": "https://juejin.cn/post/7642013733049958426",
+          "title": "Win11 远程调 Qwen3.6-27B:吞吐几乎不掉,C-Eval 从 2.7% 测到 80%Win11 远程调 Q - 掘金",
+          "snippet": "Win11\n远程调\nQwen3.6-27B\n吞吐几乎不掉,C-Eval\n从\n2.7%\n测到\n80%\n系列:AI实战落地\n·\n推理基座(第\n2\n篇)\n上篇:双\nA100\n部署与\nvLLM\n两轮调优\nGi",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_2eb1fffadcbb",
+          "url": "https://k.sina.com.cn/article_7857201856_1d45362c001902j4ue.html",
+          "title": "国产AI三强争霸:2025年文心大模型4.5、DeepSeek、Qwen3深度测评|Qwen 3|ERNIE|注意力机制|文本|场景_新浪新闻",
+          "snippet": "1.\n文心大模型4.5:全场景智能的进化\n文心大模型4.5采用“混合专家架构(MoE)+动态路由”技术,参数规模达1.2万亿,支持128K长文本输入。其核心优势在于多模态交互能力:通过整合视觉、语音、",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_e27e3d3520ac",
+          "url": "https://juejin.cn/post/7687543954779045930",
+          "title": "qwen3.5-9b-上下文指南qwen3.5:9b 上下文(Context)实战指南 一、先分清三个「上下文」数字 数 - 掘金",
+          "snippet": "qwen3.5:9b\n上下文(Context)实战指南\n本机实测:Ollama\n0.34.2\n·\nRTX\n5060\nTi\n16GB\n·\nWindows\n全部数字为实测值,非文档推测。\n一、先分清三个「",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_ff574e60d702",
+          "url": "https://browser.geekbench.com/v6/cpu/16489349",
+          "title": "AZW EQ\n - Geekbench",
+          "snippet": "AZW EQ\nSingle-Core Score1290\nMulti-Core Score3160\nGeekbench 6.5.0 for Linux AVX2\nResult Information\n",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_cac22628dfa4",
+          "url": "https://blog.csdn.net/weixin_35755562/article/details/156433980",
+          "title": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑-CSDN博客",
+          "snippet": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑\n1.\n模型能力概览\nQwen2.5-Coder-1.5B是面向代码处理的专业大语言模型,属于Qwen系列的重要分",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_98f334945123",
+          "url": "https://browser.geekbench.com/v6/cpu/16524168",
+          "title": "Red Hat KVM\n - Geekbench",
+          "snippet": "Red Hat KVM\nSingle-Core Score135\nMulti-Core Score115\nGeekbench 6.5.0 for Linux x86 (64-bit)\nResult I",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_25f12883fb56",
+          "url": "https://finance.sina.com.cn/tech/digi/2026-02-11/doc-inhmmvzi4699068.shtml",
+          "title": "DeepSeek 灰度测试百万 Token 上下文,知识库更新至 2025 年 5 月|it之家_新浪科技_新浪网",
+          "snippet": "IT之家\n2\n月\n11\n日消息,今日有多个用户反馈,称\nDeepSeek\n更新之后开始灰度测试最高\n1M(百万)Token\n的上下文长度;去年\n8\n月发布的\nDeepSeek\nV3.1\n上下文长度拓展",
+          "task_id": "task_1"
+        }
+      ],
+      "confidence": 0.0,
+      "num_searches": 4,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "72b5a75ae32b4e86a02961bea4551691",
+      "review_history": [],
+      "review_status": "skipped_incomplete"
+    },
+    "technical_checks": {
+      "report_completed": false,
+      "nonempty_report": true,
+      "sources_available": true,
+      "all_tasks_completed": false,
+      "no_execution_errors": true,
+      "review_completed": false
+    },
+    "technical_chain_success": false,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 2.672
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "task_id": "task_2",
+        "task_status": "failed",
+        "failure_reason": "Model request failed (RuntimeError)"
+      },
+      {
+        "state": "collecting",
+        "elapsed": 24.781
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 24.781
+      },
+      {
+        "state": "done",
+        "elapsed": 46.328
+      }
+    ],
+    "elapsed_seconds": 49.34399999999732,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 322,
+          "prompt_tokens": 627,
+          "total_tokens": 949,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 243
+        },
+        "elapsed_seconds": 2.6719999999986612,
+        "finish_reason": "stop",
+        "content_chars": 1075,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 157,
+          "prompt_tokens": 1275,
+          "total_tokens": 1432,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 896
+          },
+          "prompt_cache_hit_tokens": 896,
+          "prompt_cache_miss_tokens": 379
+        },
+        "elapsed_seconds": 1.2969999999986612,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 828,
+          "prompt_tokens": 3972,
+          "total_tokens": 4800,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 2564
+        },
+        "elapsed_seconds": 5.110000000000582,
+        "finish_reason": "stop",
+        "content_chars": 1543,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 180,
+          "prompt_tokens": 2085,
+          "total_tokens": 2265,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 1317
+        },
+        "elapsed_seconds": 1.125,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": {
+          "completion_tokens": 2048,
+          "prompt_tokens": 4386,
+          "total_tokens": 6434,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 2176
+          },
+          "prompt_cache_hit_tokens": 2176,
+          "prompt_cache_miss_tokens": 2210
+        },
+        "elapsed_seconds": 13.671999999998661,
+        "finish_reason": "length",
+        "content_chars": 3635,
+        "max_tokens": 2048,
+        "error_type": "RuntimeError"
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": {
+          "completion_tokens": 4096,
+          "prompt_tokens": 3849,
+          "total_tokens": 7945,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3849
+        },
+        "elapsed_seconds": 21.54699999999866,
+        "finish_reason": "length",
+        "content_chars": 7142,
+        "max_tokens": 4096,
+        "error_type": "RuntimeError"
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.34399999999732245
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.15600000000267755
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.17199999999866122
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.13999999999941792
+      }
+    ],
+    "source_fingerprint": "ebefd55cbee77ae2a5894e61438d582ec48f9dda8dba44e28578a6efbd416e97"
+  }
+]

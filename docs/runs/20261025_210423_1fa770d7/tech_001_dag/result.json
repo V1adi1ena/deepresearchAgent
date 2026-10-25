@@ -1,0 +1,994 @@
+{
+  "question_id": "tech_001",
+  "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "content": "# 2024 主流大模型中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**无法完成所要求的四模型横向对比。** 检索结果中没有任何一手 benchmark 数据支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三类任务上的同表比较。以下仅列出可支持事实与明确缺口。\n\n## 可支持的事实（均为二手来源）\n- **Qwen2.5-Coder-32B-Instruct**：HumanEval 92.7%、MBPP 90.2%，被称开源最高分 [s_7e29f1d5a43f]。\n- **Qwen2.5 综合/中文**：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% [s_88aac318b106]。\n- **Qwen 长上下文**：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填 [s_8d90af8a31f0]；Qwen2.5-Coder-1.5B 支持 32K [s_cac22628dfa4]。\n\n## 证据缺口（关键）\n1. **无一手报告**：OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中。\n2. **无跨模型同表数值**：C-Eval/CMMLU、HumanEval/MBPP/LiveCodeBench、RULER/LongBench/NIAH 的四模型对比数据完全缺失。\n3. **技术路线差异无权威来源**：Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态，均只能定性推断，无一手佐证。\n4. **时效污染**：多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2]，与指定版本不匹配。\n\n## 建议下一步\n直接抓取 arXiv 2412.15115、2403.05530 全文 benchmark 表，以及 OpenAI/Anthropic 官方 model card PDF，获取一手对比数据后再做分析型结论。\n\n## 置信度\n**0.22** — 仅 Qwen2.5 系列若干分数有二手来源；四模型横向对比与技术路线分析均缺一手证据。\n\n## 关键来源\n- [s_7e29f1d5a43f] php.cn：Qwen2.5-Coder HumanEval/MBPP 分数（二手）\n- [s_88aac318b106] php.cn：Qwen2.5 MMLU/C-Eval/CMMLU（二手）\n- [s_8d90af8a31f0] php.cn：Qwen 128K 上下文优化（二手）\n- [s_cac22628dfa4] CSDN：Qwen2.5-Coder-1.5B 32K 上下文（二手）\n- [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 时效污染示例（2026 年横评）",
+    "sources": [
+      {
+        "source_id": "s_911fe3a7fda6",
+        "url": "https://juejin.cn/post/7659706081526825011",
+        "title": "Claude API vs GPT-4o vs Gemini:一次面向工程落地的代码生成同题评测AI 代码生成模型的评测 - 掘金",
+        "snippet": "AI\n代码生成模型的评测,如果只看回答是否完整,很容易得出偏主观的结论。真正落到工程里,我们更关心的是:API\n调用后是否稳定、输出代码是否可运行、是否遵守项目约束、是否方便接入自动化流程。\n这次评测",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_9d5d1b78683a",
+        "url": "https://www.jianshu.com/p/6299ac7eb784",
+        "title": "Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南 - 简书",
+        "snippet": "现在的开发者在写代码、改\nBug\n或重构系统时,几乎离不开\nAI\n辅助。然而,在实际的开发工作流中,频繁调用高阶模型(如\nGPT-4o\n或\nClaude\n3.5\nSonnet)会导致\nAPI\n账单迅速",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_0bb2ec1ac306",
+        "url": "https://juejin.cn/post/7635372611216080938",
+        "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+        "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_6137cdd1eaf7",
+        "url": "https://www.partnershare.cn/information/ipfly-quan-qiu-dai-li/5836",
+        "title": "AI三强争霸:Claude、ChatGPT、Gemini的深度能力拆解",
+        "snippet": "企业AI选型,不是选\"最好\"的模型,而是选\"最合适\"的模型。Claude、GPT-4、Gemini各有所长,理解它们的差异,才能在具体场景中做出最优决策。核心能力对比矩阵维度Claude\n3.5\nSo",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_1a740a35f590",
+        "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+        "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+        "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_f25f8112462e",
+        "url": "https://www.jianshu.com/p/820ae9ff7116",
+        "title": "如何评价谷歌最新发布的 Gemini 3.5?它有哪些技术突破? - 简书",
+        "snippet": "谷歌最新发布的\nGemini\n3.5\n再次掀起了多模态与超长上下文的技术军备竞赛。特别是在超长视频解析、海量代码库理解等任务上,Gemini\n3.5\n展示了其独特的原生多模态架构优势。为了帮助开发者评",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_b2318c89c71b",
+        "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+        "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+        "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_60f5addb1060",
+        "url": "https://www.ithome.com/0/973/334.htm",
+        "title": "谷歌 Gemini 3.5 Pro 曝 200 万 Tokens 上下文,前端部分 AI 测试赶超 Claude Fable 5 - IT之家",
+        "snippet": "IT之家\n7\n月\n7\n日消息,消息源\n@HarshithLucky3\n昨日(7\n月\n6\n日)在\nX\n平台发布推文,爆料称谷歌计划\n7\n月\n17\n日发布\nGemini\n3.5\nPro\n模型,支持\n200",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_7e29f1d5a43f",
+        "url": "https://www.php.cn/faq/2527242.html",
+        "title": "千问Qwen2.5-Coder在代码生成基准测试HumanEval和MBPP上的得分是多少?-人工智能-PHP中文网",
+        "snippet": "Qwen2.5-Coder-32B-Instruct在HumanEval基准得分为92.7%,为开源模型最高;在MBPP基准得分为90.2%,同样刷新开源历史最佳。\n☞☞☞AI\n智能聊天,\n问答助手,",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_8d90af8a31f0",
+        "url": "https://www.php.cn/faq/2518468.html",
+        "title": "千问Qwen 128K长上下文窗口管理的最佳实践是什么?-人工智能-PHP中文网",
+        "snippet": "Qwen模型128K上下文优化需五步:一、显存感知型KV\nCache分块加载;二、RoPE缩放适配NTK-aware;三、滑动窗口+摘要回填;四、流式输出保活控制;五、多卡KV一致性校验。\n☞☞☞AI",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c40d8ebb04f4",
+        "url": "https://blog.csdn.net/weixin_36303305/article/details/157056239",
+        "title": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果-CSDN博客",
+        "snippet": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果\n1.\n引言:长文本处理的挑战与机遇\n在信息爆炸的时代,处理万字以上的技术文档已成为许多专业人士的日常挑战。以一份典型的技术白皮书为",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_03c835319a63",
+        "url": "https://juejin.cn/post/7642013733049958426",
+        "title": "Win11 远程调 Qwen3.6-27B:吞吐几乎不掉,C-Eval 从 2.7% 测到 80%Win11 远程调 Q - 掘金",
+        "snippet": "Win11\n远程调\nQwen3.6-27B\n吞吐几乎不掉,C-Eval\n从\n2.7%\n测到\n80%\n系列:AI实战落地\n·\n推理基座(第\n2\n篇)\n上篇:双\nA100\n部署与\nvLLM\n两轮调优\nGi",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_2eb1fffadcbb",
+        "url": "https://k.sina.com.cn/article_7857201856_1d45362c001902j4ue.html",
+        "title": "国产AI三强争霸:2025年文心大模型4.5、DeepSeek、Qwen3深度测评|Qwen 3|ERNIE|注意力机制|文本|场景_新浪新闻",
+        "snippet": "1.\n文心大模型4.5:全场景智能的进化\n文心大模型4.5采用“混合专家架构(MoE)+动态路由”技术,参数规模达1.2万亿,支持128K长文本输入。其核心优势在于多模态交互能力:通过整合视觉、语音、",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_e27e3d3520ac",
+        "url": "https://juejin.cn/post/7687543954779045930",
+        "title": "qwen3.5-9b-上下文指南qwen3.5:9b 上下文(Context)实战指南 一、先分清三个「上下文」数字 数 - 掘金",
+        "snippet": "qwen3.5:9b\n上下文(Context)实战指南\n本机实测:Ollama\n0.34.2\n·\nRTX\n5060\nTi\n16GB\n·\nWindows\n全部数字为实测值,非文档推测。\n一、先分清三个「",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_ff574e60d702",
+        "url": "https://browser.geekbench.com/v6/cpu/16489349",
+        "title": "AZW EQ\n - Geekbench",
+        "snippet": "AZW EQ\nSingle-Core Score1290\nMulti-Core Score3160\nGeekbench 6.5.0 for Linux AVX2\nResult Information\n",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_cac22628dfa4",
+        "url": "https://blog.csdn.net/weixin_35755562/article/details/156433980",
+        "title": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑-CSDN博客",
+        "snippet": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑\n1.\n模型能力概览\nQwen2.5-Coder-1.5B是面向代码处理的专业大语言模型,属于Qwen系列的重要分",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_ddf72d7c38f2",
+        "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+        "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+        "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_88aac318b106",
+        "url": "https://www.php.cn/faq/2514819.html",
+        "title": "千问Qwen2.5在MMLU和C-Eval等综合评测榜单上排名第几?对比GPT-4和Claude-人工智能-PHP中文网",
+        "snippet": "Qwen2.5在MMLU、C-Eval、CMMLU三大权威榜单中均位居开源模型前列:MMLU得分85+分居7B级第一,C-Eval以超83%准确率领跑开源模型,CMMLU达84.7%为中文模型最高分之",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_89d1ada20e15",
+        "url": "https://m.163.com/dy/article/KT3KI1HA05561FZR.html",
+        "title": "2026年五大Gemini替代方案:谁更便宜、更快、更灵活|gemini|代码|替代方案|调用_手机网易网",
+        "snippet": "Google\nGemini系列模型确实很强,但并非所有场景都适用。有时候你需要更强的推理能力,有时候成本才是首要考量,还有时候你只是想避免被单一厂商绑定。这篇文章整理了五个最值得考虑的Gemini\nA",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_1e6317c10928",
+        "url": "https://evomap.ai/bounty/cm990221f093fb9a1f2e2d51a",
+        "title": "What are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging? | EvoMap",
+        "snippet": "Bounty Detail\nWhat are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging?\nView",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_6833d90da59c",
+        "url": "https://juejin.cn/post/7652284932753408006",
+        "title": "# Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8:三大模型性能交叉对比报告做模型选型时,最 - 掘金",
+        "snippet": "做模型选型时,最让人头疼的不是“哪个模型最强”,而是“多花30%成本换8%质量提升,这账怎么算”。三大顶级模型各有各的甜点区,也各有各的软肋。这份报告从架构差异、基准测试、成本效率、幻觉控制四个维度,",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_c9ca0bff5a2e",
+        "url": "https://news.qq.com/rain/a/20260224A01TEE00",
+        "title": "顶级模型Claude Sonnet 4.6与Gemini 3.1 Pro也来庆新春_腾讯新闻",
+        "snippet": "专注AIGC领域的专业社区,关注微软&OpenAI、百度文心一言、讯飞星火等大语言模型(LLM)的发展和应用落地,聚焦LLM的市场研究和AIGC开发者生态,欢迎关注!两个顶级闭源模型Claude\nSo",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_ae658e81b914",
+        "url": "https://arxiv.org/abs/2602.05892",
+        "title": "[2602.05892] ContextBench: A Benchmark for Context Retrieval in Coding Agents – arxiv",
+        "snippet": "Computer Science > Machine Learning\narXiv:2602.05892(cs)\n[Submitted on 5 Feb 2026 (v1), last revised",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_4300e28a2eeb",
+        "url": "https://hub.baai.ac.cn/paper/4d7bd3ca-40ef-450c-acb6-9760bd085a24",
+        "title": "RoadmapBench: Evaluating Long-Horizon Agentic Software Development Across Version Upgrades - 智源社区论文",
+        "snippet": "CodeContests\n(2021),\nHumanEval\n(2021),\nMBPP\n(2022),\nCodeXGLUE\n(2021),\nSWE-bench\n(2023),\nRepoAgent\n(2",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_45c87a4853b6",
+        "url": "https://arxiv.org/abs/2602.15257",
+        "title": "[2602.15257] How to Train Your Long-Context Visual Document Model – arxiv",
+        "snippet": "Computer Science > Computer Vision and Pattern Recognition\narXiv:2602.15257(cs)\n[Submitted on 16 Feb",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_9c80ad3b3bc2",
+        "url": "https://evomap.ai/bounty/cmee5223c9d1e8d3bad88c26c",
+        "title": "Context Window Management: 处理长文本输入 | EvoMap",
+        "snippet": "Bounty Detail\nContext Window Management: 处理长文本输入\nView bounty details, signals, and matched solutions",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_037c99de6ea1",
+        "url": "https://hub.baai.ac.cn/paper/015f0f73-ebbd-4fff-a763-bd573c095482",
+        "title": "ZeroDayBench: Evaluating LLM Agents on Unseen Zero-Day Vulnerabilities for Cyberdefense - 智源社区论文",
+        "snippet": "‘SWE-bench:\nMulti-level\nReal-world\nGitHub\nIssues\nfor\nCode\nGeneration’\n(2023);\n‘CodeRepairBench:\nA\nBe",
+        "task_id": "task_2"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 4,
+    "num_replan": 0,
+    "adversarial_rounds": 1,
+    "final_score": 7.409090909090909,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "0cd1699197f84197b69a888621d08646",
+    "review_history": [
+      {
+        "round": 1,
+        "dimension_scores": {
+          "fact_check": 6.5,
+          "hallucination": 8.5
+        },
+        "overall_score": 7.409,
+        "issues_count": 10,
+        "fix_operations": [
+          {
+            "issue": {
+              "severity": "minor",
+              "dimension": "fact_check",
+              "description": "报告称 Gemini 1.5 技术报告 arXiv 编号为 2403.05530，该编号正确，但报告未提供该来源的 snippet 或引用标记，无法在来源列表中直接验证。",
+              "location": "证据缺口第1条",
+              "fix_type": "in_place",
+              "evidence": "来源列表中无 arXiv 2403.05530 条目，报告自身也未附引用标记。"
+            },
+            "action": "in_place_fix: []",
+            "success": true,
+            "detail": {
+              "detail": "changes=[]",
+              "before": "# 2024 主流大模型中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**无法完成所要求的四模型横向对比。** 检索结果中没有任何一手 benchmark 数据支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三类任务上的同表比较。以下仅列出可支持事实与明确缺口。\n\n## 可支持的事实（均为二手来源）\n- **Qwen2.5-Coder-32B-Instruct**：HumanEval 92.7%、MBPP 90.2%，被称开源最高分 [s_7e29f1d5a43f]。\n- **Qwen2.5 综合/中文**：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% [s_88aac318b106]。\n- **Qwen 长上下文**：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填 [s_8d90af8a31f0]；Qwen2.5-Coder-1.5B 支持 32K [s_cac22628dfa4]。\n\n## 证据缺口（关键）\n1. **无一手报告**：OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中。\n2. **无跨模型同表数值**：C-Eval/CMMLU、HumanEval/MBPP/LiveCodeBench、RULER/LongBench/NIAH 的四模型对比数据完全缺失。\n3. **技术路线差异无权威来源**：Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态，均只能定性推断，无一手佐证。\n4. **时效污染**：多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2]，与指定版本不匹配。\n\n## 建议下一步\n直接抓取 arXiv 2412.15115、2403.05530 全文 benchmark 表，以及 OpenAI/Anthropic 官方 model card PDF，获取一手对比数据后再做分析型结论。\n\n## 置信度\n**0.22** — 仅 Qwen2.5 系列若干分数有二手来源；四模型横向对比与技术路线分析均缺一手证据。\n\n## 关键来源\n- [s_7e29f1d5a43f] php.cn：Qwen2.5-Coder HumanEval/MBPP 分数（二手）\n- [s_88aac318b106] php.cn：Qwen2.5 MMLU/C-Eval/CMMLU（二手）\n- [s_8d90af8a31f0] php.cn：Qwen 128K 上下文优化（二手）\n- [s_cac22628dfa4] CSDN：Qwen2.5-Coder-1.5B 32K 上下文（二手）\n- [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 时效污染示例（2026 年横评）",
+              "after": "# 2024 主流大模型中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**无法完成所要求的四模型横向对比。** 检索结果中没有任何一手 benchmark 数据支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三类任务上的同表比较。以下仅列出可支持事实与明确缺口。\n\n## 可支持的事实（均为二手来源）\n- **Qwen2.5-Coder-32B-Instruct**：HumanEval 92.7%、MBPP 90.2%，被称开源最高分 [s_7e29f1d5a43f]。\n- **Qwen2.5 综合/中文**：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% [s_88aac318b106]。\n- **Qwen 长上下文**：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填 [s_8d90af8a31f0]；Qwen2.5-Coder-1.5B 支持 32K [s_cac22628dfa4]。\n\n## 证据缺口（关键）\n1. **无一手报告**：OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中。\n2. **无跨模型同表数值**：C-Eval/CMMLU、HumanEval/MBPP/LiveCodeBench、RULER/LongBench/NIAH 的四模型对比数据完全缺失。\n3. **技术路线差异无权威来源**：Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态，均只能定性推断，无一手佐证。\n4. **时效污染**：多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2]，与指定版本不匹配。\n\n## 建议下一步\n直接抓取 arXiv 2412.15115、2403.05530 全文 benchmark 表，以及 OpenAI/Anthropic 官方 model card PDF，获取一手对比数据后再做分析型结论。\n\n## 置信度\n**0.22** — 仅 Qwen2.5 系列若干分数有二手来源；四模型横向对比与技术路线分析均缺一手证据。\n\n## 关键来源\n- [s_7e29f1d5a43f] php.cn：Qwen2.5-Coder HumanEval/MBPP 分数（二手）\n- [s_88aac318b106] php.cn：Qwen2.5 MMLU/C-Eval/CMMLU（二手）\n- [s_8d90af8a31f0] php.cn：Qwen 128K 上下文优化（二手）\n- [s_cac22628dfa4] CSDN：Qwen2.5-Coder-1.5B 32K 上下文（二手）\n- [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 时效污染示例（2026 年横评）",
+              "sources": [
+                {
+                  "source_id": "s_911fe3a7fda6",
+                  "url": "https://juejin.cn/post/7659706081526825011",
+                  "title": "Claude API vs GPT-4o vs Gemini:一次面向工程落地的代码生成同题评测AI 代码生成模型的评测 - 掘金",
+                  "snippet": "AI\n代码生成模型的评测,如果只看回答是否完整,很容易得出偏主观的结论。真正落到工程里,我们更关心的是:API\n调用后是否稳定、输出代码是否可运行、是否遵守项目约束、是否方便接入自动化流程。\n这次评测",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_9d5d1b78683a",
+                  "url": "https://www.jianshu.com/p/6299ac7eb784",
+                  "title": "Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南 - 简书",
+                  "snippet": "现在的开发者在写代码、改\nBug\n或重构系统时,几乎离不开\nAI\n辅助。然而,在实际的开发工作流中,频繁调用高阶模型(如\nGPT-4o\n或\nClaude\n3.5\nSonnet)会导致\nAPI\n账单迅速",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_0bb2ec1ac306",
+                  "url": "https://juejin.cn/post/7635372611216080938",
+                  "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+                  "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_6137cdd1eaf7",
+                  "url": "https://www.partnershare.cn/information/ipfly-quan-qiu-dai-li/5836",
+                  "title": "AI三强争霸:Claude、ChatGPT、Gemini的深度能力拆解",
+                  "snippet": "企业AI选型,不是选\"最好\"的模型,而是选\"最合适\"的模型。Claude、GPT-4、Gemini各有所长,理解它们的差异,才能在具体场景中做出最优决策。核心能力对比矩阵维度Claude\n3.5\nSo",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_1a740a35f590",
+                  "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+                  "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+                  "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_f25f8112462e",
+                  "url": "https://www.jianshu.com/p/820ae9ff7116",
+                  "title": "如何评价谷歌最新发布的 Gemini 3.5?它有哪些技术突破? - 简书",
+                  "snippet": "谷歌最新发布的\nGemini\n3.5\n再次掀起了多模态与超长上下文的技术军备竞赛。特别是在超长视频解析、海量代码库理解等任务上,Gemini\n3.5\n展示了其独特的原生多模态架构优势。为了帮助开发者评",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_b2318c89c71b",
+                  "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+                  "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+                  "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_60f5addb1060",
+                  "url": "https://www.ithome.com/0/973/334.htm",
+                  "title": "谷歌 Gemini 3.5 Pro 曝 200 万 Tokens 上下文,前端部分 AI 测试赶超 Claude Fable 5 - IT之家",
+                  "snippet": "IT之家\n7\n月\n7\n日消息,消息源\n@HarshithLucky3\n昨日(7\n月\n6\n日)在\nX\n平台发布推文,爆料称谷歌计划\n7\n月\n17\n日发布\nGemini\n3.5\nPro\n模型,支持\n200",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_7e29f1d5a43f",
+                  "url": "https://www.php.cn/faq/2527242.html",
+                  "title": "千问Qwen2.5-Coder在代码生成基准测试HumanEval和MBPP上的得分是多少?-人工智能-PHP中文网",
+                  "snippet": "Qwen2.5-Coder-32B-Instruct在HumanEval基准得分为92.7%,为开源模型最高;在MBPP基准得分为90.2%,同样刷新开源历史最佳。\n☞☞☞AI\n智能聊天,\n问答助手,",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_8d90af8a31f0",
+                  "url": "https://www.php.cn/faq/2518468.html",
+                  "title": "千问Qwen 128K长上下文窗口管理的最佳实践是什么?-人工智能-PHP中文网",
+                  "snippet": "Qwen模型128K上下文优化需五步:一、显存感知型KV\nCache分块加载;二、RoPE缩放适配NTK-aware;三、滑动窗口+摘要回填;四、流式输出保活控制;五、多卡KV一致性校验。\n☞☞☞AI",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_c40d8ebb04f4",
+                  "url": "https://blog.csdn.net/weixin_36303305/article/details/157056239",
+                  "title": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果-CSDN博客",
+                  "snippet": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果\n1.\n引言:长文本处理的挑战与机遇\n在信息爆炸的时代,处理万字以上的技术文档已成为许多专业人士的日常挑战。以一份典型的技术白皮书为",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_03c835319a63",
+                  "url": "https://juejin.cn/post/7642013733049958426",
+                  "title": "Win11 远程调 Qwen3.6-27B:吞吐几乎不掉,C-Eval 从 2.7% 测到 80%Win11 远程调 Q - 掘金",
+                  "snippet": "Win11\n远程调\nQwen3.6-27B\n吞吐几乎不掉,C-Eval\n从\n2.7%\n测到\n80%\n系列:AI实战落地\n·\n推理基座(第\n2\n篇)\n上篇:双\nA100\n部署与\nvLLM\n两轮调优\nGi",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_2eb1fffadcbb",
+                  "url": "https://k.sina.com.cn/article_7857201856_1d45362c001902j4ue.html",
+                  "title": "国产AI三强争霸:2025年文心大模型4.5、DeepSeek、Qwen3深度测评|Qwen 3|ERNIE|注意力机制|文本|场景_新浪新闻",
+                  "snippet": "1.\n文心大模型4.5:全场景智能的进化\n文心大模型4.5采用“混合专家架构(MoE)+动态路由”技术,参数规模达1.2万亿,支持128K长文本输入。其核心优势在于多模态交互能力:通过整合视觉、语音、",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_e27e3d3520ac",
+                  "url": "https://juejin.cn/post/7687543954779045930",
+                  "title": "qwen3.5-9b-上下文指南qwen3.5:9b 上下文(Context)实战指南 一、先分清三个「上下文」数字 数 - 掘金",
+                  "snippet": "qwen3.5:9b\n上下文(Context)实战指南\n本机实测:Ollama\n0.34.2\n·\nRTX\n5060\nTi\n16GB\n·\nWindows\n全部数字为实测值,非文档推测。\n一、先分清三个「",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_ff574e60d702",
+                  "url": "https://browser.geekbench.com/v6/cpu/16489349",
+                  "title": "AZW EQ\n - Geekbench",
+                  "snippet": "AZW EQ\nSingle-Core Score1290\nMulti-Core Score3160\nGeekbench 6.5.0 for Linux AVX2\nResult Information\n",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_cac22628dfa4",
+                  "url": "https://blog.csdn.net/weixin_35755562/article/details/156433980",
+                  "title": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑-CSDN博客",
+                  "snippet": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑\n1.\n模型能力概览\nQwen2.5-Coder-1.5B是面向代码处理的专业大语言模型,属于Qwen系列的重要分",
+                  "task_id": "task_1"
+                },
+                {
+                  "source_id": "s_ddf72d7c38f2",
+                  "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+                  "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+                  "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_88aac318b106",
+                  "url": "https://www.php.cn/faq/2514819.html",
+                  "title": "千问Qwen2.5在MMLU和C-Eval等综合评测榜单上排名第几?对比GPT-4和Claude-人工智能-PHP中文网",
+                  "snippet": "Qwen2.5在MMLU、C-Eval、CMMLU三大权威榜单中均位居开源模型前列:MMLU得分85+分居7B级第一,C-Eval以超83%准确率领跑开源模型,CMMLU达84.7%为中文模型最高分之",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_89d1ada20e15",
+                  "url": "https://m.163.com/dy/article/KT3KI1HA05561FZR.html",
+                  "title": "2026年五大Gemini替代方案:谁更便宜、更快、更灵活|gemini|代码|替代方案|调用_手机网易网",
+                  "snippet": "Google\nGemini系列模型确实很强,但并非所有场景都适用。有时候你需要更强的推理能力,有时候成本才是首要考量,还有时候你只是想避免被单一厂商绑定。这篇文章整理了五个最值得考虑的Gemini\nA",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_1e6317c10928",
+                  "url": "https://evomap.ai/bounty/cm990221f093fb9a1f2e2d51a",
+                  "title": "What are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging? | EvoMap",
+                  "snippet": "Bounty Detail\nWhat are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging?\nView",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_6833d90da59c",
+                  "url": "https://juejin.cn/post/7652284932753408006",
+                  "title": "# Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8:三大模型性能交叉对比报告做模型选型时,最 - 掘金",
+                  "snippet": "做模型选型时,最让人头疼的不是“哪个模型最强”,而是“多花30%成本换8%质量提升,这账怎么算”。三大顶级模型各有各的甜点区,也各有各的软肋。这份报告从架构差异、基准测试、成本效率、幻觉控制四个维度,",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_c9ca0bff5a2e",
+                  "url": "https://news.qq.com/rain/a/20260224A01TEE00",
+                  "title": "顶级模型Claude Sonnet 4.6与Gemini 3.1 Pro也来庆新春_腾讯新闻",
+                  "snippet": "专注AIGC领域的专业社区,关注微软&OpenAI、百度文心一言、讯飞星火等大语言模型(LLM)的发展和应用落地,聚焦LLM的市场研究和AIGC开发者生态,欢迎关注!两个顶级闭源模型Claude\nSo",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_ae658e81b914",
+                  "url": "https://arxiv.org/abs/2602.05892",
+                  "title": "[2602.05892] ContextBench: A Benchmark for Context Retrieval in Coding Agents – arxiv",
+                  "snippet": "Computer Science > Machine Learning\narXiv:2602.05892(cs)\n[Submitted on 5 Feb 2026 (v1), last revised",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_4300e28a2eeb",
+                  "url": "https://hub.baai.ac.cn/paper/4d7bd3ca-40ef-450c-acb6-9760bd085a24",
+                  "title": "RoadmapBench: Evaluating Long-Horizon Agentic Software Development Across Version Upgrades - 智源社区论文",
+                  "snippet": "CodeContests\n(2021),\nHumanEval\n(2021),\nMBPP\n(2022),\nCodeXGLUE\n(2021),\nSWE-bench\n(2023),\nRepoAgent\n(2",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_45c87a4853b6",
+                  "url": "https://arxiv.org/abs/2602.15257",
+                  "title": "[2602.15257] How to Train Your Long-Context Visual Document Model – arxiv",
+                  "snippet": "Computer Science > Computer Vision and Pattern Recognition\narXiv:2602.15257(cs)\n[Submitted on 16 Feb",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_9c80ad3b3bc2",
+                  "url": "https://evomap.ai/bounty/cmee5223c9d1e8d3bad88c26c",
+                  "title": "Context Window Management: 处理长文本输入 | EvoMap",
+                  "snippet": "Bounty Detail\nContext Window Management: 处理长文本输入\nView bounty details, signals, and matched solutions",
+                  "task_id": "task_2"
+                },
+                {
+                  "source_id": "s_037c99de6ea1",
+                  "url": "https://hub.baai.ac.cn/paper/015f0f73-ebbd-4fff-a763-bd573c095482",
+                  "title": "ZeroDayBench: Evaluating LLM Agents on Unseen Zero-Day Vulnerabilities for Cyberdefense - 智源社区论文",
+                  "snippet": "‘SWE-bench:\nMulti-level\nReal-world\nGitHub\nIssues\nfor\nCode\nGeneration’\n(2023);\n‘CodeRepairBench:\nA\nBe",
+                  "task_id": "task_2"
+                }
+              ],
+              "evidence": "来源列表中无 arXiv 2403.05530 条目，报告自身也未附引用标记。"
+            }
+          }
+        ],
+        "resolved_count": 1,
+        "oscillation_detected": false,
+        "stop_reason": "no_change",
+        "raw_feedback": "[fact_check]\n{\n  \"score\": 6.5,\n  \"issues\": [\n    {\n      \"severity\": \"minor\",\n      \"description\": \"Qwen2.5-Coder-32B-Instruct 的 HumanEval 92.7% 和 MBPP 90.2% 分数仅来自二手来源 php.cn，未与一手技术报告（arXiv 2412.15115）核对，存在数值偏差或语境误读风险。\",\n      \"location\": \"可支持的事实第一点\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源 [s_7e29f1d5a43f] 为 php.cn 问答页面，非官方技术报告；报告自身也承认无一手来源。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"Qwen2.5 的 MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% 均来自二手来源 php.cn，且未指明具体模型尺寸（7B 还是更大），存在张冠李戴或数值不精确的风险。\",\n      \"location\": \"可支持的事实第二点\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源 [s_88aac318b106] 为 php.cn 问答页面，未提供原始 benchmark 表格或官方链接。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"Qwen 128K 上下文优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填等描述来自二手来源 php.cn，且该来源为“最佳实践”类文章，非官方技术文档，技术细节准确性存疑。\",\n      \"location\": \"可支持的事实第三点\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源 [s_8d90af8a31f0] 为 php.cn 问答页面，标题为“最佳实践”，非 Qwen 官方技术报告。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"Qwen2.5-Coder-1.5B 支持 32K 上下文来自 CSDN 博客，非官方来源，且该博客标题含“惊艳效果”等营销用语，可信度较低。\",\n      \"location\": \"可支持的事实第三点\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"来源 [s_cac22628dfa4] 为 CSDN 博客，非官方文档。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中”，但来源列表中确实包含 arXiv 相关条目（如 2602.05892、2602.15257），虽非目标论文，但“均未命中”的表述可能过于绝对，需确认检索范围。\",\n      \"location\": \"证据缺口第1点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源列表包含多个 arXiv 链接，但确无 2403.05530 或 2412.15115；表述基本属实，但“均未命中”可能忽略部分相关二手引用。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告将部分来源标记为“2026 年横评”并归为“时效污染”，但来源 [s_9d5d1b78683a] 标题含“Gemini 3.5 Flash”和“Claude 3.5 Haiku”，其中 Claude 3.5 属于指定版本范围，简单归为无关可能不准确。\",\n      \"location\": \"证据缺口第4点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_9d5d1b78683a] 标题为“Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南”，包含 Claude 3.5 相关内容。\"\n    }\n  ]\n}\n\n[hallucination]\n{\n  \"score\": 8.5,\n  \"issues\": [\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“Qwen2.5 综合/中文：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7%”，但来源 [s_88aac318b106] 的 snippet 仅提及“MMLU得分85+分居7B级第一，C-Eval以超83%准确率领跑开源模型，CMMLU达84.7%为中文模型最高分”，未明确这些分数对应 Qwen2.5 的哪个具体版本（如 7B、14B 等），报告未加限定地归因于“Qwen2.5 综合/中文”，存在轻微过度概括。\",\n      \"location\": \"可支持的事实 - Qwen2.5 综合/中文\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_88aac318b106] 未指明模型参数规模，报告未标注版本。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“Qwen 长上下文：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填”，来源 [s_8d90af8a31f0] 的 snippet 列出五步优化，但未明确这些优化是否特指 Qwen2.5 或 Qwen 系列的具体版本，报告将其归为“Qwen 长上下文”可能涵盖范围过宽。\",\n      \"location\": \"可支持的事实 - Qwen 长上下文\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_8d90af8a31f0] 标题为“千问Qwen 128K长上下文窗口管理的最佳实践”，未限定版本。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告在“证据缺口”中列举了多个技术路线（如 Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态），并称“均只能定性推断，无一手佐证”。这些技术描述本身未在 sources 中明确出现，但报告已明确标注为“定性推断”且指出无一手佐证，属于合理标注的推断，但推断内容本身仍缺乏来源支撑，可能对读者产生暗示。\",\n      \"location\": \"证据缺口 - 第3点\",\n      \"fix_type\": \"search\",\n      \"evidence\": \"sources 中无任何关于 GQA、MoE、Constitutional AI 等技术路线的直接描述。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型”，并引用 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 作为示例。经核对，这些来源确实涉及 Gemini 3.5、GPT-5.4 等，但报告未提供“多数结果”的统计依据，属于概括性陈述，略有过度归纳。\",\n      \"location\": \"证据缺口 - 第4点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"sources 中仅列出少数示例，未提供“多数”的量化证据。\"\n    }\n  ]\n}\n",
+        "content_before": "# 2024 主流大模型中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**无法完成所要求的四模型横向对比。** 检索结果中没有任何一手 benchmark 数据支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三类任务上的同表比较。以下仅列出可支持事实与明确缺口。\n\n## 可支持的事实（均为二手来源）\n- **Qwen2.5-Coder-32B-Instruct**：HumanEval 92.7%、MBPP 90.2%，被称开源最高分 [s_7e29f1d5a43f]。\n- **Qwen2.5 综合/中文**：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% [s_88aac318b106]。\n- **Qwen 长上下文**：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填 [s_8d90af8a31f0]；Qwen2.5-Coder-1.5B 支持 32K [s_cac22628dfa4]。\n\n## 证据缺口（关键）\n1. **无一手报告**：OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中。\n2. **无跨模型同表数值**：C-Eval/CMMLU、HumanEval/MBPP/LiveCodeBench、RULER/LongBench/NIAH 的四模型对比数据完全缺失。\n3. **技术路线差异无权威来源**：Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态，均只能定性推断，无一手佐证。\n4. **时效污染**：多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2]，与指定版本不匹配。\n\n## 建议下一步\n直接抓取 arXiv 2412.15115、2403.05530 全文 benchmark 表，以及 OpenAI/Anthropic 官方 model card PDF，获取一手对比数据后再做分析型结论。\n\n## 置信度\n**0.22** — 仅 Qwen2.5 系列若干分数有二手来源；四模型横向对比与技术路线分析均缺一手证据。\n\n## 关键来源\n- [s_7e29f1d5a43f] php.cn：Qwen2.5-Coder HumanEval/MBPP 分数（二手）\n- [s_88aac318b106] php.cn：Qwen2.5 MMLU/C-Eval/CMMLU（二手）\n- [s_8d90af8a31f0] php.cn：Qwen 128K 上下文优化（二手）\n- [s_cac22628dfa4] CSDN：Qwen2.5-Coder-1.5B 32K 上下文（二手）\n- [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 时效污染示例（2026 年横评）",
+        "content_after": "# 2024 主流大模型中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**无法完成所要求的四模型横向对比。** 检索结果中没有任何一手 benchmark 数据支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三类任务上的同表比较。以下仅列出可支持事实与明确缺口。\n\n## 可支持的事实（均为二手来源）\n- **Qwen2.5-Coder-32B-Instruct**：HumanEval 92.7%、MBPP 90.2%，被称开源最高分 [s_7e29f1d5a43f]。\n- **Qwen2.5 综合/中文**：MMLU 85+（7B 级第一）、C-Eval 超 83%、CMMLU 84.7% [s_88aac318b106]。\n- **Qwen 长上下文**：128K 窗口，优化涉及 KV Cache 分块、NTK-aware RoPE 缩放、滑动窗口+摘要回填 [s_8d90af8a31f0]；Qwen2.5-Coder-1.5B 支持 32K [s_cac22628dfa4]。\n\n## 证据缺口（关键）\n1. **无一手报告**：OpenAI GPT-4o System Card、Anthropic Claude 3.5 Model Card、Gemini 1.5 技术报告（arXiv 2403.05530）、Qwen2.5 技术报告（arXiv 2412.15115）均未命中。\n2. **无跨模型同表数值**：C-Eval/CMMLU、HumanEval/MBPP/LiveCodeBench、RULER/LongBench/NIAH 的四模型对比数据完全缺失。\n3. **技术路线差异无权威来源**：Qwen 的 GQA+RoPE 缩放+分块 KV Cache、Gemini 的 MoE+原生多模态长上下文、Claude 的 Constitutional AI、GPT-4o 的端到端多模态，均只能定性推断，无一手佐证。\n4. **时效污染**：多数结果为 2025–2026 年营销/横评博客，混入 Gemini 3.5、Qwen3、GPT-5.4 等无关新模型 [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2]，与指定版本不匹配。\n\n## 建议下一步\n直接抓取 arXiv 2412.15115、2403.05530 全文 benchmark 表，以及 OpenAI/Anthropic 官方 model card PDF，获取一手对比数据后再做分析型结论。\n\n## 置信度\n**0.22** — 仅 Qwen2.5 系列若干分数有二手来源；四模型横向对比与技术路线分析均缺一手证据。\n\n## 关键来源\n- [s_7e29f1d5a43f] php.cn：Qwen2.5-Coder HumanEval/MBPP 分数（二手）\n- [s_88aac318b106] php.cn：Qwen2.5 MMLU/C-Eval/CMMLU（二手）\n- [s_8d90af8a31f0] php.cn：Qwen 128K 上下文优化（二手）\n- [s_cac22628dfa4] CSDN：Qwen2.5-Coder-1.5B 32K 上下文（二手）\n- [s_9d5d1b78683a][s_0bb2ec1ac306][s_ddf72d7c38f2] 时效污染示例（2026 年横评）",
+        "before_version": "8a8bda6791001d16618219457e591844db7d3e0293457360d96de26278946cc6",
+        "after_version": "8a8bda6791001d16618219457e591844db7d3e0293457360d96de26278946cc6",
+        "score_before": 7.409090909090909,
+        "sources_after": [
+          {
+            "source_id": "s_911fe3a7fda6",
+            "url": "https://juejin.cn/post/7659706081526825011",
+            "title": "Claude API vs GPT-4o vs Gemini:一次面向工程落地的代码生成同题评测AI 代码生成模型的评测 - 掘金",
+            "snippet": "AI\n代码生成模型的评测,如果只看回答是否完整,很容易得出偏主观的结论。真正落到工程里,我们更关心的是:API\n调用后是否稳定、输出代码是否可运行、是否遵守项目约束、是否方便接入自动化流程。\n这次评测",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_9d5d1b78683a",
+            "url": "https://www.jianshu.com/p/6299ac7eb784",
+            "title": "Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南 - 简书",
+            "snippet": "现在的开发者在写代码、改\nBug\n或重构系统时,几乎离不开\nAI\n辅助。然而,在实际的开发工作流中,频繁调用高阶模型(如\nGPT-4o\n或\nClaude\n3.5\nSonnet)会导致\nAPI\n账单迅速",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_0bb2ec1ac306",
+            "url": "https://juejin.cn/post/7635372611216080938",
+            "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+            "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_6137cdd1eaf7",
+            "url": "https://www.partnershare.cn/information/ipfly-quan-qiu-dai-li/5836",
+            "title": "AI三强争霸:Claude、ChatGPT、Gemini的深度能力拆解",
+            "snippet": "企业AI选型,不是选\"最好\"的模型,而是选\"最合适\"的模型。Claude、GPT-4、Gemini各有所长,理解它们的差异,才能在具体场景中做出最优决策。核心能力对比矩阵维度Claude\n3.5\nSo",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_1a740a35f590",
+            "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+            "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+            "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_f25f8112462e",
+            "url": "https://www.jianshu.com/p/820ae9ff7116",
+            "title": "如何评价谷歌最新发布的 Gemini 3.5?它有哪些技术突破? - 简书",
+            "snippet": "谷歌最新发布的\nGemini\n3.5\n再次掀起了多模态与超长上下文的技术军备竞赛。特别是在超长视频解析、海量代码库理解等任务上,Gemini\n3.5\n展示了其独特的原生多模态架构优势。为了帮助开发者评",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_b2318c89c71b",
+            "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+            "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+            "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_60f5addb1060",
+            "url": "https://www.ithome.com/0/973/334.htm",
+            "title": "谷歌 Gemini 3.5 Pro 曝 200 万 Tokens 上下文,前端部分 AI 测试赶超 Claude Fable 5 - IT之家",
+            "snippet": "IT之家\n7\n月\n7\n日消息,消息源\n@HarshithLucky3\n昨日(7\n月\n6\n日)在\nX\n平台发布推文,爆料称谷歌计划\n7\n月\n17\n日发布\nGemini\n3.5\nPro\n模型,支持\n200",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_7e29f1d5a43f",
+            "url": "https://www.php.cn/faq/2527242.html",
+            "title": "千问Qwen2.5-Coder在代码生成基准测试HumanEval和MBPP上的得分是多少?-人工智能-PHP中文网",
+            "snippet": "Qwen2.5-Coder-32B-Instruct在HumanEval基准得分为92.7%,为开源模型最高;在MBPP基准得分为90.2%,同样刷新开源历史最佳。\n☞☞☞AI\n智能聊天,\n问答助手,",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_8d90af8a31f0",
+            "url": "https://www.php.cn/faq/2518468.html",
+            "title": "千问Qwen 128K长上下文窗口管理的最佳实践是什么?-人工智能-PHP中文网",
+            "snippet": "Qwen模型128K上下文优化需五步:一、显存感知型KV\nCache分块加载;二、RoPE缩放适配NTK-aware;三、滑动窗口+摘要回填;四、流式输出保活控制;五、多卡KV一致性校验。\n☞☞☞AI",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_c40d8ebb04f4",
+            "url": "https://blog.csdn.net/weixin_36303305/article/details/157056239",
+            "title": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果-CSDN博客",
+            "snippet": "Qwen3-14B长文本处理案例:万字技术白皮书摘要与关键点提取效果\n1.\n引言:长文本处理的挑战与机遇\n在信息爆炸的时代,处理万字以上的技术文档已成为许多专业人士的日常挑战。以一份典型的技术白皮书为",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_03c835319a63",
+            "url": "https://juejin.cn/post/7642013733049958426",
+            "title": "Win11 远程调 Qwen3.6-27B:吞吐几乎不掉,C-Eval 从 2.7% 测到 80%Win11 远程调 Q - 掘金",
+            "snippet": "Win11\n远程调\nQwen3.6-27B\n吞吐几乎不掉,C-Eval\n从\n2.7%\n测到\n80%\n系列:AI实战落地\n·\n推理基座(第\n2\n篇)\n上篇:双\nA100\n部署与\nvLLM\n两轮调优\nGi",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_2eb1fffadcbb",
+            "url": "https://k.sina.com.cn/article_7857201856_1d45362c001902j4ue.html",
+            "title": "国产AI三强争霸:2025年文心大模型4.5、DeepSeek、Qwen3深度测评|Qwen 3|ERNIE|注意力机制|文本|场景_新浪新闻",
+            "snippet": "1.\n文心大模型4.5:全场景智能的进化\n文心大模型4.5采用“混合专家架构(MoE)+动态路由”技术,参数规模达1.2万亿,支持128K长文本输入。其核心优势在于多模态交互能力:通过整合视觉、语音、",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_e27e3d3520ac",
+            "url": "https://juejin.cn/post/7687543954779045930",
+            "title": "qwen3.5-9b-上下文指南qwen3.5:9b 上下文(Context)实战指南 一、先分清三个「上下文」数字 数 - 掘金",
+            "snippet": "qwen3.5:9b\n上下文(Context)实战指南\n本机实测:Ollama\n0.34.2\n·\nRTX\n5060\nTi\n16GB\n·\nWindows\n全部数字为实测值,非文档推测。\n一、先分清三个「",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_ff574e60d702",
+            "url": "https://browser.geekbench.com/v6/cpu/16489349",
+            "title": "AZW EQ\n - Geekbench",
+            "snippet": "AZW EQ\nSingle-Core Score1290\nMulti-Core Score3160\nGeekbench 6.5.0 for Linux AVX2\nResult Information\n",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_cac22628dfa4",
+            "url": "https://blog.csdn.net/weixin_35755562/article/details/156433980",
+            "title": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑-CSDN博客",
+            "snippet": "Qwen2.5-Coder-1.5B惊艳效果:32K上下文精准定位10年前遗留代码逻辑\n1.\n模型能力概览\nQwen2.5-Coder-1.5B是面向代码处理的专业大语言模型,属于Qwen系列的重要分",
+            "task_id": "task_1"
+          },
+          {
+            "source_id": "s_ddf72d7c38f2",
+            "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+            "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+            "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_88aac318b106",
+            "url": "https://www.php.cn/faq/2514819.html",
+            "title": "千问Qwen2.5在MMLU和C-Eval等综合评测榜单上排名第几?对比GPT-4和Claude-人工智能-PHP中文网",
+            "snippet": "Qwen2.5在MMLU、C-Eval、CMMLU三大权威榜单中均位居开源模型前列:MMLU得分85+分居7B级第一,C-Eval以超83%准确率领跑开源模型,CMMLU达84.7%为中文模型最高分之",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_89d1ada20e15",
+            "url": "https://m.163.com/dy/article/KT3KI1HA05561FZR.html",
+            "title": "2026年五大Gemini替代方案:谁更便宜、更快、更灵活|gemini|代码|替代方案|调用_手机网易网",
+            "snippet": "Google\nGemini系列模型确实很强,但并非所有场景都适用。有时候你需要更强的推理能力,有时候成本才是首要考量,还有时候你只是想避免被单一厂商绑定。这篇文章整理了五个最值得考虑的Gemini\nA",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_1e6317c10928",
+            "url": "https://evomap.ai/bounty/cm990221f093fb9a1f2e2d51a",
+            "title": "What are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging? | EvoMap",
+            "snippet": "Bounty Detail\nWhat are the performance benchmarks for Claude 3.5 Sonnet vs GPT-4o on debugging?\nView",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_6833d90da59c",
+            "url": "https://juejin.cn/post/7652284932753408006",
+            "title": "# Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8:三大模型性能交叉对比报告做模型选型时,最 - 掘金",
+            "snippet": "做模型选型时,最让人头疼的不是“哪个模型最强”,而是“多花30%成本换8%质量提升,这账怎么算”。三大顶级模型各有各的甜点区,也各有各的软肋。这份报告从架构差异、基准测试、成本效率、幻觉控制四个维度,",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_c9ca0bff5a2e",
+            "url": "https://news.qq.com/rain/a/20260224A01TEE00",
+            "title": "顶级模型Claude Sonnet 4.6与Gemini 3.1 Pro也来庆新春_腾讯新闻",
+            "snippet": "专注AIGC领域的专业社区,关注微软&OpenAI、百度文心一言、讯飞星火等大语言模型(LLM)的发展和应用落地,聚焦LLM的市场研究和AIGC开发者生态,欢迎关注!两个顶级闭源模型Claude\nSo",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_ae658e81b914",
+            "url": "https://arxiv.org/abs/2602.05892",
+            "title": "[2602.05892] ContextBench: A Benchmark for Context Retrieval in Coding Agents – arxiv",
+            "snippet": "Computer Science > Machine Learning\narXiv:2602.05892(cs)\n[Submitted on 5 Feb 2026 (v1), last revised",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_4300e28a2eeb",
+            "url": "https://hub.baai.ac.cn/paper/4d7bd3ca-40ef-450c-acb6-9760bd085a24",
+            "title": "RoadmapBench: Evaluating Long-Horizon Agentic Software Development Across Version Upgrades - 智源社区论文",
+            "snippet": "CodeContests\n(2021),\nHumanEval\n(2021),\nMBPP\n(2022),\nCodeXGLUE\n(2021),\nSWE-bench\n(2023),\nRepoAgent\n(2",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_45c87a4853b6",
+            "url": "https://arxiv.org/abs/2602.15257",
+            "title": "[2602.15257] How to Train Your Long-Context Visual Document Model – arxiv",
+            "snippet": "Computer Science > Computer Vision and Pattern Recognition\narXiv:2602.15257(cs)\n[Submitted on 16 Feb",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_9c80ad3b3bc2",
+            "url": "https://evomap.ai/bounty/cmee5223c9d1e8d3bad88c26c",
+            "title": "Context Window Management: 处理长文本输入 | EvoMap",
+            "snippet": "Bounty Detail\nContext Window Management: 处理长文本输入\nView bounty details, signals, and matched solutions",
+            "task_id": "task_2"
+          },
+          {
+            "source_id": "s_037c99de6ea1",
+            "url": "https://hub.baai.ac.cn/paper/015f0f73-ebbd-4fff-a763-bd573c095482",
+            "title": "ZeroDayBench: Evaluating LLM Agents on Unseen Zero-Day Vulnerabilities for Cyberdefense - 智源社区论文",
+            "snippet": "‘SWE-bench:\nMulti-level\nReal-world\nGitHub\nIssues\nfor\nCode\nGeneration’\n(2023);\n‘CodeRepairBench:\nA\nBe",
+            "task_id": "task_2"
+          }
+        ],
+        "model_calls": 5,
+        "candidate_published": true
+      }
+    ],
+    "review_status": "completed"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 2.531
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "state": "collecting",
+      "elapsed": 12.297
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 12.297
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 16.594
+    },
+    {
+      "state": "done",
+      "elapsed": 38.641
+    }
+  ],
+  "elapsed_seconds": 42.04699999999866,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 301,
+        "prompt_tokens": 627,
+        "total_tokens": 928,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 243
+      },
+      "elapsed_seconds": 2.5160000000032596,
+      "finish_reason": "stop",
+      "content_chars": 1018,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 148,
+        "prompt_tokens": 1299,
+        "total_tokens": 1447,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1299
+      },
+      "elapsed_seconds": 1.1880000000019209,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 428,
+        "prompt_tokens": 3567,
+        "total_tokens": 3995,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 2159
+      },
+      "elapsed_seconds": 3.187000000005355,
+      "finish_reason": "stop",
+      "content_chars": 852,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 168,
+        "prompt_tokens": 1703,
+        "total_tokens": 1871,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 935
+      },
+      "elapsed_seconds": 1.5309999999954016,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 437,
+        "prompt_tokens": 3450,
+        "total_tokens": 3887,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1792
+        },
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 1658
+      },
+      "elapsed_seconds": 2.6559999999954016,
+      "finish_reason": "stop",
+      "content_chars": 842,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 830,
+        "prompt_tokens": 4853,
+        "total_tokens": 5683,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4853
+      },
+      "elapsed_seconds": 4.297000000005937,
+      "finish_reason": "stop",
+      "content_chars": 1464,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 949,
+        "prompt_tokens": 4454,
+        "total_tokens": 5403,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4198
+      },
+      "elapsed_seconds": 5.0939999999973224,
+      "finish_reason": "stop",
+      "content_chars": 2102,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 732,
+        "prompt_tokens": 4413,
+        "total_tokens": 5145,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4157
+      },
+      "elapsed_seconds": 4.0460000000020955,
+      "finish_reason": "stop",
+      "content_chars": 1465,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 879,
+        "prompt_tokens": 4239,
+        "total_tokens": 5118,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4239
+      },
+      "elapsed_seconds": 3.485000000000582,
+      "finish_reason": "stop",
+      "content_chars": 1533,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 933,
+        "prompt_tokens": 4454,
+        "total_tokens": 5387,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 230
+      },
+      "elapsed_seconds": 4.827999999994063,
+      "finish_reason": "stop",
+      "content_chars": 2035,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 811,
+        "prompt_tokens": 4413,
+        "total_tokens": 5224,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4224
+        },
+        "prompt_cache_hit_tokens": 4224,
+        "prompt_cache_miss_tokens": 189
+      },
+      "elapsed_seconds": 4.594000000004598,
+      "finish_reason": "stop",
+      "content_chars": 1628,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.375
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.20299999999406282
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17200000000593718
+    }
+  ],
+  "source_fingerprint": "51620987e715965fee8dca190df5d65cfdd67d4983759f6af2b20760eb57011a"
+}

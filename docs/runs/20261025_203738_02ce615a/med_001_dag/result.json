@@ -1,0 +1,432 @@
+{
+  "question_id": "med_001",
+  "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+    "content": "\n\nIncomplete tasks: task_2",
+    "sources": [
+      {
+        "source_id": "s_472738d89710",
+        "url": "https://www.sohu.com/a/811130375_121956423",
+        "title": "mRNA肿瘤疫苗:2025年扭转癌症治疗的关键一年?_技术_trans_朋友",
+        "snippet": "中信证券的最新研报指出,2025年可能成为mRNA肿瘤疫苗商业化的元年。这一消息让人心潮澎湃,也同时引发了我们对于其实际应用与安全性的深思。 癌症,作为全球范围内的主要健康问题之一,导致了数百万人的早",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5c3a644d2e16",
+        "url": "https://www.sohu.com/a/811130619_121956423",
+        "title": "2025年,mRNA肿瘤疫苗能否改变治疗格局?_癌症_未来_技术",
+        "snippet": "根据中信证券的最新研报,2025年可能会被认为是mRNA肿瘤疫苗的商业化元年,这一点引发了广泛关注和讨论。简单来说,它利用了mRNA技术让我们的免疫系统识别并攻击癌细胞。这种疫苗在临床试验中展现出比传",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_bb2b542d9fb5",
+        "url": "https://m.sohu.com/a/809974497_121626808/?pvid=000115_3w_a",
+        "title": "RNA创新：癌症疫苗与靶向治疗丨Oncology Research 2024年第十期综述精选",
+        "snippet": "在癌症研究领域,最新的科学进展不断为疾病的诊断和治疗带来新的希望。近年来,随着技术的飞速发展,许多前沿研究揭示了癌症发生机制的深层次原理,并探索了新型治疗手段。本文将为您推荐来自Oncology Re",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_a47dff22ecdd",
+        "url": "https://www.toutiao.com/article/7295686992778543616/",
+        "title": "探索癌症新疗法:mRNA疫苗崛起,早筛站上风口 - 今日头条",
+        "snippet": "图片来源:图虫创意 自1884年肿瘤根治手术诞生以来,人类已经与癌症不懈战斗超过130年。从癌症治疗的三大基石,即手术、化疗、放疗的不断进步,到“生物导弹”靶向药物的迅猛发展,再到免疫疗法的兴起,新药",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_7f427fd44058",
+        "url": "http://www.cn-healthcare.com/articlewm/20230111/content-1497127.html",
+        "title": "mRNA新时代:肿瘤疫苗的研发现状、趋势与挑战mRNA疫苗肿瘤研发细胞癌症新冠抗原-健康界",
+        "snippet": "评论 药研网【公众号】 A- A+ 自1996年首个mRNA肿瘤疫苗的应用研究到现在,mRNA的结构、稳定性及递送方式已经得到了很大的优化,但目前mRNA领域仍然面临免疫原性、疗效及生产技术上的挑",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_d1f697a5be3a",
+        "url": "https://www.chinanews.com.cn/cj/2023/03-06/9966277.shtml",
+        "title": "治疗癌症获新进展,mRNA疫苗真的有戏了?-中新网",
+        "snippet": "首个mRNA肿瘤疫苗获“突破性疗法”认定意味着什么? 中国新闻周刊记者/彭丹妮 发于2023.3.6总第1082期《中国新闻周刊》杂志 在不久的将来,人类或许会使用疫苗来治疗癌症这一古老而棘手的疾病。",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_2da0be08dbbc",
+        "url": "https://read.cnki.net/web/Journal/Article/SMHX202409022.html",
+        "title": "癌症mRNA-LNP疫苗的研究进展-生命的化学2024年09期-知网阅读",
+        "snippet": "癌症mRNA疫苗凭借其良好的安全性、强大的免疫原性、高效的研发流程及较短的生产周期,在癌症治疗领域展现出无限潜力。它通过激活固有免疫、细胞免疫及体液免疫,诱发了强烈的抗肿瘤免疫反应。近年来,mRNA疫",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_44ea1f1063d2",
+        "url": "https://www.zhihuiya.com/news/info_2264.html",
+        "title": "mRNA疫苗:变局求新 且行且进",
+        "snippet": "2023 年 4 月,在美国癌症研究协会年会( American Association for Cancer Research AACR )上, Moderna 和默沙东公布了关于 mRNA-415",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_0ad35d3c055f",
+        "url": "https://m.sohu.com/a/619011882_100023056/?pvid=000115_3w_a",
+        "title": "mRNA疫苗抗癌疗效首获验证，晚期黑色素瘤复发死亡风险降44%",
+        "snippet": "黑色素瘤是一种致命的皮肤癌,其特征是在正常皮肤或原有的痣上,色素生成细胞的生长失控,造成皮肤上出现不规则扁平或隆起的斑块,伴有颜色不匀的斑点或坚实的黑灰色肿块。\n在过去几十年中,黑色素瘤的发病率一直在",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_68283b9cbcef",
+        "url": "https://m.sohu.com/a/617914258_120086943/?pvid=000115_3w_a",
+        "title": "mRNA疫苗抗癌疗效首获验证，晚期黑色素瘤复发死亡风险降44%",
+        "snippet": "黑色素瘤是一种致命的皮肤癌,其特征是在正常皮肤或原有的痣上,色素生成细胞的生长失控,造成皮肤上出现不规则扁平或隆起的斑块,伴有颜色不匀的斑点或坚实的黑灰色肿块。\n在过去几十年中,黑色素瘤的发病率一直在",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_7e891e46e3a1",
+        "url": "https://www.globecancer.com/azzx/show.php?itemid=16818",
+        "title": "肿瘤mRNA疫苗mRNA-4157/V940让黑色素癌复发或死亡风险下降44%_全球肿瘤医生网",
+        "snippet": "肿瘤mRNA疫苗mRNA-4157/V940让黑色素癌复发或死亡风险下降44%\n获突破性疗法认定!mRNA疫苗让黑色素癌复发或死亡风险下降44%\n在2023年ASCO会议上,Moderna和MSD公布",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5371a7e65369",
+        "url": "https://bydrug.pharmcube.com/news/detail/4e622acd33ee3f0dc65be633c12f5b36",
+        "title": "mRNA肿瘤疫苗迈入黄金时代:Moderna五年数据定调,云顶新耀领跑中国创新医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "在当前全球免疫治疗领域,mRNA肿瘤疫苗的进展正成为推动癌症治疗创新的重要力量。\n近日,默沙东与Moderna联合发布的mRNA-4157(V940)在黑色素瘤的五年随访数据,为mRNA肿瘤疫苗的临床",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_7b6d5b459b93",
+        "url": "https://www.sohu.com/a/745668693_120461465",
+        "title": "获突破性疗法认定!mRNA肿瘤疫苗让癌症转移/死亡风险降低62%!_患者_治疗_试验",
+        "snippet": "远端转移/死亡风险降低62%! 在KEYNOTE-942研究中,数据显示,联合研发的基于患者肿瘤DNA的个体化治疗mRNA-4157/V940疫苗, 将高危III/IV期黑色素瘤患者的复发或死亡风险降",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_c8f136cdcf36",
+        "url": "https://medfind.link/info/5623",
+        "title": "最新数据显示mRNA疫苗在癌症治疗中的突破性进展 - MedFind",
+        "snippet": "近日,美国Moderna公司与默沙东公司联合公布了其合作开发的个性化癌症疫苗mRNA-4157(V940)的新研究进展:mRNA-4157(V940)疫苗与PD-1抑制剂KEYTRUDA联用,在肿瘤完",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_4e602f3f69e6",
+        "url": "https://www.163.com/dy/article/J3RQDB790511BLFD.html",
+        "title": "新型疫苗/现有药物组合可将黑色素瘤复发风险降低49%治疗免疫系统默克公司靶向化疗药物_网易订阅",
+        "snippet": "将新型黑色素瘤疫苗与现有抗癌药物相结合的人体试验结果表明,在三年的时间里,联合治疗将黑色素瘤复发的风险降低了 49%,扩散的风险降低了 62%。根据黑色素瘤研究联盟(Melanoma Research",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_eb3caa078dc0",
+        "url": "https://xueqiu.com/1063552865/335793307",
+        "title": "$Moderna(MRNA)$ 莫德纳的mRNA-4157疫苗在黑色素瘤治疗中展现了里程碑式的潜力,其与Keytruda... - 雪球",
+        "snippet": "发布于:2025-05-20\n23:26\niPhone转发:1回复:1喜欢:0$Moderna(MRNA)$\n莫德纳的mRNA-4157疫苗在黑色素瘤治疗中展现了里程碑式的潜力,其与Keytruda的",
+        "task_id": "task_1"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 4,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "partial",
+    "incomplete_tasks": [
+      "task_2"
+    ],
+    "run_id": "d68c075a70f54954a45bc73b1afcc4f4",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 3.094
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "error": "RuntimeError",
+      "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 13.407
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 25.313
+    },
+    {
+      "review": "timeout; original report retained"
+    },
+    {
+      "state": "done",
+      "elapsed": 90.0
+    }
+  ],
+  "elapsed_seconds": 90.21899999999732,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 539,
+        "prompt_tokens": 622,
+        "total_tokens": 1161,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 329,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 622
+      },
+      "elapsed_seconds": 3.0939999999973224
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 146,
+        "prompt_tokens": 1265,
+        "total_tokens": 1411,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 497
+      },
+      "elapsed_seconds": 1.2340000000040163
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1060,
+        "prompt_tokens": 3374,
+        "total_tokens": 4434,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 211,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 1966
+      },
+      "elapsed_seconds": 8.593999999997322
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 3214,
+        "total_tokens": 4814,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1600,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3214
+      },
+      "elapsed_seconds": 11.906000000002678
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1050,
+        "prompt_tokens": 2083,
+        "total_tokens": 3133,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 897,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1827
+      },
+      "elapsed_seconds": 7.796999999998661
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1418,
+        "prompt_tokens": 2042,
+        "total_tokens": 3460,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1137,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1786
+      },
+      "elapsed_seconds": 10.625
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1791,
+        "prompt_tokens": 900,
+        "total_tokens": 2691,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 847,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 900
+      },
+      "elapsed_seconds": 11.296999999998661
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 2756,
+        "total_tokens": 3780,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1024,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 2756
+      },
+      "elapsed_seconds": 7.188000000001921
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 3428,
+        "prompt_tokens": 868,
+        "total_tokens": 4296,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1463,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 868
+      },
+      "elapsed_seconds": 20.984000000004016
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "failed",
+      "usage": null,
+      "elapsed_seconds": 6.2039999999979045,
+      "error_type": "APITimeoutError"
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3289999999979045
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.15600000000267755
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3899999999994179
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.35899999999674037
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

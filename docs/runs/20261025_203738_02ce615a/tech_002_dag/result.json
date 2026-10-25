@@ -1,0 +1,453 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "\n\nIncomplete tasks: task_2",
+    "sources": [
+      {
+        "source_id": "s_7a74c2fd6f3b",
+        "url": "https://www.sohu.com/a/849637380_121798711",
+        "title": "寒武纪崩盘:AI芯片未来何去何从?_行业_公司_技术",
+        "snippet": "当前,AI芯片市场竞争已经愈发激烈,诸如英伟达、AMD等国际巨头在其技术和市场份额上占据优势,寒武纪在产品性能和研发速度上需要更大突破。根据分析,寒武纪需要找到自己的差异化竞争策略,例如聚焦特定行业应",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_947b4a3f0d39",
+        "url": "https://caifuhao.eastmoney.com/news/20260810094041374098950",
+        "title": "寒武纪在国产竞品里面表现咋样?_财富号_东方财富网",
+        "snippet": "国产AI芯片第二梯队绝对龙头,仅次于华为昇腾,领先海光/昆仑芯/壁仞/沐曦等。\n一、整体地位(2026年)\n-\n梯队划分\n-\n第一梯队:华为昇腾(全栈+集群+生态+产能碾压)\n-\n第二梯队:寒武纪(商",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_dbe23d84369a",
+        "url": "https://m.sohu.com/a/847215843_116132/?pvid=000115_3w_a",
+        "title": "寒武纪VS海光信息_芯片_市场_华为",
+        "snippet": "据机构预测,英伟达当前在推理市场市占率为80%,在2028年有望下降至50%。AI芯片竞争格局生变,而资本市场当前极为亢奋,给予英伟达很高估值,对于业绩增长也非常乐观—市场主流预期英伟达2025年营收",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_396bb868b852",
+        "url": "https://xueqiu.com/1785441490/314947700?md5__1038=YqGxnDu7qCq7uDGqGNReeqkgYY54AItLdx",
+        "title": "华为AI芯片在市场占有率方面的情况如下",
+        "snippet": ":\n• 国内市场 : 华为 、 海光 、 寒武纪 三家企业拿下了90%的市场份额 , 成为行业领头羊 。 在2022年中国AI加速卡出货量约为109万张中 , 华为市占率为10% 。 此外 , 华为昇",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_bfca0d71b432",
+        "url": "http://finance.sina.com.cn/wm/2025-10-03/doc-infsqtkr9259375.shtml",
+        "title": "寒武纪“封王”,中国AI芯片“反攻”开始了|芯片_新浪财经_新浪网",
+        "snippet": "当下,全球资本市场正在AI领域上演一场波澜壮阔的Capex(资本支出)交易盛宴。科技巨头们纷纷追加投资AI算力,而AI芯片作为算力的核心基石,正迎来前所未有的景气周期。在全球科技竞争日益演变为算力竞争",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_71a7b2f7b745",
+        "url": "https://www.tgb.cn/a/2r6gSvK9wQ7",
+        "title": "Ai芯片国内排序_卓礼传_ 淘股吧",
+        "snippet": "一、国内主流推理芯片厂商(按梯队+核心产品)第一梯队(头部、大规模量产/亿级订单)1.\n华为昇腾(绝对龙头)◦\n核心推理产品:昇腾910B/C、950PR(推理专用)、950DT(2026Q4);主打",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_546856fa8f96",
+        "url": "https://caifuhao.eastmoney.com/news/20240305081154188632830",
+        "title": "Ai芯片主战场,从训练到推理AI需求仍处于高速增长阶段,英伟达财报业绩指引高增,_财富号_东方财富网",
+        "snippet": "AI需求仍处于高速增长阶段,英伟达财报业绩指引高增,#推理侧需求占比超预期达40%,进一步夯实 25年持续增长基础。 与Al训练相比,#AI推理与用户终端场景需求更为紧密,训练后的大规模模型需通过AI",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_1671b412a949",
+        "url": "https://m.chinabgao.com/finance/comments/58471.html",
+        "title": "2025年GPU发展趋势：AI加速器市场将迎来重大变革",
+        "snippet": "中国报告大厅网讯,人工智能的快速发展正在重塑技术格局,GPU作为AI加速器的核心组件,其市场地位和发展趋势备受关注。随着大模型技术的不断进步,GPU与ASIC的竞争格局也在发生深刻变化,这将直接影响未",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_a7d6d3e52bde",
+        "url": "https://www.sohu.com/a/894439841_121924584",
+        "title": "深度解析:英伟达AI芯片市场领先的技术革新与竞争格局变化",
+        "snippet": "在2025年,人工智能(AI)技术的快速发展不断推动半导体行业的变革,作为行业领头羊的英伟达(NVIDIA)依托其深厚的技术积累和创新能力,持续巩固在AI芯片市场的领先地位。近年来,英伟达在数据中心A",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_367b6260f8a0",
+        "url": "https://new.qq.com/rain/a/20250505A06D4Y00",
+        "title": "AI服务器市场分析,GPU和ASIC谁的份额更高?",
+        "snippet": "市场整体规模根据IDC最近出的2025年中国人工智能计算力发展评估报告中的内容,2024年全球人工智能服务器市场规模预计为1,251亿美元,2025年将增至1,587亿美元,2028年有望达到2,22",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_fd002a3d0252",
+        "url": "https://new.qq.com/rain/a/20250506A0279E00",
+        "title": "AI服务器市场分析,GPU和ASIC谁的份额更高?",
+        "snippet": "市场整体规模      根据IDC最近出的2025年中国人工智能计算力发展评估报告中的内容,2024年全球人工智能服务器市场规模预计为1,251亿美元,2025年将增至1,587亿美元,2028年有望",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_adb3d709f597",
+        "url": "https://blog.csdn.net/TechEdu2026/article/details/165756985",
+        "title": "[人工智能]2026人工智能与大语言模型芯片家族参考V02:华为、Nvidia、AMD、Intel、Qualcomm _tf32 华为-CSDN博客",
+        "snippet": "2026\n人工智能与大语言模型芯片家族参考:Nvidia、AMD、Intel、Qualcomm\n与华为\n多厂商数据中心、边缘与终端\nAI\n加速器概览\n免责声明:本文档为高层次、示意性的多厂商概览。产品",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_de352c405cef",
+        "url": "https://m.163.com/dy/article/KPJ5MSQ30514847E.html",
+        "title": "2025年中国AI芯片市场:华为20%、海光2%|amd|中国|海光|知名企业|英伟达_手机网易网",
+        "snippet": "C114讯\n4月2日消息(南山)据路透社报道,根据市场研究机构IDC的最新报告,2025年中国云端AI加速器市场中,中国本土芯片厂商已占据约41%的份额。英伟达仍保持市场第一的位置,但其在中国市场的领",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_267a7c3da30f",
+        "url": "https://www.iim.net.cn/2226/view-25756-1.html",
+        "title": "AI芯片在2025年发展态势_IIM信息 ▂ ▅ ▇",
+        "snippet": "随着人工智能(AI)技术的迅速发展,AI芯片作为支撑AI计算的核心硬件,日益成为科技行业中的关键领域之一。无论是深度学习、计算机视觉、语音识别还是自然语言处理,AI芯片的性能都直接决定了AI应用的速度",
+        "task_id": "task_1"
+      },
+      {
+        "source_id": "s_5387a902ef0d",
+        "url": "https://www.digitimes.com/news/a20260402VL207/china-ai-server-accelerator-chips-nvidia.html",
+        "title": "Chinese companies capture nearly 41% of domestic AI accelerator server market",
+        "snippet": "China's\nAI\naccelerator\nserver\nmarket\nis\ngradually\nshifting\naway\nfrom\nusing\nNvidia\nchips\nto\ndomestic\n",
+        "task_id": "task_1"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 5,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "partial",
+    "incomplete_tasks": [
+      "task_2"
+    ],
+    "run_id": "6c12c0a7d45f4f518c5f3afbadc0d7c2",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 4.141
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "error": "RuntimeError",
+      "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 14.672
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 26.422
+    },
+    {
+      "review": "timeout; original report retained"
+    },
+    {
+      "state": "done",
+      "elapsed": 90.0
+    }
+  ],
+  "elapsed_seconds": 90.17199999999866,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 756,
+        "prompt_tokens": 629,
+        "total_tokens": 1385,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 411,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 629
+      },
+      "elapsed_seconds": 4.14100000000326
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 154,
+        "prompt_tokens": 1283,
+        "total_tokens": 1437,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 515
+      },
+      "elapsed_seconds": 1.1710000000020955
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1200,
+        "prompt_tokens": 3276,
+        "total_tokens": 4476,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 389,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 1868
+      },
+      "elapsed_seconds": 8.875
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 3036,
+        "total_tokens": 4636,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1600,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3036
+      },
+      "elapsed_seconds": 11.75
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1240,
+        "prompt_tokens": 2089,
+        "total_tokens": 3329,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 250,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1833
+      },
+      "elapsed_seconds": 7.171999999998661
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1452,
+        "prompt_tokens": 2048,
+        "total_tokens": 3500,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1332,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 1792
+      },
+      "elapsed_seconds": 10.046999999998661
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 2880,
+        "prompt_tokens": 786,
+        "total_tokens": 3666,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 885,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 786
+      },
+      "elapsed_seconds": 17.64100000000326
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 3601,
+        "total_tokens": 4625,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1024,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3601
+      },
+      "elapsed_seconds": 6.9210000000020955
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 2033,
+        "prompt_tokens": 841,
+        "total_tokens": 2874,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1157,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 841
+      },
+      "elapsed_seconds": 11.328000000001339
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1024,
+        "prompt_tokens": 3406,
+        "total_tokens": 4430,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1024,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3406
+      },
+      "elapsed_seconds": 6.953000000001339
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "failed",
+      "usage": null,
+      "elapsed_seconds": 2.6090000000040163,
+      "error_type": "APITimeoutError"
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3289999999979045
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.15600000000267755
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.35899999999674037
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.34399999999732245
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3129999999946449
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

@@ -1,0 +1,2516 @@
+[
+  {
+    "question_id": "tech_001",
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "system": "fixed",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+      "content": "",
+      "sources": [
+        {
+          "source_id": "s_ac35c3c5f5e6",
+          "url": "https://www.cnblogs.com/6028dog/p/19586071",
+          "title": "2025年主流大语言模型深度对比:GPT-4o、Claude 3.7、DeepSeek-R1 与 Qwen2.5 - 让晚风 - 博客园",
+          "snippet": "随着人工智能技术的飞速发展,2025年的大模型市场呈现出百花齐放的态势。从硅谷的\nOpenAI、Anthropic\n到国内的深度求索(DeepSeek)和阿里巴巴(通义千问),各大厂商纷纷推出了具备极",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_0bb2ec1ac306",
+          "url": "https://juejin.cn/post/7635372611216080938",
+          "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+          "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_b61fc51b2777",
+          "url": "https://k.sina.com.cn/article_7857201856_1d45362c001904q1fy.html",
+          "title": "2025年主流大语言模型深度对比:GPT-4o、Claude 3.7、DeepSeek-R1 与 Qwen2.5|Anthropic|OpenAI|深度求索|阿里巴巴|大模型_新浪新闻",
+          "snippet": "随着人工智能技术的飞速发展,2025年的大模型市场呈现出百花齐放的态势。从硅谷的\nOpenAI、Anthropic\n到国内的深度求索(DeepSeek)和阿里巴巴(通义千问),各大厂商纷纷推出了具备极",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_b2318c89c71b",
+          "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+          "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+          "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_ddf72d7c38f2",
+          "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+          "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+          "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+          "task_id": "fixed_search"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 1,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "completed",
+      "incomplete_tasks": [],
+      "run_id": "",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [],
+    "elapsed_seconds": 15.344000000004598,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 1762,
+          "total_tokens": 3362,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1600,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1762
+        },
+        "elapsed_seconds": 11.43800000000192
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.31199999999807915
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "tech_001",
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+      "content": "# 2024 年主流大语言模型对比分析：GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5\n\n## 0. 证据基础与方法说明（请先阅读）\n\n本报告所依据的检索结果存在明显的**时效错乱**问题，这一点必须在结论之前说明，否则会误导读者对结论可信度的判断：\n\n- 两次检索返回的中文内容大多是关于 **Qwen3.5、GPT-5.x、Claude 4.x、Gemini 3.x** 等更新世代模型的二手评测与营销性文章，例如“Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8”交叉对比 [s_6833d90da59c]、“2026 年最新 Claude、GPT、Gemini 场景选型对比表” [s_ddf72d7c38f2]、“2026 年 AI 模型选择指南” [s_a0b3ab3c783a]、“Qwen3.5 综合性能” [s_d1ec5c6c4bbc] 等。这些材料**不能**直接用于回答 2024 年四款模型的问题。\n- 只有少数条目直接触及本任务的对象：Qwen2.5 与 GPT-4 在数学推理上的机制差异 [s_47bc8d2adbec]、Qwen2.5 与 Qwen3 的架构与训练范式差异 [s_6ce17c7250ce]、上下文长度竞争与 MoE 主流化趋势 [s_19f7c080f077]、Claude 3.5 Sonnet 的能力矩阵定位 [s_6137cdd1eaf7]、三家国外模型的通用技术细节与选型 [s_b2318c89c71b]、含 Qwen 在内的 API 供应商横向评测 [s_1a740a35",
+      "sources": [
+        {
+          "source_id": "s_6833d90da59c",
+          "url": "https://juejin.cn/post/7652284932753408006",
+          "title": "# Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8:三大模型性能交叉对比报告做模型选型时,最 - 掘金",
+          "snippet": "做模型选型时,最让人头疼的不是“哪个模型最强”,而是“多花30%成本换8%质量提升,这账怎么算”。三大顶级模型各有各的甜点区,也各有各的软肋。这份报告从架构差异、基准测试、成本效率、幻觉控制四个维度,",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_ddf72d7c38f2",
+          "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+          "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+          "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_6137cdd1eaf7",
+          "url": "https://www.partnershare.cn/information/ipfly-quan-qiu-dai-li/5836",
+          "title": "AI三强争霸:Claude、ChatGPT、Gemini的深度能力拆解",
+          "snippet": "企业AI选型,不是选\"最好\"的模型,而是选\"最合适\"的模型。Claude、GPT-4、Gemini各有所长,理解它们的差异,才能在具体场景中做出最优决策。核心能力对比矩阵维度Claude\n3.5\nSo",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_b2318c89c71b",
+          "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+          "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+          "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_ce64182666e2",
+          "url": "https://juejin.cn/post/7616666752520847360",
+          "title": "2026年国内实测:GPT vs Claude vs Gemini,哪个更强?附镜像站教程对于国内AI开发者和重度用户来 - 掘金",
+          "snippet": "对于国内AI开发者和重度用户来说,如何同时体验GPT-4、Claude\n3、Gemini这三大顶尖模型,并对比它们的中文能力,一直是个难题。\n目前国内可直接访问的聚合平台RskAi(ai.rsk.cn",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_a0b3ab3c783a",
+          "url": "https://k.sina.com.cn/article_7879848900_1d5acf3c401902ww1m.html?from=tech",
+          "title": "2026年AI模型选择指南:一站式体验三大旗舰模型|Gemini 3.1 Pro|Anthropic|Claude 4|GPT-5.4|Google_新浪新闻",
+          "snippet": "2026年三大顶级AI模型实战对比:Gemini\n3.1\nPro\nvs\nGPT-5.4\nvs\nClaude\n4.6\n对于需要在实际项目中选型AI模型的技术决策者、开发者与产品经理而言,2026年Goo",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_9d5d1b78683a",
+          "url": "https://www.jianshu.com/p/6299ac7eb784",
+          "title": "Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南 - 简书",
+          "snippet": "现在的开发者在写代码、改\nBug\n或重构系统时,几乎离不开\nAI\n辅助。然而,在实际的开发工作流中,频繁调用高阶模型(如\nGPT-4o\n或\nClaude\n3.5\nSonnet)会导致\nAPI\n账单迅速",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_c0eb6fd6b25e",
+          "url": "https://www.jianshu.com/p/edb6f3cfb111",
+          "title": "GPT-5.6和Claude 4.8编程体验记录 - 简书",
+          "snippet": "用\nGPT-5.6\n和\nClaude\n4.8\n写了两个月代码,总结一句话:GPT\n像一个想清楚再动手的架构师,Claude\n像一个拿到需求就开干的高级工程师。最近在(titiai.cn)上对比了几个模",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_d1ec5c6c4bbc",
+          "url": "https://www.toutiao.com/article/7607477115407188489/",
+          "title": "如何评价Qwen3.5的综合性能 - 今日头条",
+          "snippet": "Qwen3.5的综合性能在开源大模型中堪称标杆,多项能力媲美甚至超越了GPT-5.2、Gemini\n3\nPro等闭源顶级模型。这次除夕发布的新版本,不仅实现了从纯文本到原生多模态的代际跃迁,更在效率与",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_47bc8d2adbec",
+          "url": "https://www.php.cn/faq/2505479.html",
+          "title": "千问Qwen2.5在数学推理和逻辑分析方面跟GPT-4比差距大吗?-人工智能-PHP中文网",
+          "snippet": "Qwen2.5与GPT-4在数学推理和逻辑分析上的差异源于训练目标、数据分布及推理机制的结构性不同:GPQA和MATH基准分数显示能力边界偏移;Qwen2.5用标准思维链而GPT-4-o支持动态回溯验",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_1a740a35f590",
+          "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+          "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+          "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_b913bd3466b1",
+          "url": "https://www.toutiao.com/article/7607465929924018714/",
+          "title": "Qwen3.5用了哪些架构创新提升推理效率? - 今日头条",
+          "snippet": "Qwen3.5通过混合注意力机制、极致稀疏MoE架构、原生多Token预测和系统级训练稳定性优化这四项架构创新,大幅提升了推理效率。这背后是一次对Transformer经典架构的深度重构,目标是在保持",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_19f7c080f077",
+          "url": "https://juejin.cn/post/7632660804625694735",
+          "title": "4月国内外十款新发布AI模型 参数和价格对比性能参数 模型名称 总参数 激活参数 上下文长度 发布时间 架构模式 Dee - 掘金",
+          "snippet": "上下文长度竞争:Qwen3.6系列、DeepSeek\nV4、Gemini\n3.1\nPro均达到100万tokens,成为超长上下文标配。\nMoE架构主流化:国产模型普遍采用MoE架构(GLM-5.1、",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_6ce17c7250ce",
+          "url": "https://juejin.cn/post/7653507801742884864",
+          "title": "Qwen 2.5 与 Qwen 3 系列微调深度调研研究背景与核心发现 Qwen(通义千问)系列大模型已迭代至 Qwen - 掘金",
+          "snippet": "研究背景与核心发现\nQwen(通义千问)系列大模型已迭代至\nQwen\n3\n世代,在开源社区和企业应用中占据重要位置。Qwen\n2.5\n与\nQwen\n3\n在架构、训练范式和微调策略上存在显著差异:Qwe",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_b3e4b7ebd8ae",
+          "url": "https://www.php.cn/faq/2114242.html",
+          "title": "Qwen3.5- 阿里通义千问开源的新一代原生多模态大模型-人工智能-PHP中文网",
+          "snippet": "qwen3.5是由阿里巴巴通义实验室推出的全新一代原生多模态大语言模型,已正式开源。其首发开源版本qwen3.5-397b-a17b采用突破性混合架构,融合线性注意力机制(gated\ndelta\nne",
+          "task_id": "task_2"
+        },
+        {
+          "source_id": "s_04dbde959d1b",
+          "url": "https://ijiandao.com/2b/master/487044.html",
+          "title": "Qwen3.5 - 阿里通义千问开源的新一代原生多模态大模型 | 爱尖刀",
+          "snippet": "Qwen3.5是什么Qwen3.5是阿里巴巴通义千问团队正式发布并开源的新一代原生多模态大模型。首发开源版本Qwen3.5-397B-A17B采用创新的混合架构,将线性注意力(Gated\nDelta\n",
+          "task_id": "task_2"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 4,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 5.0,
+      "status": "completed",
+      "incomplete_tasks": [],
+      "run_id": "47993c421aa941749a37ca635ec9ea39",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 3.937
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "task_id": "task_2",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "error": "RuntimeError",
+        "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 24.812
+      },
+      {
+        "state": "adversarial",
+        "elapsed": 35.609
+      },
+      {
+        "state": "done",
+        "elapsed": 63.875
+      }
+    ],
+    "elapsed_seconds": 63.92199999999866,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 751,
+          "prompt_tokens": 652,
+          "total_tokens": 1403,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 366,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 140
+        },
+        "elapsed_seconds": 3.937000000005355
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 228,
+          "prompt_tokens": 1310,
+          "total_tokens": 1538,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 56,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 542
+        },
+        "elapsed_seconds": 1.5160000000032596
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1200,
+          "prompt_tokens": 3591,
+          "total_tokens": 4791,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1200,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1536
+          },
+          "prompt_cache_hit_tokens": 1536,
+          "prompt_cache_miss_tokens": 2055
+        },
+        "elapsed_seconds": 8.343000000000757
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 179,
+          "prompt_tokens": 1300,
+          "total_tokens": 1479,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 532
+        },
+        "elapsed_seconds": 0.9850000000005821
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1200,
+          "prompt_tokens": 3587,
+          "total_tokens": 4787,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 446,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 2179
+        },
+        "elapsed_seconds": 9.203000000001339
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 3262,
+          "total_tokens": 4862,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1186,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3262
+        },
+        "elapsed_seconds": 10.796999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2048,
+          "prompt_tokens": 2648,
+          "total_tokens": 4696,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2048,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 2392
+        },
+        "elapsed_seconds": 16.031999999999243
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2048,
+          "prompt_tokens": 2607,
+          "total_tokens": 4655,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1211,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 2479
+        },
+        "elapsed_seconds": 12.23399999999674
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3280000000013388
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.17199999999866122
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.17199999999866122
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.13999999999941792
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "tech_002",
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "system": "fixed",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+      "content": "# AI 芯片市场格局与竞争力分析：NVIDIA、AMD、Intel 与华为昇腾、寒武纪\n\n> **证据说明（必读）**：本次检索仅返回 5 条来源，全部为中文财经/科技媒体与自媒体的**摘要级片段**，且内容高度集中于**中国市场与国产厂商梯队**。关于 NVIDIA、AMD、Intel 的产品规格、出货量、财务数据、训练/推理基准测试，**检索结果中没有任何实质性证据**。因此本报告在涉及这三家厂商的部分，只能给出**结构性分析与证据缺口标注**，不做数值化断言。凡属分析推断而非来源直述的内容，均以「〔推断〕」标记。\n\n---\n\n## 一、执行摘要\n\n1. **需求结构正在从训练主导向推理主导迁移。** 来源称 2026 年 AI 基础设施正经历\"从训练驱动向推理驱动的结构性转变\"，推理计算需求已达训练需求的 **4–5 倍**，推理算力整体市场空间**超过 3000 亿元人民币** [s_6982add1fb8c]。这是理解各厂商竞争力分化的最重要背景变量。\n2. **中国市场已形成清晰的国产梯队。** 华为昇腾被定位为\"第一梯队/绝对龙头\"，特征是\"全栈 + 集群 + 生态 + 产能碾压\"；寒武纪为\"第二梯队绝对龙头\"，仅次于昇腾，领先海光、昆仑芯、壁仞、沐曦 [s_947b4a3f0d39]。\n3. **份额格局出现标志性变化。** 2025 年中国 GPU 市场中华为与英伟达**并列第一**，寒武纪、海光、平头哥、昆仑芯\"多元并进\" [s_d2fdf7b423fe]。同源引述复旦大学刘典的判断：\"英伟达依赖时代已经结束\"，代之以国内厂商为核心的多方生态 [s_d2fdf7b423fe]。\n4. **推理专用化成为国产厂商的产品路线。** 昇腾推理产品线被列为 910B/C、**950PR（推理专用）**、950DT（2026Q4），并已进入\"大规模量产/亿级订单\"阶段 [s_71a7b2f7b745]。\n5. **最大证据缺口**：AMD 与 Intel 在本次检索中**完全没有出现**；NVIDIA 仅以\"并列第一\"和被替代的叙事出现，无产品层面信息；寒武纪的具体产品型号与性能数据亦被截断。因此\"训练 vs 推理\"的五方横向对比，**只能对华为、寒武纪给出有证据的定位，其余三方为空白**。\n\n---\n\n## 二、背景：为什么\"训练 vs 推理\"是本次分析的主轴\n\n来源给出的关键量化判断是：推理计算需求为训练需求的 4–5 倍，推理算力市场空间超 3000 亿元 [s_6982add1fb8c]。这一条数据本身构成了市场格局分析的基本框架：\n\n- **训练场景**的经济特征是资本密集、集群规模大、软件栈锁定强、单客户采购集中（云厂商与国家级算力中心）。来源对华为昇腾\"全栈 + 集群 + 生态 + 产能碾压\"的描述 [s_947b4a3f0d39]，正对应训练场景所需的能力组合〔推断〕。\n- **推理场景**的经济特征是成本敏感、碎片化、对能效与单位 token 成本敏感、部署形态多样（云、边缘、私有化）。来源中\"推理专用\"芯片（昇腾 950PR）与\"通用计算到推理专用\"的行业观察标题 [s_71a7b2f7b745][s_6982add1fb8c]，说明产业已开始为推理场景做专用化分工〔推断〕。\n- **",
+      "sources": [
+        {
+          "source_id": "s_947b4a3f0d39",
+          "url": "https://caifuhao.eastmoney.com/news/20260810094041374098950",
+          "title": "寒武纪在国产竞品里面表现咋样?_财富号_东方财富网",
+          "snippet": "国产AI芯片第二梯队绝对龙头,仅次于华为昇腾,领先海光/昆仑芯/壁仞/沐曦等。\n一、整体地位(2026年)\n-\n梯队划分\n-\n第一梯队:华为昇腾(全栈+集群+生态+产能碾压)\n-\n第二梯队:寒武纪(商",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_71a7b2f7b745",
+          "url": "https://www.tgb.cn/a/2r6gSvK9wQ7",
+          "title": "Ai芯片国内排序_卓礼传_ 淘股吧",
+          "snippet": "一、国内主流推理芯片厂商(按梯队+核心产品)第一梯队(头部、大规模量产/亿级订单)1.\n华为昇腾(绝对龙头)◦\n核心推理产品:昇腾910B/C、950PR(推理专用)、950DT(2026Q4);主打",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_6982add1fb8c",
+          "url": "https://www.ithome.com/1/008/847.htm",
+          "title": "2026国内AI算力厂商梯度观察:从通用计算到推理专用 - IT之家",
+          "snippet": "2026\n年,AI\n基础设施正经历从训练驱动向推理驱动的结构性转变。行业数据显示,AI\n推理计算需求已达训练需求的\n4\n至\n5\n倍,推理算力的整体市场空间超过\n3000\n亿元。在这一背景下,国内\nAI",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_d2fdf7b423fe",
+          "url": "https://finance.sina.com.cn/stock/marketresearch/2026-01-05/doc-inhfxrmm3703786.shtml",
+          "title": "2025年中国GPU市场格局:华为、英伟达并列第一,寒武纪、海光、平头哥、昆仑芯多元并进_新浪财经_新浪网",
+          "snippet": "来源:自主可控新鲜事\n  “中国的算力格局正在经历结构性转变。可以说,‘英伟达依赖时代’已经结束,取而代之的是一个以国内厂商为核心、多元并进的生态体系。”复旦大学中国研究院副研究员刘典在此前接受采访时",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_574028e53683",
+          "url": "https://www.askci.com/news/chanye/20251210/083609276532696704680614_3.shtml",
+          "title": "2026年中国AI芯片行业市场前景预测研究报告(简版)-中商情报网",
+          "snippet": "5.企业排行榜\n随着人工智能、自动驾驶、云计算等领域的快速发展,AI芯片企业在训练、推理、边缘计算等关键领域取得显著进展,推动中国AI芯片产业的自主可控和高质量发展。2025年中国AI芯片前五企业分别",
+          "task_id": "fixed_search"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 1,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "completed",
+      "incomplete_tasks": [],
+      "run_id": "",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [],
+    "elapsed_seconds": 11.906000000002678,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 1668,
+          "total_tokens": 3268,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 770,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1668
+        },
+        "elapsed_seconds": 11.468999999997322
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.35900000000401633
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "tech_002",
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+      "content": "\n\nIncomplete tasks: task_2",
+      "sources": [
+        {
+          "source_id": "s_7a74c2fd6f3b",
+          "url": "https://www.sohu.com/a/849637380_121798711",
+          "title": "寒武纪崩盘:AI芯片未来何去何从?_行业_公司_技术",
+          "snippet": "当前,AI芯片市场竞争已经愈发激烈,诸如英伟达、AMD等国际巨头在其技术和市场份额上占据优势,寒武纪在产品性能和研发速度上需要更大突破。根据分析,寒武纪需要找到自己的差异化竞争策略,例如聚焦特定行业应",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_947b4a3f0d39",
+          "url": "https://caifuhao.eastmoney.com/news/20260810094041374098950",
+          "title": "寒武纪在国产竞品里面表现咋样?_财富号_东方财富网",
+          "snippet": "国产AI芯片第二梯队绝对龙头,仅次于华为昇腾,领先海光/昆仑芯/壁仞/沐曦等。\n一、整体地位(2026年)\n-\n梯队划分\n-\n第一梯队:华为昇腾(全栈+集群+生态+产能碾压)\n-\n第二梯队:寒武纪(商",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_dbe23d84369a",
+          "url": "https://m.sohu.com/a/847215843_116132/?pvid=000115_3w_a",
+          "title": "寒武纪VS海光信息_芯片_市场_华为",
+          "snippet": "据机构预测,英伟达当前在推理市场市占率为80%,在2028年有望下降至50%。AI芯片竞争格局生变,而资本市场当前极为亢奋,给予英伟达很高估值,对于业绩增长也非常乐观—市场主流预期英伟达2025年营收",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_396bb868b852",
+          "url": "https://xueqiu.com/1785441490/314947700?md5__1038=YqGxnDu7qCq7uDGqGNReeqkgYY54AItLdx",
+          "title": "华为AI芯片在市场占有率方面的情况如下",
+          "snippet": ":\n• 国内市场 : 华为 、 海光 、 寒武纪 三家企业拿下了90%的市场份额 , 成为行业领头羊 。 在2022年中国AI加速卡出货量约为109万张中 , 华为市占率为10% 。 此外 , 华为昇",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_bfca0d71b432",
+          "url": "http://finance.sina.com.cn/wm/2025-10-03/doc-infsqtkr9259375.shtml",
+          "title": "寒武纪“封王”,中国AI芯片“反攻”开始了|芯片_新浪财经_新浪网",
+          "snippet": "当下,全球资本市场正在AI领域上演一场波澜壮阔的Capex(资本支出)交易盛宴。科技巨头们纷纷追加投资AI算力,而AI芯片作为算力的核心基石,正迎来前所未有的景气周期。在全球科技竞争日益演变为算力竞争",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_71a7b2f7b745",
+          "url": "https://www.tgb.cn/a/2r6gSvK9wQ7",
+          "title": "Ai芯片国内排序_卓礼传_ 淘股吧",
+          "snippet": "一、国内主流推理芯片厂商(按梯队+核心产品)第一梯队(头部、大规模量产/亿级订单)1.\n华为昇腾(绝对龙头)◦\n核心推理产品:昇腾910B/C、950PR(推理专用)、950DT(2026Q4);主打",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_546856fa8f96",
+          "url": "https://caifuhao.eastmoney.com/news/20240305081154188632830",
+          "title": "Ai芯片主战场,从训练到推理AI需求仍处于高速增长阶段,英伟达财报业绩指引高增,_财富号_东方财富网",
+          "snippet": "AI需求仍处于高速增长阶段,英伟达财报业绩指引高增,#推理侧需求占比超预期达40%,进一步夯实 25年持续增长基础。 与Al训练相比,#AI推理与用户终端场景需求更为紧密,训练后的大规模模型需通过AI",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_1671b412a949",
+          "url": "https://m.chinabgao.com/finance/comments/58471.html",
+          "title": "2025年GPU发展趋势：AI加速器市场将迎来重大变革",
+          "snippet": "中国报告大厅网讯,人工智能的快速发展正在重塑技术格局,GPU作为AI加速器的核心组件,其市场地位和发展趋势备受关注。随着大模型技术的不断进步,GPU与ASIC的竞争格局也在发生深刻变化,这将直接影响未",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_a7d6d3e52bde",
+          "url": "https://www.sohu.com/a/894439841_121924584",
+          "title": "深度解析:英伟达AI芯片市场领先的技术革新与竞争格局变化",
+          "snippet": "在2025年,人工智能(AI)技术的快速发展不断推动半导体行业的变革,作为行业领头羊的英伟达(NVIDIA)依托其深厚的技术积累和创新能力,持续巩固在AI芯片市场的领先地位。近年来,英伟达在数据中心A",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_367b6260f8a0",
+          "url": "https://new.qq.com/rain/a/20250505A06D4Y00",
+          "title": "AI服务器市场分析,GPU和ASIC谁的份额更高?",
+          "snippet": "市场整体规模根据IDC最近出的2025年中国人工智能计算力发展评估报告中的内容,2024年全球人工智能服务器市场规模预计为1,251亿美元,2025年将增至1,587亿美元,2028年有望达到2,22",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_fd002a3d0252",
+          "url": "https://new.qq.com/rain/a/20250506A0279E00",
+          "title": "AI服务器市场分析,GPU和ASIC谁的份额更高?",
+          "snippet": "市场整体规模      根据IDC最近出的2025年中国人工智能计算力发展评估报告中的内容,2024年全球人工智能服务器市场规模预计为1,251亿美元,2025年将增至1,587亿美元,2028年有望",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_adb3d709f597",
+          "url": "https://blog.csdn.net/TechEdu2026/article/details/165756985",
+          "title": "[人工智能]2026人工智能与大语言模型芯片家族参考V02:华为、Nvidia、AMD、Intel、Qualcomm _tf32 华为-CSDN博客",
+          "snippet": "2026\n人工智能与大语言模型芯片家族参考:Nvidia、AMD、Intel、Qualcomm\n与华为\n多厂商数据中心、边缘与终端\nAI\n加速器概览\n免责声明:本文档为高层次、示意性的多厂商概览。产品",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_de352c405cef",
+          "url": "https://m.163.com/dy/article/KPJ5MSQ30514847E.html",
+          "title": "2025年中国AI芯片市场:华为20%、海光2%|amd|中国|海光|知名企业|英伟达_手机网易网",
+          "snippet": "C114讯\n4月2日消息(南山)据路透社报道,根据市场研究机构IDC的最新报告,2025年中国云端AI加速器市场中,中国本土芯片厂商已占据约41%的份额。英伟达仍保持市场第一的位置,但其在中国市场的领",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_267a7c3da30f",
+          "url": "https://www.iim.net.cn/2226/view-25756-1.html",
+          "title": "AI芯片在2025年发展态势_IIM信息 ▂ ▅ ▇",
+          "snippet": "随着人工智能(AI)技术的迅速发展,AI芯片作为支撑AI计算的核心硬件,日益成为科技行业中的关键领域之一。无论是深度学习、计算机视觉、语音识别还是自然语言处理,AI芯片的性能都直接决定了AI应用的速度",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_5387a902ef0d",
+          "url": "https://www.digitimes.com/news/a20260402VL207/china-ai-server-accelerator-chips-nvidia.html",
+          "title": "Chinese companies capture nearly 41% of domestic AI accelerator server market",
+          "snippet": "China's\nAI\naccelerator\nserver\nmarket\nis\ngradually\nshifting\naway\nfrom\nusing\nNvidia\nchips\nto\ndomestic\n",
+          "task_id": "task_1"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 5,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "6c12c0a7d45f4f518c5f3afbadc0d7c2",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 4.141
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "error": "RuntimeError",
+        "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 14.672
+      },
+      {
+        "state": "adversarial",
+        "elapsed": 26.422
+      },
+      {
+        "review": "timeout; original report retained"
+      },
+      {
+        "state": "done",
+        "elapsed": 90.0
+      }
+    ],
+    "elapsed_seconds": 90.17199999999866,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 756,
+          "prompt_tokens": 629,
+          "total_tokens": 1385,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 411,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 629
+        },
+        "elapsed_seconds": 4.14100000000326
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 154,
+          "prompt_tokens": 1283,
+          "total_tokens": 1437,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 515
+        },
+        "elapsed_seconds": 1.1710000000020955
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1200,
+          "prompt_tokens": 3276,
+          "total_tokens": 4476,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 389,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 1868
+        },
+        "elapsed_seconds": 8.875
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 3036,
+          "total_tokens": 4636,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1600,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3036
+        },
+        "elapsed_seconds": 11.75
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1240,
+          "prompt_tokens": 2089,
+          "total_tokens": 3329,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 250,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1833
+        },
+        "elapsed_seconds": 7.171999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1452,
+          "prompt_tokens": 2048,
+          "total_tokens": 3500,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1332,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1792
+        },
+        "elapsed_seconds": 10.046999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2880,
+          "prompt_tokens": 786,
+          "total_tokens": 3666,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 885,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 786
+        },
+        "elapsed_seconds": 17.64100000000326
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 3601,
+          "total_tokens": 4625,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3601
+        },
+        "elapsed_seconds": 6.9210000000020955
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2033,
+          "prompt_tokens": 841,
+          "total_tokens": 2874,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1157,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 841
+        },
+        "elapsed_seconds": 11.328000000001339
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 3406,
+          "total_tokens": 4430,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3406
+        },
+        "elapsed_seconds": 6.953000000001339
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": null,
+        "elapsed_seconds": 2.6090000000040163,
+        "error_type": "APITimeoutError"
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3289999999979045
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.15600000000267755
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.35899999999674037
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.34399999999732245
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3129999999946449
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "med_001",
+    "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+    "system": "fixed",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+      "content": "# mRNA 癌症疫苗研究进展综述（聚焦 2023–2024 年临床试验）\n\n> **证据使用声明**：本报告严格基于本次检索返回的 5 条来源（1 篇中文期刊综述摘要 + 4 篇媒体/行业媒体转述稿）撰写。**检索结果中未包含任何具体临床试验编号、入组人数、有效率、生存终点或安全性分级数据**。凡属推断的内容均已标注，凡属证据缺失的部分均在\"证据缺口\"章节逐项列明，不做补白式虚构。\n\n---\n\n## 一、执行摘要（Executive Summary）\n\n1. **技术定位已确立**：癌症疫苗经多年发展已成为肿瘤免疫治疗的重要组成部分，而 mRNA 技术在 COVID-19 疫苗中的成功，成为推动癌症 mRNA 疫苗\"迅猛发展\"的关键外溢效应（来源：《实用肿瘤杂志》2023 年第 3 期综述摘要，s_928ce48e3853）。\n2. **作用逻辑的公开表述**：检索到的行业与媒体资料一致将 mRNA 癌症疫苗描述为\"训练人体免疫系统精准识别并攻击癌细胞\"的技术路径（s_5c3a644d2e16；s_c659f005e2b1）。\n3. **适应症集中在难治性实体瘤**：黑色素瘤、胰腺癌、脑癌被反复列为取得\"重大成果\"的领域（s_c659f005e2b1；s_34b241935a4b）。\n4. **时间判断存在多套口径**：行业资料称 2024–2025 年为该技术的\"爆发期\"（s_c659f005e2b1）；券商研报经媒体转述称 **2025 年可能成为\"mRNA 肿瘤疫苗商业化元年\"**（s_5c3a644d2e16；s_472738d89710）；另有资料给出 **2029 年\"或将正式走进临床\"** 的判断（s_c659f005e2b1；s_34b241935a4b）。二者并非事实冲突，而是**口径不同**（见第四节）。\n5. **关键局限**：本报告无法提供 2023–2024 年任何一项关键试验的量化数据。所有\"重大成果\"\"比传统疗法更优\"之类的表述，在所获证据中**均无原始数据支撑**",
+      "sources": [
+        {
+          "source_id": "s_928ce48e3853",
+          "url": "https://www.cnki.com.cn/Article/CJFDTOTAL-SYZZ202303003.htm",
+          "title": "癌症mRNA疫苗的研究现状、挑战及展望--《实用肿瘤杂志》2023年03期",
+          "snippet": "【摘要】: 经过多年发展,癌症疫苗逐渐成为肿瘤免疫治疗的重要组成部分,并且在当今时代的背景下呈现出更加迅猛的发展势头。随着信使RNA(messenger RNA,mRNA)技术在新型冠状病毒疫苗中取得",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_5c3a644d2e16",
+          "url": "https://www.sohu.com/a/811130619_121956423",
+          "title": "2025年,mRNA肿瘤疫苗能否改变治疗格局?_癌症_未来_技术",
+          "snippet": "根据中信证券的最新研报,2025年可能会被认为是mRNA肿瘤疫苗的商业化元年,这一点引发了广泛关注和讨论。简单来说,它利用了mRNA技术让我们的免疫系统识别并攻击癌细胞。这种疫苗在临床试验中展现出比传",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_472738d89710",
+          "url": "https://www.sohu.com/a/811130375_121956423",
+          "title": "mRNA肿瘤疫苗:2025年扭转癌症治疗的关键一年?_技术_trans_朋友",
+          "snippet": "中信证券的最新研报指出,2025年可能成为mRNA肿瘤疫苗商业化的元年。这一消息让人心潮澎湃,也同时引发了我们对于其实际应用与安全性的深思。 癌症,作为全球范围内的主要健康问题之一,导致了数百万人的早",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_c659f005e2b1",
+          "url": "https://bydrug.pharmcube.com/news/detail/5c268bb4d42b5a38b7b2037780ff70ab",
+          "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+          "snippet": "摘要:\nRNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。\n2024-2025\n年,这项技术迎来爆发期,\n在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成",
+          "task_id": "fixed_search"
+        },
+        {
+          "source_id": "s_34b241935a4b",
+          "url": "https://c.m.163.com/news/a/KEB0I91Q0532CO9S.html",
+          "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床",
+          "snippet": "摘要:RNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。2024-2025\n年,这项技术迎来爆发期,在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成果,其",
+          "task_id": "fixed_search"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 1,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "completed",
+      "incomplete_tasks": [],
+      "run_id": "",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [],
+    "elapsed_seconds": 12.406000000002678,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 1603,
+          "total_tokens": 3203,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1096,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1603
+        },
+        "elapsed_seconds": 12.031000000002678
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3129999999946449
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "med_001",
+    "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+      "content": "\n\nIncomplete tasks: task_2",
+      "sources": [
+        {
+          "source_id": "s_472738d89710",
+          "url": "https://www.sohu.com/a/811130375_121956423",
+          "title": "mRNA肿瘤疫苗:2025年扭转癌症治疗的关键一年?_技术_trans_朋友",
+          "snippet": "中信证券的最新研报指出,2025年可能成为mRNA肿瘤疫苗商业化的元年。这一消息让人心潮澎湃,也同时引发了我们对于其实际应用与安全性的深思。 癌症,作为全球范围内的主要健康问题之一,导致了数百万人的早",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_5c3a644d2e16",
+          "url": "https://www.sohu.com/a/811130619_121956423",
+          "title": "2025年,mRNA肿瘤疫苗能否改变治疗格局?_癌症_未来_技术",
+          "snippet": "根据中信证券的最新研报,2025年可能会被认为是mRNA肿瘤疫苗的商业化元年,这一点引发了广泛关注和讨论。简单来说,它利用了mRNA技术让我们的免疫系统识别并攻击癌细胞。这种疫苗在临床试验中展现出比传",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_bb2b542d9fb5",
+          "url": "https://m.sohu.com/a/809974497_121626808/?pvid=000115_3w_a",
+          "title": "RNA创新：癌症疫苗与靶向治疗丨Oncology Research 2024年第十期综述精选",
+          "snippet": "在癌症研究领域,最新的科学进展不断为疾病的诊断和治疗带来新的希望。近年来,随着技术的飞速发展,许多前沿研究揭示了癌症发生机制的深层次原理,并探索了新型治疗手段。本文将为您推荐来自Oncology Re",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_a47dff22ecdd",
+          "url": "https://www.toutiao.com/article/7295686992778543616/",
+          "title": "探索癌症新疗法:mRNA疫苗崛起,早筛站上风口 - 今日头条",
+          "snippet": "图片来源:图虫创意 自1884年肿瘤根治手术诞生以来,人类已经与癌症不懈战斗超过130年。从癌症治疗的三大基石,即手术、化疗、放疗的不断进步,到“生物导弹”靶向药物的迅猛发展,再到免疫疗法的兴起,新药",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_7f427fd44058",
+          "url": "http://www.cn-healthcare.com/articlewm/20230111/content-1497127.html",
+          "title": "mRNA新时代:肿瘤疫苗的研发现状、趋势与挑战mRNA疫苗肿瘤研发细胞癌症新冠抗原-健康界",
+          "snippet": "评论 药研网【公众号】 A- A+ 自1996年首个mRNA肿瘤疫苗的应用研究到现在,mRNA的结构、稳定性及递送方式已经得到了很大的优化,但目前mRNA领域仍然面临免疫原性、疗效及生产技术上的挑",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_d1f697a5be3a",
+          "url": "https://www.chinanews.com.cn/cj/2023/03-06/9966277.shtml",
+          "title": "治疗癌症获新进展,mRNA疫苗真的有戏了?-中新网",
+          "snippet": "首个mRNA肿瘤疫苗获“突破性疗法”认定意味着什么? 中国新闻周刊记者/彭丹妮 发于2023.3.6总第1082期《中国新闻周刊》杂志 在不久的将来,人类或许会使用疫苗来治疗癌症这一古老而棘手的疾病。",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_2da0be08dbbc",
+          "url": "https://read.cnki.net/web/Journal/Article/SMHX202409022.html",
+          "title": "癌症mRNA-LNP疫苗的研究进展-生命的化学2024年09期-知网阅读",
+          "snippet": "癌症mRNA疫苗凭借其良好的安全性、强大的免疫原性、高效的研发流程及较短的生产周期,在癌症治疗领域展现出无限潜力。它通过激活固有免疫、细胞免疫及体液免疫,诱发了强烈的抗肿瘤免疫反应。近年来,mRNA疫",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_44ea1f1063d2",
+          "url": "https://www.zhihuiya.com/news/info_2264.html",
+          "title": "mRNA疫苗:变局求新 且行且进",
+          "snippet": "2023 年 4 月,在美国癌症研究协会年会( American Association for Cancer Research AACR )上, Moderna 和默沙东公布了关于 mRNA-415",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_0ad35d3c055f",
+          "url": "https://m.sohu.com/a/619011882_100023056/?pvid=000115_3w_a",
+          "title": "mRNA疫苗抗癌疗效首获验证，晚期黑色素瘤复发死亡风险降44%",
+          "snippet": "黑色素瘤是一种致命的皮肤癌,其特征是在正常皮肤或原有的痣上,色素生成细胞的生长失控,造成皮肤上出现不规则扁平或隆起的斑块,伴有颜色不匀的斑点或坚实的黑灰色肿块。\n在过去几十年中,黑色素瘤的发病率一直在",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_68283b9cbcef",
+          "url": "https://m.sohu.com/a/617914258_120086943/?pvid=000115_3w_a",
+          "title": "mRNA疫苗抗癌疗效首获验证，晚期黑色素瘤复发死亡风险降44%",
+          "snippet": "黑色素瘤是一种致命的皮肤癌,其特征是在正常皮肤或原有的痣上,色素生成细胞的生长失控,造成皮肤上出现不规则扁平或隆起的斑块,伴有颜色不匀的斑点或坚实的黑灰色肿块。\n在过去几十年中,黑色素瘤的发病率一直在",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_7e891e46e3a1",
+          "url": "https://www.globecancer.com/azzx/show.php?itemid=16818",
+          "title": "肿瘤mRNA疫苗mRNA-4157/V940让黑色素癌复发或死亡风险下降44%_全球肿瘤医生网",
+          "snippet": "肿瘤mRNA疫苗mRNA-4157/V940让黑色素癌复发或死亡风险下降44%\n获突破性疗法认定!mRNA疫苗让黑色素癌复发或死亡风险下降44%\n在2023年ASCO会议上,Moderna和MSD公布",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_5371a7e65369",
+          "url": "https://bydrug.pharmcube.com/news/detail/4e622acd33ee3f0dc65be633c12f5b36",
+          "title": "mRNA肿瘤疫苗迈入黄金时代:Moderna五年数据定调,云顶新耀领跑中国创新医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+          "snippet": "在当前全球免疫治疗领域,mRNA肿瘤疫苗的进展正成为推动癌症治疗创新的重要力量。\n近日,默沙东与Moderna联合发布的mRNA-4157(V940)在黑色素瘤的五年随访数据,为mRNA肿瘤疫苗的临床",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_7b6d5b459b93",
+          "url": "https://www.sohu.com/a/745668693_120461465",
+          "title": "获突破性疗法认定!mRNA肿瘤疫苗让癌症转移/死亡风险降低62%!_患者_治疗_试验",
+          "snippet": "远端转移/死亡风险降低62%! 在KEYNOTE-942研究中,数据显示,联合研发的基于患者肿瘤DNA的个体化治疗mRNA-4157/V940疫苗, 将高危III/IV期黑色素瘤患者的复发或死亡风险降",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c8f136cdcf36",
+          "url": "https://medfind.link/info/5623",
+          "title": "最新数据显示mRNA疫苗在癌症治疗中的突破性进展 - MedFind",
+          "snippet": "近日,美国Moderna公司与默沙东公司联合公布了其合作开发的个性化癌症疫苗mRNA-4157(V940)的新研究进展:mRNA-4157(V940)疫苗与PD-1抑制剂KEYTRUDA联用,在肿瘤完",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_4e602f3f69e6",
+          "url": "https://www.163.com/dy/article/J3RQDB790511BLFD.html",
+          "title": "新型疫苗/现有药物组合可将黑色素瘤复发风险降低49%治疗免疫系统默克公司靶向化疗药物_网易订阅",
+          "snippet": "将新型黑色素瘤疫苗与现有抗癌药物相结合的人体试验结果表明,在三年的时间里,联合治疗将黑色素瘤复发的风险降低了 49%,扩散的风险降低了 62%。根据黑色素瘤研究联盟(Melanoma Research",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_eb3caa078dc0",
+          "url": "https://xueqiu.com/1063552865/335793307",
+          "title": "$Moderna(MRNA)$ 莫德纳的mRNA-4157疫苗在黑色素瘤治疗中展现了里程碑式的潜力,其与Keytruda... - 雪球",
+          "snippet": "发布于:2025-05-20\n23:26\niPhone转发:1回复:1喜欢:0$Moderna(MRNA)$\n莫德纳的mRNA-4157疫苗在黑色素瘤治疗中展现了里程碑式的潜力,其与Keytruda的",
+          "task_id": "task_1"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 4,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "d68c075a70f54954a45bc73b1afcc4f4",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 3.094
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "error": "RuntimeError",
+        "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 13.407
+      },
+      {
+        "state": "adversarial",
+        "elapsed": 25.313
+      },
+      {
+        "review": "timeout; original report retained"
+      },
+      {
+        "state": "done",
+        "elapsed": 90.0
+      }
+    ],
+    "elapsed_seconds": 90.21899999999732,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 539,
+          "prompt_tokens": 622,
+          "total_tokens": 1161,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 329,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 622
+        },
+        "elapsed_seconds": 3.0939999999973224
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 146,
+          "prompt_tokens": 1265,
+          "total_tokens": 1411,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 497
+        },
+        "elapsed_seconds": 1.2340000000040163
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1060,
+          "prompt_tokens": 3374,
+          "total_tokens": 4434,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 211,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 1966
+        },
+        "elapsed_seconds": 8.593999999997322
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 3214,
+          "total_tokens": 4814,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1600,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3214
+        },
+        "elapsed_seconds": 11.906000000002678
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1050,
+          "prompt_tokens": 2083,
+          "total_tokens": 3133,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 897,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1827
+        },
+        "elapsed_seconds": 7.796999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1418,
+          "prompt_tokens": 2042,
+          "total_tokens": 3460,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1137,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1786
+        },
+        "elapsed_seconds": 10.625
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1791,
+          "prompt_tokens": 900,
+          "total_tokens": 2691,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 847,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 900
+        },
+        "elapsed_seconds": 11.296999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 2756,
+          "total_tokens": 3780,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2756
+        },
+        "elapsed_seconds": 7.188000000001921
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 3428,
+          "prompt_tokens": 868,
+          "total_tokens": 4296,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1463,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 868
+        },
+        "elapsed_seconds": 20.984000000004016
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": null,
+        "elapsed_seconds": 6.2039999999979045,
+        "error_type": "APITimeoutError"
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3289999999979045
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.15600000000267755
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3899999999994179
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.35899999999674037
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "med_002",
+    "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "评估 GLP-1 受体激动剂（司美格鲁肽、替尔泊肽）在减重以外的潜在医疗应用，包括心血管保护、认知功能和成瘾治疗。",
+      "content": "\n\nIncomplete tasks: task_2",
+      "sources": [
+        {
+          "source_id": "s_284005eebc56",
+          "url": "https://bydrug.pharmcube.com/news/detail/1cd33d00bb0e2c8131248ede9373d4de",
+          "title": "替尔泊肽、司美格鲁肽勿反复停药!体重反弹外心血管风险同步走高医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+          "snippet": "GLP-1\n受体激动剂如今已经成为\n2\n型糖尿病与肥胖管理当中非常重要的治疗选择,替尔泊肽、司美格鲁肽、埃诺格鲁肽等药物在临床中应用广泛,凭借明确的降糖、减重、改善多重代谢指标的能力被大量患者选择。\n",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c9f113420f6f",
+          "url": "https://m.163.com/dy/article/KI3VS36D053296CT.html",
+          "title": "Cell系列综述:司美格鲁肽等GLP-1类药物在神经和精神疾病中的应用|glp|中枢神经系统|司美格鲁肽|心血管疾病|性疾病|治疗|精神疾病|糖尿病_手机网易网",
+          "snippet": "撰文丨王聪编辑丨王多鱼排版丨水成文GLP-1\n类药物,定义为全部或部分通过激活胰高血糖素样肽-1\n受体(GLP-1R)发挥药效的药物,已获批用于治疗\n2\n型糖尿病、肥胖症,以及相关心血管疾病、肾脏疾病",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_5ea3e71def6b",
+          "url": "https://bydrug.pharmcube.com/news/detail/3b36d80130bd33a0dc5f6c76214c1fbb",
+          "title": "GLP-1受体激动剂:六大药物非临床研究对比深度解析医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+          "snippet": "近年来,以司美格鲁肽为代表的胰高血糖素样肽\n‐1\n(\nGLP‐1\n)受体激动剂,凭借其确切的降糖疗效及显著的减重获益,在代谢性疾病治疗中获得了广泛临床应用。\n一、药效学:降糖与减重。\n尽管六款药物的分",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_88f142764d95",
+          "url": "https://www.cndzys.com/xshcore/quanwei_ztart/1es_2877744.html",
+          "title": "【glp1是司美格鲁肽吗】 - 大众医疗",
+          "snippet": "GLP-1受体激动剂是一种用于治疗2型糖尿病的药物类别,司美格鲁肽是其中的一种。这种药物通过模拟人体自然产生的胰高血糖素样肽-1(GLP-1)的作用,增强胰岛素分泌,降低胰高血糖素水平,从而帮助控制血",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_33af116e4c6f",
+          "url": "https://www.medsci.cn/search?q=GLP-1%E5%8F%97%E4%BD%93%E6%BF%80%E5%8A%A8%E5%89%82",
+          "title": "GLP-1受体激动剂相关资讯-临床研究进展,文献-MedSci.cn",
+          "snippet": "目前,我国已上市的GLP-1受体激动剂包括艾塞那肽、利拉鲁肽、贝那鲁肽、利司那肽和艾塞那肽周制剂。为使我国临床医生及时、全面了解该类药物的最新临床证据,并在临床实践中更好的发挥该类药物的作用,我国部分",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_4b7fcdaca1c0",
+          "url": "https://cnki.com.cn/Article/CJFDTotal-YLBS202411007.htm",
+          "title": "胰高血糖素样肽1受体激动剂在药物成瘾中的作用研究进展--《中国药理学与毒理学杂志》2024年11期",
+          "snippet": "药物成瘾是全球性的重大医学生物学和社会问题,目前临床上尚缺乏理想的治疗药物。胰高血糖素样肽1(GLP-1)作为一种关键的肠脑肽,其受体激动剂目前已被批准用于治疗2型糖尿病和肥胖症。近年来,GLP-1受",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_abf641515b07",
+          "url": "https://www.zeruibio.com/cn/product.php?kid=3",
+          "title": "GLP-1, GLP-1/GIP 激动剂",
+          "snippet": "GLP-1、GLP-1/GIP系列是长效剂型,对2型糖尿病的治疗效果较好。 产品编号 产品名称 结构式 CAS# S06 司美格鲁肽 查看大图 910463-68-2 ZL03 司美格鲁肽主链,氨基酸",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_7dbeb54ecf14",
+          "url": "https://www.163.com/dy/article/JF9UP3BB055631LP.html",
+          "title": "司美格鲁肽等类似药能治物质使用障碍吗成瘾受体治疗激动剂glp_网易订阅",
+          "snippet": "近年来最突出的医学进展之一是出现了一类被称为胰高血糖素样肽-1 受体激动剂(GLP-1 RAs)的药物。其中最为知名的药物当属司美格鲁肽(Ozempic),这是一种用于治疗糖尿病的药,因其超说明书使用",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_20f9aac4d35a",
+          "url": "http://paper.medlive.cn/literature/4346991",
+          "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+          "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_5cb93dd3e12d",
+          "url": "https://paper.medlive.cn/literature/4346990",
+          "title": "Semaglutide, weight loss, and cardiovascular outcomes in the SELECT trial._Lancet_期刊文献_医脉通",
+          "snippet": "Semaglutide,\nweight\nloss,\nand\ncardiovascular\noutcomes\nin\nthe\nSELECT\ntrial.\nLancet\n2026\nApr\n25;407(10",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c52e943773a4",
+          "url": "https://link.springer.com/article/10.1038/s41591-024-03015-5",
+          "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+          "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_da91ac3d0c43",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41207920/",
+          "title": "Cardiovascular outcomes of semaglutide and tirzepatide for patients with type 2 diabetes in clinical practice",
+          "snippet": "Cardiovascular\noutcome\ntrials\nof\nthe\nincretin-based\nmedicines\ntirzepatide\nand\nsemaglutide\nhave\nshown",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_2b7e36fe817c",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39181597/",
+          "title": "Semaglutide and cardiovascular outcomes in patients with obesity and prevalent heart failure: a prespecified analysis of the SELECT trial",
+          "snippet": "SELECT\nTrial\nInvestigators:\nMitsunori\nAbe,\nRajpal\nK\nAbhaichand,\nWalter\nP\nAbhayaratna,\nAtul\nAbhyankar",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_13bce67cb41b",
+          "url": "https://europepmc.org/article/PMC/PMC10684505",
+          "title": "Semaglutide and Tirzepatide reduce alcohol consumption in individuals with obesity",
+          "snippet": "Semaglutide and Tirzepatide reduce alcohol consumption in individuals with obesity\nQuddos Fatima 1 2",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_9fb80d49af7b",
+          "url": "https://www.nature.com/articles/s41591-024-03015-5",
+          "title": "Long-term kidney outcomes of semaglutide in obesity and cardiovascular disease in the SELECT trial  Nature Medicine",
+          "snippet": "Download PDF Download PDF Abstract The SELECT trial previously reported a 20% reduction in major adv",
+          "task_id": "task_1"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 4,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "b6b367497d724113981b65567d579a53",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 4.266
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "error": "RuntimeError",
+        "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 15.438
+      },
+      {
+        "state": "adversarial",
+        "elapsed": 27.219
+      },
+      {
+        "review": "timeout; original report retained"
+      },
+      {
+        "state": "done",
+        "elapsed": 90.0
+      }
+    ],
+    "elapsed_seconds": 90.21899999999732,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 765,
+          "prompt_tokens": 633,
+          "total_tokens": 1398,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 415,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 633
+        },
+        "elapsed_seconds": 4.26600000000326
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 161,
+          "prompt_tokens": 1289,
+          "total_tokens": 1450,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 521
+        },
+        "elapsed_seconds": 1.2180000000007567
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1200,
+          "prompt_tokens": 3316,
+          "total_tokens": 4516,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 899,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 1908
+        },
+        "elapsed_seconds": 9.5
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 2552,
+          "total_tokens": 4152,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1600,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2552
+        },
+        "elapsed_seconds": 11.781000000002678
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1074,
+          "prompt_tokens": 2085,
+          "total_tokens": 3159,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 352,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1829
+        },
+        "elapsed_seconds": 6.75
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2048,
+          "prompt_tokens": 2044,
+          "total_tokens": 4092,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 2048,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1788
+        },
+        "elapsed_seconds": 14.35899999999674
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 4096,
+          "prompt_tokens": 1891,
+          "total_tokens": 5987,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 4096,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1891
+        },
+        "elapsed_seconds": 22.06300000000192
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1537,
+          "prompt_tokens": 756,
+          "total_tokens": 2293,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 763,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 756
+        },
+        "elapsed_seconds": 9.360000000000582
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 2679,
+          "total_tokens": 3703,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 2679
+        },
+        "elapsed_seconds": 6.23399999999674
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": null,
+        "elapsed_seconds": 3.4839999999967404,
+        "error_type": "APITimeoutError"
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.2819999999992433
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.17199999999866122
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.31199999999807915
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.39100000000325963
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  },
+  {
+    "question_id": "fin_001",
+    "query": "分析美联储 2024 年降息周期对全球资本流动、新兴市场汇率和中国货币政策的影响路径。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "分析美联储 2024 年降息周期对全球资本流动、新兴市场汇率和中国货币政策的影响路径。",
+      "content": "\n\nIncomplete tasks: task_2",
+      "sources": [
+        {
+          "source_id": "s_f42f29329323",
+          "url": "https://www.toutiao.com/article/7446298438125371923/",
+          "title": "“人民币汇率波动背后:美元政策影响与中国市场调控的艺术” - 今日头条",
+          "snippet": "美元降息周期与人民币汇率的关系:美联储的货币政策对全球汇率市场有着重要影响。根据搜索结果,美联储在2024年已经开启了降息周期,预计年内降息1-2次,2025年可能降息4-5次。",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_cba7b8b952cd",
+          "url": "https://www.sohu.com/a/809666647_121976703",
+          "title": "美联储降息预期升温 中国汇率政策面临新机遇_经济_全球_市场",
+          "snippet": "随着全球经济形势的不断演变,特别是在美联储预期逐步向降息转变的背景下,市场对于中国汇率政策的关注度显著提升。根据世界银行的最新预测,2024年全球通胀可能降至三年来的最低点,这为中国的货币政策提供了更",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_c05753184596",
+          "url": "http://www.chinaforex.com.cn/index.php/cms/item-list-category-518.shtml",
+          "title": "《中国外汇》2024年第19期",
+          "snippet": "总第505期 2024年10月01日出版 \n美联储降息 \n美联储降息前景研判\n免费\n[张启迪]\n本轮美联储降息的终点根据美国经济走势可以分为两种情景。若美国经济实现软着陆,降息终点更有可能与新冠疫情前",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_91313822207d",
+          "url": "https://caifuhao.eastmoney.com/news/20240919133523087511750",
+          "title": "美联储降息对中国的影响几何_财富号_东方财富网",
+          "snippet": "美联储在2024年9月19日宣布降息50个基点,这是自 2020 年3月以来的首次降息,将联邦基金利率目标区间下调至 4.75% - 5.00% 之间,标志着其货币政策由紧缩周期向宽松周期的转向。下面",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_2302734ff676",
+          "url": "https://fund.jrj.com.cn/2024/09/20095743370393.shtml",
+          "title": "美联储降息周期开启叠加A股估值历史低位,A500指数ETF长期配置价值显现-基金-金融界",
+          "snippet": "而2025年则有100BP的降息空间,2026年或将再降息两次。 图:美联储降息周期历史回顾(单位:%) 来源: 国信证券 国信证券发表研报认为,随着全球资本市场的不断发展, 资本流动也越来越国际化,",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_8e5937532d64",
+          "url": "https://m.sohu.com/a/818977950_121994931/?pvid=000115_3w_a",
+          "title": "美联储降息对人民币汇率的深远影响分析",
+          "snippet": "2024年10月22日,美联储宣布降息50个基点的消息引发了市场对跨境资本流动和汇率动向的广泛关注。降息政策的转变标志着美联储的紧缩货币政策已持续超过两年,其对全球金融市场,尤其是中国的人民币汇率及跨",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_b974f1c2e2f8",
+          "url": "https://www.sohu.com/a/810158080_121994931",
+          "title": "美联储降息带动人民币汇率新机遇_经济_中国_政策",
+          "snippet": "2024年9月,美联储宣布降息50个基点,标志着其货币政策转向,并引发了市场对人民币汇率走势的关注。此举不仅影响了美国国内经济,也对全球经济,尤其是中国经济与人民币汇率产生深远的影响。 美联储的降息措",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_8e0b30e2bfda",
+          "url": "https://www.hangyan.co/reports/3392405131730355902",
+          "title": "2024年中期货币政策展望:“不一样”的降息FP - 行业研究报告 - 小牛行研",
+          "snippet": "类型: 中国宏观专题 机构: 中国银河 发表时间: 2024-06-17 00:00:00 更新时间: 2024-06-17 20:10:27",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_4d3fc7dfb402",
+          "url": "https://www.cei.cn//defaultsite/s/article/2026/09/18/4b4ff607-9d914745-01a0-b3af7c3e-56d4_home.html?referCode=gjdas&columnId=4028c7ca-37115425-0137-1156070d-001e",
+          "title": "【2026•第36周】美联储正式加息,多维度影响市场",
+          "snippet": "9月16日,美联储宣布将联邦基金利率目标区间上调25个基点,使基准基金利率从3.50%至3.75%上调到3.75%至4%。\n美联储宣布加息。美联储从2022年3月至2023年7月进行11次加息以应对新",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_4507f4706273",
+          "url": "https://news.qq.com/rain/a/20260918A02EGQ00",
+          "title": "美联储加息对房地产有什么影响?_腾讯新闻",
+          "snippet": "当地时间9月16日,美联储宣布将联邦基金利率目标区间上调25个基点,使基准基金利率从3.50%至3.75%上调到3.75%至4%。这是美联储自2023年7月以来时隔三年多的首次加息动作。在美联储加息之",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_41a80112f2b9",
+          "url": "http://www.zqrb.cn/finance/hongguanjingji/2026-09-18/A1789717971162.html",
+          "title": "美联储时隔3年重启加息 外部阶段性扰动不改国内稳增长主线-证券日报网",
+          "snippet": "本报记者\n韩昱\n近日,美联储宣布将美国联邦基金利率目标区间上调25个基点到3.75%至4%之间,符合市场主流预期。这也是美联储三年多来首次加息,上一次加息要追溯到2023年7月。彼时,美联储自2022",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_b48b51fac2e1",
+          "url": "https://news.qq.com/rain/a/20260918A033DO00",
+          "title": "美联储重启加息,全球资产大洗牌,中国货币政策何去何从?_腾讯新闻",
+          "snippet": "请记得点赞、转发!未关注的,请关注“火星宏观”账号,谢谢!内容提要:美联储时隔三年重新加息25个基点,并释放年内可能继续加息的信号。美元和短期限美债收益率获得支撑,但亚洲货币、黄金、金融银行股和REI",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_14fc2370fa2a",
+          "url": "https://m.163.com/dy/article/L74U2B3U0556NLUM.html",
+          "title": "全球集体加息,唯独中国逆势放水!新一轮财富洗牌已经开始|中国|利差|加息|央行|宏观经济|财富洗牌_手机网易网",
+          "snippet": "2026年9月17日,美联储宣布加息25个基点,将联邦基金利率目标区间上调至3.75%至4.00%。这是自2023年7月以来美联储的首次加息。点阵图显示,18名官员中有16人预计年底前至少还需要再加息",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_e38aa0e48274",
+          "url": "https://military.china.com/news/13004177/20260918/49750075_2.html",
+          "title": "时隔三年多,美联储宣布加息25个基点 政策转向引发市场波动_军事频道_中华网",
+          "snippet": "对于特朗普为何要执着于全球最低利率,马元认为有多重原因。首先,11月中期选举日益临近,当前美国能源、住房、食品等居民开支上涨较快,已成为选民最关注的议题之一。特朗普支持率已跌至约33%,若进一步加息,",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_d421dbd6cedb",
+          "url": "http://epaper.oeeee.com/epaper/G/html/2026-09/18/node_5857.htm",
+          "title": "南方都市报·奥一网",
+          "snippet": "当地时间9月16日,美联储宣布将联邦基金利率目标区间上调25个基点,从3.50%-3.75%升至3.75%-4.00%。这是2023年7月以来美联储首次加息,最终联邦公开市场委员会以12票赞成、零",
+          "task_id": "task_1"
+        },
+        {
+          "source_id": "s_1400081da465",
+          "url": "https://www.eeo.com.cn/2026/0918/1040698.shtml",
+          "title": "美联储时隔三年加息25个基点,年内或还有一次加息_经济观察网",
+          "snippet": "美联储时隔三年加息25个基点,年内或还有一次加息\n美联储于北京时间9月17日凌晨宣布加息25个基点,将联邦基金利率目标区间上调至3.75%—4%,为2023年7月以来首次加息。决议获全票通过,最新点阵",
+          "task_id": "task_1"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 5,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "e0be7bcf063a45798da4c686b7455182",
+      "review_history": []
+    },
+    "technical_chain_success": true,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 4.328
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "error": "RuntimeError",
+        "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 15.313
+      },
+      {
+        "state": "adversarial",
+        "elapsed": 25.484
+      },
+      {
+        "review": "timeout; original report retained"
+      },
+      {
+        "state": "done",
+        "elapsed": 90.0
+      }
+    ],
+    "elapsed_seconds": 90.23399999999674,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 745,
+          "prompt_tokens": 617,
+          "total_tokens": 1362,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 426,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 617
+        },
+        "elapsed_seconds": 4.328000000001339
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 174,
+          "prompt_tokens": 1279,
+          "total_tokens": 1453,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 511
+        },
+        "elapsed_seconds": 1.5939999999973224
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1200,
+          "prompt_tokens": 3480,
+          "total_tokens": 4680,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 414,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1408
+          },
+          "prompt_cache_hit_tokens": 1408,
+          "prompt_cache_miss_tokens": 2072
+        },
+        "elapsed_seconds": 8.89100000000326
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1600,
+          "prompt_tokens": 3176,
+          "total_tokens": 4776,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1600,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3176
+        },
+        "elapsed_seconds": 10.171000000002095
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1062,
+          "prompt_tokens": 2150,
+          "total_tokens": 3212,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 321,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1894
+        },
+        "elapsed_seconds": 6.875
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1027,
+          "prompt_tokens": 2109,
+          "total_tokens": 3136,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 802,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 1853
+        },
+        "elapsed_seconds": 7.3439999999973224
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2030,
+          "prompt_tokens": 910,
+          "total_tokens": 2940,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 530,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 910
+        },
+        "elapsed_seconds": 13.844000000004598
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 3345,
+          "total_tokens": 4369,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3345
+        },
+        "elapsed_seconds": 6.936999999998079
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 2557,
+          "prompt_tokens": 938,
+          "total_tokens": 3495,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1320,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 938
+        },
+        "elapsed_seconds": 15.171999999998661
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 1024,
+          "prompt_tokens": 3723,
+          "total_tokens": 4747,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 1024,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 3723
+        },
+        "elapsed_seconds": 5.860000000000582
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "failed",
+        "usage": null,
+        "elapsed_seconds": 7.5,
+        "error_type": "APITimeoutError"
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3440000000045984
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.1559999999954016
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.34399999999732245
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.3280000000013388
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "elapsed_seconds": 0.48399999999674037
+      }
+    ],
+    "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+  }
+]

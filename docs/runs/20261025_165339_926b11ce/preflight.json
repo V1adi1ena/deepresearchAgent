@@ -1,0 +1,6 @@
+{
+  "dependency": "web_search",
+  "available": false,
+  "error": "博查AI 错误: Invalid API KEY",
+  "result_count": 0
+}

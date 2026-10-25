@@ -1,0 +1,157 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "fixed",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 摘要\n现有证据仅覆盖中国厂商的梯队排序与推理市场趋势，**缺乏 NVIDIA、AMD、Intel 的可比数据**，因此无法完成五方横向竞争力比较。可支持的结论限于：华为昇腾居国产第一梯队，寒武纪为第二梯队龙头；推理需求已显著超过训练需求。\n\n## 有证据支持的发现\n- **国产梯队**：华为昇腾为第一梯队（全栈、集群、生态、产能领先）；寒武纪为第二梯队龙头，领先海光、昆仑芯、壁仞、沐曦 [s_947b4a3f0d39]。\n- **推理产品**：昇腾核心推理产品包括 910B/C、950PR（推理专用）、950DT（2026Q4）[s_71a7b2f7b745]。\n- **需求结构**：2026 年 AI 基础设施由训练驱动转向推理驱动，推理需求为训练的 4–5 倍，推理算力市场空间超 3000 亿元 [s_6982add1fb8c]。\n- **市场格局**：2025 年中国 GPU 市场华为与英伟达并列第一，寒武纪、海光、平头哥、昆仑芯多元并进 [s_d2fdf7b423fe]。\n\n## 证据缺口与矛盾\n- 无 NVIDIA/AMD/Intel 的训练或推理性能、份额、生态数据，五方比较无法成立。\n- 寒武纪具体产品与训练场景表现未提供；\"第二梯队龙头\"仅为单一来源判断。\n- 华为与英伟达\"并列第一\"的口径（出货量/份额/收入）未说明，且与\"英伟达依赖时代结束\"的定性表述存在张力，无法核实 [s_d2fdf7b423fe]。\n- 中商情报网前五企业名单被截断，未采信 [s_574028e53683]。\n\n## 引用来源\n- [s_947b4a3f0d39] 东方财富网，寒武纪国产竞品表现\n- [s_71a7b2f7b745] 淘股吧，AI 芯片国内排序\n- [s_6982add1fb8c] IT之家，2026 国内 AI 算力厂商梯度观察\n- [s_d2fdf7b423fe] 新浪财经，2025 年中国 GPU 市场格局\n\nOverall Confidence: 0.30",
+    "sources": [
+      {
+        "source_id": "s_947b4a3f0d39",
+        "url": "https://caifuhao.eastmoney.com/news/20260810094041374098950",
+        "title": "寒武纪在国产竞品里面表现咋样?_财富号_东方财富网",
+        "snippet": "国产AI芯片第二梯队绝对龙头,仅次于华为昇腾,领先海光/昆仑芯/壁仞/沐曦等。\n一、整体地位(2026年)\n-\n梯队划分\n-\n第一梯队:华为昇腾(全栈+集群+生态+产能碾压)\n-\n第二梯队:寒武纪(商",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_71a7b2f7b745",
+        "url": "https://www.tgb.cn/a/2r6gSvK9wQ7",
+        "title": "Ai芯片国内排序_卓礼传_ 淘股吧",
+        "snippet": "一、国内主流推理芯片厂商(按梯队+核心产品)第一梯队(头部、大规模量产/亿级订单)1.\n华为昇腾(绝对龙头)◦\n核心推理产品:昇腾910B/C、950PR(推理专用)、950DT(2026Q4);主打",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_6982add1fb8c",
+        "url": "https://www.ithome.com/1/008/847.htm",
+        "title": "2026国内AI算力厂商梯度观察:从通用计算到推理专用 - IT之家",
+        "snippet": "2026\n年,AI\n基础设施正经历从训练驱动向推理驱动的结构性转变。行业数据显示,AI\n推理计算需求已达训练需求的\n4\n至\n5\n倍,推理算力的整体市场空间超过\n3000\n亿元。在这一背景下,国内\nAI",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_d2fdf7b423fe",
+        "url": "https://finance.sina.com.cn/stock/marketresearch/2026-01-05/doc-inhfxrmm3703786.shtml",
+        "title": "2025年中国GPU市场格局:华为、英伟达并列第一,寒武纪、海光、平头哥、昆仑芯多元并进_新浪财经_新浪网",
+        "snippet": "来源:自主可控新鲜事\n  “中国的算力格局正在经历结构性转变。可以说,‘英伟达依赖时代’已经结束,取而代之的是一个以国内厂商为核心、多元并进的生态体系。”复旦大学中国研究院副研究员刘典在此前接受采访时",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_574028e53683",
+        "url": "https://www.askci.com/news/chanye/20251210/083609276532696704680614_3.shtml",
+        "title": "2026年中国AI芯片行业市场前景预测研究报告(简版)-中商情报网",
+        "snippet": "5.企业排行榜\n随着人工智能、自动驾驶、云计算等领域的快速发展,AI芯片企业在训练、推理、边缘计算等关键领域取得显著进展,推动中国AI芯片产业的自主可控和高质量发展。2025年中国AI芯片前五企业分别",
+        "task_id": "fixed_search"
+      }
+    ],
+    "confidence": 0.3,
+    "num_searches": 1,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "",
+    "review_history": [],
+    "review_status": "not_requested"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [],
+  "elapsed_seconds": 4.01600000000326,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 546,
+        "prompt_tokens": 1679,
+        "total_tokens": 2225,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1679
+      },
+      "elapsed_seconds": 3.5940000000045984,
+      "finish_reason": "stop",
+      "content_chars": 877,
+      "max_tokens": 4096
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.375
+    }
+  ],
+  "source_fingerprint": "51620987e715965fee8dca190df5d65cfdd67d4983759f6af2b20760eb57011a"
+}

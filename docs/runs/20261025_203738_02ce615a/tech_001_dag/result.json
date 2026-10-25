@@ -1,0 +1,402 @@
+{
+  "question_id": "tech_001",
+  "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "content": "# 2024 年主流大语言模型对比分析：GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5\n\n## 0. 证据基础与方法说明（请先阅读）\n\n本报告所依据的检索结果存在明显的**时效错乱**问题，这一点必须在结论之前说明，否则会误导读者对结论可信度的判断：\n\n- 两次检索返回的中文内容大多是关于 **Qwen3.5、GPT-5.x、Claude 4.x、Gemini 3.x** 等更新世代模型的二手评测与营销性文章，例如“Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8”交叉对比 [s_6833d90da59c]、“2026 年最新 Claude、GPT、Gemini 场景选型对比表” [s_ddf72d7c38f2]、“2026 年 AI 模型选择指南” [s_a0b3ab3c783a]、“Qwen3.5 综合性能” [s_d1ec5c6c4bbc] 等。这些材料**不能**直接用于回答 2024 年四款模型的问题。\n- 只有少数条目直接触及本任务的对象：Qwen2.5 与 GPT-4 在数学推理上的机制差异 [s_47bc8d2adbec]、Qwen2.5 与 Qwen3 的架构与训练范式差异 [s_6ce17c7250ce]、上下文长度竞争与 MoE 主流化趋势 [s_19f7c080f077]、Claude 3.5 Sonnet 的能力矩阵定位 [s_6137cdd1eaf7]、三家国外模型的通用技术细节与选型 [s_b2318c89c71b]、含 Qwen 在内的 API 供应商横向评测 [s_1a740a35",
+    "sources": [
+      {
+        "source_id": "s_6833d90da59c",
+        "url": "https://juejin.cn/post/7652284932753408006",
+        "title": "# Gemini 3.5 vs. GPT-5.5 vs. Claude 4.8:三大模型性能交叉对比报告做模型选型时,最 - 掘金",
+        "snippet": "做模型选型时,最让人头疼的不是“哪个模型最强”,而是“多花30%成本换8%质量提升,这账怎么算”。三大顶级模型各有各的甜点区,也各有各的软肋。这份报告从架构差异、基准测试、成本效率、幻觉控制四个维度,",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_ddf72d7c38f2",
+        "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+        "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+        "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_6137cdd1eaf7",
+        "url": "https://www.partnershare.cn/information/ipfly-quan-qiu-dai-li/5836",
+        "title": "AI三强争霸:Claude、ChatGPT、Gemini的深度能力拆解",
+        "snippet": "企业AI选型,不是选\"最好\"的模型,而是选\"最合适\"的模型。Claude、GPT-4、Gemini各有所长,理解它们的差异,才能在具体场景中做出最优决策。核心能力对比矩阵维度Claude\n3.5\nSo",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_b2318c89c71b",
+        "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+        "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+        "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_ce64182666e2",
+        "url": "https://juejin.cn/post/7616666752520847360",
+        "title": "2026年国内实测:GPT vs Claude vs Gemini,哪个更强?附镜像站教程对于国内AI开发者和重度用户来 - 掘金",
+        "snippet": "对于国内AI开发者和重度用户来说,如何同时体验GPT-4、Claude\n3、Gemini这三大顶尖模型,并对比它们的中文能力,一直是个难题。\n目前国内可直接访问的聚合平台RskAi(ai.rsk.cn",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_a0b3ab3c783a",
+        "url": "https://k.sina.com.cn/article_7879848900_1d5acf3c401902ww1m.html?from=tech",
+        "title": "2026年AI模型选择指南:一站式体验三大旗舰模型|Gemini 3.1 Pro|Anthropic|Claude 4|GPT-5.4|Google_新浪新闻",
+        "snippet": "2026年三大顶级AI模型实战对比:Gemini\n3.1\nPro\nvs\nGPT-5.4\nvs\nClaude\n4.6\n对于需要在实际项目中选型AI模型的技术决策者、开发者与产品经理而言,2026年Goo",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_9d5d1b78683a",
+        "url": "https://www.jianshu.com/p/6299ac7eb784",
+        "title": "Gemini 3.5 Flash 编码能力怎么样?与 GPT-4o mini / Claude 3.5 Haiku 跑分对比与选型指南 - 简书",
+        "snippet": "现在的开发者在写代码、改\nBug\n或重构系统时,几乎离不开\nAI\n辅助。然而,在实际的开发工作流中,频繁调用高阶模型(如\nGPT-4o\n或\nClaude\n3.5\nSonnet)会导致\nAPI\n账单迅速",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_c0eb6fd6b25e",
+        "url": "https://www.jianshu.com/p/edb6f3cfb111",
+        "title": "GPT-5.6和Claude 4.8编程体验记录 - 简书",
+        "snippet": "用\nGPT-5.6\n和\nClaude\n4.8\n写了两个月代码,总结一句话:GPT\n像一个想清楚再动手的架构师,Claude\n像一个拿到需求就开干的高级工程师。最近在(titiai.cn)上对比了几个模",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_d1ec5c6c4bbc",
+        "url": "https://www.toutiao.com/article/7607477115407188489/",
+        "title": "如何评价Qwen3.5的综合性能 - 今日头条",
+        "snippet": "Qwen3.5的综合性能在开源大模型中堪称标杆,多项能力媲美甚至超越了GPT-5.2、Gemini\n3\nPro等闭源顶级模型。这次除夕发布的新版本,不仅实现了从纯文本到原生多模态的代际跃迁,更在效率与",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_47bc8d2adbec",
+        "url": "https://www.php.cn/faq/2505479.html",
+        "title": "千问Qwen2.5在数学推理和逻辑分析方面跟GPT-4比差距大吗?-人工智能-PHP中文网",
+        "snippet": "Qwen2.5与GPT-4在数学推理和逻辑分析上的差异源于训练目标、数据分布及推理机制的结构性不同:GPQA和MATH基准分数显示能力边界偏移;Qwen2.5用标准思维链而GPT-4-o支持动态回溯验",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_1a740a35f590",
+        "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+        "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+        "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_b913bd3466b1",
+        "url": "https://www.toutiao.com/article/7607465929924018714/",
+        "title": "Qwen3.5用了哪些架构创新提升推理效率? - 今日头条",
+        "snippet": "Qwen3.5通过混合注意力机制、极致稀疏MoE架构、原生多Token预测和系统级训练稳定性优化这四项架构创新,大幅提升了推理效率。这背后是一次对Transformer经典架构的深度重构,目标是在保持",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_19f7c080f077",
+        "url": "https://juejin.cn/post/7632660804625694735",
+        "title": "4月国内外十款新发布AI模型 参数和价格对比性能参数 模型名称 总参数 激活参数 上下文长度 发布时间 架构模式 Dee - 掘金",
+        "snippet": "上下文长度竞争:Qwen3.6系列、DeepSeek\nV4、Gemini\n3.1\nPro均达到100万tokens,成为超长上下文标配。\nMoE架构主流化:国产模型普遍采用MoE架构(GLM-5.1、",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_6ce17c7250ce",
+        "url": "https://juejin.cn/post/7653507801742884864",
+        "title": "Qwen 2.5 与 Qwen 3 系列微调深度调研研究背景与核心发现 Qwen(通义千问)系列大模型已迭代至 Qwen - 掘金",
+        "snippet": "研究背景与核心发现\nQwen(通义千问)系列大模型已迭代至\nQwen\n3\n世代,在开源社区和企业应用中占据重要位置。Qwen\n2.5\n与\nQwen\n3\n在架构、训练范式和微调策略上存在显著差异:Qwe",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_b3e4b7ebd8ae",
+        "url": "https://www.php.cn/faq/2114242.html",
+        "title": "Qwen3.5- 阿里通义千问开源的新一代原生多模态大模型-人工智能-PHP中文网",
+        "snippet": "qwen3.5是由阿里巴巴通义实验室推出的全新一代原生多模态大语言模型,已正式开源。其首发开源版本qwen3.5-397b-a17b采用突破性混合架构,融合线性注意力机制(gated\ndelta\nne",
+        "task_id": "task_2"
+      },
+      {
+        "source_id": "s_04dbde959d1b",
+        "url": "https://ijiandao.com/2b/master/487044.html",
+        "title": "Qwen3.5 - 阿里通义千问开源的新一代原生多模态大模型 | 爱尖刀",
+        "snippet": "Qwen3.5是什么Qwen3.5是阿里巴巴通义千问团队正式发布并开源的新一代原生多模态大模型。首发开源版本Qwen3.5-397B-A17B采用创新的混合架构,将线性注意力(Gated\nDelta\n",
+        "task_id": "task_2"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 4,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 5.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "47993c421aa941749a37ca635ec9ea39",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 3.937
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "error": "RuntimeError",
+      "message": "Real embedding unavailable; install sentence-transformers and its model. Random fallback is test-only."
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 24.812
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 35.609
+    },
+    {
+      "state": "done",
+      "elapsed": 63.875
+    }
+  ],
+  "elapsed_seconds": 63.92199999999866,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 751,
+        "prompt_tokens": 652,
+        "total_tokens": 1403,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 366,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 140
+      },
+      "elapsed_seconds": 3.937000000005355
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 228,
+        "prompt_tokens": 1310,
+        "total_tokens": 1538,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 56,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 542
+      },
+      "elapsed_seconds": 1.5160000000032596
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1200,
+        "prompt_tokens": 3591,
+        "total_tokens": 4791,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1200,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 2055
+      },
+      "elapsed_seconds": 8.343000000000757
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 179,
+        "prompt_tokens": 1300,
+        "total_tokens": 1479,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 532
+      },
+      "elapsed_seconds": 0.9850000000005821
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1200,
+        "prompt_tokens": 3587,
+        "total_tokens": 4787,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 446,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 2179
+      },
+      "elapsed_seconds": 9.203000000001339
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 3262,
+        "total_tokens": 4862,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1186,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 3262
+      },
+      "elapsed_seconds": 10.796999999998661
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 2048,
+        "prompt_tokens": 2648,
+        "total_tokens": 4696,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 2048,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2392
+      },
+      "elapsed_seconds": 16.031999999999243
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 2048,
+        "prompt_tokens": 2607,
+        "total_tokens": 4655,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1211,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2479
+      },
+      "elapsed_seconds": 12.23399999999674
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3280000000013388
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.13999999999941792
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

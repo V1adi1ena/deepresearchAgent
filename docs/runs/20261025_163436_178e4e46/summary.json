@@ -1,0 +1,36 @@
+[
+  {
+    "question_id": "tech_001",
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 1200
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 1600
+        }
+      }
+    },
+    "timeout": 45.0,
+    "max_sub_questions": 2,
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "technical_chain_success": false,
+    "error_type": "AttributeError",
+    "error": "'RunConfig' object has no attribute 'get'",
+    "elapsed_seconds": 6.625,
+    "model_calls": [],
+    "source_fingerprint": "3df09b2f0981f12b38d8e772b9a47b32b1aaed49adc2019f0da2755ae4307732"
+  }
+]

@@ -1,0 +1,114 @@
+{
+  "question_id": "med_001",
+  "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+  "system": "fixed",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "综述 2023-2024 年 mRNA 癌症疫苗临床试验进展，分析其技术原理、关键试验数据及面临的挑战。",
+    "content": "# mRNA 癌症疫苗研究进展综述（聚焦 2023–2024 年临床试验）\n\n> **证据使用声明**：本报告严格基于本次检索返回的 5 条来源（1 篇中文期刊综述摘要 + 4 篇媒体/行业媒体转述稿）撰写。**检索结果中未包含任何具体临床试验编号、入组人数、有效率、生存终点或安全性分级数据**。凡属推断的内容均已标注，凡属证据缺失的部分均在\"证据缺口\"章节逐项列明，不做补白式虚构。\n\n---\n\n## 一、执行摘要（Executive Summary）\n\n1. **技术定位已确立**：癌症疫苗经多年发展已成为肿瘤免疫治疗的重要组成部分，而 mRNA 技术在 COVID-19 疫苗中的成功，成为推动癌症 mRNA 疫苗\"迅猛发展\"的关键外溢效应（来源：《实用肿瘤杂志》2023 年第 3 期综述摘要，s_928ce48e3853）。\n2. **作用逻辑的公开表述**：检索到的行业与媒体资料一致将 mRNA 癌症疫苗描述为\"训练人体免疫系统精准识别并攻击癌细胞\"的技术路径（s_5c3a644d2e16；s_c659f005e2b1）。\n3. **适应症集中在难治性实体瘤**：黑色素瘤、胰腺癌、脑癌被反复列为取得\"重大成果\"的领域（s_c659f005e2b1；s_34b241935a4b）。\n4. **时间判断存在多套口径**：行业资料称 2024–2025 年为该技术的\"爆发期\"（s_c659f005e2b1）；券商研报经媒体转述称 **2025 年可能成为\"mRNA 肿瘤疫苗商业化元年\"**（s_5c3a644d2e16；s_472738d89710）；另有资料给出 **2029 年\"或将正式走进临床\"** 的判断（s_c659f005e2b1；s_34b241935a4b）。二者并非事实冲突，而是**口径不同**（见第四节）。\n5. **关键局限**：本报告无法提供 2023–2024 年任何一项关键试验的量化数据。所有\"重大成果\"\"比传统疗法更优\"之类的表述，在所获证据中**均无原始数据支撑**",
+    "sources": [
+      {
+        "source_id": "s_928ce48e3853",
+        "url": "https://www.cnki.com.cn/Article/CJFDTOTAL-SYZZ202303003.htm",
+        "title": "癌症mRNA疫苗的研究现状、挑战及展望--《实用肿瘤杂志》2023年03期",
+        "snippet": "【摘要】: 经过多年发展,癌症疫苗逐渐成为肿瘤免疫治疗的重要组成部分,并且在当今时代的背景下呈现出更加迅猛的发展势头。随着信使RNA(messenger RNA,mRNA)技术在新型冠状病毒疫苗中取得",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_5c3a644d2e16",
+        "url": "https://www.sohu.com/a/811130619_121956423",
+        "title": "2025年,mRNA肿瘤疫苗能否改变治疗格局?_癌症_未来_技术",
+        "snippet": "根据中信证券的最新研报,2025年可能会被认为是mRNA肿瘤疫苗的商业化元年,这一点引发了广泛关注和讨论。简单来说,它利用了mRNA技术让我们的免疫系统识别并攻击癌细胞。这种疫苗在临床试验中展现出比传",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_472738d89710",
+        "url": "https://www.sohu.com/a/811130375_121956423",
+        "title": "mRNA肿瘤疫苗:2025年扭转癌症治疗的关键一年?_技术_trans_朋友",
+        "snippet": "中信证券的最新研报指出,2025年可能成为mRNA肿瘤疫苗商业化的元年。这一消息让人心潮澎湃,也同时引发了我们对于其实际应用与安全性的深思。 癌症,作为全球范围内的主要健康问题之一,导致了数百万人的早",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_c659f005e2b1",
+        "url": "https://bydrug.pharmcube.com/news/detail/5c268bb4d42b5a38b7b2037780ff70ab",
+        "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床医药新闻-ByDrug-一站式医药资源共享中心-医药魔方",
+        "snippet": "摘要:\nRNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。\n2024-2025\n年,这项技术迎来爆发期,\n在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_34b241935a4b",
+        "url": "https://c.m.163.com/news/a/KEB0I91Q0532CO9S.html",
+        "title": "RNA 癌症疫苗:2025 最新进展曝光,2029 年或将正式走进临床",
+        "snippet": "摘要:RNA\n癌症疫苗是近年来癌症治疗领域的革命性突破,它能训练人体免疫系统精准识别并攻击癌细胞。2024-2025\n年,这项技术迎来爆发期,在黑色素瘤、胰腺癌、脑癌等难治癌症的治疗中取得重大成果,其",
+        "task_id": "fixed_search"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 1,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [],
+  "elapsed_seconds": 12.406000000002678,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 1603,
+        "total_tokens": 3203,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1096,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1603
+      },
+      "elapsed_seconds": 12.031000000002678
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.3129999999946449
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

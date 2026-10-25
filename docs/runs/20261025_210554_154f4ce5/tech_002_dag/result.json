@@ -1,0 +1,132 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "Evidence insufficient or global deadline reached; no complete research report.",
+    "sources": [],
+    "confidence": 0.0,
+    "num_searches": 0,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "failed",
+    "incomplete_tasks": [],
+    "run_id": "b8442cf0e06843fe819e882ae1090046",
+    "review_history": [],
+    "review_status": "skipped_incomplete"
+  },
+  "technical_checks": {
+    "report_completed": false,
+    "nonempty_report": true,
+    "sources_available": false,
+    "all_tasks_completed": true,
+    "no_execution_errors": false,
+    "review_completed": false
+  },
+  "technical_chain_success": false,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "error": "ValueError",
+      "message": "Plan exceeds max_sub_questions"
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 3.844
+    },
+    {
+      "state": "failed",
+      "elapsed": 3.844
+    }
+  ],
+  "elapsed_seconds": 3.875,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 892,
+        "prompt_tokens": 604,
+        "total_tokens": 1496,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 604
+      },
+      "elapsed_seconds": 3.8439999999973224,
+      "finish_reason": "stop",
+      "content_chars": 3534,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [],
+  "source_fingerprint": "51620987e715965fee8dca190df5d65cfdd67d4983759f6af2b20760eb57011a"
+}

@@ -1,0 +1,114 @@
+{
+  "question_id": "tech_001",
+  "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+  "system": "fixed",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 1200
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 1600
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "content": "",
+    "sources": [
+      {
+        "source_id": "s_ac35c3c5f5e6",
+        "url": "https://www.cnblogs.com/6028dog/p/19586071",
+        "title": "2025年主流大语言模型深度对比:GPT-4o、Claude 3.7、DeepSeek-R1 与 Qwen2.5 - 让晚风 - 博客园",
+        "snippet": "随着人工智能技术的飞速发展,2025年的大模型市场呈现出百花齐放的态势。从硅谷的\nOpenAI、Anthropic\n到国内的深度求索(DeepSeek)和阿里巴巴(通义千问),各大厂商纷纷推出了具备极",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_0bb2ec1ac306",
+        "url": "https://juejin.cn/post/7635372611216080938",
+        "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+        "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_b61fc51b2777",
+        "url": "https://k.sina.com.cn/article_7857201856_1d45362c001904q1fy.html",
+        "title": "2025年主流大语言模型深度对比:GPT-4o、Claude 3.7、DeepSeek-R1 与 Qwen2.5|Anthropic|OpenAI|深度求索|阿里巴巴|大模型_新浪新闻",
+        "snippet": "随着人工智能技术的飞速发展,2025年的大模型市场呈现出百花齐放的态势。从硅谷的\nOpenAI、Anthropic\n到国内的深度求索(DeepSeek)和阿里巴巴(通义千问),各大厂商纷纷推出了具备极",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_b2318c89c71b",
+        "url": "https://blog.csdn.net/2602_96795563/article/details/167349817",
+        "title": "国外主流大模型深度对比:GPT、Claude、Gemini技术细节与实战选型指南-CSDN博客",
+        "snippet": "一、引言\n作为技术开发者,我们每天都在和各种大模型打交道——写代码时用GPT辅助调试,处理长文档时找Claude帮忙总结,做多模态任务时试试Gemini的图文理解。但你真的清楚这三个国外主流大模型的核",
+        "task_id": "fixed_search"
+      },
+      {
+        "source_id": "s_ddf72d7c38f2",
+        "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+        "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+        "snippet": "做大模型选型,顺序很重要!\n很多人第一步就问“谁最强?”,其实应该先反过来——“我遇到什么问题?”。真正落地,得按任务来选模型。\n主流模型参照版本\nGPT:GPT-5.4Claude:Sonnet\n4",
+        "task_id": "fixed_search"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 1,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "",
+    "review_history": []
+  },
+  "technical_chain_success": true,
+  "events": [],
+  "elapsed_seconds": 15.344000000004598,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1600,
+        "prompt_tokens": 1762,
+        "total_tokens": 3362,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 1600,
+          "rejected_prediction_tokens": null
+        },
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1762
+      },
+      "elapsed_seconds": 11.43800000000192
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "elapsed_seconds": 0.31199999999807915
+    }
+  ],
+  "source_fingerprint": "cc78913eba8aaa61c45c27fbc2dbf560221a71c699cfa0f875da05281b4f6796"
+}

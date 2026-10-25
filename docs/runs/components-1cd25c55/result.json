@@ -1,0 +1,338 @@
+{
+  "scope": "Synthetic component checks, not real research quality or benchmark results",
+  "embedding_backend": "sentence_transformers",
+  "query": "Orion service request quota and cache expiration",
+  "gold": [
+    "Orion has a quota of 30 requests per minute.",
+    "Orion cache expires after 90 seconds.",
+    "Orion rejects requests above the quota."
+  ],
+  "input": [
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.",
+    "Orion has a quota of 30 requests per minute. This is a synthetic configuration fixture. Evidence must remain identifiable.",
+    "Orion cache expires after 90 seconds. This is a synthetic configuration fixture. Evidence must remain identifiable.",
+    "Orion rejects requests above the quota. This is a synthetic configuration fixture. Evidence must remain identifiable."
+  ],
+  "estimated_token_budget": 110,
+  "strategies": {
+    "truncate": {
+      "output": [
+        "A botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.\nA botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the afternoon.\nA botanical catalogue lists trees, flowers and seeds. Seasonal rainfall changes soil moisture. Garden paths open in the aft"
+      ],
+      "retained_exact_facts": 0,
+      "total_facts": 3,
+      "input_characters": 1394,
+      "output_characters": 385,
+      "estimated_tokens": 110
+    },
+    "relevance": {
+      "output": [
+        "Orion has a quota of 30 requests per minute. This is a synthetic configuration fixture. Evidence must remain identifiable.",
+        "Orion cache expires after 90 seconds. This is a synthetic configuration fixture. Evidence must remain identifiable."
+      ],
+      "retained_exact_facts": 2,
+      "total_facts": 3,
+      "input_characters": 1394,
+      "output_characters": 237,
+      "estimated_tokens": 67
+    },
+    "textrank": {
+      "output": [
+        "Orion has a quota of 30 requests per minute. This is a synthetic configuration fixture. Evidence must remain identifiable.",
+        "Orion cache expires after 90 seconds. This is a synthetic configuration fixture. Evidence must remain identifiable."
+      ],
+      "retained_exact_facts": 2,
+      "total_facts": 3,
+      "input_characters": 1394,
+      "output_characters": 237,
+      "estimated_tokens": 67
+    }
+  },
+  "real_model_review": {
+    "original": "Orion allows 300 requests per minute [1].",
+    "reviewed": "Orion allows 30 requests per minute [1].",
+    "sources": [
+      {
+        "url": "fixture://orion/config",
+        "title": "Synthetic configuration fixture",
+        "snippet": "Orion allows 30 requests per minute."
+      }
+    ],
+    "history": [
+      {
+        "round": 1,
+        "dimension_scores": {
+          "fact_check": 10.0,
+          "hallucination": 10.0
+        },
+        "overall_score": 10.0,
+        "issues_count": 0,
+        "fix_operations": [
+          {
+            "issue": {
+              "severity": "critical",
+              "dimension": "fact_check",
+              "description": "报告称 Orion 允许每分钟 300 次请求，但唯一提供的来源明确写的是每分钟 30 次，数值被放大了 10 倍，属于对核心事实的直接误引，且该数值正是本报告唯一的核心结论。",
+              "location": "正文第1段 / 引用标记 [1]",
+              "fix_type": "in_place",
+              "evidence": "Source [1] Synthetic configuration fixture, fixture://orion/config: \"Orion allows 30 requests per minute.\" 报告原文: \"Orion allows 300 requests per minute [1].\""
+            },
+            "action": "in_place_fix: [{'location': '第一段，核心结论句', 'before': 'Orion allows 300 requests per minute [1].', 'after': 'Orion allows 30 requests per minute [1].'}]",
+            "success": true,
+            "detail": {
+              "detail": "changes=[{'location': '第一段，核心结论句', 'before': 'Orion allows 300 requests per minute [1].', 'after': 'Orion allows 30 requests per minute [1].'}]",
+              "before": "Orion allows 300 requests per minute [1].",
+              "after": "Orion allows 30 requests per minute [1].",
+              "sources": [
+                {
+                  "url": "fixture://orion/config",
+                  "title": "Synthetic configuration fixture",
+                  "snippet": "Orion allows 30 requests per minute."
+                }
+              ],
+              "evidence": "Source [1] Synthetic configuration fixture, fixture://orion/config: \"Orion allows 30 requests per minute.\" 报告原文: \"Orion allows 300 requests per minute [1].\""
+            }
+          },
+          {
+            "issue": {
+              "severity": "critical",
+              "dimension": "hallucination",
+              "description": "The report claims Orion allows 300 requests per minute, but the cited source explicitly states 30 requests per minute. The specific numerical claim directly contradicts the only supplied evidence.",
+              "location": "Content: 'Orion allows 300 requests per minute [1].'",
+              "fix_type": "in_place",
+              "evidence": "Source [1] snippet: 'Orion allows 30 requests per minute.'"
+            },
+            "action": "in_place_fix: []",
+            "success": true,
+            "detail": {
+              "detail": "changes=[]",
+              "before": "Orion allows 30 requests per minute [1].",
+              "after": "Orion allows 30 requests per minute [1].",
+              "sources": [
+                {
+                  "url": "fixture://orion/config",
+                  "title": "Synthetic configuration fixture",
+                  "snippet": "Orion allows 30 requests per minute."
+                }
+              ],
+              "evidence": "Source [1] snippet: 'Orion allows 30 requests per minute.'"
+            }
+          },
+          {
+            "issue": {
+              "severity": "major",
+              "dimension": "fact_check",
+              "description": "报告在仅有单一来源、单句结论的情况下未标注单位/时间窗口的一致性说明，也未说明引用是否为原文直引；由于唯一 claim 已与来源冲突，整篇报告不存在任何经核实成立的事实陈述。",
+              "location": "全文",
+              "fix_type": "search",
+              "evidence": "来源列表仅含 [1]，其 snippet 与报告数值不一致，报告无其他可验证 claim 可供交叉印证。"
+            },
+            "action": "search_unavailable",
+            "success": false,
+            "detail": {
+              "detail": "No search tool",
+              "before": "Orion allows 30 requests per minute [1].",
+              "after": "Orion allows 30 requests per minute [1].",
+              "sources": [
+                {
+                  "url": "fixture://orion/config",
+                  "title": "Synthetic configuration fixture",
+                  "snippet": "Orion allows 30 requests per minute."
+                }
+              ],
+              "evidence": "来源列表仅含 [1]，其 snippet 与报告数值不一致，报告无其他可验证 claim 可供交叉印证。"
+            }
+          }
+        ],
+        "resolved_count": 2,
+        "oscillation_detected": false,
+        "stop_reason": "max_rounds_reached(1)",
+        "raw_feedback": "[fact_check]\n{\n  \"score\": 10.0,\n  \"issues\": []\n}\n\n[hallucination]\n{\n  \"score\": 10.0,\n  \"issues\": []\n}\n",
+        "content_before": "Orion allows 300 requests per minute [1].",
+        "content_after": "Orion allows 30 requests per minute [1].",
+        "before_version": "69e113ce50c11ca09055415d6276081bfd4b8ba64f4ae3c7a477fafb55d94847",
+        "after_version": "881c69e802ef3c828aed6ea90c91d57a9ca6103d684660609aeb93d91b2d1a22",
+        "score_before": 0.5454545454545454,
+        "sources_after": [
+          {
+            "url": "fixture://orion/config",
+            "title": "Synthetic configuration fixture",
+            "snippet": "Orion allows 30 requests per minute."
+          }
+        ],
+        "model_calls": 7,
+        "candidate_published": true
+      }
+    ],
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 324,
+          "prompt_tokens": 483,
+          "total_tokens": 807,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 48,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 227
+        },
+        "elapsed_seconds": 3.7659999999996217
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 286,
+          "prompt_tokens": 442,
+          "total_tokens": 728,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 163,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 186
+        },
+        "elapsed_seconds": 1.9220000000022992
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 78,
+          "prompt_tokens": 309,
+          "total_tokens": 387,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 0,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 309
+        },
+        "elapsed_seconds": 0.7969999999986612
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 91,
+          "prompt_tokens": 340,
+          "total_tokens": 431,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 72,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 340
+        },
+        "elapsed_seconds": 1.139999999999418
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 105,
+          "prompt_tokens": 291,
+          "total_tokens": 396,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 79,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 291
+        },
+        "elapsed_seconds": 1.2190000000009604
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 104,
+          "prompt_tokens": 483,
+          "total_tokens": 587,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 87,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 227
+        },
+        "elapsed_seconds": 1.375
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 78,
+          "prompt_tokens": 442,
+          "total_tokens": 520,
+          "completion_tokens_details": {
+            "accepted_prediction_tokens": null,
+            "audio_tokens": null,
+            "reasoning_tokens": 61,
+            "rejected_prediction_tokens": null
+          },
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 256
+          },
+          "prompt_cache_hit_tokens": 256,
+          "prompt_cache_miss_tokens": 186
+        },
+        "elapsed_seconds": 0.8590000000003783
+      }
+    ]
+  }
+}
