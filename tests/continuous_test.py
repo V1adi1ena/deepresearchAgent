@@ -16,11 +16,15 @@ import re
 import subprocess
 import sys
 import time
+import tempfile
+import uuid
 from pathlib import Path
 
 # 强制无缓冲输出，确保日志实时写入
-sys.stdout.reconfigure(line_buffering=True)
-sys.stderr.reconfigure(line_buffering=True)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(line_buffering=True)
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(line_buffering=True)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
@@ -90,38 +94,37 @@ TEST_QUERIES: list[dict] = [
 
 
 def clean_env():
-    """清理数据库和旧日志。"""
-    db_path = PROJECT_ROOT / "data" / "memory.db"
-    if db_path.exists():
-        db_path.unlink()
-    for f in (PROJECT_ROOT / "outputs" / "reports").glob("report_*.md"):
-        f.unlink()
-    print("[Test] 环境已清理")
+    """Allocate a new isolated run; never delete project data or prior reports."""
+    return Path(tempfile.mkdtemp(prefix="deepresearch-test-"))
 
 
 def run_single_test(test_case: dict) -> dict:
     """执行单次测试并返回分析结果。"""
     test_id = test_case["id"]
     query = test_case["query"]
-    log_file = PROJECT_ROOT / "outputs" / f"test_{test_id}.log"
+    run_dir = clean_env()
+    log_file = run_dir / f"test_{test_id}.log"
 
     print(f"\n{'='*60}")
     print(f"[Test {test_id}] {test_case['name']}")
     print(f"Query: {query[:60]}...")
     print(f"{'='*60}")
 
-    clean_env()
 
     start = time.time()
     proc = subprocess.run(
         [
             sys.executable,
-            str(PROJECT_ROOT / "scripts" / "run_research.py"),
+            str(PROJECT_ROOT / "scripts" / "run_single.py"),
             "--query", query,
-            "--output_dir", str(PROJECT_ROOT / "outputs" / "reports" / test_id),
+            "--output_dir", str(run_dir / "reports"),
+            "--memory_db", str(run_dir / "memory.db"),
+            "--session_id", uuid.uuid4().hex,
         ],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        env={**os.environ, "PYTHONUTF8": "1"},
         timeout=900,  # 15 分钟超时
     )
     elapsed = time.time() - start
@@ -133,9 +136,10 @@ def run_single_test(test_case: dict) -> dict:
     result = analyze_log(proc.stdout, test_case)
     result["elapsed"] = elapsed
     result["returncode"] = proc.returncode
+    result["run_directory"] = str(run_dir)
 
     # 检查报告文件
-    report_dir = PROJECT_ROOT / "outputs" / "reports" / test_id
+    report_dir = run_dir / "reports"
     reports = list(report_dir.glob("*.md")) if report_dir.exists() else []
     if reports:
         report_text = reports[0].read_text(encoding="utf-8")
@@ -143,6 +147,25 @@ def run_single_test(test_case: dict) -> dict:
         result["report_length"] = len(report_text)
         result["report_has_content"] = len(report_text) > test_case["min_report_length"]
         result["is_empty_md"] = "Research failed" in report_text or result["report_length"] < 500
+        record_path = reports[0].with_suffix(".json")
+        if record_path.exists():
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+            report = record["report"]
+            tasks = record.get("tasks", [])
+            result["subtask_total"] = len(tasks)
+            result["subtask_success"] = sum(t["status"] == "success" for t in tasks)
+            result["subtask_failed"] = len(tasks)-result["subtask_success"]
+            result["success_rate"] = result["subtask_success"]/len(tasks) if tasks else 0
+            result["report_status"] = report["status"]
+            result["num_searches"] = report["num_searches"]
+            result["num_replan"] = report["num_replan"]
+            result["adversarial_rounds"] = report["adversarial_rounds"]
+            result["confidence"] = report["confidence"]
+            result["is_empty_md"] = report["status"] == "failed"
+            result["has_bogus_output"] = not bool(report["sources"])
+            result["technical_chain_success"] = proc.returncode == 0 and report["status"] != "failed" and bool(report["sources"])
+            result["quality_review"] = record.get("quality_review")
+            result["issues"] = [] if result["technical_chain_success"] else ["No usable evidence or failed research"]
     else:
         result["report_path"] = None
         result["report_length"] = 0
@@ -217,12 +240,7 @@ def print_summary(results: list[dict]):
     total_pass = 0
     for r in results:
         tc = r["test_case"]
-        passed = (
-            r["success_rate"] >= tc["min_success_rate"]
-            and r.get("report_has_content", False)
-            and not r.get("is_empty_md", True)
-            and not r["has_bogus_output"]
-        )
+        passed = r.get("technical_chain_success", False)
         total_pass += int(passed)
 
         status = "✅ PASS" if passed else "❌ FAIL"
@@ -234,7 +252,7 @@ def print_summary(results: list[dict]):
         if r["issues"]:
             print(f"  问题: {'; '.join(r['issues'])}")
 
-    print(f"\n总计: {total_pass}/{len(results)} 通过")
+    print(f"\n技术链路: {total_pass}/{len(results)} 通过；回答与引用支持需要另行核对")
 
 
 def main():

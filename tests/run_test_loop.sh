@@ -22,14 +22,17 @@ for Q in "${QUERIES[@]}"; do
     # 清理环境
     # rm -f data/memory.db
     # rm -rf "outputs/reports/test${IDX}"
-    mkdir -p "outputs/reports/test${IDX}"
+    RUN_DIR=$(mktemp -d "${TMPDIR:-/tmp}/deepresearch-test.XXXXXX")
+    mkdir -p "$RUN_DIR/reports"
 
-    LOG="outputs/test_${IDX}.log"
+    LOG="$RUN_DIR/run.log"
 
     # 运行（前台运行，输出实时可见）
-    PYTHONUNBUFFERED=1 python scripts/run_research.py \
+    PYTHONUNBUFFERED=1 python scripts/run_single.py \
         --query "$Q" \
-        --output_dir "outputs/reports/test${IDX}" \
+        --output_dir "$RUN_DIR/reports" \
+        --memory_db "$RUN_DIR/memory.db" \
+        --session_id "test${IDX}-$(date +%s)" \
         > "$LOG" 2>&1
 
     # 提取关键指标
@@ -38,7 +41,7 @@ for Q in "${QUERIES[@]}"; do
     grep -E "DAG 生成完成|子任务完成|报告生成完成|耗时:|置信度" "$LOG" | tail -8 || true
 
     # 检查报告文件
-    REPORT=$(find "outputs/reports/test${IDX}" -name "*.md" | head -1)
+    REPORT=$(find "$RUN_DIR/reports" -name "*.md" | head -1)
     if [ -f "$REPORT" ]; then
         LEN=$(wc -c < "$REPORT")
         echo "[Test $IDX] 报告: $REPORT ($LEN bytes)"
