@@ -93,6 +93,7 @@ def main() -> None:
                   "events": modules["orchestrator"].events, "model_calls": modules.get("model_calls", []),
                   "tool_calls": modules.get("tool_calls", []),
                   "tasks": [{"task_id": r.task_id, "status": r.status.value,
+                             "output": r.output, "trajectory": r.trajectory,
                              "tool_calls": [t.get("name") for t in r.trajectory if t.get("role") == "tool"]}
                             for r in modules["orchestrator"]._results],
                   "quality_review": {"answers_question": None, "citations_support_claims": None}}

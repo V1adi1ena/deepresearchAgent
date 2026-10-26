@@ -169,6 +169,12 @@ def main():
                         record["technical_chain_success"] = all(record["technical_checks"].values())
                         (case_dir / "report.md").write_text(report.content, encoding="utf-8")
                         record["events"] = modules["orchestrator"].events
+                        record["task_specs"] = [{"task_id": task.task_id, "description": task.description,
+                            "search_hints": task.search_hints, "preferred_domains": task.preferred_domains,
+                            "dependencies": task.dependencies} for task in modules["orchestrator"]._task_map.values()]
+                        record["tasks"] = [{"task_id": r.task_id, "status": r.status.value,
+                            "output": r.output, "trajectory": r.trajectory}
+                            for r in modules["orchestrator"]._results]
                     except Exception as exc:
                         import traceback
                         traceback.print_exc()
