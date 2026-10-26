@@ -1,5 +1,6 @@
 import asyncio
 import json
+import pytest
 from types import SimpleNamespace
 
 from src.agents.researcher import ResearcherAgent
@@ -203,3 +204,50 @@ def test_publisher_constraint_is_enforced_locally_if_provider_ignores_it():
     ]}, "Alpha2.5", allowed_domains=["research.test"])
     assert len(result["results"]) == 1
     assert result["rejected_results"][0]["reason"] == "outside_requested_publisher_domains"
+
+
+@pytest.mark.parametrize("case", ["budget", "browser_error", "no_source"])
+def test_later_tool_failure_preserves_evidence_and_tool_call_pairing(case):
+    executions = []
+    class Search:
+        name = "web_search"
+        def get_openai_tool_schema(self):
+            return {"type": "function", "function": {"name": self.name}}
+        async def execute(self, query):
+            executions.append(query)
+            return ({"error": "provider unavailable"} if case == "no_source" else
+                {"results": [{"url": "https://example.test/alpha", "title": "Alpha2.5", "snippet": "count=30"}]})
+    class Browser:
+        name = "browser"
+        reads = 0
+        def get_openai_tool_schema(self):
+            return {"type": "function", "function": {"name": self.name}}
+        async def execute(self, url, max_chars=8000):
+            self.reads += 1
+            return "count=30" if self.reads == 1 else "[Browser Error] Page timed out"
+    def call(name, identifier, args):
+        return {"id": identifier, "function": {"name": name, "arguments": json.dumps(args)}}
+    class Policy:
+        tools = None
+        def set_tools(self, tools): self.tools = tools
+        def __call__(self, messages):
+            responses = [m for m in messages if m["role"] == "tool"]
+            if not responses:
+                count = 3 if case == "budget" else 1
+                return {"tool_calls": [call("web_search", str(i), {"query": "Alpha2.5"}) for i in range(count)]}
+            if case == "browser_error" and len(responses) == 1:
+                return {"tool_calls": [call("browser", "read", {"url": "https://example.test/other"})]}
+            expected = ["0", "1", "2"] if case == "budget" else (["0", "read"] if case == "browser_error" else ["0"])
+            assert [m["tool_call_id"] for m in responses] == expected
+            if case == "budget":
+                assert self.tools is None
+            return {"content": "已取得 count=30；无法获取其他指标。Confidence: 0.7"}
+    agent = ResearcherAgent("fixture", Policy(), [Search()] + ([Browser()] if case == "browser_error" else []))
+    result = asyncio.run(agent.run(SubTask("A", TaskType.SEARCH, "Alpha2.5"), {}))
+    if case == "no_source":
+        assert result.status == AgentStatus.FAILED and not result_sources([result])
+    else:
+        assert result.status == AgentStatus.SUCCESS and "30" in result_sources([result])[0]["snippet"]
+    assert len(executions) == (2 if case == "budget" else 1)
+
+
