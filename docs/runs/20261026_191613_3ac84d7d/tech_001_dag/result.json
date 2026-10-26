@@ -1,0 +1,704 @@
+{
+  "question_id": "tech_001",
+  "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "content": "# 2024 主流 LLM 中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**现有证据不足以完成所要求的对比分析。** 检索仅覆盖 GPT-4o 与 Claude 3.5 Sonnet 的官方安全/发布文档，未获得任何中文推理、代码生成或长上下文基准的**具体分数**，且完全缺失 Gemini 1.5 与 Qwen2.5 的资料。以下仅陈述可支持的事实。\n\n## 可支持的事实\n- **GPT-4o**：官方 System Card（2024-08-08）聚焦安全评估（外部红队、Preparedness Framework 风险评分），**并非**能力基准报告 [s_c786d7c5432e]。上下文长度 128k tokens（定价页 2024-11 快照）[s_0083b7297196]。\n- **Claude 3.5 Sonnet**：官方发布页确认 200K token 上下文、$3/$15 每百万输入/输出 token、速度约为 Claude 3 Opus 的 2 倍，并宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品，但**摘要未给出具体分数** [s_e91e6f80eaac]。\n\n## 证据缺口（明确）\n1. **无中文推理数据**：两份官方文档均无中文专项评测；需转向 C-Eval/CMMLU 等第三方榜单（未检索）。\n2. **无具体数值**：GPT-4o 的 MMLU/HumanEval/MGSM、Claude 3.5 的 GPQA/SWE-bench/MATH 均未取到。\n3. **Gemini 1.5、Qwen2.5 完全无来源**，无法纳入对比。\n4. **技术路线**：GPT-4o 端到端多模态、Claude 3.5 架构细节官方均未披露，属未公开信息。\n5. 页面抓取两次 403 失败，正文未获取。\n\n## 不可用的来源\n- o1 System Card [s_dcf8ab338d73] 为不同模型，不适用。\n- Anthropic 首页 [s_afe2508ac4ca] 提及 Claude 3.7 Sonnet，属后续版本，不能代表 3.5。\n- Claude 3.5 发布页标注日期为 2025-03-01，晚于 2024 年，需谨慎对待其时效性 [s_e91e6f80eaac]。\n\n## 建议下一步\n抓取 System Card 与 Anthropic 模型卡 PDF 直链；中文能力改用 C-Eval/CMMLU 第三方榜单；补充 Gemini 1.5 与 Qwen2.5 官方技术报告。\n\n---\n**总体置信度：0.35**（仅确认上下文长度、定价、安全文档性质等元信息；核心对比维度无数据支撑）。\n**关键来源**：OpenAI GPT-4o System Card [s_c786d7c5432e]、OpenAI 定价页 [s_0083b7297196]、Anthropic Claude 3.5 Sonnet 发布页 [s_e91e6f80eaac]。\n\nIncomplete tasks: task_2",
+    "sources": [
+      {
+        "source_id": "s_c786d7c5432e",
+        "url": "https://openai.com/index/gpt-4o-system-card/",
+        "title": "GPT-4o System Card  OpenAI",
+        "snippet": "This report outlines the safety work carried out prior to releasing GPT‐4o including external red teaming, frontier risk evaluations according to our Preparedness Framework, and an overview of the mitigations we built in to address key risk areas. View PDF version Loading... Share GPT-4o Scorecard Key Areas of Risk Evaluation & Mitigation Preparedness Framework Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. We thoroughly evaluate new models for potential risks and build in appropriate safeguards before deploying them in ChatGPT or the API. We’re publishing the model System Card together with the Preparedness Framework",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-08-08T13:20:05+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_dcf8ab338d73",
+        "url": "https://openai.com/index/openai-o1-system-card",
+        "title": "OpenAI o1 System Card  OpenAI",
+        "snippet": "This report outlines the safety work carried out prior to releasing OpenAI o1, including external red teaming and frontier risk evaluations according to our Preparedness Framework. Read the System Card (opens in a new window) Share OpenAI o1 System Card Key Areas of Evaluation Preparedness Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. Improved or comparable performance from previous flagship OpenAI model Introduction The o1 model series is trained with large-scale reinforcement learning to reason using chain-of-thought. These advanced reasoning capabilities provide new avenues for improving the safety and robustness",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-12-05T21:11:03+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_0083b7297196",
+        "url": "https://openai.com/api/pricing/?utm_source=rachelandreago",
+        "title": "Pricing  OpenAI",
+        "snippet": "Pricing Show prices per 1K tokens API Pricing Our latest models Reasoning models for complex, multi-step problems OpenAI o1 Frontier reasoning model that supports tools, Structured Outputs, and vision | 200k context length Price Input: $15.00 / 1M tokens Cached input: $7.50 / 1M tokens Output: $60.00 / 1M tokens OpenAI o3-mini Small cost-efficient reasoning model that’s optimized for coding, math, and science, and supports tools and Structured Outputs | 200k context length Price Input: $1.10 / 1M tokens Cached input: $0.55 / 1M tokens Output: $4.40 / 1M tokens GPT models for everyday tasks GPT-4o High-intelligence model for complex tasks | 128k context length Price Input: $2.50 / 1M tokens Cached input: $1.25 / 1M tokens Output: $10.00 / 1M tokens GPT-4o mini Affordable small model for fas",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-11-08T18:07:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_e91e6f80eaac",
+        "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+        "title": "Claude 3.5 Sonnet",
+        "snippet": "Today, we’re launching Claude 3.5 Sonnet—our first release in the forthcoming Claude 3.5 model family. Claude 3.5 Sonnet raises the industry bar for intelligence, outperforming competitor models and Claude 3 Opus on a wide range of evaluations, with the speed and cost of our mid-tier model, Claude 3 Sonnet.\nClaude 3.5 Sonnet is now available for free on Claude.ai and the Claude iOS app, while Claude Pro and Team plan subscribers can access it with significantly higher rate limits. It is also available via the Anthropic  API ,  Amazon Bedrock , and  Google Cloud’s Vertex AI . The model costs $3 per million input tokens and $15 per million output tokens, with a 200K token context window.\nFrontier intelligence at 2x the speed\nClaude 3.5 Sonnet sets new industry benchmarks for graduate-level r",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-03-01T08:00:00+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_afe2508ac4ca",
+        "url": "https://www.anthropic.com/",
+        "title": "anthropic",
+        "snippet": "Claude.ai\nMeet Claude 3.7 Sonnet\nClaude 3.7 Sonnet, our most intelligent AI model, is now available.\nTalk to Claude API\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nClaude 3.7 Sonnet and Claude Code\nIntroducing Claude 3.7 Sonnet, our most intelligent model yet and the first hybrid reasoning model. We’re also launching Claude Code, an agentic tool for coding. \nRead the announcement\nModel details\nClaude 3.7 Sonnet \nResearch insights\nClaude's extended thinking\nOur Work\nProduct\nClaude for Enterprise\nSep 4, 2024\nAlignment  ·  Research\nConstitutional AI: Harmlessness from AI Feedback\nDec 15, 2022\nAnnouncements\nCore Views on AI Safety: When, Why, What, and How\nMar 8, 2023\nWork with Anthropic\nAnthropic is an AI safety and research company based i",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-06-26T06:41:03+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 8,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "partial",
+    "incomplete_tasks": [
+      "task_2"
+    ],
+    "run_id": "2d419ef1d32c4d9fa3d903216bc3d351",
+    "review_history": [],
+    "review_status": "skipped_incomplete"
+  },
+  "technical_checks": {
+    "report_completed": false,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": false,
+    "no_execution_errors": true,
+    "review_completed": false
+  },
+  "technical_chain_success": false,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 3.484
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "failed",
+      "failure_reason": "Tool 'browser' failed: Page read timed out"
+    },
+    {
+      "state": "collecting",
+      "elapsed": 19.984
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 19.984
+    },
+    {
+      "state": "done",
+      "elapsed": 24.234
+    }
+  ],
+  "task_specs": [
+    {
+      "task_id": "task_1",
+      "description": "检索 GPT-4o 与 Claude 3.5 的官方技术报告/模型卡，收集其在中文推理、代码生成、长上下文任务上的基准数据与架构技术路线信息",
+      "search_hints": [
+        "GPT-4o system card benchmark reasoning coding long context site:openai.com",
+        "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com"
+      ],
+      "preferred_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "dependencies": []
+    },
+    {
+      "task_id": "task_2",
+      "description": "检索 Gemini 1.5 与 Qwen2.5 的官方技术报告/模型卡，收集其在中文推理、代码生成、长上下文任务上的基准数据与架构技术路线信息",
+      "search_hints": [
+        "Gemini 1.5 technical report benchmark long context coding site:deepmind.google",
+        "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io"
+      ],
+      "preferred_domains": [
+        "deepmind.google",
+        "qwenlm.github.io"
+      ],
+      "dependencies": []
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task_1",
+      "status": "success",
+      "output": "**检索结果摘要（置信度 0.35）**\n\n**已确认事实**\n- GPT-4o 官方 System Card 存在：https://openai.com/index/gpt-4o-system-card/ （2024-08-08 发布）。但该文档侧重安全评估（外部红队、Preparedness Framework 风险评分），**并非**中文推理/代码/长上下文基准报告。页面抓取返回 403，正文未获取。\n- GPT-4o 上下文长度 128k tokens（OpenAI 定价页，2024-11 快照）。\n- Claude 3.5 Sonnet 官方发布页：https://www.anthropic.com/news/claude-3-5-sonnet 。确认：200K token 上下文窗口；定价 $3/百万输入、$15/百万输出；速度约为 Claude 3 Opus 的 2 倍；宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品。具体分数未在摘要中给出。\n\n**证据缺口（关键）**\n1. 未获得任何**中文推理**基准数据——两份官方文档均未提供中文专项评测。\n2. 未获得具体数值：GPT-4o 的 MMLU/HumanEval/MGSM 分数、Claude 3.5 Sonnet 的 GPQA/SWE-bench/MATH 分数均未取到。\n3. 架构技术路线（GPT-4o 为端到端多模态、Claude 3.5 的架构细节）官方均未披露，属未公开信息。\n4. 两次页面抓取均因 403 失败，需改用 PDF 直链或第三方镜像补充。\n\n**建议下一步**：直接抓取 System Card PDF 与 Anthropic 模型卡 PDF；中文能力需转向 C-Eval/CMMLU 等第三方榜单。",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_FQImu5CKp1xyHBtDTeSL2164",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"GPT-4o system card benchmark reasoning coding long context site:openai.com\", \"top_n\": 6}"
+              }
+            },
+            {
+              "id": "call_01_sPX8QSkRZ3RtaSUxlDnU1680",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_FQImu5CKp1xyHBtDTeSL2164",
+          "name": "web_search",
+          "result": {
+            "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024",
+            "results": [
+              {
+                "title": "GPT-4o System Card  OpenAI",
+                "url": "https://openai.com/index/gpt-4o-system-card/",
+                "snippet": "This report outlines the safety work carried out prior to releasing GPT‐4o including external red teaming, frontier risk evaluations according to our Preparedness Framework, and an overview of the mitigations we built in to address key risk areas. View PDF version Loading... Share GPT-4o Scorecard Key Areas of Risk Evaluation & Mitigation Preparedness Framework Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. We thoroughly evaluate new models for potential risks and build in appropriate safeguards before deploying them in ChatGPT or the API. We’re publishing the model System Card together with the Preparedness Framework",
+                "published_at": "2024-08-08T13:20:05+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "OpenAI o1 System Card  OpenAI",
+                "url": "https://openai.com/index/openai-o1-system-card",
+                "snippet": "This report outlines the safety work carried out prior to releasing OpenAI o1, including external red teaming and frontier risk evaluations according to our Preparedness Framework. Read the System Card (opens in a new window) Share OpenAI o1 System Card Key Areas of Evaluation Preparedness Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. Improved or comparable performance from previous flagship OpenAI model Introduction The o1 model series is trained with large-scale reinforcement learning to reason using chain-of-thought. These advanced reasoning capabilities provide new avenues for improving the safety and robustness",
+                "published_at": "2024-12-05T21:11:03+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Pricing  OpenAI",
+                "url": "https://openai.com/api/pricing/?utm_source=rachelandreago",
+                "snippet": "Pricing Show prices per 1K tokens API Pricing Our latest models Reasoning models for complex, multi-step problems OpenAI o1 Frontier reasoning model that supports tools, Structured Outputs, and vision | 200k context length Price Input: $15.00 / 1M tokens Cached input: $7.50 / 1M tokens Output: $60.00 / 1M tokens OpenAI o3-mini Small cost-efficient reasoning model that’s optimized for coding, math, and science, and supports tools and Structured Outputs | 200k context length Price Input: $1.10 / 1M tokens Cached input: $0.55 / 1M tokens Output: $4.40 / 1M tokens GPT models for everyday tasks GPT-4o High-intelligence model for complex tasks | 128k context length Price Input: $2.50 / 1M tokens Cached input: $1.25 / 1M tokens Output: $10.00 / 1M tokens GPT-4o mini Affordable small model for fas",
+                "published_at": "2024-11-08T18:07:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 3,
+            "source": "bocha",
+            "rejected_results": [
+              {
+                "url": "https://openai.com/index/gpt-4-1/",
+                "title": "Introducing GPT-4.1 in the API",
+                "reason": "different_target_version_in_title"
+              },
+              {
+                "url": "https://openai.com/index/o3-mini-system-card/",
+                "title": "OpenAI o3-mini System Card  OpenAI",
+                "reason": "later_year_without_target_version_in_title"
+              },
+              {
+                "url": "https://openai.com/api/",
+                "title": "API platform  OpenAI",
+                "reason": "later_year_without_target_version_in_title"
+              }
+            ],
+            "page_reads": [
+              {
+                "url": "https://openai.com/index/gpt-4o-system-card/",
+                "status": "failed",
+                "error": "[Browser Error] Network error: ClientResponseError: 403, message='Forbidden', url='https://openai.com/index/gpt-4o-system-card/'",
+                "chars": 0
+              },
+              {
+                "url": "https://openai.com/index/openai-o1-system-card",
+                "status": "failed",
+                "error": "[Browser Error] Network error: ClientResponseError: 403, message='Forbidden', url='https://openai.com/index/openai-o1-system-card'",
+                "chars": 0
+              }
+            ]
+          },
+          "arguments": {
+            "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_sPX8QSkRZ3RtaSUxlDnU1680",
+          "name": "web_search",
+          "result": {
+            "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com 2024",
+            "results": [
+              {
+                "title": "Claude 3.5 Sonnet",
+                "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+                "snippet": "Today, we’re launching Claude 3.5 Sonnet—our first release in the forthcoming Claude 3.5 model family. Claude 3.5 Sonnet raises the industry bar for intelligence, outperforming competitor models and Claude 3 Opus on a wide range of evaluations, with the speed and cost of our mid-tier model, Claude 3 Sonnet.\nClaude 3.5 Sonnet is now available for free on Claude.ai and the Claude iOS app, while Claude Pro and Team plan subscribers can access it with significantly higher rate limits. It is also available via the Anthropic  API ,  Amazon Bedrock , and  Google Cloud’s Vertex AI . The model costs $3 per million input tokens and $15 per million output tokens, with a 200K token context window.\nFrontier intelligence at 2x the speed\nClaude 3.5 Sonnet sets new industry benchmarks for graduate-level r",
+                "published_at": "2025-03-01T08:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "later_publication_requires_date_check"
+              },
+              {
+                "title": "anthropic",
+                "url": "https://www.anthropic.com/",
+                "snippet": "Claude.ai\nMeet Claude 3.7 Sonnet\nClaude 3.7 Sonnet, our most intelligent AI model, is now available.\nTalk to Claude API\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nClaude 3.7 Sonnet and Claude Code\nIntroducing Claude 3.7 Sonnet, our most intelligent model yet and the first hybrid reasoning model. We’re also launching Claude Code, an agentic tool for coding. \nRead the announcement\nModel details\nClaude 3.7 Sonnet \nResearch insights\nClaude's extended thinking\nOur Work\nProduct\nClaude for Enterprise\nSep 4, 2024\nAlignment  ·  Research\nConstitutional AI: Harmlessness from AI Feedback\nDec 15, 2022\nAnnouncements\nCore Views on AI Safety: When, Why, What, and How\nMar 8, 2023\nWork with Anthropic\nAnthropic is an AI safety and research company based i",
+                "published_at": "2024-06-26T06:41:03+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 2,
+            "source": "bocha",
+            "rejected_results": [
+              {
+                "url": "https://www.anthropic.com/claude/sonnet",
+                "title": "Claude 3.7 Sonnet \\ Anthropic",
+                "reason": "different_target_version_in_title"
+              },
+              {
+                "url": "https://www.anthropic.com/transparency",
+                "title": "Anthropic’s Transparency Hub \\ Anthropic",
+                "reason": "later_year_without_target_version_in_title"
+              },
+              {
+                "url": "https://www.anthropic.com/news/claude-4",
+                "title": "Introducing Claude 4 \\ Anthropic",
+                "reason": "different_target_version_in_title"
+              },
+              {
+                "url": "https://docs.anthropic.com/en/docs/initial-setup",
+                "title": "Initial setup - Anthropic",
+                "reason": "later_year_without_target_version_in_title"
+              }
+            ],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "**检索结果摘要（置信度 0.35）**\n\n**已确认事实**\n- GPT-4o 官方 System Card 存在：https://openai.com/index/gpt-4o-system-card/ （2024-08-08 发布）。但该文档侧重安全评估（外部红队、Preparedness Framework 风险评分），**并非**中文推理/代码/长上下文基准报告。页面抓取返回 403，正文未获取。\n- GPT-4o 上下文长度 128k tokens（OpenAI 定价页，2024-11 快照）。\n- Claude 3.5 Sonnet 官方发布页：https://www.anthropic.com/news/claude-3-5-sonnet 。确认：200K token 上下文窗口；定价 $3/百万输入、$15/百万输出；速度约为 Claude 3 Opus 的 2 倍；宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品。具体分数未在摘要中给出。\n\n**证据缺口（关键）**\n1. 未获得任何**中文推理**基准数据——两份官方文档均未提供中文专项评测。\n2. 未获得具体数值：GPT-4o 的 MMLU/HumanEval/MGSM 分数、Claude 3.5 Sonnet 的 GPQA/SWE-bench/MATH 分数均未取到。\n3. 架构技术路线（GPT-4o 为端到端多模态、Claude 3.5 的架构细节）官方均未披露，属未公开信息。\n4. 两次页面抓取均因 403 失败，需改用 PDF 直链或第三方镜像补充。\n\n**建议下一步**：直接抓取 System Card PDF 与 Anthropic 模型卡 PDF；中文能力需转向 C-Eval/CMMLU 等第三方榜单。",
+          "tool_calls": []
+        }
+      ]
+    },
+    {
+      "task_id": "task_2",
+      "status": "failed",
+      "output": "Tool 'browser' failed: Page read timed out",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_GLW6hC296mn0G4tcP8h59949",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"Gemini 1.5 technical report benchmark long context coding site:deepmind.google\", \"top_n\": 5}"
+              }
+            },
+            {
+              "id": "call_01_l21rPxGEF2jBEOjgOhvX6351",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io\", \"top_n\": 5}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_GLW6hC296mn0G4tcP8h59949",
+          "name": "web_search",
+          "result": {
+            "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google 2024",
+            "results": [],
+            "total": 0,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google",
+            "top_n": 5
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_l21rPxGEF2jBEOjgOhvX6351",
+          "name": "web_search",
+          "result": {
+            "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io 2024",
+            "results": [],
+            "total": 0,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io",
+            "top_n": 5
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_dcI0lx1CHfeFq6JoazMP1735",
+              "type": "function",
+              "function": {
+                "name": "browser",
+                "arguments": "{\"url\": \"https://qwenlm.github.io/blog/qwen2.5/\", \"max_chars\": 6000}"
+              }
+            },
+            {
+              "id": "call_01_jzAmf5juAqMlZqeu6eLM9091",
+              "type": "function",
+              "function": {
+                "name": "browser",
+                "arguments": "{\"url\": \"https://deepmind.google/discover/blog/google-gemini-1-5-next-generation-model-february-2024/\", \"max_chars\": 6000}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "tool_call_id": "call_00_dcI0lx1CHfeFq6JoazMP1735",
+          "name": "browser",
+          "result": {
+            "url": "https://qwenlm.github.io/blog/qwen2.5/",
+            "content": "GITHUB\nHUGGING FACE\nMODELSCOPE\nDEMO\nDISCORD\nIntroduction\nIn the past three months since Qwen2’s release, numerous developers have built new models on the Qwen2 language models, providing us with valuable feedback. During this period, we have focused on creating smarter and more knowledgeable language models. Today, we are excited to introduce the latest addition to the Qwen family:\nQwen2.5\nWe are announcing what might be the largest opensource release in history! Let’s get the party started!\nOur latest release features the LLMs\nQwen2.5\n, along with specialized models for coding,\nQwen2.5-Coder\n, and mathematics,\nQwen2.5-Math\n. All open-weight models are dense, decoder-only language models, av\n\n, and mathematics,\nQwen2.5-Math\n. All open-weight models are dense, decoder-only language models, available in various sizes, including:\nQwen2.5: 0.5B, 1.5B, 3B, 7B, 14B, 32B, and 72B\nQwen2.5-Coder: 1.5B, 7B, and 32B on the way\nQwen2.5-Math: 1.5B, 7B, and 72B.\nAll our open-source models, except for the 3B and 72B variants, are licensed under Apache 2.0. You can find the license files in the respective Hugging Face repositories. In addition to these models, we offer APIs for our flagship language models:\nQwen-Plus\nQwen-Turbo\nthrough Model Studio, and we encourage you to explore them! Furthermore, we have also open-sourced the\nQwen2-VL-72B\n, which features performance enhancements compared to \n\ne, we have also open-sourced the\nQwen2-VL-72B\n, which features performance enhancements compared to last month’s release.\nFor more details about Qwen2.5, Qwen2.5-Coder, and Qwen2.5-Math, feel free to visit the following links:\nQwen2.5 LLM\nQwen2.5-Coder\nQwen2.5-Math\nGet ready to unlock a world of possibilities with our extensive lineup of models! We’re excited to share these cutting-edge models with you, and we can’t wait to see the incredible things you’ll achieve with them!\nTakeaways\nIn terms of\nQwen2.5\n, the language models, all models are pretrained on our latest large-scale dataset, encompassing up to\n18 trillion\ntokens. Compared to Qwen2, Qwen2.5 has acquired significantly more knowledg\n\nassing up to\n18 trillion\ntokens. Compared to Qwen2, Qwen2.5 has acquired significantly more knowledge (MMLU: 85+) and has greatly improved capabilities in coding (HumanEval 85+) and mathematics (MATH 80+). Additionally, the new models achieve significant improvements in instruction following, generating long texts (over 8K tokens), understanding structured data (e.g, tables), and generating structured outputs especially JSON. Qwen2.5 models are generally more resilient to the diversity of system prompts, enhancing role-play implementation and condition-setting for chatbots. Like Qwen2, the Qwen2.5 language models support up to\n128K\ntokens and can generate up to\ntokens. They also maintain mul\n\nn2.5 language models support up to\n128K\ntokens and can generate up to\ntokens. They also maintain multilingual support for over\nlanguages, including Chinese, English, French, Spanish, Portuguese, German, Italian, Russian, Japanese, Korean, Vietnamese, Thai, Arabic, and more. Below, we provide basic information about the models and details of the supported languages.\nThe specialized expert language models, namely\nQwen2.5-Coder\nfor coding and\nQwen2.5-Math\nfor mathematics, have undergone substantial enhancements compared to their predecessors, CodeQwen1.5 and Qwen2-Math. Specifically, Qwen2.5-Coder has been trained on\n5.5 trillion\ntokens of code-related data, enabling even smaller coding-specifi\n\nr has been trained on\n5.5 trillion\ntokens of code-related data, enabling even smaller coding-specific models to deliver competitive performance against larger language models on coding evaluation benchmarks. Meanwhile, Qwen2.5-Math supports both\nChinese\nEnglish\nand incorporates various reasoning methods, including Chain-of-Thought (CoT), Program-of-Thought (PoT), and Tool-Integrated Reasoning (TIR).\nPerformance\nQwen2.5\nTo showcase Qwen2.5’s capabilities, we benchmark our largest open-source model,\nQwen2.5-72B\n- a 72B-parameter dense decoder-only language model - against leading open-source models like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned\n\nels like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned versions across various benchmarks, evaluating both model capabilities and human preferences.\nBesides the instruction-tuned language models, we figure out that the base language model of our flagship opensource model Qwen2.5-72B reaches top-tier performance even against larger models like Llama-3-405B.\nFurthermore, we benchmark the latest version of our API-based model,\nQwen-Plus\n, against leading proprietary and open-source models, including GPT4-o, Claude-3.5-Sonnet, Llama-3.1-405B, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of lar\n\neek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of large language models. We show that\nQwen-Plus\nsignificantly outcompetes DeepSeek-V2.5 and demonstrates competitive performance against Llama-3.1-405B, while still underperforming compared to GPT4-o and Claude-3.5-Sonnet in some aspects. This benchmarking not only highlights Qwen-Plus’s strengths but also identifies areas for future improvement, reinforcing our commitment to continuous enhancement and innovation in the field of large language models.\nA significant update in Qwen2.5 is the reintroduction of our 14B and 32B models,\nQwen2.5-14B\nQwen2.5-32B\n. These models outperform baseline models of\n\ntion of our 14B and 32B models,\nQwen2.5-14B\nQwen2.5-32B\n. These models outperform baseline models of comparable or larger sizes, such as Phi-3.5-MoE-Instruct and Gemma2-27B-IT, across diverse tasks. They achieve an optimal balance between model size and capability, delivering performance that matches or exceeds some larger models. Additionally, our API-based model,\nQwen-Turbo\n, offers highly competitive performance compared to the two open-source models, while providing a cost-effective and rapid service.\nIn recent times, there has been a notable shift towards small language models (SLMs). Although SLMs have historically trailed behind their larger counterparts (LLMs), the performance gap is\n\nhough SLMs have historically trailed behind their larger counterparts (LLMs), the performance gap is rapidly diminishing. Remarkably, even models with just 3 billion parameters are now delivering highly competitive results. The accompanying figure illustrates a significant trend: newer models achieving scores above 65 in MMLU are increasingly smaller, underscoring the accelerated growth in knowledge density among language models. Notably, our\nQwen2.5-3B\nstands out as a prime example, achieving impressive performance with only around 3 billion parameters, showcasing its efficiency and capability compared to its predecessors.\nIn addition to the notable enhancements in benchmark evaluations, we\n\ny compared to its predecessors.\nIn addition to the notable enhancements in benchmark evaluations, we have refined our post-training methodologies. Our four key updates include support for long text generation of up to 8K tokens, significantly improved comprehension of structured data, more reliable generation of structured outputs, particularly in JSON format, and enhanced performance across diverse system prompts, which facilitates effective role-playing. Check the LLM blog for details about how to leverage these capabilities.\nQwen2.5-Coder\nSince the launch of CodeQwen1.5, we have attracted numerous users who rely on this model for various coding tasks, such as debugging, answering coding-r\n\numerous users who rely on this model for various coding tasks, such as debugging, answering coding-related questions, and providing code suggestions. Our latest iteration, Qwen2.5-Coder, is specifically designed for coding applications. In this section, we present the perform\n\n[CONTENT_TRUNCATED: 12821 chars total; extracted passages, not full page]",
+            "evidence_excerpt": "GITHUB\nHUGGING FACE\nMODELSCOPE\nDEMO\nDISCORD\nIntroduction\nIn the past three months since Qwen2’s release, numerous developers have built new models on the Qwen2 language models, providing us with valuable feedback. During this period, we have focused on creating smarter and more knowledgeable language models. Today, we are excited to introduce the latest addition to the Qwen family:\nQwen2.5\nWe are announcing what might be the largest opensource release in history! Let’s get the party started!\nOur latest release features the LLMs\nQwen2.5\n, along with specialized models for coding,\nQwen2.5-\n\ntion-tuned\n\nels like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned versions across various benchmarks, evaluating both model capabilities and human preferences.\nBesides the instruction-tuned language models, we figure out that the base language model of our flagship opensource model Qwen2.5-72B reaches top-tier performance even against larger models like Llama-3-405B.\nFurthermore, we benchmark the latest version of our API-based model,\nQwen-Plus\n, against leading proprietary and open-source models, including GPT4-o, Claude-3.5-Sonnet, Llama-3.1-405B, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current land\n\nB, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of lar\n\neek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of large language models. We show that\nQwen-Plus\nsignificantly outcompetes DeepSeek-V2.5 and demonstrates competitive performance against Llama-3.1-405B, while still underperforming compared to GPT4-o and Claude-3.5-Sonnet in some aspects. This benchmarking not only highlights Qwen-Plus’s strengths but also identifies areas for future improvement, reinforcing our commitment to continuous enhancement and innovation in the field of large language models.\nA significant update in Qwen2.5 is ",
+            "evidence_kind": "page_excerpt"
+          },
+          "arguments": {
+            "url": "https://qwenlm.github.io/blog/qwen2.5/",
+            "max_chars": 6000
+          }
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "tool_call_id": "call_01_jzAmf5juAqMlZqeu6eLM9091",
+          "name": "browser",
+          "error": "Page read timed out"
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 29.84299999999348,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 361,
+        "prompt_tokens": 854,
+        "total_tokens": 1215,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 854
+      },
+      "elapsed_seconds": 3.4689999999973224,
+      "finish_reason": "stop",
+      "content_chars": 1171,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 131,
+        "prompt_tokens": 1417,
+        "total_tokens": 1548,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1417
+      },
+      "elapsed_seconds": 1.25,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 132,
+        "prompt_tokens": 1421,
+        "total_tokens": 1553,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 1421
+      },
+      "elapsed_seconds": 1.5,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 141,
+        "prompt_tokens": 1538,
+        "total_tokens": 1679,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 640
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 898
+      },
+      "elapsed_seconds": 1.4060000000026776,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 400,
+        "prompt_tokens": 3045,
+        "total_tokens": 3445,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 2661
+      },
+      "elapsed_seconds": 3.1570000000065193,
+      "finish_reason": "stop",
+      "content_chars": 766,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 703,
+        "prompt_tokens": 1814,
+        "total_tokens": 2517,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 1686
+      },
+      "elapsed_seconds": 4.25,
+      "finish_reason": "stop",
+      "content_chars": 1281,
+      "max_tokens": 4096
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024",
+        "top_n": 6,
+        "domains": [
+          "openai.com"
+        ]
+      },
+      "elapsed_seconds": 0.39100000000325963
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google 2024",
+        "top_n": 5,
+        "domains": [
+          "deepmind.google"
+        ]
+      },
+      "elapsed_seconds": 0.25
+    },
+    {
+      "tool": "browser",
+      "status": "failed",
+      "input": {
+        "url": "https://openai.com/index/gpt-4o-system-card/",
+        "max_chars": 8000,
+        "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024"
+      },
+      "elapsed_seconds": 0.4379999999946449
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io 2024",
+        "top_n": 5,
+        "domains": [
+          "qwenlm.github.io"
+        ]
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "tool": "browser",
+      "status": "failed",
+      "input": {
+        "url": "https://openai.com/index/openai-o1-system-card",
+        "max_chars": 8000,
+        "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024"
+      },
+      "elapsed_seconds": 0.25
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com 2024",
+        "top_n": 6,
+        "domains": [
+          "anthropic.com"
+        ]
+      },
+      "elapsed_seconds": 0.13999999999941792
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://qwenlm.github.io/blog/qwen2.5/",
+        "max_chars": 8000,
+        "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。"
+      },
+      "elapsed_seconds": 1.125
+    },
+    {
+      "tool": "browser",
+      "status": "cancelled",
+      "input": {
+        "url": "https://deepmind.google/discover/blog/google-gemini-1-5-next-generation-model-february-2024/",
+        "max_chars": 8000,
+        "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。"
+      },
+      "elapsed_seconds": 12.0
+    }
+  ],
+  "source_fingerprint": "0dd9ab69bf189fea99002b5bde8d6b7759cd1881641deb61df39dce6b11e0588"
+}

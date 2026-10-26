@@ -1,0 +1,1225 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑 **NVIDIA 一侧**的竞争力描述；AMD、Intel、华为昇腾、寒武纪均**无一手数据**，无法完成跨厂商对比。以下按证据强度分层陈述。\n\n## NVIDIA：训练与推理均有可引用证据\n- **推理**：Blackwell Ultra（GB300 NVL72）官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”，微软、CoreWeave、OCI 已规模化部署，用于低延迟/长上下文场景；使能要素为 NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM [s_f6f6f452c0a6]。该倍数为**厂商自述营销口径**，非第三方复现。\n- **基准**：MLPerf Inference v6.0 中 Blackwell Ultra 系统在最多模型/场景取得最高吞吐；NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与 [s_f600a45f3f4e][s_267fa508d06b]。注意：此为 NVIDIA 对 MLPerf 结果的**自述**，未取得 MLPerf 官方榜单原文。\n- **路线图**：Vera Rubin 平台 2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 增补第七颗芯片（Groq 3 LPX 低延迟推理加速器），定位以数据中心为计算单元、面向长上下文/agentic 推理 [s_1d2abc303176][s_1c7e1fc9369c]。**未取得** HBM 容量/带宽、FP4 算力等具体规格。\n\n## AMD / Intel：证据缺失\n两次 `site:amd.com` 检索返回 0 条，检索预算耗尽，**未获得任何 AMD（MI350/MI355X、MI400/Helios）或 Intel（Gaudi 3）官方规格与基准**。因此无法就训练或推理给出与 NVIDIA 的对比结论。\n\n## 中国厂商：证据缺失\n- `site:huawei.com` 命中均为无关文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**无一条涉及昇腾 910B/910C 规格或性能**；support.huawei.com 部分页面因 SSL 校验失败无法读取 [s_20581477fb31][s_b0693111ec09]。\n- `site:cambricon.com` 返回 **0 条**，思元 590/690 无官方页面命中。\n- 缺口：昇腾 910C 算力/带宽/互联参数、思元 590/690 规格与量产状态、CANN/MagicMind 生态成熟度、2025–2026 出货与客户案例。\n\n## 证据缺口与建议\n本报告无法回答“训练 vs 推理”的跨厂商排序。建议改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解。\n\n**总体置信度：0.35**（NVIDIA 部分约 0.8；AMD/Intel/中国厂商部分接近 0）\n\n**关键来源**：NVIDIA Developer 官方博客与产品页（推理平台、MLPerf v6.0、Vera Rubin 平台）[s_f6f6f452c0a6][s_f600a45f3f4e][s_267fa508d06b][s_1d2abc303176][s_1c7e1fc9369c]；华为支持站点检索结果（仅证明检索失败，非产品证据）[s_20581477fb31][s_b0693111ec09]。",
+    "sources": [
+      {
+        "source_id": "s_f6f6f452c0a6",
+        "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+        "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+        "snippet": "Click to Enlarge\nUnderstanding AI Inference\nToday's AI applications, powered by frontier\nmixture-of-experts (MoE)\n, introduce a critical deployment challenge: achieving uncompromising performance at scale. The core difficulty is the fundamental trade-off between user experience and total output. Specifically, you must constantly balance user interactivity—the low latency a seamless user experience demands—against total throughput—the maximum volume of work your system can handle.\nAn effective AI deployment can't just be fast at one point; it must perform across the full spectrum of operational demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference p\n\n demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference platform is engineered to lead this frontier across all operating points, ensuring you can deploy the right solution to maximize your system's efficiency and minimize cost per token for every workload.\nNVIDIA Inference Tools for Every AI Developer\nChoose your optimal path for deploying high-performance AI inference on NVIDIA. For developers who need full control, customization, and ultimate optimization for LLM performance, NVIDIA Dynamo and NVIDIA TensorRT™-LLM enable you to serve all AI m\n\ndevelopers to manage every device instruction set or data-transfer protocol directly.\nThe NVIDIA software stack spans model serving, runtime scheduling, kernels, communication libraries, and hardware-aware optimizations, enabling rapid performance gains and lower serving costs as improvements compound across layers.\nNVIDIA Blackwell Ultra Delivers up to 50x Better Performance and 35x Lower Cost for Agentic AI\nBuilt to accelerate the next generation of agentic AI, NVIDIA Blackwell Ultra delivers breakthrough inference performance with dramatically lower cost. Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low",
+        "task_id": "task_1",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2026-05-09T11:49:48+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_3d277e8ae2b4",
+        "url": "https://developer.nvidia.com/ja-jp/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+        "title": "NVIDIA Rubin プラットフォームの内部: 6 つの新チップと AI スーパーコンピューター - NVIDIA 技術ブログ",
+        "snippet": "Reading\nTime:\n13\nminutes\nAI\nは産業化段階に移行しています。\n個別の\nAI\nモデルのトレーニングや人と直接対話する推論を実行するシステムとして始まった\nAI\nは、現在では常時稼働する\nAI\nファクトリーに進化し、電力、半導体、データを大規模なインテリジェンスへと継続的に変換しています。こういったファクトリーは現在、事業計画の生成、市場分析、徹底的な研究の実施、広大な知識体系にわたる推論を実施するアプリケーションを支えています。\nこれらの機能を大規模に提供するために、次世代\nAI\nファクトリーは、エージェント型推論、複雑なワークフロー、マルチモーダル\nパイプラインに必要な長文コンテキストを提供する数十万単位の入力トークンを処理する必要があります。同時に、電力、信頼性、セキュリティ、デプロイ速度、コストといった制約の範囲でリアルタイム推論を維持しなければなりません。\nNVIDIA\nRubin\nプラットフォームは、この新たな現実に向けて特別に設計されました。\n徹底的な共同設計が\nRubin\nプラットフォームの基盤です。GPU、CPU、ネットワーク、セキュリティ、ソフトウェア、電力供給、冷却システムは、個別に最適化されるのではなく、単一のシステムとして統合的に設計されています。そうすることで、Rubin\nプラットフォームは単一の\nGPU\nサーバーではなく、データ\nセンターをコンピューティングの単位として扱います。このアプローチは、大規模環境において効率的、安全に、予測可能な形でインテリジェンスを生成するための新たな基盤を確立します。単なる個別コンポーネントのベンチマークだけでなく、本番環境のデプロイにおいても、パフォーマンスと効率性が向上することを保証します。\nこの技術的詳細の解説では、AI\nファクトリーが新しいアーキテクチャのアプローチを必要とする理由、",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-01-05T14:01:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_267fa508d06b",
+        "url": "https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/",
+        "title": "NVIDIA Platform Delivers Lowest Token Cost Enabled by Extreme Co-Design | NVIDIA Technical Blog",
+        "snippet": "Co-designed\nhardware,\nsoftware,\nand\nmodels\nare\nkey\nto\ndelivering\nthe\nhighest\nAI\nfactory\nthroughput\nand\nlowest\ntoken\ncost.\nMeasuring\nthis\ngoes\nfar\nbeyond\npeak\nchip\nspecifications.\nRigorous\nAI\ninference\nperformance\nbenchmarks\nare\ncritical\nto\nunderstanding\nreal-world\ntoken\noutput,\nwhich\ndrives\nAI\nfactory\nrevenue.\nMLPerf\nInference\nv6.0\nis\nthe\nlatest\nin\na\nseries\nof\nindustry\nbenchmarks\nthat\nmeasure\nperformance\nacross\na\nwide\nrange\nof\nmodel\narchitectures\nand\nuse\ncases.\nIn\nthis\nlatest\nround,\nsystems\npowered\nby\nNVIDIA\nBlackwell\nUltra\nGPUs\ndelivered\nthe\nhighest\nthroughput\nacross\nthe\nwidest\nrange\nof\nmodels\nand\nscenarios.\nThis\nbrings\nthe\ncumulative\nNVIDIA\nMLPerf\ntraining\nand\ninference\nwins\nsince\n2018\nto\n291,\nwhich\nis\n9x\nof\nall\nother\nsubmitters\ncombined.\nThis\nround,\nthe\nNVIDIA\npartner\necosystem\npartici",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-04-01T23:00:48+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_1c7e1fc9369c",
+        "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+        "title": "Tag: NVL72 | NVIDIA Technical Blog",
+        "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-05-10T09:59:12+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_1d2abc303176",
+        "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+        "title": "Inside the NVIDIA Vera Rubin Platform: Six New Chips, One AI Supercomputer | NVIDIA Technical Blog",
+        "snippet": "Update\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe\nNVIDIA\nVera\nRubin\nPlatform.\nAI\nhas\nentered\nan\nindustrial\nphase.\nWhat\nbegan\nas\nsystems\nperforming\ndiscrete\nAI\nmodel\ntraining\nand\nhuman-facing\ninference\nhas\nevolved\ninto\nalways-on\nAI\nfactories\nthat\ncontinuously\nconvert\npower,\nsilicon,\nand\ndata\ninto\nintelligence\nat\nscale.\nThese\nfactories\nnow\nunderpin\napplications\nthat\ngenerate\nbusiness\nplans,\nanalyze\nmarkets,\nconduct\ndeep\nresearch,\nand\nreason\nacross\nvast\nbodies\nof\nknowledge.\nTo\ndeliver\nthese\ncapabilities\nat\nscale,\nnext\ngeneration\nAI\nfactories\nmust\nprocess\nhundreds\nof\nthousands\nof\ninput\ntokens\nto\nprovide\nthe\nlong-context\nrequired\nfor\nagentic\nreasoning,\ncomplex\nworkflows,\nand\nmultimodal",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-01-06T06:20:12+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_f600a45f3f4e",
+        "url": "https://developer.nvidia.com/ko-kr/blog/nvidia-extreme-co-design-delivers-new-mlperf-inference-records/",
+        "title": "MLPerf Inference v6.0: NVIDIA Blackwell Ultra, 누적 291회 우승 - NVIDIA Technical Blog",
+        "snippet": "Reading\nTime:\n6\nminutes\n하드웨어,\n소프트웨어,\n모델의\n공동\n설계는\n최고의\nAI\n팩토리의\n처리량을\n극대화하고\n토큰\n비용을\n낮추는\n핵심\n요소입니다.\n능\n측정은\n단순히\n칩의\n이론적\n최대\n사양을\n확인하는\n차원을\n훨씬\n넘어섭니다.\n실제\n환경에서의\n토큰\n출력량을\n파악하기\n위해서는\n엄격한\nAI\n추론\n성능\n벤치마크가\n필수적이며,\n이는\n곧\nAI\n팩토리의\n수익으로\n직결됩니다.\n업계\n표준\n벤치마크인\nMLPerf\nInference\nv6.0의\n최신\n결과에\n따르면,\nNVIDIA\nBlackwell\nUltra\nGPU\n기반\n시스템이\n가장\n광범위한\n모델\n아키텍처와\n사용\n사례에서\n최고의\n처리량을\n기록했습니다.\n이로써\n2018년부터\n누적된\nNVIDIA의\nMLPerf\n학습\n및\n추론\n부문\n우승\n기록은\n총\n291회에\n달하며,\n이는\n다른\n모든\n참여사의\n기록을\n합친\n것보다\n9배나\n많은\n수치입니다.\n이번\n라운드에서는\n총\n14개의\n파트너사가\n대거\n참여하며\nNVIDIA\n파트너\n생태계의\n압도적인\n저력을\n보여주었습니다.\n이는\n단일\n플랫폼으로서는\n역대\n최대\n규모의\n참여입니다.\nASUS,\nCisco,\nCoreWeave,\nDell\nTechnologies,\nGigaComputing,\nGoogle\nCloud,\nHPE,\nLenovo,\nNebius,\nNetweb\nTechnology,\nQuanta\nCloud\nTechnology\n(QCT),\nRed\nHat,\nSupermicro,\n그리고\nLambda는\nNVIDIA\n플랫폼을\n통해\n다시\n한번\n탁월한\n성능을\n입증해\n냈습니다.\n그림\n1.\nNVIDIA,\n누적\nMLPerf\n학습\n및\n추론\n부문에서\n타사\n합산\n대비\n9배\n더",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-04-01T15:20:26+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_20581477fb31",
+        "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+        "title": "华为 A300-3010 配置手册、产品文档、PDF - 华为",
+        "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-08-27T07:05:24+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_51b5576c93ed",
+        "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+        "title": "华为 OptiX RTN 910A 配置手册、产品文档、PDF - 华为",
+        "snippet": "OptiX\nRTN\n910A全部文档产品文档包方案概述产品概述硬件描述版本说明书快速安装指南硬件安装指南配置指南调测指南工具更多华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOM公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900\nV100R023C10版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOFS/EOS公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R021C10版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOM公告华为OptiX\nRTN\n980L\nV100R011C10,OptiX\nRTN\n905\nV100R011C10,OptiX\nRTN\n905F\nV10",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-01-10T23:17:10+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_7a212cec4526",
+        "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910-pid-60977",
+        "title": "华为 OptiX RTN 910 配置手册、产品文档、PDF - 华为",
+        "snippet": "OptiX\nRTN\n910全部文档方案概述产品概述硬件描述Visio图标硬件安装指南培训胶片工具更多",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-01-10T23:16:57+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_a07b427a5ddb",
+        "url": "https://support.huawei.com/enterprise/zh/kunpeng-computing/s920x10k-pid-255325319",
+        "title": "华为 S920X10K 配置手册、产品文档、PDF - 华为",
+        "snippet": "S920X10K全部文档产品介绍多媒体快速安装指南软件部署指南验收测试指南升级指导书用户指南维护与服务指南安全维护与加固告警处理通信矩阵参数参考命令参考开发指南接口参考工具更多",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-01-10T22:50:49+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_80b86d49bd21",
+        "url": "https://support.huawei.com/enterprise/zh/edge-computing-and-server/a300-3010-pid-251560253/software",
+        "title": "华为 A300-3010 软件下载和补丁升级-华为",
+        "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-09-23T20:36:20+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_b0693111ec09",
+        "url": "https://support.huawei.com/enterprise/en/routers/atn-910c-pid-21675279",
+        "title": "Huawei ATN 910C Support Guide, Manuals & PDF - Huawei",
+        "snippet": "ATN\n910CAll\nDocumentsRelease\nNotesPatch\nRelease\nNotesOtherRelease\nDocumentsRelease\nNotesPatch\nRelease\nNotesRelease\nNotesATN\n905-S\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C10SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticePatch\nRelease\nNotesATN\n900\nV800R022SPH3b1\nPatch\nRelease",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-02-12T09:41:01+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 7,
+    "num_replan": 0,
+    "adversarial_rounds": 1,
+    "final_score": 7.409090909090909,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "11e960c1143341a1b15b8479b1ccdb30",
+    "review_history": [
+      {
+        "round": 1,
+        "dimension_scores": {
+          "fact_check": 6.5,
+          "hallucination": 8.5
+        },
+        "overall_score": 7.409,
+        "issues_count": 5,
+        "fix_operations": [
+          {
+            "issue": {
+              "severity": "minor",
+              "dimension": "fact_check",
+              "description": "报告称 Vera Rubin 平台于 2026-01-05 发布，但来源博客的发布日期为 2026-01-06，存在 1 天日期偏差。",
+              "location": "NVIDIA 路线图段落",
+              "fix_type": "in_place",
+              "evidence": "来源 [s_1d2abc303176] 的 Published 字段为 2026-01-06T06:20:12+08:00，而报告写“2026-01-05 发布”。"
+            },
+            "action": "in_place_fix: [{'location': 'NVIDIA 路线图段落', 'before': 'Vera Rubin 平台 2026-01-05 发布', 'after': 'Vera Rubin 平台 2026-01-06 发布'}]",
+            "success": false,
+            "detail": {
+              "detail": "changes=[{'location': 'NVIDIA 路线图段落', 'before': 'Vera Rubin 平台 2026-01-05 发布', 'after': 'Vera Rubin 平台 2026-01-06 发布'}]",
+              "before": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑 **NVIDIA 一侧**的竞争力描述；AMD、Intel、华为昇腾、寒武纪均**无一手数据**，无法完成跨厂商对比。以下按证据强度分层陈述。\n\n## NVIDIA：训练与推理均有可引用证据\n- **推理**：Blackwell Ultra（GB300 NVL72）官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”，微软、CoreWeave、OCI 已规模化部署，用于低延迟/长上下文场景；使能要素为 NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM [s_f6f6f452c0a6]。该倍数为**厂商自述营销口径**，非第三方复现。\n- **基准**：MLPerf Inference v6.0 中 Blackwell Ultra 系统在最多模型/场景取得最高吞吐；NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与 [s_f600a45f3f4e][s_267fa508d06b]。注意：此为 NVIDIA 对 MLPerf 结果的**自述**，未取得 MLPerf 官方榜单原文。\n- **路线图**：Vera Rubin 平台 2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 增补第七颗芯片（Groq 3 LPX 低延迟推理加速器），定位以数据中心为计算单元、面向长上下文/agentic 推理 [s_1d2abc303176][s_1c7e1fc9369c]。**未取得** HBM 容量/带宽、FP4 算力等具体规格。\n\n## AMD / Intel：证据缺失\n两次 `site:amd.com` 检索返回 0 条，检索预算耗尽，**未获得任何 AMD（MI350/MI355X、MI400/Helios）或 Intel（Gaudi 3）官方规格与基准**。因此无法就训练或推理给出与 NVIDIA 的对比结论。\n\n## 中国厂商：证据缺失\n- `site:huawei.com` 命中均为无关文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**无一条涉及昇腾 910B/910C 规格或性能**；support.huawei.com 部分页面因 SSL 校验失败无法读取 [s_20581477fb31][s_b0693111ec09]。\n- `site:cambricon.com` 返回 **0 条**，思元 590/690 无官方页面命中。\n- 缺口：昇腾 910C 算力/带宽/互联参数、思元 590/690 规格与量产状态、CANN/MagicMind 生态成熟度、2025–2026 出货与客户案例。\n\n## 证据缺口与建议\n本报告无法回答“训练 vs 推理”的跨厂商排序。建议改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解。\n\n**总体置信度：0.35**（NVIDIA 部分约 0.8；AMD/Intel/中国厂商部分接近 0）\n\n**关键来源**：NVIDIA Developer 官方博客与产品页（推理平台、MLPerf v6.0、Vera Rubin 平台）[s_f6f6f452c0a6][s_f600a45f3f4e][s_267fa508d06b][s_1d2abc303176][s_1c7e1fc9369c]；华为支持站点检索结果（仅证明检索失败，非产品证据）[s_20581477fb31][s_b0693111ec09]。",
+              "after": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑 **NVIDIA 一侧**的竞争力描述；AMD、Intel、华为昇腾、寒武纪均**无一手数据**，无法完成跨厂商对比。以下按证据强度分层陈述。\n\n## NVIDIA：训练与推理均有可引用证据\n- **推理**：Blackwell Ultra（GB300 NVL72）官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”，微软、CoreWeave、OCI 已规模化部署，用于低延迟/长上下文场景；使能要素为 NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM [s_f6f6f452c0a6]。该倍数为**厂商自述营销口径**，非第三方复现。\n- **基准**：MLPerf Inference v6.0 中 Blackwell Ultra 系统在最多模型/场景取得最高吞吐；NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与 [s_f600a45f3f4e][s_267fa508d06b]。注意：此为 NVIDIA 对 MLPerf 结果的**自述**，未取得 MLPerf 官方榜单原文。\n- **路线图**：Vera Rubin 平台 2026-01-06 发布“六颗新芯片、一台 AI 超算”，2026-03-16 增补第七颗芯片（Groq 3 LPX 低延迟推理加速器），定位以数据中心为计算单元、面向长上下文/agentic 推理 [s_1d2abc303176][s_1c7e1fc9369c]。**未取得** HBM 容量/带宽、FP4 算力等具体规格。\n\n## AMD / Intel：证据缺失\n两次 `site:amd.com` 检索返回 0 条，检索预算耗尽，**未获得任何 AMD（MI350/MI355X、MI400/Helios）或 Intel（Gaudi 3）官方规格与基准**。因此无法就训练或推理给出与 NVIDIA 的对比结论。\n\n## 中国厂商：证据缺失\n- `site:huawei.com` 命中均为无关文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**无一条涉及昇腾 910B/910C 规格或性能**；support.huawei.com 部分页面因 SSL 校验失败无法读取 [s_20581477fb31][s_b0693111ec09]。\n- `site:cambricon.com` 返回 **0 条**，思元 590/690 无官方页面命中。\n- 缺口：昇腾 910C 算力/带宽/互联参数、思元 590/690 规格与量产状态、CANN/MagicMind 生态成熟度、2025–2026 出货与客户案例。\n\n## 证据缺口与建议\n本报告无法回答“训练 vs 推理”的跨厂商排序。建议改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解。\n\n**总体置信度：0.35**（NVIDIA 部分约 0.8；AMD/Intel/中国厂商部分接近 0）\n\n**关键来源**：NVIDIA Developer 官方博客与产品页（推理平台、MLPerf v6.0、Vera Rubin 平台）[s_f6f6f452c0a6][s_f600a45f3f4e][s_267fa508d06b][s_1d2abc303176][s_1c7e1fc9369c]；华为支持站点检索结果（仅证明检索失败，非产品证据）[s_20581477fb31][s_b0693111ec09]。",
+              "sources": [
+                {
+                  "source_id": "s_f6f6f452c0a6",
+                  "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+                  "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+                  "snippet": "Click to Enlarge\nUnderstanding AI Inference\nToday's AI applications, powered by frontier\nmixture-of-experts (MoE)\n, introduce a critical deployment challenge: achieving uncompromising performance at scale. The core difficulty is the fundamental trade-off between user experience and total output. Specifically, you must constantly balance user interactivity—the low latency a seamless user experience demands—against total throughput—the maximum volume of work your system can handle.\nAn effective AI deployment can't just be fast at one point; it must perform across the full spectrum of operational demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference p\n\n demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference platform is engineered to lead this frontier across all operating points, ensuring you can deploy the right solution to maximize your system's efficiency and minimize cost per token for every workload.\nNVIDIA Inference Tools for Every AI Developer\nChoose your optimal path for deploying high-performance AI inference on NVIDIA. For developers who need full control, customization, and ultimate optimization for LLM performance, NVIDIA Dynamo and NVIDIA TensorRT™-LLM enable you to serve all AI m\n\ndevelopers to manage every device instruction set or data-transfer protocol directly.\nThe NVIDIA software stack spans model serving, runtime scheduling, kernels, communication libraries, and hardware-aware optimizations, enabling rapid performance gains and lower serving costs as improvements compound across layers.\nNVIDIA Blackwell Ultra Delivers up to 50x Better Performance and 35x Lower Cost for Agentic AI\nBuilt to accelerate the next generation of agentic AI, NVIDIA Blackwell Ultra delivers breakthrough inference performance with dramatically lower cost. Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low",
+                  "task_id": "task_1",
+                  "evidence_kind": "page_excerpt",
+                  "published_at": "2026-05-09T11:49:48+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_3d277e8ae2b4",
+                  "url": "https://developer.nvidia.com/ja-jp/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+                  "title": "NVIDIA Rubin プラットフォームの内部: 6 つの新チップと AI スーパーコンピューター - NVIDIA 技術ブログ",
+                  "snippet": "Reading\nTime:\n13\nminutes\nAI\nは産業化段階に移行しています。\n個別の\nAI\nモデルのトレーニングや人と直接対話する推論を実行するシステムとして始まった\nAI\nは、現在では常時稼働する\nAI\nファクトリーに進化し、電力、半導体、データを大規模なインテリジェンスへと継続的に変換しています。こういったファクトリーは現在、事業計画の生成、市場分析、徹底的な研究の実施、広大な知識体系にわたる推論を実施するアプリケーションを支えています。\nこれらの機能を大規模に提供するために、次世代\nAI\nファクトリーは、エージェント型推論、複雑なワークフロー、マルチモーダル\nパイプラインに必要な長文コンテキストを提供する数十万単位の入力トークンを処理する必要があります。同時に、電力、信頼性、セキュリティ、デプロイ速度、コストといった制約の範囲でリアルタイム推論を維持しなければなりません。\nNVIDIA\nRubin\nプラットフォームは、この新たな現実に向けて特別に設計されました。\n徹底的な共同設計が\nRubin\nプラットフォームの基盤です。GPU、CPU、ネットワーク、セキュリティ、ソフトウェア、電力供給、冷却システムは、個別に最適化されるのではなく、単一のシステムとして統合的に設計されています。そうすることで、Rubin\nプラットフォームは単一の\nGPU\nサーバーではなく、データ\nセンターをコンピューティングの単位として扱います。このアプローチは、大規模環境において効率的、安全に、予測可能な形でインテリジェンスを生成するための新たな基盤を確立します。単なる個別コンポーネントのベンチマークだけでなく、本番環境のデプロイにおいても、パフォーマンスと効率性が向上することを保証します。\nこの技術的詳細の解説では、AI\nファクトリーが新しいアーキテクチャのアプローチを必要とする理由、",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-01-05T14:01:00+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_267fa508d06b",
+                  "url": "https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/",
+                  "title": "NVIDIA Platform Delivers Lowest Token Cost Enabled by Extreme Co-Design | NVIDIA Technical Blog",
+                  "snippet": "Co-designed\nhardware,\nsoftware,\nand\nmodels\nare\nkey\nto\ndelivering\nthe\nhighest\nAI\nfactory\nthroughput\nand\nlowest\ntoken\ncost.\nMeasuring\nthis\ngoes\nfar\nbeyond\npeak\nchip\nspecifications.\nRigorous\nAI\ninference\nperformance\nbenchmarks\nare\ncritical\nto\nunderstanding\nreal-world\ntoken\noutput,\nwhich\ndrives\nAI\nfactory\nrevenue.\nMLPerf\nInference\nv6.0\nis\nthe\nlatest\nin\na\nseries\nof\nindustry\nbenchmarks\nthat\nmeasure\nperformance\nacross\na\nwide\nrange\nof\nmodel\narchitectures\nand\nuse\ncases.\nIn\nthis\nlatest\nround,\nsystems\npowered\nby\nNVIDIA\nBlackwell\nUltra\nGPUs\ndelivered\nthe\nhighest\nthroughput\nacross\nthe\nwidest\nrange\nof\nmodels\nand\nscenarios.\nThis\nbrings\nthe\ncumulative\nNVIDIA\nMLPerf\ntraining\nand\ninference\nwins\nsince\n2018\nto\n291,\nwhich\nis\n9x\nof\nall\nother\nsubmitters\ncombined.\nThis\nround,\nthe\nNVIDIA\npartner\necosystem\npartici",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-04-01T23:00:48+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_1c7e1fc9369c",
+                  "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+                  "title": "Tag: NVL72 | NVIDIA Technical Blog",
+                  "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-05-10T09:59:12+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_1d2abc303176",
+                  "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+                  "title": "Inside the NVIDIA Vera Rubin Platform: Six New Chips, One AI Supercomputer | NVIDIA Technical Blog",
+                  "snippet": "Update\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe\nNVIDIA\nVera\nRubin\nPlatform.\nAI\nhas\nentered\nan\nindustrial\nphase.\nWhat\nbegan\nas\nsystems\nperforming\ndiscrete\nAI\nmodel\ntraining\nand\nhuman-facing\ninference\nhas\nevolved\ninto\nalways-on\nAI\nfactories\nthat\ncontinuously\nconvert\npower,\nsilicon,\nand\ndata\ninto\nintelligence\nat\nscale.\nThese\nfactories\nnow\nunderpin\napplications\nthat\ngenerate\nbusiness\nplans,\nanalyze\nmarkets,\nconduct\ndeep\nresearch,\nand\nreason\nacross\nvast\nbodies\nof\nknowledge.\nTo\ndeliver\nthese\ncapabilities\nat\nscale,\nnext\ngeneration\nAI\nfactories\nmust\nprocess\nhundreds\nof\nthousands\nof\ninput\ntokens\nto\nprovide\nthe\nlong-context\nrequired\nfor\nagentic\nreasoning,\ncomplex\nworkflows,\nand\nmultimodal",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-01-06T06:20:12+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_f600a45f3f4e",
+                  "url": "https://developer.nvidia.com/ko-kr/blog/nvidia-extreme-co-design-delivers-new-mlperf-inference-records/",
+                  "title": "MLPerf Inference v6.0: NVIDIA Blackwell Ultra, 누적 291회 우승 - NVIDIA Technical Blog",
+                  "snippet": "Reading\nTime:\n6\nminutes\n하드웨어,\n소프트웨어,\n모델의\n공동\n설계는\n최고의\nAI\n팩토리의\n처리량을\n극대화하고\n토큰\n비용을\n낮추는\n핵심\n요소입니다.\n능\n측정은\n단순히\n칩의\n이론적\n최대\n사양을\n확인하는\n차원을\n훨씬\n넘어섭니다.\n실제\n환경에서의\n토큰\n출력량을\n파악하기\n위해서는\n엄격한\nAI\n추론\n성능\n벤치마크가\n필수적이며,\n이는\n곧\nAI\n팩토리의\n수익으로\n직결됩니다.\n업계\n표준\n벤치마크인\nMLPerf\nInference\nv6.0의\n최신\n결과에\n따르면,\nNVIDIA\nBlackwell\nUltra\nGPU\n기반\n시스템이\n가장\n광범위한\n모델\n아키텍처와\n사용\n사례에서\n최고의\n처리량을\n기록했습니다.\n이로써\n2018년부터\n누적된\nNVIDIA의\nMLPerf\n학습\n및\n추론\n부문\n우승\n기록은\n총\n291회에\n달하며,\n이는\n다른\n모든\n참여사의\n기록을\n합친\n것보다\n9배나\n많은\n수치입니다.\n이번\n라운드에서는\n총\n14개의\n파트너사가\n대거\n참여하며\nNVIDIA\n파트너\n생태계의\n압도적인\n저력을\n보여주었습니다.\n이는\n단일\n플랫폼으로서는\n역대\n최대\n규모의\n참여입니다.\nASUS,\nCisco,\nCoreWeave,\nDell\nTechnologies,\nGigaComputing,\nGoogle\nCloud,\nHPE,\nLenovo,\nNebius,\nNetweb\nTechnology,\nQuanta\nCloud\nTechnology\n(QCT),\nRed\nHat,\nSupermicro,\n그리고\nLambda는\nNVIDIA\n플랫폼을\n통해\n다시\n한번\n탁월한\n성능을\n입증해\n냈습니다.\n그림\n1.\nNVIDIA,\n누적\nMLPerf\n학습\n및\n추론\n부문에서\n타사\n합산\n대비\n9배\n더",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-04-01T15:20:26+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_20581477fb31",
+                  "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+                  "title": "华为 A300-3010 配置手册、产品文档、PDF - 华为",
+                  "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-08-27T07:05:24+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_51b5576c93ed",
+                  "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+                  "title": "华为 OptiX RTN 910A 配置手册、产品文档、PDF - 华为",
+                  "snippet": "OptiX\nRTN\n910A全部文档产品文档包方案概述产品概述硬件描述版本说明书快速安装指南硬件安装指南配置指南调测指南工具更多华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOM公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900\nV100R023C10版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOFS/EOS公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R021C10版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOM公告华为OptiX\nRTN\n980L\nV100R011C10,OptiX\nRTN\n905\nV100R011C10,OptiX\nRTN\n905F\nV10",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-01-10T23:17:10+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_7a212cec4526",
+                  "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910-pid-60977",
+                  "title": "华为 OptiX RTN 910 配置手册、产品文档、PDF - 华为",
+                  "snippet": "OptiX\nRTN\n910全部文档方案概述产品概述硬件描述Visio图标硬件安装指南培训胶片工具更多",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-01-10T23:16:57+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_a07b427a5ddb",
+                  "url": "https://support.huawei.com/enterprise/zh/kunpeng-computing/s920x10k-pid-255325319",
+                  "title": "华为 S920X10K 配置手册、产品文档、PDF - 华为",
+                  "snippet": "S920X10K全部文档产品介绍多媒体快速安装指南软件部署指南验收测试指南升级指导书用户指南维护与服务指南安全维护与加固告警处理通信矩阵参数参考命令参考开发指南接口参考工具更多",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-01-10T22:50:49+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_80b86d49bd21",
+                  "url": "https://support.huawei.com/enterprise/zh/edge-computing-and-server/a300-3010-pid-251560253/software",
+                  "title": "华为 A300-3010 软件下载和补丁升级-华为",
+                  "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-09-23T20:36:20+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_b0693111ec09",
+                  "url": "https://support.huawei.com/enterprise/en/routers/atn-910c-pid-21675279",
+                  "title": "Huawei ATN 910C Support Guide, Manuals & PDF - Huawei",
+                  "snippet": "ATN\n910CAll\nDocumentsRelease\nNotesPatch\nRelease\nNotesOtherRelease\nDocumentsRelease\nNotesPatch\nRelease\nNotesRelease\nNotesATN\n905-S\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C10SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticePatch\nRelease\nNotesATN\n900\nV800R022SPH3b1\nPatch\nRelease",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-02-12T09:41:01+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                }
+              ],
+              "evidence": "来源 [s_1d2abc303176] 的 Published 字段为 2026-01-06T06:20:12+08:00，而报告写“2026-01-05 发布”。",
+              "reverted": true
+            }
+          }
+        ],
+        "resolved_count": 0,
+        "oscillation_detected": false,
+        "stop_reason": "no_change",
+        "raw_feedback": "[fact_check]\n{\n  \"score\": 6.5,\n  \"issues\": [\n    {\n      \"severity\": \"major\",\n      \"description\": \"报告称 Vera Rubin 平台于 2026-01-05 发布，但来源博客的发布日期为 2026-01-06，存在日期偏差；且报告未说明该日期是博客发布日期还是实际发布事件日期，事实表述不精确。\",\n      \"location\": \"NVIDIA 路线图段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_1d2abc303176] 的 Published 字段为 2026-01-06T06:20:12+08:00，而报告写“2026-01-05 发布”。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x”，该数字与来源一致，但来源为 NVIDIA 官方博客自述，报告虽已注明“自述”，却未标注该数据无法独立验证，事实核查层面应明确标记为单一厂商来源。\",\n      \"location\": \"基准段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_f600a45f3f4e] 原文：“누적된 NVIDIA의 MLPerf 학습 및 추론 부문 우승 기록은 총 291회에 달하며, 이는 다른 모든 참여사의 기록을 합친 것보다 9배나 많은 수치입니다.” 仅为 NVIDIA 自述。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称“本轮 14 家伙伴参与”，来源列出 14 家伙伴名称，数字一致；但报告未提及来源同时声称这是“单平台史上最大规模参与”，该表述同样为厂商自述，报告在事实陈述中未区分可验证数字与营销定性。\",\n      \"location\": \"基准段落\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_f600a45f3f4e] 列出 ASUS、Cisco、CoreWeave、Dell、GigaComputing、Google Cloud、HPE、Lenovo、Nebius、Netweb、Quanta、Red Hat、Supermicro、Lambda 共 14 家，并称“단일 플랫폼으로서는 역대 최대 규모의 참여”。\"\n    }\n  ]\n}\n\n[hallucination]\n{\n  \"score\": 8.5,\n  \"issues\": [\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称微软、CoreWeave、OCI 已规模化部署 GB300 NVL72 用于低延迟/长上下文场景，但来源摘录仅提及这些云厂商正在部署，未明确说明部署用途为低延迟/长上下文，属于合理推断但未标注。\",\n      \"location\": \"NVIDIA：训练与推理均有可引用证据 - 推理\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源摘录：'Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low'（截断），未明确低延迟/长上下文。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称 Vera Rubin 平台定位以数据中心为计算单元、面向长上下文/agentic 推理，但来源摘录仅提及 AI 工厂和长上下文需求，未明确平台定位表述，属于合理推断但未标注。\",\n      \"location\": \"NVIDIA：训练与推理均有可引用证据 - 路线图\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源摘录：'next generation AI factories must process hundreds of thousands of input tokens to provide the long-context required for agentic reasoning'，未直接描述平台定位。\"\n    }\n  ]\n}\n",
+        "content_before": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑 **NVIDIA 一侧**的竞争力描述；AMD、Intel、华为昇腾、寒武纪均**无一手数据**，无法完成跨厂商对比。以下按证据强度分层陈述。\n\n## NVIDIA：训练与推理均有可引用证据\n- **推理**：Blackwell Ultra（GB300 NVL72）官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”，微软、CoreWeave、OCI 已规模化部署，用于低延迟/长上下文场景；使能要素为 NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM [s_f6f6f452c0a6]。该倍数为**厂商自述营销口径**，非第三方复现。\n- **基准**：MLPerf Inference v6.0 中 Blackwell Ultra 系统在最多模型/场景取得最高吞吐；NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与 [s_f600a45f3f4e][s_267fa508d06b]。注意：此为 NVIDIA 对 MLPerf 结果的**自述**，未取得 MLPerf 官方榜单原文。\n- **路线图**：Vera Rubin 平台 2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 增补第七颗芯片（Groq 3 LPX 低延迟推理加速器），定位以数据中心为计算单元、面向长上下文/agentic 推理 [s_1d2abc303176][s_1c7e1fc9369c]。**未取得** HBM 容量/带宽、FP4 算力等具体规格。\n\n## AMD / Intel：证据缺失\n两次 `site:amd.com` 检索返回 0 条，检索预算耗尽，**未获得任何 AMD（MI350/MI355X、MI400/Helios）或 Intel（Gaudi 3）官方规格与基准**。因此无法就训练或推理给出与 NVIDIA 的对比结论。\n\n## 中国厂商：证据缺失\n- `site:huawei.com` 命中均为无关文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**无一条涉及昇腾 910B/910C 规格或性能**；support.huawei.com 部分页面因 SSL 校验失败无法读取 [s_20581477fb31][s_b0693111ec09]。\n- `site:cambricon.com` 返回 **0 条**，思元 590/690 无官方页面命中。\n- 缺口：昇腾 910C 算力/带宽/互联参数、思元 590/690 规格与量产状态、CANN/MagicMind 生态成熟度、2025–2026 出货与客户案例。\n\n## 证据缺口与建议\n本报告无法回答“训练 vs 推理”的跨厂商排序。建议改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解。\n\n**总体置信度：0.35**（NVIDIA 部分约 0.8；AMD/Intel/中国厂商部分接近 0）\n\n**关键来源**：NVIDIA Developer 官方博客与产品页（推理平台、MLPerf v6.0、Vera Rubin 平台）[s_f6f6f452c0a6][s_f600a45f3f4e][s_267fa508d06b][s_1d2abc303176][s_1c7e1fc9369c]；华为支持站点检索结果（仅证明检索失败，非产品证据）[s_20581477fb31][s_b0693111ec09]。",
+        "content_after": "# AI 芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑 **NVIDIA 一侧**的竞争力描述；AMD、Intel、华为昇腾、寒武纪均**无一手数据**，无法完成跨厂商对比。以下按证据强度分层陈述。\n\n## NVIDIA：训练与推理均有可引用证据\n- **推理**：Blackwell Ultra（GB300 NVL72）官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”，微软、CoreWeave、OCI 已规模化部署，用于低延迟/长上下文场景；使能要素为 NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM [s_f6f6f452c0a6]。该倍数为**厂商自述营销口径**，非第三方复现。\n- **基准**：MLPerf Inference v6.0 中 Blackwell Ultra 系统在最多模型/场景取得最高吞吐；NVIDIA 自 2018 年累计训练+推理胜场 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与 [s_f600a45f3f4e][s_267fa508d06b]。注意：此为 NVIDIA 对 MLPerf 结果的**自述**，未取得 MLPerf 官方榜单原文。\n- **路线图**：Vera Rubin 平台 2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 增补第七颗芯片（Groq 3 LPX 低延迟推理加速器），定位以数据中心为计算单元、面向长上下文/agentic 推理 [s_1d2abc303176][s_1c7e1fc9369c]。**未取得** HBM 容量/带宽、FP4 算力等具体规格。\n\n## AMD / Intel：证据缺失\n两次 `site:amd.com` 检索返回 0 条，检索预算耗尽，**未获得任何 AMD（MI350/MI355X、MI400/Helios）或 Intel（Gaudi 3）官方规格与基准**。因此无法就训练或推理给出与 NVIDIA 的对比结论。\n\n## 中国厂商：证据缺失\n- `site:huawei.com` 命中均为无关文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**无一条涉及昇腾 910B/910C 规格或性能**；support.huawei.com 部分页面因 SSL 校验失败无法读取 [s_20581477fb31][s_b0693111ec09]。\n- `site:cambricon.com` 返回 **0 条**，思元 590/690 无官方页面命中。\n- 缺口：昇腾 910C 算力/带宽/互联参数、思元 590/690 规格与量产状态、CANN/MagicMind 生态成熟度、2025–2026 出货与客户案例。\n\n## 证据缺口与建议\n本报告无法回答“训练 vs 推理”的跨厂商排序。建议改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解。\n\n**总体置信度：0.35**（NVIDIA 部分约 0.8；AMD/Intel/中国厂商部分接近 0）\n\n**关键来源**：NVIDIA Developer 官方博客与产品页（推理平台、MLPerf v6.0、Vera Rubin 平台）[s_f6f6f452c0a6][s_f600a45f3f4e][s_267fa508d06b][s_1d2abc303176][s_1c7e1fc9369c]；华为支持站点检索结果（仅证明检索失败，非产品证据）[s_20581477fb31][s_b0693111ec09]。",
+        "before_version": "f5f1b5e435b0bcfbf4aa04f93c592d55e279c3c2aaff3e1f6e880229adcb0896",
+        "after_version": "f5f1b5e435b0bcfbf4aa04f93c592d55e279c3c2aaff3e1f6e880229adcb0896",
+        "score_before": 7.954545454545454,
+        "sources_after": [
+          {
+            "source_id": "s_f6f6f452c0a6",
+            "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+            "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+            "snippet": "Click to Enlarge\nUnderstanding AI Inference\nToday's AI applications, powered by frontier\nmixture-of-experts (MoE)\n, introduce a critical deployment challenge: achieving uncompromising performance at scale. The core difficulty is the fundamental trade-off between user experience and total output. Specifically, you must constantly balance user interactivity—the low latency a seamless user experience demands—against total throughput—the maximum volume of work your system can handle.\nAn effective AI deployment can't just be fast at one point; it must perform across the full spectrum of operational demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference p\n\n demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference platform is engineered to lead this frontier across all operating points, ensuring you can deploy the right solution to maximize your system's efficiency and minimize cost per token for every workload.\nNVIDIA Inference Tools for Every AI Developer\nChoose your optimal path for deploying high-performance AI inference on NVIDIA. For developers who need full control, customization, and ultimate optimization for LLM performance, NVIDIA Dynamo and NVIDIA TensorRT™-LLM enable you to serve all AI m\n\ndevelopers to manage every device instruction set or data-transfer protocol directly.\nThe NVIDIA software stack spans model serving, runtime scheduling, kernels, communication libraries, and hardware-aware optimizations, enabling rapid performance gains and lower serving costs as improvements compound across layers.\nNVIDIA Blackwell Ultra Delivers up to 50x Better Performance and 35x Lower Cost for Agentic AI\nBuilt to accelerate the next generation of agentic AI, NVIDIA Blackwell Ultra delivers breakthrough inference performance with dramatically lower cost. Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low",
+            "task_id": "task_1",
+            "evidence_kind": "page_excerpt",
+            "published_at": "2026-05-09T11:49:48+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_3d277e8ae2b4",
+            "url": "https://developer.nvidia.com/ja-jp/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+            "title": "NVIDIA Rubin プラットフォームの内部: 6 つの新チップと AI スーパーコンピューター - NVIDIA 技術ブログ",
+            "snippet": "Reading\nTime:\n13\nminutes\nAI\nは産業化段階に移行しています。\n個別の\nAI\nモデルのトレーニングや人と直接対話する推論を実行するシステムとして始まった\nAI\nは、現在では常時稼働する\nAI\nファクトリーに進化し、電力、半導体、データを大規模なインテリジェンスへと継続的に変換しています。こういったファクトリーは現在、事業計画の生成、市場分析、徹底的な研究の実施、広大な知識体系にわたる推論を実施するアプリケーションを支えています。\nこれらの機能を大規模に提供するために、次世代\nAI\nファクトリーは、エージェント型推論、複雑なワークフロー、マルチモーダル\nパイプラインに必要な長文コンテキストを提供する数十万単位の入力トークンを処理する必要があります。同時に、電力、信頼性、セキュリティ、デプロイ速度、コストといった制約の範囲でリアルタイム推論を維持しなければなりません。\nNVIDIA\nRubin\nプラットフォームは、この新たな現実に向けて特別に設計されました。\n徹底的な共同設計が\nRubin\nプラットフォームの基盤です。GPU、CPU、ネットワーク、セキュリティ、ソフトウェア、電力供給、冷却システムは、個別に最適化されるのではなく、単一のシステムとして統合的に設計されています。そうすることで、Rubin\nプラットフォームは単一の\nGPU\nサーバーではなく、データ\nセンターをコンピューティングの単位として扱います。このアプローチは、大規模環境において効率的、安全に、予測可能な形でインテリジェンスを生成するための新たな基盤を確立します。単なる個別コンポーネントのベンチマークだけでなく、本番環境のデプロイにおいても、パフォーマンスと効率性が向上することを保証します。\nこの技術的詳細の解説では、AI\nファクトリーが新しいアーキテクチャのアプローチを必要とする理由、",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-01-05T14:01:00+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_267fa508d06b",
+            "url": "https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/",
+            "title": "NVIDIA Platform Delivers Lowest Token Cost Enabled by Extreme Co-Design | NVIDIA Technical Blog",
+            "snippet": "Co-designed\nhardware,\nsoftware,\nand\nmodels\nare\nkey\nto\ndelivering\nthe\nhighest\nAI\nfactory\nthroughput\nand\nlowest\ntoken\ncost.\nMeasuring\nthis\ngoes\nfar\nbeyond\npeak\nchip\nspecifications.\nRigorous\nAI\ninference\nperformance\nbenchmarks\nare\ncritical\nto\nunderstanding\nreal-world\ntoken\noutput,\nwhich\ndrives\nAI\nfactory\nrevenue.\nMLPerf\nInference\nv6.0\nis\nthe\nlatest\nin\na\nseries\nof\nindustry\nbenchmarks\nthat\nmeasure\nperformance\nacross\na\nwide\nrange\nof\nmodel\narchitectures\nand\nuse\ncases.\nIn\nthis\nlatest\nround,\nsystems\npowered\nby\nNVIDIA\nBlackwell\nUltra\nGPUs\ndelivered\nthe\nhighest\nthroughput\nacross\nthe\nwidest\nrange\nof\nmodels\nand\nscenarios.\nThis\nbrings\nthe\ncumulative\nNVIDIA\nMLPerf\ntraining\nand\ninference\nwins\nsince\n2018\nto\n291,\nwhich\nis\n9x\nof\nall\nother\nsubmitters\ncombined.\nThis\nround,\nthe\nNVIDIA\npartner\necosystem\npartici",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-04-01T23:00:48+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_1c7e1fc9369c",
+            "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+            "title": "Tag: NVL72 | NVIDIA Technical Blog",
+            "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-05-10T09:59:12+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_1d2abc303176",
+            "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+            "title": "Inside the NVIDIA Vera Rubin Platform: Six New Chips, One AI Supercomputer | NVIDIA Technical Blog",
+            "snippet": "Update\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe\nNVIDIA\nVera\nRubin\nPlatform.\nAI\nhas\nentered\nan\nindustrial\nphase.\nWhat\nbegan\nas\nsystems\nperforming\ndiscrete\nAI\nmodel\ntraining\nand\nhuman-facing\ninference\nhas\nevolved\ninto\nalways-on\nAI\nfactories\nthat\ncontinuously\nconvert\npower,\nsilicon,\nand\ndata\ninto\nintelligence\nat\nscale.\nThese\nfactories\nnow\nunderpin\napplications\nthat\ngenerate\nbusiness\nplans,\nanalyze\nmarkets,\nconduct\ndeep\nresearch,\nand\nreason\nacross\nvast\nbodies\nof\nknowledge.\nTo\ndeliver\nthese\ncapabilities\nat\nscale,\nnext\ngeneration\nAI\nfactories\nmust\nprocess\nhundreds\nof\nthousands\nof\ninput\ntokens\nto\nprovide\nthe\nlong-context\nrequired\nfor\nagentic\nreasoning,\ncomplex\nworkflows,\nand\nmultimodal",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-01-06T06:20:12+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_f600a45f3f4e",
+            "url": "https://developer.nvidia.com/ko-kr/blog/nvidia-extreme-co-design-delivers-new-mlperf-inference-records/",
+            "title": "MLPerf Inference v6.0: NVIDIA Blackwell Ultra, 누적 291회 우승 - NVIDIA Technical Blog",
+            "snippet": "Reading\nTime:\n6\nminutes\n하드웨어,\n소프트웨어,\n모델의\n공동\n설계는\n최고의\nAI\n팩토리의\n처리량을\n극대화하고\n토큰\n비용을\n낮추는\n핵심\n요소입니다.\n능\n측정은\n단순히\n칩의\n이론적\n최대\n사양을\n확인하는\n차원을\n훨씬\n넘어섭니다.\n실제\n환경에서의\n토큰\n출력량을\n파악하기\n위해서는\n엄격한\nAI\n추론\n성능\n벤치마크가\n필수적이며,\n이는\n곧\nAI\n팩토리의\n수익으로\n직결됩니다.\n업계\n표준\n벤치마크인\nMLPerf\nInference\nv6.0의\n최신\n결과에\n따르면,\nNVIDIA\nBlackwell\nUltra\nGPU\n기반\n시스템이\n가장\n광범위한\n모델\n아키텍처와\n사용\n사례에서\n최고의\n처리량을\n기록했습니다.\n이로써\n2018년부터\n누적된\nNVIDIA의\nMLPerf\n학습\n및\n추론\n부문\n우승\n기록은\n총\n291회에\n달하며,\n이는\n다른\n모든\n참여사의\n기록을\n합친\n것보다\n9배나\n많은\n수치입니다.\n이번\n라운드에서는\n총\n14개의\n파트너사가\n대거\n참여하며\nNVIDIA\n파트너\n생태계의\n압도적인\n저력을\n보여주었습니다.\n이는\n단일\n플랫폼으로서는\n역대\n최대\n규모의\n참여입니다.\nASUS,\nCisco,\nCoreWeave,\nDell\nTechnologies,\nGigaComputing,\nGoogle\nCloud,\nHPE,\nLenovo,\nNebius,\nNetweb\nTechnology,\nQuanta\nCloud\nTechnology\n(QCT),\nRed\nHat,\nSupermicro,\n그리고\nLambda는\nNVIDIA\n플랫폼을\n통해\n다시\n한번\n탁월한\n성능을\n입증해\n냈습니다.\n그림\n1.\nNVIDIA,\n누적\nMLPerf\n학습\n및\n추론\n부문에서\n타사\n합산\n대비\n9배\n더",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-04-01T15:20:26+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_20581477fb31",
+            "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+            "title": "华为 A300-3010 配置手册、产品文档、PDF - 华为",
+            "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-08-27T07:05:24+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_51b5576c93ed",
+            "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+            "title": "华为 OptiX RTN 910A 配置手册、产品文档、PDF - 华为",
+            "snippet": "OptiX\nRTN\n910A全部文档产品文档包方案概述产品概述硬件描述版本说明书快速安装指南硬件安装指南配置指南调测指南工具更多华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOM公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900\nV100R023C10版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOFS/EOS公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R021C10版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOM公告华为OptiX\nRTN\n980L\nV100R011C10,OptiX\nRTN\n905\nV100R011C10,OptiX\nRTN\n905F\nV10",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-01-10T23:17:10+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_7a212cec4526",
+            "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910-pid-60977",
+            "title": "华为 OptiX RTN 910 配置手册、产品文档、PDF - 华为",
+            "snippet": "OptiX\nRTN\n910全部文档方案概述产品概述硬件描述Visio图标硬件安装指南培训胶片工具更多",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-01-10T23:16:57+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_a07b427a5ddb",
+            "url": "https://support.huawei.com/enterprise/zh/kunpeng-computing/s920x10k-pid-255325319",
+            "title": "华为 S920X10K 配置手册、产品文档、PDF - 华为",
+            "snippet": "S920X10K全部文档产品介绍多媒体快速安装指南软件部署指南验收测试指南升级指导书用户指南维护与服务指南安全维护与加固告警处理通信矩阵参数参考命令参考开发指南接口参考工具更多",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-01-10T22:50:49+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_80b86d49bd21",
+            "url": "https://support.huawei.com/enterprise/zh/edge-computing-and-server/a300-3010-pid-251560253/software",
+            "title": "华为 A300-3010 软件下载和补丁升级-华为",
+            "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-09-23T20:36:20+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_b0693111ec09",
+            "url": "https://support.huawei.com/enterprise/en/routers/atn-910c-pid-21675279",
+            "title": "Huawei ATN 910C Support Guide, Manuals & PDF - Huawei",
+            "snippet": "ATN\n910CAll\nDocumentsRelease\nNotesPatch\nRelease\nNotesOtherRelease\nDocumentsRelease\nNotesPatch\nRelease\nNotesRelease\nNotesATN\n905-S\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C10SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticePatch\nRelease\nNotesATN\n900\nV800R022SPH3b1\nPatch\nRelease",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-02-12T09:41:01+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          }
+        ],
+        "model_calls": 6,
+        "candidate_published": true
+      }
+    ],
+    "review_status": "completed"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 2.813
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "state": "collecting",
+      "elapsed": 10.657
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 10.657
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 15.688
+    },
+    {
+      "state": "done",
+      "elapsed": 34.125
+    }
+  ],
+  "task_specs": [
+    {
+      "task_id": "task_1",
+      "description": "检索 NVIDIA、AMD、Intel 2025-2026 年最新 AI 芯片产品线（训练与推理）的官方规格、性能基准与市场数据，包括 NVIDIA Blackwell/Rubin、AMD MI350/MI400、Intel Gaudi 3 等，覆盖训练与推理场景的竞争力指标。",
+      "search_hints": [
+        "NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com",
+        "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com"
+      ],
+      "preferred_domains": [
+        "nvidia.com",
+        "amd.com",
+        "intel.com"
+      ],
+      "dependencies": []
+    },
+    {
+      "task_id": "task_2",
+      "description": "检索华为昇腾（Ascend 910B/910C 等）与寒武纪（思元 590/690 等）2025-2026 年 AI 芯片在训练与推理场景的官方规格、性能数据、生态与市场应用情况，并对比其与 NVIDIA/AMD/Intel 的竞争力差异。",
+      "search_hints": [
+        "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com",
+        "寒武纪 思元590 思元690 训练 推理 性能 2026 site:cambricon.com"
+      ],
+      "preferred_domains": [
+        "huawei.com",
+        "cambricon.com"
+      ],
+      "dependencies": []
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task_1",
+      "status": "success",
+      "output": "**检索结果摘要（中文）**\n\n**NVIDIA（官方来源，nvidia.com）**\n- Blackwell Ultra（GB300 NVL72）：官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”；微软、CoreWeave、OCI 已规模化部署 GB300 NVL72，用于低延迟/长上下文场景（agentic coding）。关键使能：NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM。来源：https://developer.nvidia.com/topics/ai/ai-inference （2026-05）\n- MLPerf Inference v6.0：Blackwell Ultra 系统在最多模型/场景上取得最高吞吐；NVIDIA 自 2018 年累计 MLPerf 训练+推理胜场达 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与（ASUS、Cisco、CoreWeave、Dell、Google Cloud、HPE、Lenovo、Nebius、QCT、Red Hat、Supermicro、Lambda 等）。来源：https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/ （2026-04-01）\n- Vera Rubin 平台：2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 更新为第七颗芯片（Groq 3 LPX 低延迟推理加速器）；定位以数据中心为计算单元、面向长上下文/agentic 推理。来源：https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/\n\n**证据缺口（重要）**\n- AMD MI350/MI355X、MI400/Helios 与 Intel Gaudi 3 的官方规格与基准：第二次检索（site:amd.com）返回 0 条，且检索预算耗尽，**未获得任何 AMD/Intel 一手数据**，无法给出跨厂商竞争力对比。\n- 未取得 Rubin 具体规格（HBM 容量/带宽、FP4 算力）、Blackwell Ultra 单卡规格与 MLPerf 具体数值（仅倍数/胜场数）。\n- “50x/35x”为厂商自述营销口径，非第三方复现。\n\n**置信度：0.45**（NVIDIA 部分约 0.8，AMD/Intel 对比部分缺失）",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_l0ABGzG7IpF6Jk9wCv186459",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com\", \"top_n\": 6}"
+              }
+            },
+            {
+              "id": "call_01_qM2mCv9kuz0ml58xHC9E3820",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_l0ABGzG7IpF6Jk9wCv186459",
+          "name": "web_search",
+          "result": {
+            "query": "NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com",
+            "results": [
+              {
+                "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+                "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+                "snippet": "NVIDIA\nBlackwell\nUltra\nDelivers\nup\nto\n50x\nBetter\nPerformance\nand\n35x\nLower\nCost\nfor\nAgentic\nAI\nBuilt\nto\naccelerate\nthe\nnext\ngeneration\nof\nagentic\nAI,\nNVIDIA\nBlackwell\nUltra\ndelivers\nbreakthrough\ninference\nperformance\nwith\ndramatically\nlower\ncost.\nCloud\nproviders\nsuch\nas\nMicrosoft,\nCoreWeave,\nand\nOracle\nCloud\nInfrastructure\nare\ndeploying\nNVIDIA\nGB300\nNVL72\nsystems\nat\nscale\nfor\nlow-latency\nand\nlong-context\nuse\ncases,\nsuch\nas\nagentic\ncoding\nand\ncoding\nassistants.This\nis\nenabled\nby\ndeep\nco-design\nacross\nNVIDIA\nBlackwell,\nNVLinkTM,\nand\nNVLink\nSwitch\nfor\nscale-out;\nNVFP4\nfor\nlow-precision\naccuracy;\nand\nNVIDIA\nDynamo\nand\nTensorRTTM\nLLM\nfor\nspeed\nand\nflexibility—as\nwell\nas\ndevelopment\nwith\ncommunity\nframeworks\nSGLang,\nvLLM,\nand\nmore.",
+                "published_at": "2026-05-09T11:49:48+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "Click to Enlarge\nUnderstanding AI Inference\nToday's AI applications, powered by frontier\nmixture-of-experts (MoE)\n, introduce a critical deployment challenge: achieving uncompromising performance at scale. The core difficulty is the fundamental trade-off between user experience and total output. Specifically, you must constantly balance user interactivity—the low latency a seamless user experience demands—against total throughput—the maximum volume of work your system can handle.\nAn effective AI deployment can't just be fast at one point; it must perform across the full spectrum of operational demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference platform is engineered to lead this frontier across all operating points, ensuring you can deploy the right solution to maximize your system's efficiency and minimize cost per token for every workload.\nNVIDIA Inference Tools for Every AI Developer\nChoose your optimal path for deploying high-performance AI inference on NVIDIA. For developers who need full control, customization, and ultimate optimization for LLM performance, NVIDIA Dynamo and NVIDIA TensorRT™-LLM enable you to serve all AI models—across any framework, architecture, or deployment scale. If you manage your own GPU-accelerated infrastructure but want simplified software deployment, NVIDIA NIM™ provides containers to self-host inferencing microservices for pretrained and customized AI models. Developers needing a fully managed, instant, serverless AI inference solution get auto-scaling, cost-efficient GPU utilization, and multi-cloud flexibility with NVIDIA DGX™ Cloud Serverless Inference. Find the right balance of control, speed, and ease for your AI in production.\nLearn More About NVIDIA’s Inference Performance\nNVIDIA TensorRT LLM\nTensorRT-LLM is an open source library for high-performance, real-time LLM inference on NVIDIA GPUs. With a modular Python runtime, PyTorch-native authoring, and a stable production API, it’s optimized to maximize throughput, minimize costs, and deliver fast user experiences.\nGet Started With TensorRT LLM\nNVIDIA Dynamo\nNVIDIA Dynamo is an open source, low-latency inference framework for serving generative AI models in distributed environments. It scales inference workloads across large GPU fleets with optimized resource scheduling, memory management, and data transfer, and it supports all major AI inference backends, including open source frameworks SGLang and vLLM.\nGet Started With\nNVIDIA Dynamo\nNVIDIA NIM\nNVIDIA NIM™ provides easy-to-use microservices for secure, reliable deployment of high-performance AI inferencing across the cloud, data center, and workstations.\nGet Started With NIM\nNVIDIA DGX Cloud Serverless Inference\nNVIDIA DGX™ Cloud offers high-performance, serverless AI inference with auto-scaling, cost-efficient GPU utilization, and multi-cloud flexibility.\nGet Started With DGX Cloud Serverless Inference\nLower cost per token comes from turning individual optimizations into system-level performance. NVIDIA’s inference software stack does this by connecting three layers:\nProduction Operation\n: Coordinates distributed serving, orchestration, autoscaling, and memory management so inference can run across the right compute and storage resources.\nApplication Acceleration\n: Runs models with high performance while giving developers room to tune and customize, using runtime optimizations such as overlapping compute and communication and kernel fusion.\nInfrastructure Access\n: Exposes NVIDIA GPU, networking, memory, and system capabilities without requiring developers to manage every device instruction set or data-transfer protocol directly.\nThe NVIDIA software stack spans model serving, runtime scheduling, kernels, communication libraries, and hardware-aware optimizations, enabling rapid performance gains and lower serving costs as improvements compound across layers.\nNVIDIA Blackwell Ultra Delivers up to 50x Better Performance and 35x Lower Cost for Agentic AI\nBuilt to accelerate the next generation of agentic AI, NVIDIA Blackwell Ultra delivers breakthrough inference performance with dramatically lower cost. Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low-latency and long-context use cases, such as agentic coding and coding assistants.\nThis is enabled by deep co-design across NVIDIA Blackwell, NVLink™, and NVLink Switch for scale-out; NVFP4 for low-precision accuracy; and NVIDIA Dynamo and TensorRT LLM for speed and flexibility—as well as development with community frameworks SGLang, vLLM, and more.\nExplore Technical Results",
+                "evidence_excerpt": "Click to Enlarge\nUnderstanding AI Inference\nToday's AI applications, powered by frontier\nmixture-of-experts (MoE)\n, introduce a critical deployment challenge: achieving uncompromising performance at scale. The core difficulty is the fundamental trade-off between user experience and total output. Specifically, you must constantly balance user interactivity—the low latency a seamless user experience demands—against total throughput—the maximum volume of work your system can handle.\nAn effective AI deployment can't just be fast at one point; it must perform across the full spectrum of operational demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference p\n\n demands. This complete performance profile is mapped by the Pareto frontier. The NVIDIA inference platform is engineered to lead this frontier across all operating points, ensuring you can deploy the right solution to maximize your system's efficiency and minimize cost per token for every workload.\nNVIDIA Inference Tools for Every AI Developer\nChoose your optimal path for deploying high-performance AI inference on NVIDIA. For developers who need full control, customization, and ultimate optimization for LLM performance, NVIDIA Dynamo and NVIDIA TensorRT™-LLM enable you to serve all AI m\n\ndevelopers to manage every device instruction set or data-transfer protocol directly.\nThe NVIDIA software stack spans model serving, runtime scheduling, kernels, communication libraries, and hardware-aware optimizations, enabling rapid performance gains and lower serving costs as improvements compound across layers.\nNVIDIA Blackwell Ultra Delivers up to 50x Better Performance and 35x Lower Cost for Agentic AI\nBuilt to accelerate the next generation of agentic AI, NVIDIA Blackwell Ultra delivers breakthrough inference performance with dramatically lower cost. Cloud providers such as Microsoft, CoreWeave, and Oracle Cloud Infrastructure are deploying NVIDIA GB300 NVL72 systems at scale for low"
+              },
+              {
+                "title": "NVIDIA Rubin プラットフォームの内部: 6 つの新チップと AI スーパーコンピューター - NVIDIA 技術ブログ",
+                "url": "https://developer.nvidia.com/ja-jp/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+                "snippet": "Reading\nTime:\n13\nminutes\nAI\nは産業化段階に移行しています。\n個別の\nAI\nモデルのトレーニングや人と直接対話する推論を実行するシステムとして始まった\nAI\nは、現在では常時稼働する\nAI\nファクトリーに進化し、電力、半導体、データを大規模なインテリジェンスへと継続的に変換しています。こういったファクトリーは現在、事業計画の生成、市場分析、徹底的な研究の実施、広大な知識体系にわたる推論を実施するアプリケーションを支えています。\nこれらの機能を大規模に提供するために、次世代\nAI\nファクトリーは、エージェント型推論、複雑なワークフロー、マルチモーダル\nパイプラインに必要な長文コンテキストを提供する数十万単位の入力トークンを処理する必要があります。同時に、電力、信頼性、セキュリティ、デプロイ速度、コストといった制約の範囲でリアルタイム推論を維持しなければなりません。\nNVIDIA\nRubin\nプラットフォームは、この新たな現実に向けて特別に設計されました。\n徹底的な共同設計が\nRubin\nプラットフォームの基盤です。GPU、CPU、ネットワーク、セキュリティ、ソフトウェア、電力供給、冷却システムは、個別に最適化されるのではなく、単一のシステムとして統合的に設計されています。そうすることで、Rubin\nプラットフォームは単一の\nGPU\nサーバーではなく、データ\nセンターをコンピューティングの単位として扱います。このアプローチは、大規模環境において効率的、安全に、予測可能な形でインテリジェンスを生成するための新たな基盤を確立します。単なる個別コンポーネントのベンチマークだけでなく、本番環境のデプロイにおいても、パフォーマンスと効率性が向上することを保証します。\nこの技術的詳細の解説では、AI\nファクトリーが新しいアーキテクチャのアプローチを必要とする理由、",
+                "published_at": "2026-01-05T14:01:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "NVIDIA Platform Delivers Lowest Token Cost Enabled by Extreme Co-Design | NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/",
+                "snippet": "Co-designed\nhardware,\nsoftware,\nand\nmodels\nare\nkey\nto\ndelivering\nthe\nhighest\nAI\nfactory\nthroughput\nand\nlowest\ntoken\ncost.\nMeasuring\nthis\ngoes\nfar\nbeyond\npeak\nchip\nspecifications.\nRigorous\nAI\ninference\nperformance\nbenchmarks\nare\ncritical\nto\nunderstanding\nreal-world\ntoken\noutput,\nwhich\ndrives\nAI\nfactory\nrevenue.\nMLPerf\nInference\nv6.0\nis\nthe\nlatest\nin\na\nseries\nof\nindustry\nbenchmarks\nthat\nmeasure\nperformance\nacross\na\nwide\nrange\nof\nmodel\narchitectures\nand\nuse\ncases.\nIn\nthis\nlatest\nround,\nsystems\npowered\nby\nNVIDIA\nBlackwell\nUltra\nGPUs\ndelivered\nthe\nhighest\nthroughput\nacross\nthe\nwidest\nrange\nof\nmodels\nand\nscenarios.\nThis\nbrings\nthe\ncumulative\nNVIDIA\nMLPerf\ntraining\nand\ninference\nwins\nsince\n2018\nto\n291,\nwhich\nis\n9x\nof\nall\nother\nsubmitters\ncombined.\nThis\nround,\nthe\nNVIDIA\npartner\necosystem\npartici",
+                "published_at": "2026-04-01T23:00:48+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Tag: NVL72 | NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+                "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+                "published_at": "2026-05-10T09:59:12+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Inside the NVIDIA Vera Rubin Platform: Six New Chips, One AI Supercomputer | NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/",
+                "snippet": "Update\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe\nNVIDIA\nVera\nRubin\nPlatform.\nAI\nhas\nentered\nan\nindustrial\nphase.\nWhat\nbegan\nas\nsystems\nperforming\ndiscrete\nAI\nmodel\ntraining\nand\nhuman-facing\ninference\nhas\nevolved\ninto\nalways-on\nAI\nfactories\nthat\ncontinuously\nconvert\npower,\nsilicon,\nand\ndata\ninto\nintelligence\nat\nscale.\nThese\nfactories\nnow\nunderpin\napplications\nthat\ngenerate\nbusiness\nplans,\nanalyze\nmarkets,\nconduct\ndeep\nresearch,\nand\nreason\nacross\nvast\nbodies\nof\nknowledge.\nTo\ndeliver\nthese\ncapabilities\nat\nscale,\nnext\ngeneration\nAI\nfactories\nmust\nprocess\nhundreds\nof\nthousands\nof\ninput\ntokens\nto\nprovide\nthe\nlong-context\nrequired\nfor\nagentic\nreasoning,\ncomplex\nworkflows,\nand\nmultimodal",
+                "published_at": "2026-01-06T06:20:12+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "MLPerf Inference v6.0: NVIDIA Blackwell Ultra, 누적 291회 우승 - NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/ko-kr/blog/nvidia-extreme-co-design-delivers-new-mlperf-inference-records/",
+                "snippet": "Reading\nTime:\n6\nminutes\n하드웨어,\n소프트웨어,\n모델의\n공동\n설계는\n최고의\nAI\n팩토리의\n처리량을\n극대화하고\n토큰\n비용을\n낮추는\n핵심\n요소입니다.\n능\n측정은\n단순히\n칩의\n이론적\n최대\n사양을\n확인하는\n차원을\n훨씬\n넘어섭니다.\n실제\n환경에서의\n토큰\n출력량을\n파악하기\n위해서는\n엄격한\nAI\n추론\n성능\n벤치마크가\n필수적이며,\n이는\n곧\nAI\n팩토리의\n수익으로\n직결됩니다.\n업계\n표준\n벤치마크인\nMLPerf\nInference\nv6.0의\n최신\n결과에\n따르면,\nNVIDIA\nBlackwell\nUltra\nGPU\n기반\n시스템이\n가장\n광범위한\n모델\n아키텍처와\n사용\n사례에서\n최고의\n처리량을\n기록했습니다.\n이로써\n2018년부터\n누적된\nNVIDIA의\nMLPerf\n학습\n및\n추론\n부문\n우승\n기록은\n총\n291회에\n달하며,\n이는\n다른\n모든\n참여사의\n기록을\n합친\n것보다\n9배나\n많은\n수치입니다.\n이번\n라운드에서는\n총\n14개의\n파트너사가\n대거\n참여하며\nNVIDIA\n파트너\n생태계의\n압도적인\n저력을\n보여주었습니다.\n이는\n단일\n플랫폼으로서는\n역대\n최대\n규모의\n참여입니다.\nASUS,\nCisco,\nCoreWeave,\nDell\nTechnologies,\nGigaComputing,\nGoogle\nCloud,\nHPE,\nLenovo,\nNebius,\nNetweb\nTechnology,\nQuanta\nCloud\nTechnology\n(QCT),\nRed\nHat,\nSupermicro,\n그리고\nLambda는\nNVIDIA\n플랫폼을\n통해\n다시\n한번\n탁월한\n성능을\n입증해\n냈습니다.\n그림\n1.\nNVIDIA,\n누적\nMLPerf\n학습\n및\n추론\n부문에서\n타사\n합산\n대비\n9배\n더",
+                "published_at": "2026-04-01T15:20:26+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 6,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+                "status": "read",
+                "error": null,
+                "chars": 4677
+              }
+            ]
+          },
+          "arguments": {
+            "query": "NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_qM2mCv9kuz0ml58xHC9E3820",
+          "name": "web_search",
+          "result": {
+            "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+            "results": [],
+            "total": 0,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_Z506bNTt2hU1gHtP46FJ1086",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"AMD Instinct MI350X MI355X specifications FP4 HBM3E vs MI400 Helios rack 2026\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "tool_call_id": "call_00_Z506bNTt2hU1gHtP46FJ1086",
+          "name": "web_search",
+          "result": {
+            "error": "Search budget exhausted",
+            "budget_exhausted": true
+          },
+          "arguments": {
+            "query": "AMD Instinct MI350X MI355X specifications FP4 HBM3E vs MI400 Helios rack 2026",
+            "top_n": 6
+          },
+          "error": "Search budget exhausted"
+        },
+        {
+          "turn": 2,
+          "role": "assistant",
+          "content": "**检索结果摘要（中文）**\n\n**NVIDIA（官方来源，nvidia.com）**\n- Blackwell Ultra（GB300 NVL72）：官方称面向 agentic AI 推理“最高 50x 性能提升、35x 更低成本”；微软、CoreWeave、OCI 已规模化部署 GB300 NVL72，用于低延迟/长上下文场景（agentic coding）。关键使能：NVFP4、NVLink/NVLink Switch、Dynamo + TensorRT-LLM、SGLang/vLLM。来源：https://developer.nvidia.com/topics/ai/ai-inference （2026-05）\n- MLPerf Inference v6.0：Blackwell Ultra 系统在最多模型/场景上取得最高吞吐；NVIDIA 自 2018 年累计 MLPerf 训练+推理胜场达 291 次，为其他所有提交方合计的 9x；本轮 14 家伙伴参与（ASUS、Cisco、CoreWeave、Dell、Google Cloud、HPE、Lenovo、Nebius、QCT、Red Hat、Supermicro、Lambda 等）。来源：https://developer.nvidia.com/blog/nvidia-platform-delivers-lowest-token-cost-enabled-by-extreme-co-design/ （2026-04-01）\n- Vera Rubin 平台：2026-01-05 发布“六颗新芯片、一台 AI 超算”，2026-03-16 更新为第七颗芯片（Groq 3 LPX 低延迟推理加速器）；定位以数据中心为计算单元、面向长上下文/agentic 推理。来源：https://developer.nvidia.com/blog/inside-the-nvidia-rubin-platform-six-new-chips-one-ai-supercomputer/\n\n**证据缺口（重要）**\n- AMD MI350/MI355X、MI400/Helios 与 Intel Gaudi 3 的官方规格与基准：第二次检索（site:amd.com）返回 0 条，且检索预算耗尽，**未获得任何 AMD/Intel 一手数据**，无法给出跨厂商竞争力对比。\n- 未取得 Rubin 具体规格（HBM 容量/带宽、FP4 算力）、Blackwell Ultra 单卡规格与 MLPerf 具体数值（仅倍数/胜场数）。\n- “50x/35x”为厂商自述营销口径，非第三方复现。\n\n**置信度：0.45**（NVIDIA 部分约 0.8，AMD/Intel 对比部分缺失）",
+          "tool_calls": []
+        }
+      ]
+    },
+    {
+      "task_id": "task_2",
+      "status": "success",
+      "output": "**检索结果摘要（置信度 0.15）**\n\n两次限定站点的检索均未获得有效证据：\n- `site:huawei.com` 查询返回的全是无关产品文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**没有一条涉及昇腾 910B/910C 的规格或性能**；且 support.huawei.com 页面因 SSL 证书校验失败无法读取。\n- `site:cambricon.com` 查询返回 **0 条结果**，思元 590/690 无任何官方页面命中。\n\n**结论：本次未能取得可引用的官方规格、性能数据、生态或市场应用事实，也无法支撑与 NVIDIA/AMD/Intel 的对比。** 证据缺口包括：昇腾 910C 的算力/带宽/互联参数、思元 590/690 的官方规格与量产状态、CANN/MagicMind 生态成熟度、2025-2026 出货与客户案例。\n\n**建议后续**：改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解报告。",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_UKk5ggnzwS9VSzJVqsux7390",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"华为昇腾 910C 训练 推理 性能 2026 site:huawei.com\", \"top_n\": 6}"
+              }
+            },
+            {
+              "id": "call_01_nj6SkUmzcrO9rmAjBy5U2454",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"寒武纪 思元590 思元690 训练 推理 性能 2026 site:cambricon.com\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_UKk5ggnzwS9VSzJVqsux7390",
+          "name": "web_search",
+          "result": {
+            "query": "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com",
+            "results": [
+              {
+                "title": "华为 A300-3010 配置手册、产品文档、PDF - 华为",
+                "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+                "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+                "published_at": "2026-08-27T07:05:24+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "华为 OptiX RTN 910A 配置手册、产品文档、PDF - 华为",
+                "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+                "snippet": "OptiX\nRTN\n910A全部文档产品文档包方案概述产品概述硬件描述版本说明书快速安装指南硬件安装指南配置指南调测指南工具更多华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOM公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900\nV100R023C10版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOFS/EOS公告华为OptiX\nRTN\n300系列\n&\nOptiX\nRTN\n900系列\n&\nRTN\n6900/3100\nV100R025C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L&RTN\n6900\nV100R024C00版本EOM公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R021C10版本EOFS/EOS公告华为OptiX\nRTN\n310/320/380/380A/380H/905/905F/910A/950/950A/980/980L\nV100R022C10版本EOM公告华为OptiX\nRTN\n980L\nV100R011C10,OptiX\nRTN\n905\nV100R011C10,OptiX\nRTN\n905F\nV10",
+                "published_at": "2026-01-10T23:17:10+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "华为 OptiX RTN 910 配置手册、产品文档、PDF - 华为",
+                "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910-pid-60977",
+                "snippet": "OptiX\nRTN\n910全部文档方案概述产品概述硬件描述Visio图标硬件安装指南培训胶片工具更多",
+                "published_at": "2026-01-10T23:16:57+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "华为 S920X10K 配置手册、产品文档、PDF - 华为",
+                "url": "https://support.huawei.com/enterprise/zh/kunpeng-computing/s920x10k-pid-255325319",
+                "snippet": "S920X10K全部文档产品介绍多媒体快速安装指南软件部署指南验收测试指南升级指导书用户指南维护与服务指南安全维护与加固告警处理通信矩阵参数参考命令参考开发指南接口参考工具更多",
+                "published_at": "2026-01-10T22:50:49+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "华为 A300-3010 软件下载和补丁升级-华为",
+                "url": "https://support.huawei.com/enterprise/zh/edge-computing-and-server/a300-3010-pid-251560253/software",
+                "snippet": "A300-3010全部文档产品文档包产品介绍多媒体快速安装指南软件部署指南升级指导书用户指南故障处理通信矩阵命令参考API参考接口参考产品文档包CANN最新版本文档请登录昇腾社区查阅产品介绍多媒体Atlas\n300I\n推理卡(型号:3010)\n产品3D展示快速安装指南Atlas\n300I\n推理卡\n快速指南(型号3010)04软件部署指南Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件安装指南(型号\n3010)06Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件安装指南(型号\n3010)08Atlas\n300I\n推理卡\n23.0.RC3\nNPU驱动和固件安装指南(型号\n3010)04Atlas\n300I\n推理卡\n23.0.RC2\nNPU驱动和固件安装指南(型号\n3010)05升级指导书Atlas\n300I\n推理卡\n24.1.RC3\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC2\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.RC1\nNPU驱动和固件升级指导书(型号\n3000,3010)02Atlas\n300I\n推理卡\n24.1.0\nNPU驱动和固件升级指导书(型号3000,3010)04Atlas\n300I\n推理卡\n23.0.x(23.0.3及其系列版本)\nNPU驱动和固件升级指导书(型号\n3000,3010)04Atlas\n300I\n推理",
+                "published_at": "2026-09-23T20:36:20+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Huawei ATN 910C Support Guide, Manuals & PDF - Huawei",
+                "url": "https://support.huawei.com/enterprise/en/routers/atn-910c-pid-21675279",
+                "snippet": "ATN\n910CAll\nDocumentsRelease\nNotesPatch\nRelease\nNotesOtherRelease\nDocumentsRelease\nNotesPatch\nRelease\nNotesRelease\nNotesATN\n905-S\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R022C00SPC600\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C10SPC500\nOpen\nSource\nSoftware\nNoticeATN\n900\nV800R023C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n950C,\n910C\nand\n905\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n910C-M,\n910C-K,\n910D,\n950D,\n980C\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticeATN\n905-S\nV800R024C00SPC500\nOpen\nSource\nSoftware\nNoticePatch\nRelease\nNotesATN\n900\nV800R022SPH3b1\nPatch\nRelease",
+                "published_at": "2026-02-12T09:41:01+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 6,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+                "status": "failed",
+                "error": "[Browser Error] Network error: ClientConnectorCertificateError: Cannot connect to host support.huawei.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')]",
+                "chars": 0
+              },
+              {
+                "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+                "status": "failed",
+                "error": "[Browser Error] Network error: ClientConnectorCertificateError: Cannot connect to host support.huawei.com:443 ssl:True [SSLCertVerificationError: (1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')]",
+                "chars": 0
+              }
+            ]
+          },
+          "arguments": {
+            "query": "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_nj6SkUmzcrO9rmAjBy5U2454",
+          "name": "web_search",
+          "result": {
+            "query": "寒武纪 思元590 思元690 训练 推理 性能 2026 site:cambricon.com",
+            "results": [],
+            "total": 0,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "寒武纪 思元590 思元690 训练 推理 性能 2026 site:cambricon.com",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "**检索结果摘要（置信度 0.15）**\n\n两次限定站点的检索均未获得有效证据：\n- `site:huawei.com` 查询返回的全是无关产品文档（Atlas 300I 推理卡手册、OptiX RTN 910 微波设备、ATN 910C 路由器、鲲鹏 S920X10K），**没有一条涉及昇腾 910B/910C 的规格或性能**；且 support.huawei.com 页面因 SSL 证书校验失败无法读取。\n- `site:cambricon.com` 查询返回 **0 条结果**，思元 590/690 无任何官方页面命中。\n\n**结论：本次未能取得可引用的官方规格、性能数据、生态或市场应用事实，也无法支撑与 NVIDIA/AMD/Intel 的对比。** 证据缺口包括：昇腾 910C 的算力/带宽/互联参数、思元 590/690 的官方规格与量产状态、CANN/MagicMind 生态成熟度、2025-2026 出货与客户案例。\n\n**建议后续**：改用非站点限定关键词（如“昇腾 910C 规格 算力”“思元690 发布”），或直接读取华为全联接大会/昇腾社区、寒武纪年报与投资者关系公告、SemiAnalysis 等第三方拆解报告。",
+          "tool_calls": []
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 34.171000000002095,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 435,
+        "prompt_tokens": 831,
+        "total_tokens": 1266,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 640
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 191
+      },
+      "elapsed_seconds": 2.812999999994645,
+      "finish_reason": "stop",
+      "content_chars": 1223,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 134,
+        "prompt_tokens": 1448,
+        "total_tokens": 1582,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 552
+      },
+      "elapsed_seconds": 1.3910000000032596,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 143,
+        "prompt_tokens": 1465,
+        "total_tokens": 1608,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 569
+      },
+      "elapsed_seconds": 1.9060000000026776,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 297,
+        "prompt_tokens": 4147,
+        "total_tokens": 4444,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 3763
+      },
+      "elapsed_seconds": 2.7969999999913853,
+      "finish_reason": "stop",
+      "content_chars": 527,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 78,
+        "prompt_tokens": 5734,
+        "total_tokens": 5812,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 4966
+      },
+      "elapsed_seconds": 1.187000000005355,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 540,
+        "prompt_tokens": 5513,
+        "total_tokens": 6053,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 384
+        },
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 5129
+      },
+      "elapsed_seconds": 3.7189999999973224,
+      "finish_reason": "stop",
+      "content_chars": 1173,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 914,
+        "prompt_tokens": 5526,
+        "total_tokens": 6440,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 5398
+      },
+      "elapsed_seconds": 5.0310000000026776,
+      "finish_reason": "stop",
+      "content_chars": 1637,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 459,
+        "prompt_tokens": 4533,
+        "total_tokens": 4992,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4277
+      },
+      "elapsed_seconds": 3.312000000005355,
+      "finish_reason": "stop",
+      "content_chars": 995,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 540,
+        "prompt_tokens": 4492,
+        "total_tokens": 5032,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4236
+      },
+      "elapsed_seconds": 2.7969999999913853,
+      "finish_reason": "stop",
+      "content_chars": 1322,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1011,
+        "prompt_tokens": 4288,
+        "total_tokens": 5299,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4288
+      },
+      "elapsed_seconds": 4.39100000000326,
+      "finish_reason": "stop",
+      "content_chars": 1843,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 189,
+        "prompt_tokens": 5254,
+        "total_tokens": 5443,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5254
+      },
+      "elapsed_seconds": 1.7810000000026776,
+      "finish_reason": "stop",
+      "content_chars": 384,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 551,
+        "prompt_tokens": 4533,
+        "total_tokens": 5084,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 181
+      },
+      "elapsed_seconds": 3.687999999994645,
+      "finish_reason": "stop",
+      "content_chars": 1166,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 313,
+        "prompt_tokens": 4492,
+        "total_tokens": 4805,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4352
+        },
+        "prompt_cache_hit_tokens": 4352,
+        "prompt_cache_miss_tokens": 140
+      },
+      "elapsed_seconds": 2.4680000000080327,
+      "finish_reason": "stop",
+      "content_chars": 867,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com",
+        "top_n": 6,
+        "domains": [
+          "nvidia.com"
+        ]
+      },
+      "elapsed_seconds": 0.35899999999674037
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+        "max_chars": 8000,
+        "query": "NVIDIA Blackwell Rubin AI chip training inference benchmark 2026 site:nvidia.com"
+      },
+      "elapsed_seconds": 1.0160000000032596
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com",
+        "top_n": 6,
+        "domains": [
+          "huawei.com"
+        ]
+      },
+      "elapsed_seconds": 0.17199999999138527
+    },
+    {
+      "tool": "browser",
+      "status": "failed",
+      "input": {
+        "url": "https://support.huawei.com/enterprise/zh/atlas-computing/a300-3010-pid-251560253",
+        "max_chars": 8000,
+        "query": "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com"
+      },
+      "elapsed_seconds": 0.062000000005355105
+    },
+    {
+      "tool": "browser",
+      "status": "failed",
+      "input": {
+        "url": "https://support.huawei.com/enterprise/zh/enterprise-network-microwave/optix-rtn-910a-pid-21402366",
+        "max_chars": 8000,
+        "query": "华为昇腾 910C 训练 推理 性能 2026 site:huawei.com"
+      },
+      "elapsed_seconds": 0.031000000002677552
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "寒武纪 思元590 思元690 训练 推理 性能 2026 site:cambricon.com",
+        "top_n": 6,
+        "domains": [
+          "cambricon.com"
+        ]
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+        "top_n": 6,
+        "domains": [
+          "amd.com"
+        ]
+      },
+      "elapsed_seconds": 0.10899999999674037
+    }
+  ],
+  "source_fingerprint": "bca11f66243ae9c9ca4d166825693660bfba1f5d44c18963564e26cdf5e07948"
+}

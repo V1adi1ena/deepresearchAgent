@@ -1,0 +1,1343 @@
+[
+  {
+    "question_id": "tech_001",
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "default": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "red_agent": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "blue_agent": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "compressor": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "adversarial_config": {
+      "enabled": true,
+      "max_rounds": 1,
+      "score_threshold": 9.5,
+      "delta_threshold": 0.2,
+      "save_logs": true,
+      "max_model_calls": 12,
+      "max_fixes_per_round": 1
+    },
+    "runtime": {
+      "executable": "D:\\Anaconda\\python.exe",
+      "python_version": "3.12.7"
+    },
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+      "content": "# 2024 主流 LLM 中文推理/代码/长上下文对比：证据现状\n\n## 核心结论\n**现有证据不足以完成所要求的对比分析。** 检索仅覆盖 GPT-4o 与 Claude 3.5 Sonnet 的官方安全/发布文档，未获得任何中文推理、代码生成或长上下文基准的**具体分数**，且完全缺失 Gemini 1.5 与 Qwen2.5 的资料。以下仅陈述可支持的事实。\n\n## 可支持的事实\n- **GPT-4o**：官方 System Card（2024-08-08）聚焦安全评估（外部红队、Preparedness Framework 风险评分），**并非**能力基准报告 [s_c786d7c5432e]。上下文长度 128k tokens（定价页 2024-11 快照）[s_0083b7297196]。\n- **Claude 3.5 Sonnet**：官方发布页确认 200K token 上下文、$3/$15 每百万输入/输出 token、速度约为 Claude 3 Opus 的 2 倍，并宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品，但**摘要未给出具体分数** [s_e91e6f80eaac]。\n\n## 证据缺口（明确）\n1. **无中文推理数据**：两份官方文档均无中文专项评测；需转向 C-Eval/CMMLU 等第三方榜单（未检索）。\n2. **无具体数值**：GPT-4o 的 MMLU/HumanEval/MGSM、Claude 3.5 的 GPQA/SWE-bench/MATH 均未取到。\n3. **Gemini 1.5、Qwen2.5 完全无来源**，无法纳入对比。\n4. **技术路线**：GPT-4o 端到端多模态、Claude 3.5 架构细节官方均未披露，属未公开信息。\n5. 页面抓取两次 403 失败，正文未获取。\n\n## 不可用的来源\n- o1 System Card [s_dcf8ab338d73] 为不同模型，不适用。\n- Anthropic 首页 [s_afe2508ac4ca] 提及 Claude 3.7 Sonnet，属后续版本，不能代表 3.5。\n- Claude 3.5 发布页标注日期为 2025-03-01，晚于 2024 年，需谨慎对待其时效性 [s_e91e6f80eaac]。\n\n## 建议下一步\n抓取 System Card 与 Anthropic 模型卡 PDF 直链；中文能力改用 C-Eval/CMMLU 第三方榜单；补充 Gemini 1.5 与 Qwen2.5 官方技术报告。\n\n---\n**总体置信度：0.35**（仅确认上下文长度、定价、安全文档性质等元信息；核心对比维度无数据支撑）。\n**关键来源**：OpenAI GPT-4o System Card [s_c786d7c5432e]、OpenAI 定价页 [s_0083b7297196]、Anthropic Claude 3.5 Sonnet 发布页 [s_e91e6f80eaac]。\n\nIncomplete tasks: task_2",
+      "sources": [
+        {
+          "source_id": "s_c786d7c5432e",
+          "url": "https://openai.com/index/gpt-4o-system-card/",
+          "title": "GPT-4o System Card  OpenAI",
+          "snippet": "This report outlines the safety work carried out prior to releasing GPT‐4o including external red teaming, frontier risk evaluations according to our Preparedness Framework, and an overview of the mitigations we built in to address key risk areas. View PDF version Loading... Share GPT-4o Scorecard Key Areas of Risk Evaluation & Mitigation Preparedness Framework Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. We thoroughly evaluate new models for potential risks and build in appropriate safeguards before deploying them in ChatGPT or the API. We’re publishing the model System Card together with the Preparedness Framework",
+          "task_id": "task_1",
+          "evidence_kind": "search_summary",
+          "published_at": "2024-08-08T13:20:05+08:00",
+          "scope_note": "title_not_obviously_mismatched"
+        },
+        {
+          "source_id": "s_dcf8ab338d73",
+          "url": "https://openai.com/index/openai-o1-system-card",
+          "title": "OpenAI o1 System Card  OpenAI",
+          "snippet": "This report outlines the safety work carried out prior to releasing OpenAI o1, including external red teaming and frontier risk evaluations according to our Preparedness Framework. Read the System Card (opens in a new window) Share OpenAI o1 System Card Key Areas of Evaluation Preparedness Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. Improved or comparable performance from previous flagship OpenAI model Introduction The o1 model series is trained with large-scale reinforcement learning to reason using chain-of-thought. These advanced reasoning capabilities provide new avenues for improving the safety and robustness",
+          "task_id": "task_1",
+          "evidence_kind": "search_summary",
+          "published_at": "2024-12-05T21:11:03+08:00",
+          "scope_note": "title_not_obviously_mismatched"
+        },
+        {
+          "source_id": "s_0083b7297196",
+          "url": "https://openai.com/api/pricing/?utm_source=rachelandreago",
+          "title": "Pricing  OpenAI",
+          "snippet": "Pricing Show prices per 1K tokens API Pricing Our latest models Reasoning models for complex, multi-step problems OpenAI o1 Frontier reasoning model that supports tools, Structured Outputs, and vision | 200k context length Price Input: $15.00 / 1M tokens Cached input: $7.50 / 1M tokens Output: $60.00 / 1M tokens OpenAI o3-mini Small cost-efficient reasoning model that’s optimized for coding, math, and science, and supports tools and Structured Outputs | 200k context length Price Input: $1.10 / 1M tokens Cached input: $0.55 / 1M tokens Output: $4.40 / 1M tokens GPT models for everyday tasks GPT-4o High-intelligence model for complex tasks | 128k context length Price Input: $2.50 / 1M tokens Cached input: $1.25 / 1M tokens Output: $10.00 / 1M tokens GPT-4o mini Affordable small model for fas",
+          "task_id": "task_1",
+          "evidence_kind": "search_summary",
+          "published_at": "2024-11-08T18:07:00+08:00",
+          "scope_note": "title_not_obviously_mismatched"
+        },
+        {
+          "source_id": "s_e91e6f80eaac",
+          "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+          "title": "Claude 3.5 Sonnet",
+          "snippet": "Today, we’re launching Claude 3.5 Sonnet—our first release in the forthcoming Claude 3.5 model family. Claude 3.5 Sonnet raises the industry bar for intelligence, outperforming competitor models and Claude 3 Opus on a wide range of evaluations, with the speed and cost of our mid-tier model, Claude 3 Sonnet.\nClaude 3.5 Sonnet is now available for free on Claude.ai and the Claude iOS app, while Claude Pro and Team plan subscribers can access it with significantly higher rate limits. It is also available via the Anthropic  API ,  Amazon Bedrock , and  Google Cloud’s Vertex AI . The model costs $3 per million input tokens and $15 per million output tokens, with a 200K token context window.\nFrontier intelligence at 2x the speed\nClaude 3.5 Sonnet sets new industry benchmarks for graduate-level r",
+          "task_id": "task_1",
+          "evidence_kind": "search_summary",
+          "published_at": "2025-03-01T08:00:00+08:00",
+          "scope_note": "later_publication_requires_date_check"
+        },
+        {
+          "source_id": "s_afe2508ac4ca",
+          "url": "https://www.anthropic.com/",
+          "title": "anthropic",
+          "snippet": "Claude.ai\nMeet Claude 3.7 Sonnet\nClaude 3.7 Sonnet, our most intelligent AI model, is now available.\nTalk to Claude API\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nClaude 3.7 Sonnet and Claude Code\nIntroducing Claude 3.7 Sonnet, our most intelligent model yet and the first hybrid reasoning model. We’re also launching Claude Code, an agentic tool for coding. \nRead the announcement\nModel details\nClaude 3.7 Sonnet \nResearch insights\nClaude's extended thinking\nOur Work\nProduct\nClaude for Enterprise\nSep 4, 2024\nAlignment  ·  Research\nConstitutional AI: Harmlessness from AI Feedback\nDec 15, 2022\nAnnouncements\nCore Views on AI Safety: When, Why, What, and How\nMar 8, 2023\nWork with Anthropic\nAnthropic is an AI safety and research company based i",
+          "task_id": "task_1",
+          "evidence_kind": "search_summary",
+          "published_at": "2024-06-26T06:41:03+08:00",
+          "scope_note": "title_not_obviously_mismatched"
+        }
+      ],
+      "confidence": 0.5,
+      "num_searches": 8,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "partial",
+      "incomplete_tasks": [
+        "task_2"
+      ],
+      "run_id": "2d419ef1d32c4d9fa3d903216bc3d351",
+      "review_history": [],
+      "review_status": "skipped_incomplete"
+    },
+    "technical_checks": {
+      "report_completed": false,
+      "nonempty_report": true,
+      "sources_available": true,
+      "all_tasks_completed": false,
+      "no_execution_errors": true,
+      "review_completed": false
+    },
+    "technical_chain_success": false,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 3.484
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "success",
+        "failure_reason": null
+      },
+      {
+        "task_id": "task_2",
+        "task_status": "failed",
+        "failure_reason": "Tool 'browser' failed: Page read timed out"
+      },
+      {
+        "state": "collecting",
+        "elapsed": 19.984
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 19.984
+      },
+      {
+        "state": "done",
+        "elapsed": 24.234
+      }
+    ],
+    "task_specs": [
+      {
+        "task_id": "task_1",
+        "description": "检索 GPT-4o 与 Claude 3.5 的官方技术报告/模型卡，收集其在中文推理、代码生成、长上下文任务上的基准数据与架构技术路线信息",
+        "search_hints": [
+          "GPT-4o system card benchmark reasoning coding long context site:openai.com",
+          "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com"
+        ],
+        "preferred_domains": [
+          "openai.com",
+          "anthropic.com"
+        ],
+        "dependencies": []
+      },
+      {
+        "task_id": "task_2",
+        "description": "检索 Gemini 1.5 与 Qwen2.5 的官方技术报告/模型卡，收集其在中文推理、代码生成、长上下文任务上的基准数据与架构技术路线信息",
+        "search_hints": [
+          "Gemini 1.5 technical report benchmark long context coding site:deepmind.google",
+          "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io"
+        ],
+        "preferred_domains": [
+          "deepmind.google",
+          "qwenlm.github.io"
+        ],
+        "dependencies": []
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_1",
+        "status": "success",
+        "output": "**检索结果摘要（置信度 0.35）**\n\n**已确认事实**\n- GPT-4o 官方 System Card 存在：https://openai.com/index/gpt-4o-system-card/ （2024-08-08 发布）。但该文档侧重安全评估（外部红队、Preparedness Framework 风险评分），**并非**中文推理/代码/长上下文基准报告。页面抓取返回 403，正文未获取。\n- GPT-4o 上下文长度 128k tokens（OpenAI 定价页，2024-11 快照）。\n- Claude 3.5 Sonnet 官方发布页：https://www.anthropic.com/news/claude-3-5-sonnet 。确认：200K token 上下文窗口；定价 $3/百万输入、$15/百万输出；速度约为 Claude 3 Opus 的 2 倍；宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品。具体分数未在摘要中给出。\n\n**证据缺口（关键）**\n1. 未获得任何**中文推理**基准数据——两份官方文档均未提供中文专项评测。\n2. 未获得具体数值：GPT-4o 的 MMLU/HumanEval/MGSM 分数、Claude 3.5 Sonnet 的 GPQA/SWE-bench/MATH 分数均未取到。\n3. 架构技术路线（GPT-4o 为端到端多模态、Claude 3.5 的架构细节）官方均未披露，属未公开信息。\n4. 两次页面抓取均因 403 失败，需改用 PDF 直链或第三方镜像补充。\n\n**建议下一步**：直接抓取 System Card PDF 与 Anthropic 模型卡 PDF；中文能力需转向 C-Eval/CMMLU 等第三方榜单。",
+        "trajectory": [
+          {
+            "turn": 0,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_FQImu5CKp1xyHBtDTeSL2164",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"GPT-4o system card benchmark reasoning coding long context site:openai.com\", \"top_n\": 6}"
+                }
+              },
+              {
+                "id": "call_01_sPX8QSkRZ3RtaSUxlDnU1680",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com\", \"top_n\": 6}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_00_FQImu5CKp1xyHBtDTeSL2164",
+            "name": "web_search",
+            "result": {
+              "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024",
+              "results": [
+                {
+                  "title": "GPT-4o System Card  OpenAI",
+                  "url": "https://openai.com/index/gpt-4o-system-card/",
+                  "snippet": "This report outlines the safety work carried out prior to releasing GPT‐4o including external red teaming, frontier risk evaluations according to our Preparedness Framework, and an overview of the mitigations we built in to address key risk areas. View PDF version Loading... Share GPT-4o Scorecard Key Areas of Risk Evaluation & Mitigation Preparedness Framework Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. We thoroughly evaluate new models for potential risks and build in appropriate safeguards before deploying them in ChatGPT or the API. We’re publishing the model System Card together with the Preparedness Framework",
+                  "published_at": "2024-08-08T13:20:05+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "OpenAI o1 System Card  OpenAI",
+                  "url": "https://openai.com/index/openai-o1-system-card",
+                  "snippet": "This report outlines the safety work carried out prior to releasing OpenAI o1, including external red teaming and frontier risk evaluations according to our Preparedness Framework. Read the System Card (opens in a new window) Share OpenAI o1 System Card Key Areas of Evaluation Preparedness Scorecard Low Scorecard ratings Low Medium High Critical Only models with a post-mitigation score of \"medium\" or below can be deployed. Only models with a post-mitigation score of \"high\" or below can be developed further. Improved or comparable performance from previous flagship OpenAI model Introduction The o1 model series is trained with large-scale reinforcement learning to reason using chain-of-thought. These advanced reasoning capabilities provide new avenues for improving the safety and robustness",
+                  "published_at": "2024-12-05T21:11:03+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "Pricing  OpenAI",
+                  "url": "https://openai.com/api/pricing/?utm_source=rachelandreago",
+                  "snippet": "Pricing Show prices per 1K tokens API Pricing Our latest models Reasoning models for complex, multi-step problems OpenAI o1 Frontier reasoning model that supports tools, Structured Outputs, and vision | 200k context length Price Input: $15.00 / 1M tokens Cached input: $7.50 / 1M tokens Output: $60.00 / 1M tokens OpenAI o3-mini Small cost-efficient reasoning model that’s optimized for coding, math, and science, and supports tools and Structured Outputs | 200k context length Price Input: $1.10 / 1M tokens Cached input: $0.55 / 1M tokens Output: $4.40 / 1M tokens GPT models for everyday tasks GPT-4o High-intelligence model for complex tasks | 128k context length Price Input: $2.50 / 1M tokens Cached input: $1.25 / 1M tokens Output: $10.00 / 1M tokens GPT-4o mini Affordable small model for fas",
+                  "published_at": "2024-11-08T18:07:00+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                }
+              ],
+              "total": 3,
+              "source": "bocha",
+              "rejected_results": [
+                {
+                  "url": "https://openai.com/index/gpt-4-1/",
+                  "title": "Introducing GPT-4.1 in the API",
+                  "reason": "different_target_version_in_title"
+                },
+                {
+                  "url": "https://openai.com/index/o3-mini-system-card/",
+                  "title": "OpenAI o3-mini System Card  OpenAI",
+                  "reason": "later_year_without_target_version_in_title"
+                },
+                {
+                  "url": "https://openai.com/api/",
+                  "title": "API platform  OpenAI",
+                  "reason": "later_year_without_target_version_in_title"
+                }
+              ],
+              "page_reads": [
+                {
+                  "url": "https://openai.com/index/gpt-4o-system-card/",
+                  "status": "failed",
+                  "error": "[Browser Error] Network error: ClientResponseError: 403, message='Forbidden', url='https://openai.com/index/gpt-4o-system-card/'",
+                  "chars": 0
+                },
+                {
+                  "url": "https://openai.com/index/openai-o1-system-card",
+                  "status": "failed",
+                  "error": "[Browser Error] Network error: ClientResponseError: 403, message='Forbidden', url='https://openai.com/index/openai-o1-system-card'",
+                  "chars": 0
+                }
+              ]
+            },
+            "arguments": {
+              "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_01_sPX8QSkRZ3RtaSUxlDnU1680",
+            "name": "web_search",
+            "result": {
+              "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com 2024",
+              "results": [
+                {
+                  "title": "Claude 3.5 Sonnet",
+                  "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+                  "snippet": "Today, we’re launching Claude 3.5 Sonnet—our first release in the forthcoming Claude 3.5 model family. Claude 3.5 Sonnet raises the industry bar for intelligence, outperforming competitor models and Claude 3 Opus on a wide range of evaluations, with the speed and cost of our mid-tier model, Claude 3 Sonnet.\nClaude 3.5 Sonnet is now available for free on Claude.ai and the Claude iOS app, while Claude Pro and Team plan subscribers can access it with significantly higher rate limits. It is also available via the Anthropic  API ,  Amazon Bedrock , and  Google Cloud’s Vertex AI . The model costs $3 per million input tokens and $15 per million output tokens, with a 200K token context window.\nFrontier intelligence at 2x the speed\nClaude 3.5 Sonnet sets new industry benchmarks for graduate-level r",
+                  "published_at": "2025-03-01T08:00:00+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "title": "anthropic",
+                  "url": "https://www.anthropic.com/",
+                  "snippet": "Claude.ai\nMeet Claude 3.7 Sonnet\nClaude 3.7 Sonnet, our most intelligent AI model, is now available.\nTalk to Claude API\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nClaude 3.7 Sonnet and Claude Code\nIntroducing Claude 3.7 Sonnet, our most intelligent model yet and the first hybrid reasoning model. We’re also launching Claude Code, an agentic tool for coding. \nRead the announcement\nModel details\nClaude 3.7 Sonnet \nResearch insights\nClaude's extended thinking\nOur Work\nProduct\nClaude for Enterprise\nSep 4, 2024\nAlignment  ·  Research\nConstitutional AI: Harmlessness from AI Feedback\nDec 15, 2022\nAnnouncements\nCore Views on AI Safety: When, Why, What, and How\nMar 8, 2023\nWork with Anthropic\nAnthropic is an AI safety and research company based i",
+                  "published_at": "2024-06-26T06:41:03+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                }
+              ],
+              "total": 2,
+              "source": "bocha",
+              "rejected_results": [
+                {
+                  "url": "https://www.anthropic.com/claude/sonnet",
+                  "title": "Claude 3.7 Sonnet \\ Anthropic",
+                  "reason": "different_target_version_in_title"
+                },
+                {
+                  "url": "https://www.anthropic.com/transparency",
+                  "title": "Anthropic’s Transparency Hub \\ Anthropic",
+                  "reason": "later_year_without_target_version_in_title"
+                },
+                {
+                  "url": "https://www.anthropic.com/news/claude-4",
+                  "title": "Introducing Claude 4 \\ Anthropic",
+                  "reason": "different_target_version_in_title"
+                },
+                {
+                  "url": "https://docs.anthropic.com/en/docs/initial-setup",
+                  "title": "Initial setup - Anthropic",
+                  "reason": "later_year_without_target_version_in_title"
+                }
+              ],
+              "page_reads": []
+            },
+            "arguments": {
+              "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 1,
+            "role": "assistant",
+            "content": "**检索结果摘要（置信度 0.35）**\n\n**已确认事实**\n- GPT-4o 官方 System Card 存在：https://openai.com/index/gpt-4o-system-card/ （2024-08-08 发布）。但该文档侧重安全评估（外部红队、Preparedness Framework 风险评分），**并非**中文推理/代码/长上下文基准报告。页面抓取返回 403，正文未获取。\n- GPT-4o 上下文长度 128k tokens（OpenAI 定价页，2024-11 快照）。\n- Claude 3.5 Sonnet 官方发布页：https://www.anthropic.com/news/claude-3-5-sonnet 。确认：200K token 上下文窗口；定价 $3/百万输入、$15/百万输出；速度约为 Claude 3 Opus 的 2 倍；宣称在研究生级推理等基准上超越 Claude 3 Opus 及竞品。具体分数未在摘要中给出。\n\n**证据缺口（关键）**\n1. 未获得任何**中文推理**基准数据——两份官方文档均未提供中文专项评测。\n2. 未获得具体数值：GPT-4o 的 MMLU/HumanEval/MGSM 分数、Claude 3.5 Sonnet 的 GPQA/SWE-bench/MATH 分数均未取到。\n3. 架构技术路线（GPT-4o 为端到端多模态、Claude 3.5 的架构细节）官方均未披露，属未公开信息。\n4. 两次页面抓取均因 403 失败，需改用 PDF 直链或第三方镜像补充。\n\n**建议下一步**：直接抓取 System Card PDF 与 Anthropic 模型卡 PDF；中文能力需转向 C-Eval/CMMLU 等第三方榜单。",
+            "tool_calls": []
+          }
+        ]
+      },
+      {
+        "task_id": "task_2",
+        "status": "failed",
+        "output": "Tool 'browser' failed: Page read timed out",
+        "trajectory": [
+          {
+            "turn": 0,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_GLW6hC296mn0G4tcP8h59949",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"Gemini 1.5 technical report benchmark long context coding site:deepmind.google\", \"top_n\": 5}"
+                }
+              },
+              {
+                "id": "call_01_l21rPxGEF2jBEOjgOhvX6351",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io\", \"top_n\": 5}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_00_GLW6hC296mn0G4tcP8h59949",
+            "name": "web_search",
+            "result": {
+              "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google 2024",
+              "results": [],
+              "total": 0,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": []
+            },
+            "arguments": {
+              "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google",
+              "top_n": 5
+            }
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_01_l21rPxGEF2jBEOjgOhvX6351",
+            "name": "web_search",
+            "result": {
+              "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io 2024",
+              "results": [],
+              "total": 0,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": []
+            },
+            "arguments": {
+              "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io",
+              "top_n": 5
+            }
+          },
+          {
+            "turn": 1,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_dcI0lx1CHfeFq6JoazMP1735",
+                "type": "function",
+                "function": {
+                  "name": "browser",
+                  "arguments": "{\"url\": \"https://qwenlm.github.io/blog/qwen2.5/\", \"max_chars\": 6000}"
+                }
+              },
+              {
+                "id": "call_01_jzAmf5juAqMlZqeu6eLM9091",
+                "type": "function",
+                "function": {
+                  "name": "browser",
+                  "arguments": "{\"url\": \"https://deepmind.google/discover/blog/google-gemini-1-5-next-generation-model-february-2024/\", \"max_chars\": 6000}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 1,
+            "role": "tool",
+            "tool_call_id": "call_00_dcI0lx1CHfeFq6JoazMP1735",
+            "name": "browser",
+            "result": {
+              "url": "https://qwenlm.github.io/blog/qwen2.5/",
+              "content": "GITHUB\nHUGGING FACE\nMODELSCOPE\nDEMO\nDISCORD\nIntroduction\nIn the past three months since Qwen2’s release, numerous developers have built new models on the Qwen2 language models, providing us with valuable feedback. During this period, we have focused on creating smarter and more knowledgeable language models. Today, we are excited to introduce the latest addition to the Qwen family:\nQwen2.5\nWe are announcing what might be the largest opensource release in history! Let’s get the party started!\nOur latest release features the LLMs\nQwen2.5\n, along with specialized models for coding,\nQwen2.5-Coder\n, and mathematics,\nQwen2.5-Math\n. All open-weight models are dense, decoder-only language models, av\n\n, and mathematics,\nQwen2.5-Math\n. All open-weight models are dense, decoder-only language models, available in various sizes, including:\nQwen2.5: 0.5B, 1.5B, 3B, 7B, 14B, 32B, and 72B\nQwen2.5-Coder: 1.5B, 7B, and 32B on the way\nQwen2.5-Math: 1.5B, 7B, and 72B.\nAll our open-source models, except for the 3B and 72B variants, are licensed under Apache 2.0. You can find the license files in the respective Hugging Face repositories. In addition to these models, we offer APIs for our flagship language models:\nQwen-Plus\nQwen-Turbo\nthrough Model Studio, and we encourage you to explore them! Furthermore, we have also open-sourced the\nQwen2-VL-72B\n, which features performance enhancements compared to \n\ne, we have also open-sourced the\nQwen2-VL-72B\n, which features performance enhancements compared to last month’s release.\nFor more details about Qwen2.5, Qwen2.5-Coder, and Qwen2.5-Math, feel free to visit the following links:\nQwen2.5 LLM\nQwen2.5-Coder\nQwen2.5-Math\nGet ready to unlock a world of possibilities with our extensive lineup of models! We’re excited to share these cutting-edge models with you, and we can’t wait to see the incredible things you’ll achieve with them!\nTakeaways\nIn terms of\nQwen2.5\n, the language models, all models are pretrained on our latest large-scale dataset, encompassing up to\n18 trillion\ntokens. Compared to Qwen2, Qwen2.5 has acquired significantly more knowledg\n\nassing up to\n18 trillion\ntokens. Compared to Qwen2, Qwen2.5 has acquired significantly more knowledge (MMLU: 85+) and has greatly improved capabilities in coding (HumanEval 85+) and mathematics (MATH 80+). Additionally, the new models achieve significant improvements in instruction following, generating long texts (over 8K tokens), understanding structured data (e.g, tables), and generating structured outputs especially JSON. Qwen2.5 models are generally more resilient to the diversity of system prompts, enhancing role-play implementation and condition-setting for chatbots. Like Qwen2, the Qwen2.5 language models support up to\n128K\ntokens and can generate up to\ntokens. They also maintain mul\n\nn2.5 language models support up to\n128K\ntokens and can generate up to\ntokens. They also maintain multilingual support for over\nlanguages, including Chinese, English, French, Spanish, Portuguese, German, Italian, Russian, Japanese, Korean, Vietnamese, Thai, Arabic, and more. Below, we provide basic information about the models and details of the supported languages.\nThe specialized expert language models, namely\nQwen2.5-Coder\nfor coding and\nQwen2.5-Math\nfor mathematics, have undergone substantial enhancements compared to their predecessors, CodeQwen1.5 and Qwen2-Math. Specifically, Qwen2.5-Coder has been trained on\n5.5 trillion\ntokens of code-related data, enabling even smaller coding-specifi\n\nr has been trained on\n5.5 trillion\ntokens of code-related data, enabling even smaller coding-specific models to deliver competitive performance against larger language models on coding evaluation benchmarks. Meanwhile, Qwen2.5-Math supports both\nChinese\nEnglish\nand incorporates various reasoning methods, including Chain-of-Thought (CoT), Program-of-Thought (PoT), and Tool-Integrated Reasoning (TIR).\nPerformance\nQwen2.5\nTo showcase Qwen2.5’s capabilities, we benchmark our largest open-source model,\nQwen2.5-72B\n- a 72B-parameter dense decoder-only language model - against leading open-source models like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned\n\nels like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned versions across various benchmarks, evaluating both model capabilities and human preferences.\nBesides the instruction-tuned language models, we figure out that the base language model of our flagship opensource model Qwen2.5-72B reaches top-tier performance even against larger models like Llama-3-405B.\nFurthermore, we benchmark the latest version of our API-based model,\nQwen-Plus\n, against leading proprietary and open-source models, including GPT4-o, Claude-3.5-Sonnet, Llama-3.1-405B, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of lar\n\neek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of large language models. We show that\nQwen-Plus\nsignificantly outcompetes DeepSeek-V2.5 and demonstrates competitive performance against Llama-3.1-405B, while still underperforming compared to GPT4-o and Claude-3.5-Sonnet in some aspects. This benchmarking not only highlights Qwen-Plus’s strengths but also identifies areas for future improvement, reinforcing our commitment to continuous enhancement and innovation in the field of large language models.\nA significant update in Qwen2.5 is the reintroduction of our 14B and 32B models,\nQwen2.5-14B\nQwen2.5-32B\n. These models outperform baseline models of\n\ntion of our 14B and 32B models,\nQwen2.5-14B\nQwen2.5-32B\n. These models outperform baseline models of comparable or larger sizes, such as Phi-3.5-MoE-Instruct and Gemma2-27B-IT, across diverse tasks. They achieve an optimal balance between model size and capability, delivering performance that matches or exceeds some larger models. Additionally, our API-based model,\nQwen-Turbo\n, offers highly competitive performance compared to the two open-source models, while providing a cost-effective and rapid service.\nIn recent times, there has been a notable shift towards small language models (SLMs). Although SLMs have historically trailed behind their larger counterparts (LLMs), the performance gap is\n\nhough SLMs have historically trailed behind their larger counterparts (LLMs), the performance gap is rapidly diminishing. Remarkably, even models with just 3 billion parameters are now delivering highly competitive results. The accompanying figure illustrates a significant trend: newer models achieving scores above 65 in MMLU are increasingly smaller, underscoring the accelerated growth in knowledge density among language models. Notably, our\nQwen2.5-3B\nstands out as a prime example, achieving impressive performance with only around 3 billion parameters, showcasing its efficiency and capability compared to its predecessors.\nIn addition to the notable enhancements in benchmark evaluations, we\n\ny compared to its predecessors.\nIn addition to the notable enhancements in benchmark evaluations, we have refined our post-training methodologies. Our four key updates include support for long text generation of up to 8K tokens, significantly improved comprehension of structured data, more reliable generation of structured outputs, particularly in JSON format, and enhanced performance across diverse system prompts, which facilitates effective role-playing. Check the LLM blog for details about how to leverage these capabilities.\nQwen2.5-Coder\nSince the launch of CodeQwen1.5, we have attracted numerous users who rely on this model for various coding tasks, such as debugging, answering coding-r\n\numerous users who rely on this model for various coding tasks, such as debugging, answering coding-related questions, and providing code suggestions. Our latest iteration, Qwen2.5-Coder, is specifically designed for coding applications. In this section, we present the perform\n\n[CONTENT_TRUNCATED: 12821 chars total; extracted passages, not full page]",
+              "evidence_excerpt": "GITHUB\nHUGGING FACE\nMODELSCOPE\nDEMO\nDISCORD\nIntroduction\nIn the past three months since Qwen2’s release, numerous developers have built new models on the Qwen2 language models, providing us with valuable feedback. During this period, we have focused on creating smarter and more knowledgeable language models. Today, we are excited to introduce the latest addition to the Qwen family:\nQwen2.5\nWe are announcing what might be the largest opensource release in history! Let’s get the party started!\nOur latest release features the LLMs\nQwen2.5\n, along with specialized models for coding,\nQwen2.5-\n\ntion-tuned\n\nels like Llama-3.1-70B and Mistral-Large-V2. We present comprehensive results from instruction-tuned versions across various benchmarks, evaluating both model capabilities and human preferences.\nBesides the instruction-tuned language models, we figure out that the base language model of our flagship opensource model Qwen2.5-72B reaches top-tier performance even against larger models like Llama-3-405B.\nFurthermore, we benchmark the latest version of our API-based model,\nQwen-Plus\n, against leading proprietary and open-source models, including GPT4-o, Claude-3.5-Sonnet, Llama-3.1-405B, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current land\n\nB, and DeepSeek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of lar\n\neek-V2.5. This comparison showcases Qwen-Plus’s competitive standing in the current landscape of large language models. We show that\nQwen-Plus\nsignificantly outcompetes DeepSeek-V2.5 and demonstrates competitive performance against Llama-3.1-405B, while still underperforming compared to GPT4-o and Claude-3.5-Sonnet in some aspects. This benchmarking not only highlights Qwen-Plus’s strengths but also identifies areas for future improvement, reinforcing our commitment to continuous enhancement and innovation in the field of large language models.\nA significant update in Qwen2.5 is ",
+              "evidence_kind": "page_excerpt"
+            },
+            "arguments": {
+              "url": "https://qwenlm.github.io/blog/qwen2.5/",
+              "max_chars": 6000
+            }
+          },
+          {
+            "turn": 1,
+            "role": "tool",
+            "tool_call_id": "call_01_jzAmf5juAqMlZqeu6eLM9091",
+            "name": "browser",
+            "error": "Page read timed out"
+          }
+        ]
+      }
+    ],
+    "elapsed_seconds": 29.84299999999348,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 361,
+          "prompt_tokens": 854,
+          "total_tokens": 1215,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 854
+        },
+        "elapsed_seconds": 3.4689999999973224,
+        "finish_reason": "stop",
+        "content_chars": 1171,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 131,
+          "prompt_tokens": 1417,
+          "total_tokens": 1548,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1417
+        },
+        "elapsed_seconds": 1.25,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 132,
+          "prompt_tokens": 1421,
+          "total_tokens": 1553,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1421
+        },
+        "elapsed_seconds": 1.5,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 141,
+          "prompt_tokens": 1538,
+          "total_tokens": 1679,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 898
+        },
+        "elapsed_seconds": 1.4060000000026776,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 400,
+          "prompt_tokens": 3045,
+          "total_tokens": 3445,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 384
+          },
+          "prompt_cache_hit_tokens": 384,
+          "prompt_cache_miss_tokens": 2661
+        },
+        "elapsed_seconds": 3.1570000000065193,
+        "finish_reason": "stop",
+        "content_chars": 766,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 703,
+          "prompt_tokens": 1814,
+          "total_tokens": 2517,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 128
+          },
+          "prompt_cache_hit_tokens": 128,
+          "prompt_cache_miss_tokens": 1686
+        },
+        "elapsed_seconds": 4.25,
+        "finish_reason": "stop",
+        "content_chars": 1281,
+        "max_tokens": 4096
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024",
+          "top_n": 6,
+          "domains": [
+            "openai.com"
+          ]
+        },
+        "elapsed_seconds": 0.39100000000325963
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "Gemini 1.5 technical report benchmark long context coding site:deepmind.google 2024",
+          "top_n": 5,
+          "domains": [
+            "deepmind.google"
+          ]
+        },
+        "elapsed_seconds": 0.25
+      },
+      {
+        "tool": "browser",
+        "status": "failed",
+        "input": {
+          "url": "https://openai.com/index/gpt-4o-system-card/",
+          "max_chars": 8000,
+          "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024"
+        },
+        "elapsed_seconds": 0.4379999999946449
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "Qwen2.5 technical report benchmark Chinese reasoning coding site:qwenlm.github.io 2024",
+          "top_n": 5,
+          "domains": [
+            "qwenlm.github.io"
+          ]
+        },
+        "elapsed_seconds": 0.125
+      },
+      {
+        "tool": "browser",
+        "status": "failed",
+        "input": {
+          "url": "https://openai.com/index/openai-o1-system-card",
+          "max_chars": 8000,
+          "query": "GPT-4o system card benchmark reasoning coding long context site:openai.com 2024"
+        },
+        "elapsed_seconds": 0.25
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "Claude 3.5 Sonnet model card benchmark coding reasoning site:anthropic.com 2024",
+          "top_n": 6,
+          "domains": [
+            "anthropic.com"
+          ]
+        },
+        "elapsed_seconds": 0.13999999999941792
+      },
+      {
+        "tool": "browser",
+        "status": "completed",
+        "input": {
+          "url": "https://qwenlm.github.io/blog/qwen2.5/",
+          "max_chars": 8000,
+          "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。"
+        },
+        "elapsed_seconds": 1.125
+      },
+      {
+        "tool": "browser",
+        "status": "cancelled",
+        "input": {
+          "url": "https://deepmind.google/discover/blog/google-gemini-1-5-next-generation-model-february-2024/",
+          "max_chars": 8000,
+          "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。"
+        },
+        "elapsed_seconds": 12.0
+      }
+    ],
+    "source_fingerprint": "0dd9ab69bf189fea99002b5bde8d6b7759cd1881641deb61df39dce6b11e0588"
+  },
+  {
+    "question_id": "tech_002",
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "system": "dag",
+    "model_backend": "deepseek",
+    "sampling": {
+      "modules": {
+        "default": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "planner": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "solver": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "summarizer": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "red_agent": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        },
+        "blue_agent": {
+          "temperature": 0.1,
+          "max_tokens": 4096,
+          "thinking": "disabled"
+        },
+        "compressor": {
+          "temperature": 0.1,
+          "max_tokens": 2048,
+          "thinking": "disabled"
+        }
+      }
+    },
+    "timeout": 90.0,
+    "max_sub_questions": 2,
+    "adversarial_config": {
+      "enabled": true,
+      "max_rounds": 1,
+      "score_threshold": 9.5,
+      "delta_threshold": 0.2,
+      "save_logs": true,
+      "max_model_calls": 12,
+      "max_fixes_per_round": 1
+    },
+    "runtime": {
+      "executable": "D:\\Anaconda\\python.exe",
+      "python_version": "3.12.7"
+    },
+    "quality_review": {
+      "answers_question": null,
+      "citations_support_claims": null
+    },
+    "report": {
+      "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+      "content": "Evidence insufficient or global deadline reached; no complete research report.",
+      "sources": [],
+      "confidence": 0.0,
+      "num_searches": 6,
+      "num_replan": 0,
+      "adversarial_rounds": 0,
+      "final_score": 0.0,
+      "status": "failed",
+      "incomplete_tasks": [
+        "task_1",
+        "task_2"
+      ],
+      "run_id": "019f88729afe40d88a4f60dffecb618e",
+      "review_history": [],
+      "review_status": "skipped_incomplete"
+    },
+    "technical_checks": {
+      "report_completed": false,
+      "nonempty_report": true,
+      "sources_available": false,
+      "all_tasks_completed": false,
+      "no_execution_errors": true,
+      "review_completed": false
+    },
+    "technical_chain_success": false,
+    "events": [
+      {
+        "state": "planning",
+        "elapsed": 0.0
+      },
+      {
+        "state": "dispatching",
+        "elapsed": 2.906
+      },
+      {
+        "task_id": "task_1",
+        "task_status": "failed",
+        "failure_reason": "Tool 'web_search' failed: Search budget exhausted"
+      },
+      {
+        "task_id": "task_2",
+        "task_status": "failed",
+        "failure_reason": "Tool 'web_search' failed: Search budget exhausted"
+      },
+      {
+        "state": "collecting",
+        "elapsed": 7.031
+      },
+      {
+        "state": "synthesizing",
+        "elapsed": 7.031
+      },
+      {
+        "state": "failed",
+        "elapsed": 7.031
+      }
+    ],
+    "task_specs": [
+      {
+        "task_id": "task_1",
+        "description": "检索 NVIDIA、AMD、Intel 2025-2026 年最新数据中心 AI 芯片产品线（训练与推理）的官方规格、性能基准与市场数据，包括 NVIDIA Blackwell/Rubin、AMD MI350/MI400、Intel Gaudi 3 等，并收集其市场份额与客户部署情况。",
+        "search_hints": [
+          "NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com",
+          "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com"
+        ],
+        "preferred_domains": [
+          "nvidia.com",
+          "amd.com",
+          "intel.com"
+        ],
+        "dependencies": []
+      },
+      {
+        "task_id": "task_2",
+        "description": "检索华为昇腾（Ascend 910B/910C 等）与寒武纪（思元 590/690 等）2025-2026 年在训练与推理场景的官方产品规格、性能基准、生态（CANN/MindSpore、Cambricon BANG）及中国市场部署与竞争力数据。",
+        "search_hints": [
+          "华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com",
+          "寒武纪 思元590 690 训练 推理 性能 2026 site:cambricon.com"
+        ],
+        "preferred_domains": [
+          "hiascend.com",
+          "cambricon.com"
+        ],
+        "dependencies": []
+      }
+    ],
+    "tasks": [
+      {
+        "task_id": "task_1",
+        "status": "failed",
+        "output": "Tool 'web_search' failed: Search budget exhausted",
+        "trajectory": [
+          {
+            "turn": 0,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_nhtvYDsnzjN96RAg6RvS8740",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com\", \"top_n\": 6}"
+                }
+              },
+              {
+                "id": "call_01_0kfTkQQsdPDCRG3w17wh8591",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com\", \"top_n\": 6}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_00_nhtvYDsnzjN96RAg6RvS8740",
+            "name": "web_search",
+            "result": {
+              "query": "NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com",
+              "results": [
+                {
+                  "title": "NVIDIA Data Center Deep Learning Product Performance | NVIDIA Developer",
+                  "url": "https://developer.nvidia.com/deep-learning-performance-training-inference/training",
+                  "snippet": "NVIDIA\nNeMoLlama\n3.1\n405B64.65.6\nlog\nperplexity512x\nGB300Theia\n(8x\nNVIDIA\nGB300\nNVL72)5.1-0060Mixedc4/en/3.0.1NVIDIA\nBlackwell\nUltra\nGPU\n(GB300)\n84.95.6\nlog\nperplexity512x\nGB200Tyche\n(8x\nNVIDIA\nGB200\nNVL72)5.1-0071Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n18.85.6\nlog\nperplexity2,560x\nGB200hsg\n(40x\nNVIDIA\nGB200\nNVL72)5.1-0003Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n105.6\nlog\nperplexity5,120x\nGB200hsg\n(80x\nNVIDIA\nGB200\nNVL72)5.1-0004Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n256.35.6\nlog\nperplexity256x\nB200HiPerGator\nNVIDIA\nDGX\nB200\n(8x\nB200‐SXM‐180GB)5.1-0087Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(B200-SXM-180GB)\n147.25.6\nlog\nperplexity448x\nB200HiPerGator\nNVIDIA\nDGX\nB200\n(8x\nB200‐SXM‐180GB)5.1-0089Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(B200-SXM-180GB)\nLlama2-70B-Lora1.20.925\nEval\nlos",
+                  "published_at": "2026-05-09T15:39:30+08:00",
+                  "evidence_kind": "page_excerpt",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched",
+                  "content": "AI Training\nDeploying AI in real-world applications requires training networks to convergence at a specified accuracy. This is the best methodology to test whether AI systems are ready to be deployed in the field to deliver meaningful results.\nClick here\nto view other performance data.\nMLPerf Training\nLarge Language Model\nNVIDIA Performance on MLPerf 6.0 Training Benchmarks\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Single Node, Closed Division\nNetwork | Time to Train (mins) | MLPerf Quality Target | GPU | Server | MLPerf ID | Precision | Dataset | Framework | GPU Version\nLlama2-70B-Lora | 11.6 | 0.925 Eval loss | 4x GB300 | 1xXE9712x4GB300 | 6.0-0048 | Mixed | SCROLLS GovReport | PyT\n\na | 11.6 | 0.925 Eval loss | 4x GB300 | 1xXE9712x4GB300 | 6.0-0048 | Mixed | SCROLLS GovReport | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nLlama2-70B-Lora | 6.6 | 0.925 Eval loss | 8x B300 | XA_NB3I-E12 | 6.0-0038 | Mixed | SCROLLS GovReport | PyTorch | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nLlama2-70B-Lora | 7.9 | 0.925 Eval loss | 8x B200 | AS-4126GS-NBR-LCC | 6.0-0107 | Mixed | SCROLLS GovReport | NVIDIA NeMo | NVIDIA Blackwell GPU (B200-SXM-180GB)\nLlama3.1 8B | 123.7 | 3.3 log perplexity | 4x GB300 | 1xXE9712x4GB300 | 6.0-0048 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nLlama3.1 8B | 72.0 | 3.3 log perplexity | 8x B300 | Nebius B300 n1 (8x B300-SXM-270GB)\n\na GPU (GB300)\nLlama3.1 8B | 72.0 | 3.3 log perplexity | 8x B300 | Nebius B300 n1 (8x B300-SXM-270GB) | 6.0-0023 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nLlama3.1 8B | 82.2 | 3.3 log perplexity | 8x B200 | 1xXE9780x8B200-SXM-180GB | 6.0-0052 | Mixed | c4/en/3.0.1 | DGL | NVIDIA Blackwell GPU (B200-SXM-180GB)\nGPT-OSS 20B | 152.7 | 3.34 log perplexity | 4x GB300 | 1xXE9712x4GB300 | 6.0-0048 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nGPT-OSS 20B | 83.6 | 3.34 log perplexity | 8x B300 | Nebius B300 n1 (8x B300-SXM-270GB) | 6.0-0023 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nGPT-OSS 20B | 96.5\n\n| Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nGPT-OSS 20B | 96.5 | 3.34 log perplexity | 8x B200 | Lambda-1-Click-Cluster_B200_n1 | 6.0-0008 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell GPU (B200-SXM-180GB)\nDLRM-dcnv2 | 2.2 | 0.80275 AUC | 8x B300 | G894-SD3-AAX7 | 6.0-0065 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | NVIDIA Merlin HugeCTR | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nDLRM-dcnv2 | 2.3 | 0.80275 AUC | 8x B200 | SYS-A22GA-NBRT | 6.0-0113 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | NVIDIA Merlin HugeCTR | NVIDIA Blackwell GPU (B200-SXM-180GB)\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Multi Node, Closed Div\n\nckwell GPU (B200-SXM-180GB)\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Multi Node, Closed Division\nNetwork | Time to Train (mins) | MLPerf Quality Target | GPU | Server | MLPerf ID | Precision | Dataset | Framework | GPU Version\nLlama 3.1 405B | 58.3 | 5.6 log perplexity | 512x GB300 | Theia-cmh (8x NVIDIA GB300 NVL72) | 6.0-0013 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (GB300)\nLlama 3.1 405B | 18.5 | 5.6 log perplexity | 2,048x GB300 | Theia-cmh (32x NVIDIA GB300 NVL72) | 6.0-0012 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (GB300)\nLlama 3.1 405B | 9.8 | 5.6 log perplexity | 4,096x GB300 | CoreWeave_GB300_1024x4_nccl2297 | 6.0-0004 | Mixed\n\n 405B | 9.8 | 5.6 log perplexity | 4,096x GB300 | CoreWeave_GB300_1024x4_nccl2297 | 6.0-0004 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nLlama 3.1 405B | 18.8 | 5.6 log perplexity | 2,560x GB200 | Tyche-hsg (40x NVIDIA GB200 NVL72) | 6.0-0019 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell GPU (GB200)\nLlama 3.1 405B | 10.0 | 5.6 log perplexity | 5,120x GB200 | Tyche-hsg (80x NVIDIA GB200 NVL72) | 6.0-0021 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell GPU (GB200)\nLlama 3.1 405B | 7.1 | 5.6 log perplexity | 8,192x GB200 | Azure GB200 (128x NVIDIA GB200 NVL72) | 6.0-0001 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell GPU (GB200)\nDeepSeek v3 671B \n\nL72) | 6.0-0001 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell GPU (GB200)\nDeepSeek v3 671B | 33.4 | 3.6 log perplexity | 256x GB300 | Theia (4x NVIDIA GB300 NVL72) | 6.0-0099 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (GB300)\nDeepSeek v3 671B | 17.5 | 3.6 log perplexity | 512x GB300 | Theia (8x NVIDIA GB300 NVL72) | 6.0-0101 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (GB300)\nDeepSeek v3 671B | 5.5 | 3.6 log perplexity | 2,048x GB300 | CoreWeave_GB300_512x4 | 6.0-0006 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nDeepSeek v3 671B | 3.1 | 3.6 log perplexity | 4,096x GB300 | CoreWeave_GB300_1024x4 | 6.0-0003 | Mixed | c\n\nek v3 671B | 3.1 | 3.6 log perplexity | 4,096x GB300 | CoreWeave_GB300_1024x4 | 6.0-0003 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nDeepSeek v3 671B | 2.0 | 3.6 log perplexity | 8,192x GB300 | CoreWeave_GB300_2048x4 | 6.0-0005 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell Ultra GPU (GB300)\nDeepSeek v3 671B | 49.4 | 3.6 log perplexity | 256x GB200 | NVIDIA GB200 NVL72 (64 nodes, 4 NVLink domains) | 6.0-0007 | Mixed | c4/en/3.0.1 | PyTorch | NVIDIA Blackwell GPU (GB200)\nDeepSeek v3 671B | 27.6 | 3.6 log perplexity | 512x GB200 | Tyche-hsg (8x NVIDIA GB200 NVL72) | 6.0-0022 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA Blackwell GPU (GB200)\nDeepSeek v3 671B | 7.8 |\n\n6.0-0022 | Mixed | c4/en/3.0.1 | NVIDIA NeMo | NVIDIA \n\n NVIDIA Blackwell Ultra GPU (GB300)\nDLRM-dcnv2 | 0.7 | 0.80275 AUC | 64x GB300 | DLB2-CB3 | 6.0-0062 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | NVIDIA NeMo | NVIDIA Blackwell Ultra GPU (GB300)\nDLRM-dcnv2 | 1.9 | 0.80275 AUC | 16x B300 | 2xXE9780x8B300-SXM-270GB | 6.0-0058 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | PyTorch | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nMLPerf™ v6.0 Training Closed: 6.0-0003, 6.0-0005, 6.0-0010, 6.0-0013, 6.0-0017, 6.0-0023, 6.0-0024, 6.0-0025, 6.0-0027, 6.0-0028, 6.0-0030, 6.0-0035, 6.0-0037, 6.0-0038, 6.0-0039, 6.0-0041, 6.0-0042, 6.0-0043, 6.0-0065, 6.0-0066, 6.0-0067, 6.0-0070, 6.0-0073, 6.0-0079, 6.0-0083, 6.0-0084, 6.0-0085, 6.0-\n\n0043, 6.0-0065, 6.0-0066, 6.0-0067, 6.0-0070, 6.0-0073, 6.0-0079, 6.0-0083, 6.0-0084, 6.0-0085, 6.0-0086, 6.0-0087, 6.0-0088, 6.0-0089, 6.0-0090, 6.0-0091, 6.0-0094, 6.0-0095, 6.0-0096, 6.0-0097, 6.0-0098, 6.0-0100, 6.0-0101, 6.0-0102, 6.0-0103, 6.0-0104, 6.0-0105, 6.0-0106, 6.0-0107, 6.0-0113, 6.0-0117 | MLPerf name and logo are trademarks. See\nhttps://mlcommons.org/\nfor more information.\nFor Training rules and guidelines, click\nhere\nLLM Training Performance on NVIDIA Data Center Products\nGB300 Training Performance\nFramework | Model | Throughput per GPU | GPU | Server | Container Version | Sequence Length | TP | PP | CP | EP | Precision | Global Batch Size | GPU Version\nNVIDIA Nemo | DeepSe\n\nVIDIA GB200\n| Nemotron 3 Super | 7,168 tokens/sec/gpu | 64x GB200 | DGX GB200 | nemo:26.08 | 8192 | 2 | 1 | 1 | 64 | FP4 | 512 | NVIDIA GB200\n| Nemotron 3 Ultra | 2,528 tokens/sec/gpu | 256x GB200 | DGX GB200 | nemo:26.08 | 8192 | 2 | 1 | 1 | 64 | FP8 | 256 | NVIDIA GB200\nTP: Tensor Parallelism\nPP: Pipeline Parallelism\nCP: Context Parallelism\nEP: Expert Parallelism\nView More Performance Data\nAI Inference\nReal-world inferencing demands high throughput and low latencies with maximum efficiency across use cases. An industry-leading solution lets customers quickly deploy AI models into real-world production with the highest performance from data center to edge.\nLearn More\nAI Pipeline\nNVIDIA Riva\n\nproduction with the highest performance from data center to edge.\nLearn More\nAI Pipeline\nNVIDIA Riva is an application framework for multimodal conversational AI services that deliver real-performance on GPUs.\nLearn More\n\n[CONTENT_TRUNCATED: 15220 chars total; extracted passages, not full page]",
+                  "evidence_excerpt": "AI Training\nDeploying AI in real-world applications requires training networks to convergence at a specified accuracy. This is the best methodology to test whether AI systems are ready to be deployed in the field to deliver meaningful results.\nClick here\nto view other performance data.\nMLPerf Training\nLarge Language Model\nNVIDIA Performance on MLPerf 6.0 Training Benchmarks\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Single Node, Closed Division\nNetwork | Time to Train (mins) | MLPerf Quality Target | GPU | Server | MLPerf ID | Precision | Dataset | Framework | GPU Version\nLlama2-70B-Lora | 11.6 | 0.925 Eval loss | 4x GB300 | 1xXE9712x4GB300 | 6.0-0048 | Mixed | SCROLLS GovReport | PyT\n\n94-SD3-AAX7 | 6.0-0065 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | NVIDIA Merlin HugeCTR | NVIDIA Blackwell Ultra GPU (B300-SXM-270GB)\nDLRM-dcnv2 | 2.3 | 0.80275 AUC | 8x B200 | SYS-A22GA-NBRT | 6.0-0113 | Mixed | Criteo 3.5TB Click Logs (multi-hot variant) | NVIDIA Merlin HugeCTR | NVIDIA Blackwell GPU (B200-SXM-180GB)\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Multi Node, Closed Div\n\nckwell GPU (B200-SXM-180GB)\nNVIDIA Performance on MLPerf 6.0’s AI Benchmarks: Multi Node, Closed Division\nNetwork | Time to Train (mins) | MLPerf Quality Target | GPU | Server | MLPerf ID | Precision | Dataset | Framework | GPU Version\nLlama 3.1 405B | 58.3 | 5.6 log perplexity | 512x GB300 \n\n6.0-0102, 6.0-0103, 6.0-0104, 6.0-0105, 6.0-0106, 6.0-0107, 6.0-0113, 6.0-0117 | MLPerf name and logo are trademarks. See\nhttps://mlcommons.org/\nfor more information.\nFor Training rules and guidelines, click\nhere\nLLM Training Performance on NVIDIA Data Center Products\nGB300 Training Performance\nFramework | Model | Throughput per GPU | GPU | Server | Container Version | Sequence Length | TP | PP | CP | EP | Precision | Global Batch Size | GPU Version\nNVIDIA Nemo | DeepSe\n\nVIDIA GB200\n| Nemotron 3 Super | 7,168 tokens/sec/gpu | 64x GB200 | DGX GB200 | nemo:26.08 | 8192 | 2 | 1 | 1 | 64 | F"
+                },
+                {
+                  "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+                  "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+                  "snippet": "NVIDIA\nBlackwell\nUltra\nDelivers\nup\nto\n50x\nBetter\nPerformance\nand\n35x\nLower\nCost\nfor\nAgentic\nAI\nBuilt\nto\naccelerate\nthe\nnext\ngeneration\nof\nagentic\nAI,\nNVIDIA\nBlackwell\nUltra\ndelivers\nbreakthrough\ninference\nperformance\nwith\ndramatically\nlower\ncost.\nCloud\nproviders\nsuch\nas\nMicrosoft,\nCoreWeave,\nand\nOracle\nCloud\nInfrastructure\nare\ndeploying\nNVIDIA\nGB300\nNVL72\nsystems\nat\nscale\nfor\nlow-latency\nand\nlong-context\nuse\ncases,\nsuch\nas\nagentic\ncoding\nand\ncoding\nassistants.This\nis\nenabled\nby\ndeep\nco-design\nacross\nNVIDIA\nBlackwell,\nNVLinkTM,\nand\nNVLink\nSwitch\nfor\nscale-out;\nNVFP4\nfor\nlow-precision\naccuracy;\nand\nNVIDIA\nDynamo\nand\nTensorRTTM\nLLM\nfor\nspeed\nand\nflexibility—as\nwell\nas\ndevelopment\nwith\ncommunity\nframeworks\nSGLang,\nvLLM,\nand\nmore.",
+                  "published_at": "2026-05-09T11:49:48+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "Grace CPU | NVIDIA Developer",
+                  "url": "https://developer.nvidia.com/grace-cpu",
+                  "snippet": "NVIDIA\nGrace\nCPU\nBenchmarking\nGuide\nSee\nprocedures\nand\nsample\ncode\nfor\nbenchmarking\nyour\nNVIDIA\nGrace\nsystem.",
+                  "published_at": "2026-05-10T03:02:28+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "CUDA GPU Compute Capability | NVIDIA Developer",
+                  "url": "https://developer.nvidia.com/cuda/gpus",
+                  "snippet": "12.1\nNVIDIA\nGB10\n(DGX\nSpark)\n12.0\nNVIDIA\nRTX\nPRO\n6000\nBlackwell\nServer\nEdition\nNVIDIA\nRTX\nPRO\n4500\nBlackwell\nServer\nEdition\nNVIDIA\nRTX\nPRO\n6000\nBlackwell\nWorkstation\nEditionNVIDIA\nRTX\nPRO\n6000\nBlackwell\nMax-Q\nWorkstation\nEditionNVIDIA\nRTX\nPRO\n5000\nBlackwellNVIDIA\nRTX\nPRO\n4500\nBlackwellNVIDIA\nRTX\nPRO\n4000\nBlackwellNVIDIA\nRTX\nPRO\n4000\nBlackwell\nSFF\nEditionNVIDIA\nRTX\nPRO\n2000\nBlackwellGeForce\nRTX\n5090GeForce\nRTX\n5080GeForce\nRTX\n5070\nTiGeForce\nRTX\n5070GeForce\nRTX\n5060\nTiGeForce\nRTX\n5060GeForce\nRTX\n5050\n11.0\nJetson\nT5000Jetson\nT4000\n10.3\nNVIDIA\nGB300NVIDIA\nB300\n10.0\nNVIDIA\nGB200NVIDIA\nB200\n9.0\nNVIDIA\nGH200NVIDIA\nH200NVIDIA\nH100\n8.9\nNVIDIA\nL4NVIDIA\nL40NVIDIA\nL40S\nNVIDIA\nRTX\n6000\nAdaNVIDIA\nRTX\n5000\nAdaNVIDIA\nRTX\n4500\nAdaNVIDIA\nRTX\n4000\nAdaNVIDIA\nRTX\n4000\nSFF\nAdaNVIDIA\nRTX\n2000\nAdaGeForce\nRTX\n409",
+                  "published_at": "2026-05-09T15:49:51+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "Recent posts for: “NCCL”",
+                  "url": "https://developer.nvidia.com/blog/recent-posts/?products=NCCL",
+                  "snippet": "Jul\n14,\n2025\nEnabling\nFast\nInference\nand\nResilient\nTraining\nwith\nNCCL\n2.27\nAs\nAI\nworkloads\nscale,\nfast\nand\nreliable\nGPU\ncommunication\nbecomes\nvital,\nnot\njust\nfor\ntraining,\nbut\nincreasingly\nfor\ninference\nat\nscale.\nThe\nNVIDIA\nCollective...\n9\nMIN\nREAD",
+                  "published_at": "2026-05-10T09:58:44+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "Tag: NVL72 | NVIDIA Technical Blog",
+                  "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+                  "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+                  "published_at": "2026-05-10T09:59:12+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                }
+              ],
+              "total": 6,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": [
+                {
+                  "url": "https://developer.nvidia.com/deep-learning-performance-training-inference/training",
+                  "status": "read",
+                  "error": null,
+                  "chars": 8073
+                }
+              ]
+            },
+            "arguments": {
+              "query": "NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_01_0kfTkQQsdPDCRG3w17wh8591",
+            "name": "web_search",
+            "result": {
+              "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+              "results": [],
+              "total": 0,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": []
+            },
+            "arguments": {
+              "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 1,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_4J7JW3nbP1qpCFlgDlXI4958",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"AMD Instinct MI350 MI400 specifications HBM memory FP4 performance 2026 vs Intel Gaudi 3\", \"top_n\": 6}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 1,
+            "role": "tool",
+            "tool_call_id": "call_00_4J7JW3nbP1qpCFlgDlXI4958",
+            "name": "web_search",
+            "error": "Search budget exhausted"
+          }
+        ]
+      },
+      {
+        "task_id": "task_2",
+        "status": "failed",
+        "output": "Tool 'web_search' failed: Search budget exhausted",
+        "trajectory": [
+          {
+            "turn": 0,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_0aGBdEQ5ObLXYMOTcE8L6933",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com\", \"top_n\": 6}"
+                }
+              },
+              {
+                "id": "call_01_KYWO3B2RwuKYPQNUer3s9787",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"寒武纪 思元590 690 训练 推理 性能 2026 site:cambricon.com\", \"top_n\": 6}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_00_0aGBdEQ5ObLXYMOTcE8L6933",
+            "name": "web_search",
+            "result": {
+              "query": "华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com",
+              "results": [
+                {
+                  "title": "昇腾NPU处理器",
+                  "url": "https://www.hiascend.com/hardware/processor",
+                  "snippet": "昇腾NPU处理器更多精度格式、SIMT+SIMD混合编程、灵衢高速互联,加速万亿级大模型训练和极致低时延推理",
+                  "published_at": "2026-08-01T15:09:06+08:00",
+                  "evidence_kind": "page_excerpt",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched",
+                  "content": "Ascend 950PR\n更多产品\n项目咨询\n昇腾NPU处理器\n更多精度格式、SIMT+SIMD混合编程、灵衢高速互联，加速万亿级大模型训练和极致低时延推理\nAscend 950PR\nAscend 950DT\nAscend 950PR\nAscend 950PR聚焦LLM大语言模型Prefill阶段以及高性能推荐业务，最大配备128GB、1.6TB/s高速片上内存，打造极致吞吐能力。\n项目咨询\n固件与驱动\n* 图片仅供参考，具体硬件产品形态以实物为准\n产品特性\n超强算力\n支持多种精度格式，最大支持1784TFLOPS，通过量化技术，实现模型推理极致性能\n混合编程\n支持SIMD+SIMT混合编程架构，性能与易用性同步提升\n高速互联\n支持灵衢2.0互联协议，最大支持2TB/s双向互联带宽\n获取产品资源\n产品资源\n技术白皮书\n兼容性查询工具\n获取开发支持与帮助\n昇腾论坛\n问题求助，技术探讨，大咖在线答疑解惑\n支持与服务\n为你提供多样化的自助查询途径、专业高效的人工服务支持",
+                  "evidence_excerpt": "Ascend 950PR\n更多产品\n项目咨询\n昇腾NPU处理器\n更多精度格式、SIMT+SIMD混合编程、灵衢高速互联，加速万亿级大模型训练和极致低时延推理\nAscend 950PR\nAscend 950DT\nAscend 950PR\nAscend 950PR聚焦LLM大语言模型Prefill阶段以及高性能推荐业务，最大配备128GB、1.6TB/s高速片上内存，打造极致吞吐能力。\n项目咨询\n固件与驱动\n* 图片仅供参考，具体硬件产品形态以实物为准\n产品特性\n超强算力\n支持多种精度格式，最大支持1784TFLOPS，通过量化技术，实现模型推理极致性能\n混合编程\n支持SIMD+SIMT混合编程架构，性能与易用性同步提升\n高速互联\n支持灵衢2.0互联协议，最大支持2TB/s双向互联带宽\n获取产品资源\n产品资源\n技术白皮书\n兼容性查询工具\n获取开发支持与帮助\n昇腾论坛\n问题求助，技术探讨，大咖在线答疑解惑\n支持与服务\n为你提供多样化的自助查询途径、专业高效的人工服务支持"
+                },
+                {
+                  "title": "基于华为昇腾CANN的从零手搓推理框架-昇腾社区",
+                  "url": "https://www.hiascend.com/edu/growth/details/d4462bcaab7148f0b8252d248f77eafe",
+                  "snippet": "课程涵盖了推理框架的基础概念、核心功能模块实现、性能优化技术以及实际应用案例。通过本课程的学习,学习者将全面掌握推理框架的内部工作机制,包括模型中间表示、模型解释、计算图构建、运行时设计等核心组件",
+                  "published_at": "2026-01-10T06:48:02+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "基于华为昇腾CANN的从零手搓推理框架-微认证-昇腾社区",
+                  "url": "https://www.hiascend.com/edu/certification/detail/d2ffe13c305e4af3b6fe20130a417f28",
+                  "snippet": "基于华为昇腾CANN的从零手搓推理框架本认证是基于华为昇腾CANN的从零手搓推理框架,通过认证,学习者将全面掌握推理框架的内部工作机制,并具备在华为昇腾平台上独立开发和优化推理框架的综合能力。",
+                  "published_at": "2026-01-10T07:50:45+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "Super_Resolution_CNN_ID3003-PyTorch-模型库-ModelZoo-昇腾社区",
+                  "url": "https://www.hiascend.com/software/modelzoo/models/detail/c944228b74c14d89a6efe697f51dfa84",
+                  "snippet": "基本信息\n发布者(Publisher):Huawei\n应用领域(Application\nDomain):Object\nDetection\n版本(Version):1.1\n修改时间(Modified)\n:2022.8.16\n大小(Size):190616KB\n框架(Framework):PyTorch\n1.5\n模型格式(Model\nFormat):ckpt\n精度(Precision):Mixed\n处理器(Processor):昇腾910\n应用级别(Categories):Official\n描述(Description):基于PyTorch框架的图像超分辨率训练代码\n概述\n简述\n我们提出了一种用于单幅图像超分辨率(SR)的深度学习方法。我们的方法直接学习低/高分辨率图像之间的端到端映射。该映射表示为一个深度卷积神经网络\n(CNN),它将低分辨率图像作为输入并输出高分辨率图像。我们进一步表明,传统的基于稀疏编码的\nSR\n方法也可以被视为深度卷积网络。但与单独处理每个组件的传统方法不同,我们的方法联合优化了所有层。我们的深度\nCNN\n结构轻巧,但展示了最先进的恢复质量,并实现了实际在线使用的快速速度。我们探索不同的网络结构和参数设置,以实现性能和速度之间的权衡.\n默认配置\n训练超参(单卡):\nbatch_size\n32\ndata_url\ntrain_url\nnum-epochs\nlr\n1e-4\nnum-workers\n8\nseed\n123\n支持特性\n特性列表\n是否支持\n分布式训练\n是\n混合精度\n是\n数据并行\n否\n混合精度训练\n昇腾910\nAI处理器提供自动混合精度功能,可以针对全网中float32数据类型的算子,按照内置的优化策略,自动将部分float32的算子降低精度到float16,从而在精度损失很小的情况下提升系统性能并减少内存使用。\n开启混合精度\n基于NPU芯片的架构特性",
+                  "published_at": "2026-01-05T00:00:00+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "推理引擎-昇腾社区",
+                  "url": "https://www.hiascend.com/edu/growth/details/c4ef987e0ae04fa3a3846c573c4766da",
+                  "snippet": "本路径将围绕深度学习推理系统的设计,实现与优化内容展开,同时还会在最后介绍部署和\nMLOps\n等内容。",
+                  "published_at": "2026-01-10T06:47:34+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "title": "推理应用调优实践-昇腾社区",
+                  "url": "https://www.hiascend.com/edu/growth/details/d1c1ac12e6284557a0230ba6ebb4ddc1",
+                  "snippet": "学完本路径内全部内容,您可以熟练掌握基于Ascend\nCL提供的高级特性对您的推理应用进行调试调优,优化推理应用的精度和性能。",
+                  "published_at": "2026-01-10T06:16:26+08:00",
+                  "evidence_kind": "search_summary",
+                  "preferred_domain": true,
+                  "scope_note": "title_not_obviously_mismatched"
+                }
+              ],
+              "total": 6,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": [
+                {
+                  "url": "https://www.hiascend.com/hardware/processor",
+                  "status": "read",
+                  "error": null,
+                  "chars": 438
+                }
+              ]
+            },
+            "arguments": {
+              "query": "华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 0,
+            "role": "tool",
+            "tool_call_id": "call_01_KYWO3B2RwuKYPQNUer3s9787",
+            "name": "web_search",
+            "result": {
+              "query": "寒武纪 思元590 690 训练 推理 性能 2026 site:cambricon.com",
+              "results": [],
+              "total": 0,
+              "source": "bocha",
+              "rejected_results": [],
+              "page_reads": []
+            },
+            "arguments": {
+              "query": "寒武纪 思元590 690 训练 推理 性能 2026 site:cambricon.com",
+              "top_n": 6
+            }
+          },
+          {
+            "turn": 1,
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "call_00_wys5jJNFZHbSbmCNt2vd5384",
+                "type": "function",
+                "function": {
+                  "name": "web_search",
+                  "arguments": "{\"query\": \"寒武纪 思元590 思元690 规格 算力 训练 推理 2025 官方\", \"top_n\": 6}"
+                }
+              }
+            ]
+          },
+          {
+            "turn": 1,
+            "role": "tool",
+            "tool_call_id": "call_00_wys5jJNFZHbSbmCNt2vd5384",
+            "name": "web_search",
+            "error": "Search budget exhausted"
+          }
+        ]
+      }
+    ],
+    "elapsed_seconds": 7.094000000011874,
+    "model_calls": [
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 438,
+          "prompt_tokens": 831,
+          "total_tokens": 1269,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 831
+        },
+        "elapsed_seconds": 2.9060000000026776,
+        "finish_reason": "stop",
+        "content_chars": 1243,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 135,
+          "prompt_tokens": 1450,
+          "total_tokens": 1585,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 896
+          },
+          "prompt_cache_hit_tokens": 896,
+          "prompt_cache_miss_tokens": 554
+        },
+        "elapsed_seconds": 1.25,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 144,
+          "prompt_tokens": 1465,
+          "total_tokens": 1609,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 896
+          },
+          "prompt_cache_hit_tokens": 896,
+          "prompt_cache_miss_tokens": 569
+        },
+        "elapsed_seconds": 1.1719999999913853,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 78,
+          "prompt_tokens": 3429,
+          "total_tokens": 3507,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 2661
+        },
+        "elapsed_seconds": 1.2189999999973224,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      },
+      {
+        "model": "deepseek-v4-flash",
+        "status": "completed",
+        "usage": {
+          "completion_tokens": 76,
+          "prompt_tokens": 7643,
+          "total_tokens": 7719,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 768
+          },
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 6875
+        },
+        "elapsed_seconds": 1.3910000000032596,
+        "finish_reason": "tool_calls",
+        "content_chars": 0,
+        "max_tokens": 2048
+      }
+    ],
+    "tool_calls": [
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com",
+          "top_n": 6,
+          "domains": [
+            "hiascend.com"
+          ]
+        },
+        "elapsed_seconds": 0.2970000000059372
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com",
+          "top_n": 6,
+          "domains": [
+            "nvidia.com"
+          ]
+        },
+        "elapsed_seconds": 0.29699999999138527
+      },
+      {
+        "tool": "browser",
+        "status": "completed",
+        "input": {
+          "url": "https://www.hiascend.com/hardware/processor",
+          "max_chars": 8000,
+          "query": "华为昇腾 910C 训练 推理 性能 基准 2026 site:hiascend.com"
+        },
+        "elapsed_seconds": 0.5310000000026776
+      },
+      {
+        "tool": "browser",
+        "status": "completed",
+        "input": {
+          "url": "https://developer.nvidia.com/deep-learning-performance-training-inference/training",
+          "max_chars": 8000,
+          "query": "NVIDIA Blackwell Rubin data center GPU training inference benchmark 2026 site:nvidia.com"
+        },
+        "elapsed_seconds": 1.0470000000059372
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "寒武纪 思元590 690 训练 推理 性能 2026 site:cambricon.com",
+          "top_n": 6,
+          "domains": [
+            "cambricon.com"
+          ]
+        },
+        "elapsed_seconds": 0.125
+      },
+      {
+        "tool": "web_search",
+        "status": "completed",
+        "input": {
+          "query": "AMD MI350 MI400 vs Intel Gaudi 3 AI accelerator benchmark 2026 site:amd.com",
+          "top_n": 6,
+          "domains": [
+            "amd.com"
+          ]
+        },
+        "elapsed_seconds": 0.13999999999941792
+      }
+    ],
+    "source_fingerprint": "0dd9ab69bf189fea99002b5bde8d6b7759cd1881641deb61df39dce6b11e0588"
+  }
+]
