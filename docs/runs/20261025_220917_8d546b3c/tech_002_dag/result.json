@@ -1,0 +1,434 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "Evidence insufficient or global deadline reached; no complete research report.",
+    "sources": [],
+    "confidence": 0.0,
+    "num_searches": 3,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "failed",
+    "incomplete_tasks": [
+      "task_1",
+      "task_2"
+    ],
+    "run_id": "0f0a8a390487463d9fa870e480c4b8ee",
+    "review_history": [],
+    "review_status": "skipped_incomplete"
+  },
+  "technical_checks": {
+    "report_completed": false,
+    "nonempty_report": true,
+    "sources_available": false,
+    "all_tasks_completed": false,
+    "no_execution_errors": true,
+    "review_completed": false
+  },
+  "technical_chain_success": false,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 2.375
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "failed",
+      "failure_reason": "Tool 'web_search' failed: Search budget exhausted"
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "failed",
+      "failure_reason": "Blocked by failed dependencies: ['task_1']"
+    },
+    {
+      "state": "collecting",
+      "elapsed": 5.562
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 5.562
+    },
+    {
+      "state": "failed",
+      "elapsed": 5.562
+    }
+  ],
+  "task_specs": [
+    {
+      "task_id": "task_1",
+      "description": "检索 NVIDIA、AMD、Intel 最新 AI 芯片（如 Blackwell/Hopper、MI300/MI350、Gaudi 3）在训练与推理场景的官方规格、性能基准与市场数据，并检索华为昇腾、寒武纪的对应产品与竞争力信息。",
+      "search_hints": [
+        "NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026",
+        "华为昇腾 寒武纪 训练 推理 芯片 性能 2026"
+      ],
+      "preferred_domains": [
+        "nvidia.com",
+        "amd.com",
+        "intel.com",
+        "huawei.com",
+        "cambricon.com"
+      ],
+      "dependencies": []
+    },
+    {
+      "task_id": "task_2",
+      "description": "基于检索到的规格、基准与市场数据，对比 NVIDIA、AMD、Intel、华为昇腾、寒武纪在训练与推理场景下的竞争力（性能、生态、市场份额、供应链约束），并给出格局判断。",
+      "search_hints": [
+        "AI accelerator market share NVIDIA AMD Intel 2026",
+        "华为昇腾 寒武纪 市场份额 生态 2026"
+      ],
+      "preferred_domains": [],
+      "dependencies": [
+        "task_1"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task_1",
+      "status": "failed",
+      "output": "Tool 'web_search' failed: Search budget exhausted",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_gUFELvuWwTsR0iPKDgJk4720",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026\", \"top_n\": 8}"
+              }
+            },
+            {
+              "id": "call_01_BuRQNMfw7xNWKHvELWLv2168",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"华为昇腾 寒武纪 训练 推理 芯片 性能 2026\", \"top_n\": 8}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_gUFELvuWwTsR0iPKDgJk4720",
+          "name": "web_search",
+          "result": {
+            "query": "NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026 site:nvidia.com",
+            "results": [
+              {
+                "title": "CUDA GPU Compute Capability | NVIDIA Developer",
+                "url": "https://developer.nvidia.com/cuda/gpus",
+                "snippet": "12.1\nNVIDIA\nGB10\n(DGX\nSpark)\n12.0\nNVIDIA\nRTX\nPRO\n6000\nBlackwell\nServer\nEdition\nNVIDIA\nRTX\nPRO\n4500\nBlackwell\nServer\nEdition\nNVIDIA\nRTX\nPRO\n6000\nBlackwell\nWorkstation\nEditionNVIDIA\nRTX\nPRO\n6000\nBlackwell\nMax-Q\nWorkstation\nEditionNVIDIA\nRTX\nPRO\n5000\nBlackwellNVIDIA\nRTX\nPRO\n4500\nBlackwellNVIDIA\nRTX\nPRO\n4000\nBlackwellNVIDIA\nRTX\nPRO\n4000\nBlackwell\nSFF\nEditionNVIDIA\nRTX\nPRO\n2000\nBlackwellGeForce\nRTX\n5090GeForce\nRTX\n5080GeForce\nRTX\n5070\nTiGeForce\nRTX\n5070GeForce\nRTX\n5060\nTiGeForce\nRTX\n5060GeForce\nRTX\n5050\n11.0\nJetson\nT5000Jetson\nT4000\n10.3\nNVIDIA\nGB300NVIDIA\nB300\n10.0\nNVIDIA\nGB200NVIDIA\nB200\n9.0\nNVIDIA\nGH200NVIDIA\nH200NVIDIA\nH100\n8.9\nNVIDIA\nL4NVIDIA\nL40NVIDIA\nL40S\nNVIDIA\nRTX\n6000\nAdaNVIDIA\nRTX\n5000\nAdaNVIDIA\nRTX\n4500\nAdaNVIDIA\nRTX\n4000\nAdaNVIDIA\nRTX\n4000\nSFF\nAdaNVIDIA\nRTX\n2000\nAdaGeForce\nRTX\n409",
+                "published_at": "2026-05-09T15:49:51+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "CUDA GPU Compute Capability\nCompute capability\n(CC) defines the hardware features and supported instructions for each NVIDIA GPU architecture. Find the compute capability for your GPU in the table below.\nFor legacy GPUs, refer to\nLegacy CUDA GPU Compute Capability\nCompute Capability | Data Center | Workstation/Consumer | Jetson\n12.1 |  | NVIDIA GB10 (DGX Spark) NVIDIA RTX Spark N1X |\n12.0 | NVIDIA RTX PRO 6000 Blackwell Server Edition NVIDIA RTX PRO 4500 Blackwell Server Edition | NVIDIA RTX PRO 6000 Blackwell Workstation Edition NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition NVIDIA RTX PRO 5500 Blackwell Workstation Edition NVIDIA RTX PRO 5000 Blackwell NVIDIA RTX PRO 4500 Blackwell Workstation Edition NVIDIA RTX PRO 4000 Blackwell NVIDIA RTX PRO 4000 Blackwell SFF Edition NVIDIA RTX PRO 2000 Blackwell GeForce RTX 5090 GeForce RTX 5080 GeForce RTX 5070 Ti GeForce RTX 5070 GeForce RTX 5060 Ti GeForce RTX 5060 GeForce RTX 5050 |\n11.0 |  |  | Jetson T5000 Jetson T4000\n10.3 | NVIDIA GB300 NVIDIA B300 | NVIDIA GB300 (DGX Station) |\n10.0 | NVIDIA GB200 NVIDIA B200 |  |\n9.0 | NVIDIA GH200 NVIDIA H200 NVIDIA H100 |  |\n8.9 | NVIDIA L4 NVIDIA L40 NVIDIA L40S | NVIDIA RTX 6000 Ada NVIDIA RTX 5000 Ada NVIDIA RTX 4500 Ada NVIDIA RTX 4000 Ada NVIDIA RTX 4000 SFF Ada NVIDIA RTX 2000 Ada GeForce RTX 4090 GeForce RTX 4080 GeForce RTX 4070 Ti GeForce RTX 4070 GeForce RTX 4060 Ti GeForce RTX 4060 GeForce RTX 4050 |\n8.7 |  |  | Jetson AGX Orin Jetson Orin NX Jetson Orin Nano\n8.6 | NVIDIA A40 NVIDIA A10 NVIDIA A16 NVIDIA A2 | NVIDIA RTX A6000 NVIDIA RTX A5000 NVIDIA RTX A4000 NVIDIA RTX A3000 NVIDIA RTX A2000 GeForce RTX 3090 Ti GeForce RTX 3090 GeForce RTX 3080 Ti GeForce RTX 3080 GeForce RTX 3070 Ti GeForce RTX 3070 GeForce RTX 3060 Ti GeForce RTX 3060 GeForce RTX 3050 Ti GeForce RTX 3050 |\n8.0 | NVIDIA A100 NVIDIA A30 |  |\n7.5 | NVIDIA T4 | QUADRO RTX 8000 QUADRO RTX 6000 QUADRO RTX 5000 QUADRO RTX 4000 QUADRO RTX 3000 QUADRO  T2000 NVIDIA T1200 NVIDIA T1000 NVIDIA T600 NVIDIA T500 NVIDIA T400 GeForce GTX 1650 Ti NVIDIA TITAN RTX GeForce RTX 2080 Ti GeForce RTX 2080 GeForce RTX 2070 GeForce RTX 2060 |\nGet started with CUDA today.\nDownload CUDA Toolkit\nDocumentation",
+                "evidence_excerpt": "CUDA GPU Compute Capability\nCompute capability\n(CC) defines the hardware features and supported instructions for each NVIDIA GPU architecture. Find the compute capability for your GPU in the table below.\nFor legacy GPUs, refer to\nLegacy CUDA GPU Compute Capability\nCompute Capability | Data Center | Workstation/Consumer | Jetson\n12.1 |  | NVIDIA GB10 (DGX Spark) NVIDIA RTX Spark N1X |\n12.0 | NVIDIA RTX PRO 6000 Blackwell Server Edition NVIDIA RTX PRO 4500 Blackwell Server Edition | NVIDIA RTX PRO 6000 Blackwell Workstation Edition NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition NVIDIA RTX PRO 5500 Blackwell Workstation Edition NVIDIA RTX PRO 5000 Blackwell NVIDIA RTX PRO 4500 Blackwel\n\nTX PRO 5500 Blackwell Workstation Edition NVIDIA RTX PRO 5000 Blackwell NVIDIA RTX PRO 4500 Blackwell Workstation Edition NVIDIA RTX PRO 4000 Blackwell NVIDIA RTX PRO 4000 Blackwell SFF Edition NVIDIA RTX PRO 2000 Blackwell GeForce RTX 5090 GeForce RTX 5080 GeForce RTX 5070 Ti GeForce RTX 5070 GeForce RTX 5060 Ti GeForce RTX 5060 GeForce RTX 5050 |\n11.0 |  |  | Jetson T5000 Jetson T4000\n10.3 | NVIDIA GB300 NVIDIA B300 | NVIDIA GB300 (DGX Station) |\n10.0 | NVIDIA GB200 NVIDIA B200 |  |\n9.0 | NVIDIA GH200 NVIDIA H200 NVIDIA H100 |  |\n8.9 | NVIDIA L4 NVIDIA L40 NVIDIA L40S | NVIDIA RTX 6000 Ada NVIDIA RTX 5000 Ada NVIDIA RTX 4500 Ada NVIDIA RTX 4000 Ada NVIDIA RTX 4000 SFF Ada NVIDIA RTX 2000 A\n\nVIDIA RTX 5000 Ada NVIDIA RTX 4500 Ada NVIDIA RTX 4000 Ada NVIDIA RTX 4000 SFF Ada NVIDIA RTX 2000 Ada GeForce RTX 4090 GeForce RTX 4080 GeForce RTX 4070 Ti GeForce RTX 4070 GeForce RTX 4060 Ti GeForce RTX 4060 GeForce RTX 4050 |\n8.7 |  |  | Jetson AGX Orin Jetson Orin NX Jetson Orin Nano\n8.6 | NVIDIA A40 NVIDIA A10 NVIDIA A16 NVIDIA A2 | NVIDIA RTX A6000 NVIDIA RTX A5000 NVIDIA RTX A4000 NVIDIA RTX A3000 NVIDIA RTX A2000 GeForce RTX 3090 Ti GeForce RTX 3090 GeForce RTX 3080 Ti GeForce RTX 3080 GeForce RTX 3070 Ti GeForce RTX 3070 GeForce RTX 3060 Ti GeForce RTX 3060 GeForce RTX 3050 Ti "
+              },
+              {
+                "title": "Explore NVIDIA AI Inference Tools and Technologies | NVIDIA Developer",
+                "url": "https://developer.nvidia.com/topics/ai/ai-inference",
+                "snippet": "NVIDIA\nBlackwell\nUltra\nDelivers\nup\nto\n50x\nBetter\nPerformance\nand\n35x\nLower\nCost\nfor\nAgentic\nAI\nBuilt\nto\naccelerate\nthe\nnext\ngeneration\nof\nagentic\nAI,\nNVIDIA\nBlackwell\nUltra\ndelivers\nbreakthrough\ninference\nperformance\nwith\ndramatically\nlower\ncost.\nCloud\nproviders\nsuch\nas\nMicrosoft,\nCoreWeave,\nand\nOracle\nCloud\nInfrastructure\nare\ndeploying\nNVIDIA\nGB300\nNVL72\nsystems\nat\nscale\nfor\nlow-latency\nand\nlong-context\nuse\ncases,\nsuch\nas\nagentic\ncoding\nand\ncoding\nassistants.This\nis\nenabled\nby\ndeep\nco-design\nacross\nNVIDIA\nBlackwell,\nNVLinkTM,\nand\nNVLink\nSwitch\nfor\nscale-out;\nNVFP4\nfor\nlow-precision\naccuracy;\nand\nNVIDIA\nDynamo\nand\nTensorRTTM\nLLM\nfor\nspeed\nand\nflexibility—as\nwell\nas\ndevelopment\nwith\ncommunity\nframeworks\nSGLang,\nvLLM,\nand\nmore.",
+                "published_at": "2026-05-09T11:49:48+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "NVIDIA Data Center Deep Learning Product Performance | NVIDIA Developer",
+                "url": "https://developer.nvidia.com/deep-learning-performance-training-inference/training",
+                "snippet": "NVIDIA\nNeMoLlama\n3.1\n405B64.65.6\nlog\nperplexity512x\nGB300Theia\n(8x\nNVIDIA\nGB300\nNVL72)5.1-0060Mixedc4/en/3.0.1NVIDIA\nBlackwell\nUltra\nGPU\n(GB300)\n84.95.6\nlog\nperplexity512x\nGB200Tyche\n(8x\nNVIDIA\nGB200\nNVL72)5.1-0071Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n18.85.6\nlog\nperplexity2,560x\nGB200hsg\n(40x\nNVIDIA\nGB200\nNVL72)5.1-0003Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n105.6\nlog\nperplexity5,120x\nGB200hsg\n(80x\nNVIDIA\nGB200\nNVL72)5.1-0004Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(GB200)\n256.35.6\nlog\nperplexity256x\nB200HiPerGator\nNVIDIA\nDGX\nB200\n(8x\nB200‐SXM‐180GB)5.1-0087Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(B200-SXM-180GB)\n147.25.6\nlog\nperplexity448x\nB200HiPerGator\nNVIDIA\nDGX\nB200\n(8x\nB200‐SXM‐180GB)5.1-0089Mixedc4/en/3.0.1NVIDIA\nBlackwell\nGPU\n(B200-SXM-180GB)\nLlama2-70B-Lora1.20.925\nEval\nlos",
+                "published_at": "2026-05-09T15:39:30+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "[태그:] Agentic AI - NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/ko-kr/blog/tag/agentic-ai/",
+                "snippet": "2025년\n10월\n10일\nNVIDIA\nBlackwell,\nSemiAnalysis\nInferenceMAXTM\nv1\n벤치마크에서\n놀라운\n기록을\n세우다\nSemiAnalysis가\n최근\n발표한\nInferenceMAXTM\nv1은\n추론\n하드웨어\n성능을\n평가하기\n위한\n포괄적인\n방법론을\n제공하는\n새로운\n오픈...\n7\nMIN\nREAD",
+                "published_at": "2026-05-14T16:56:29+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Recent posts for: “NCCL”",
+                "url": "https://developer.nvidia.com/blog/recent-posts/?products=NCCL",
+                "snippet": "Jul\n14,\n2025\nEnabling\nFast\nInference\nand\nResilient\nTraining\nwith\nNCCL\n2.27\nAs\nAI\nworkloads\nscale,\nfast\nand\nreliable\nGPU\ncommunication\nbecomes\nvital,\nnot\njust\nfor\ntraining,\nbut\nincreasingly\nfor\ninference\nat\nscale.\nThe\nNVIDIA\nCollective...\n9\nMIN\nREAD",
+                "published_at": "2026-05-10T09:58:44+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "MLPerf Inference v6.0: NVIDIA Blackwell Ultra, 누적 291회 우승 - NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/ko-kr/blog/nvidia-extreme-co-design-delivers-new-mlperf-inference-records/",
+                "snippet": "Reading\nTime:\n6\nminutes\n하드웨어,\n소프트웨어,\n모델의\n공동\n설계는\n최고의\nAI\n팩토리의\n처리량을\n극대화하고\n토큰\n비용을\n낮추는\n핵심\n요소입니다.\n능\n측정은\n단순히\n칩의\n이론적\n최대\n사양을\n확인하는\n차원을\n훨씬\n넘어섭니다.\n실제\n환경에서의\n토큰\n출력량을\n파악하기\n위해서는\n엄격한\nAI\n추론\n성능\n벤치마크가\n필수적이며,\n이는\n곧\nAI\n팩토리의\n수익으로\n직결됩니다.\n업계\n표준\n벤치마크인\nMLPerf\nInference\nv6.0의\n최신\n결과에\n따르면,\nNVIDIA\nBlackwell\nUltra\nGPU\n기반\n시스템이\n가장\n광범위한\n모델\n아키텍처와\n사용\n사례에서\n최고의\n처리량을\n기록했습니다.\n이로써\n2018년부터\n누적된\nNVIDIA의\nMLPerf\n학습\n및\n추론\n부문\n우승\n기록은\n총\n291회에\n달하며,\n이는\n다른\n모든\n참여사의\n기록을\n합친\n것보다\n9배나\n많은\n수치입니다.\n이번\n라운드에서는\n총\n14개의\n파트너사가\n대거\n참여하며\nNVIDIA\n파트너\n생태계의\n압도적인\n저력을\n보여주었습니다.\n이는\n단일\n플랫폼으로서는\n역대\n최대\n규모의\n참여입니다.\nASUS,\nCisco,\nCoreWeave,\nDell\nTechnologies,\nGigaComputing,\nGoogle\nCloud,\nHPE,\nLenovo,\nNebius,\nNetweb\nTechnology,\nQuanta\nCloud\nTechnology\n(QCT),\nRed\nHat,\nSupermicro,\n그리고\nLambda는\nNVIDIA\n플랫폼을\n통해\n다시\n한번\n탁월한\n성능을\n입증해\n냈습니다.\n그림\n1.\nNVIDIA,\n누적\nMLPerf\n학습\n및\n추론\n부문에서\n타사\n합산\n대비\n9배\n더",
+                "published_at": "2026-04-01T15:20:26+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Tag: NVL72 | NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/blog/tag/nvl72/",
+                "snippet": "Jan\n05,\n2026\nInside\nthe\nNVIDIA\nVera\nRubin\nPlatform:\nSix\nNew\nChips,\nOne\nAI\nSupercomputer\nUpdate\nMarch\n16,\n2026:\nThe\nNVIDIA\nVera\nRubin\nplatform\nnow\nhas\na\nseventh\nchip.\nLearn\nmore\nabout\nNVIDIA\nGroq\n3\nLPX:\nThe\nLow-Latency\nInference\nAccelerator\nfor\nthe...\n63\nMIN\nREAD",
+                "published_at": "2026-05-10T09:59:12+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Grace CPU | NVIDIA Developer",
+                "url": "https://developer.nvidia.com/grace-cpu",
+                "snippet": "NVIDIA\nGrace\nCPU\nBenchmarking\nGuide\nSee\nprocedures\nand\nsample\ncode\nfor\nbenchmarking\nyour\nNVIDIA\nGrace\nsystem.",
+                "published_at": "2026-05-10T03:02:28+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 8,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://developer.nvidia.com/cuda/gpus",
+                "status": "read",
+                "error": null,
+                "chars": 2195
+              }
+            ]
+          },
+          "arguments": {
+            "query": "NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026",
+            "top_n": 8
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_BuRQNMfw7xNWKHvELWLv2168",
+          "name": "web_search",
+          "result": {
+            "query": "华为昇腾 寒武纪 训练 推理 芯片 性能 2026 site:amd.com",
+            "results": [],
+            "total": 0,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": []
+          },
+          "arguments": {
+            "query": "华为昇腾 寒武纪 训练 推理 芯片 性能 2026",
+            "top_n": 8
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_1NRW2lUlOPIhKs2DffeV0505",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"华为昇腾 寒武纪 训练 推理 芯片 性能 2026\", \"top_n\": 8}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 1,
+          "role": "tool",
+          "tool_call_id": "call_00_1NRW2lUlOPIhKs2DffeV0505",
+          "name": "web_search",
+          "error": "Search budget exhausted"
+        }
+      ]
+    },
+    {
+      "task_id": "task_2",
+      "status": "failed",
+      "output": "Blocked by failed dependencies: ['task_1']",
+      "trajectory": []
+    }
+  ],
+  "elapsed_seconds": 5.60899999999674,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 406,
+        "prompt_tokens": 831,
+        "total_tokens": 1237,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 831
+      },
+      "elapsed_seconds": 2.375,
+      "finish_reason": "stop",
+      "content_chars": 1194,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 133,
+        "prompt_tokens": 1452,
+        "total_tokens": 1585,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 556
+      },
+      "elapsed_seconds": 0.8119999999980791,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 71,
+        "prompt_tokens": 6055,
+        "total_tokens": 6126,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 4519
+      },
+      "elapsed_seconds": 1.0780000000013388,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026 site:nvidia.com",
+        "top_n": 8,
+        "domains": [
+          "nvidia.com"
+        ]
+      },
+      "elapsed_seconds": 0.2969999999986612
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://developer.nvidia.com/cuda/gpus",
+        "max_chars": 8000,
+        "query": "NVIDIA Blackwell AMD MI300X Intel Gaudi 3 training inference benchmark 2026 site:nvidia.com"
+      },
+      "elapsed_seconds": 0.8590000000040163
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "华为昇腾 寒武纪 训练 推理 芯片 性能 2026 site:amd.com",
+        "top_n": 8,
+        "domains": [
+          "amd.com"
+        ]
+      },
+      "elapsed_seconds": 0.14099999999598367
+    }
+  ],
+  "source_fingerprint": "14b673279c69d882dbc17763125dc826c778ba892202228d058ceca83251e2fa"
+}

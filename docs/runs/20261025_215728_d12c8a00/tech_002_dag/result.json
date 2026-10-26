@@ -1,0 +1,759 @@
+{
+  "question_id": "tech_002",
+  "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "分析当前 AI 芯片市场格局，比较 NVIDIA、AMD、Intel 及中国厂商（华为昇腾、寒武纪）在训练与推理场景下的竞争力。",
+    "content": "# AI芯片市场格局：训练与推理竞争力比较\n\n## 核心结论\n现有证据仅能支撑**华为昇腾**与**寒武纪**的部分比较，**NVIDIA、AMD、Intel 的检索证据缺失**，无法完成四类厂商的完整横向对比。以下结论置信度有限。\n\n## 华为昇腾\n- **规格（多源不一致）**：910B 采用达芬奇架构、7nm；FP16 有 320 TFLOPS [s_fa8faa8b2f26]、256 TFLOPS [s_167414a81a98]、376 TFLOPS [s_9be912e402a8] 三种说法；INT8 约 640 TOPS [s_fa8faa8b2f26][s_167414a81a98]。功耗亦有 310W [s_fa8faa8b2f26] 与 400W 之别。\n- **训练定位**：单卡接近 A100（约 90%–100%）[s_9be912e402a8][s_03561847cac6]；LLM 训练效率约 A100 的 80% [s_02bee2bbac10]。\n- **生态**：CANN/MindSpore、ModelArts，配合 MindSpore 可近 2 倍提升 [s_02bee2bbac10]；行业覆盖能源、金融、交通等 [s_167414a81a98]。\n- **910C/910D**：称比 H100 快 30%、成本低 17%、光计算能效 200% [s_03561847cac6]，属**媒体转述、未经官方证实**。\n\n## 寒武纪\n- **思元370**：7nm、chiplet、390 亿晶体管、256 TOPS(INT8)，为思元270 的 2 倍；国内首款公开支持 LPDDR5 的云端 AI 芯片 [s_bd649514edee][s_cf37c5040094]。\n- **思元590（2023）**：对标 A100；百度内部测试显示多数主流模型可支持，训练性能部分接近 A100、部分仅约 50% [s_c74944dab68a]。\n- **思元270-S4**：70W，推理向，峰值为思元100 的 4 倍 [s_1849820ea8d9]。\n- 思元590 适配 DeepSeek-R1 的供应商说法仅见股吧/雪球类内容 [s_a7ac72c18fc6]，**非官方**。\n\n## 证据缺口\n- 未取得 NVIDIA/AMD/Intel 任何规格或实测来源，无法比较其训练/推理竞争力。\n- 未取得 hiascend.com / cambricon.com 官方规格页；910B 算力数值多源冲突。\n- 910C/D、思元590 具体参数及 MLPerf 类实测缺失；寒武纪 Neuware/BANG 生态与市占、营收数据未覆盖。\n\n## 参考来源\n[s_fa8faa8b2f26] modb.pro/wiki/8248；[s_9be912e402a8] hangyan.co；[s_02bee2bbac10] idcsp.com；[s_167414a81a98] hiascend.csdn.net；[s_03561847cac6] takungpao.com；[s_c74944dab68a] 163.com；[s_bd649514edee] cnblogs.com；[s_cf37c5040094] caifuhao.eastmoney.com；[s_1849820ea8d9] kuanfans.com；[s_a7ac72c18fc6] xueqiu.com。\n\n**总体置信度：0.45**（华为/寒武纪部分规格有据但相互冲突；NVIDIA/AMD/Intel 完全缺证，无法支撑完整市场格局判断）。\n\nIncomplete tasks: task_1",
+    "sources": [
+      {
+        "source_id": "s_fa8faa8b2f26",
+        "url": "https://www.modb.pro/wiki/8248",
+        "title": "昇腾910B",
+        "snippet": "昇腾910B\n微信扫码\n复制链接\n新浪微博\n分享数说\n采集到收藏夹\n分享到数说\n昇腾910B\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n产品概览\n用户评价\n华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。该芯片具有高达320 TFLOPS的半精度（FP16）计算能力和640 TOPS的整数精度（INT8）计算能力，而其功耗仅为310W，能效比优异。\n用户评价\n词条统计\n创建者：墨天轮福利君\n编辑次数：0\n浏览次数：10737\nAPI调用次数：0\n有奖问卷\n意见反馈\n客服小墨",
+        "task_id": "task_2",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2025-02-19T19:33:23+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_9be912e402a8",
+        "url": "https://www.hangyan.co/charts/3336833002863854761",
+        "title": "华为昇腾910b与英伟达A100参数性能对比 - 2024年02月-行业研究数据 - 小牛行研",
+        "snippet": "华为昇腾芯片为 AI 体系提供强大算力,昇腾 910b 单卡性能接近英伟达 A100。昇腾 910 是一款高性能 AI 芯片,采用了 7nm 工艺制程,集成了数千个达芬奇核心,能够提供高达 256TOPS 的算力,在业界其算力处于领先水平。 相关行业研究图表 微软365商业版收人增量测算核心假设 WPS AI长期空间测算敏感性分析(亿元) 该行政命令发布指示,通过制定指导、培训和最佳实践,防止人工智能被用来加剧司法、医疗保健和住房领域 Bloomberg在金融权益类测试中较大模型表现更优 全球人工智能人才数量占比 通用服务器拆解图(以华为TS200-2280为例) 相关行业研究报告 图表内容 表12:华为昇腾910b与英伟达A100参数性能对比 性能指标 异腾910b 英伟达A100 架构 自研华为达芬奇架构 NVIDIAAmpere架构 峰值算力FP16 376TFlops 312TFlops 峰值算力FP32 94TFlops 19.5TFlops GPU显存 64GBHBM2E 80GBHBM2E CPU-NPUPCIe规格 PCIe5.0×16512GB PCIe4.0×16256GB NPU-NPU带宽 392GB/s HCCL 400GB/s Nvlink 芯片RDMA出口带宽 200GB/sRoCE芯片直出网口 1000Gb-2000Gh/sIB需要通过IB网卡扩展出口 TDP 400W 300W 制程工艺 7nm 7nm",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-02-24T02:28:02+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_02bee2bbac10",
+        "url": "https://www.idcsp.com/help/1666.html",
+        "title": "昇腾910B AI处理器在AI训练大型语言模型时的效率是如何实现的？",
+        "snippet": "本文关键词\n昇腾910B\n 华为910B通常指的是华为昇腾910 AI处理器,它是华为推出的一款高性能AI芯片,专为大规模计算任务和AI训练而设计。昇腾910 AI处理器在发布时被宣称为算力最强的AI芯片之一,具有高计算密度和快速的训练速度,每秒可处理图片1802张,提供强大的AI算力,广泛应用于平安城市、互联网、金融、运营商、交通、电力等行业。\n 昇腾910B AI处理器采用了华为自研的达芬奇架构,提供了多种精度的计算能力,支持FP16、INT8、INT4等。昇腾910B在人工智能推理加速领域展现出色性能和能效比,搭载64GB HBM显存,互联带宽约为400GB/s,功耗为310W。此外,昇腾910B与华为的MindSpore AI计算框架配合使用时,能够实现接近2倍的性能提升,促进AI产业生态的发展。\n 在性能参数上,昇腾910B与英伟达的A100 GPU有诸多对比点。尽管A100在某些参数上可能略高,例如半精度算力和显存容量,但昇腾910B在能效比和特定应用场景下展现出竞争力,特别是在AI训练大型语言模型时,其效率可达到A100的80%,且在某些测试中,性能上已超越A100达20%。华为昇腾910B的推出,不仅满足了国内市场的需求,也向世界展示了中国在高性能计算领域的发展潜力。\n 昇腾910B AI处理器在AI训练大型语言模型时的效率实现主要得益于其高性能的硬件设计和软件优化。昇腾910B采用了华为自研的达芬奇架构,这是一种专为人工智能应用设计的高效能计算架构,并且使用了先进的7纳米工艺制程 。昇腾910B具有高达256TOPS的算力,在业界处于领先水平,同时在功耗方面也进行了优化,达到规格算力所需功耗仅310W,明显低于设计规格的350W 。\n 此外,昇腾910B搭载64GB HBM显存,提供了高速的数据传输能力,互联带宽约为400GB/s,这有助于在处理大型语言模",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-08-21T22:56:56+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_167414a81a98",
+        "url": "https://hiascend.csdn.net/68ad4834a6db534ba2c78478.html",
+        "title": "华为昇腾910B性能及应用场景_推荐算法_算力资源比较多-昇腾社区",
+        "snippet": "华为昇腾910B是一款高性能的人工智能处理器芯片,以下是其性能参数及应用的相关信息:\n一、性能参数\n制造工艺:昇腾910B采用了先进的7nm工艺制程,确保了其高效能低功耗的特性。\n核心数量:集成了数千个处理核心,支持深度学习、推理推断等多种人工智能计算任务。\n浮点运算性能:高达256TFLOPS的浮点运算性能,使其能够实现高效的并行计算,从而加速人工智能应用的处理速度。\n精度支持:支持FP16、INT8、INT4等多种精度,半精度(FP16)算力达到320\nTFLOPS,整数精度(INT8)算力达到640\nTOPS。\n架构设计:基于华为自主研发的达芬奇架构,融合了大规模片上异构处理核心,以及高速互连技术,能够实现不同处理核心之间的高效通信和协同计算。\n二、应用\n自动驾驶:昇腾910B的高性能使得它非常适合应用于自动驾驶领域。与百度自动驾驶团队合作,针对昇腾910B的特性对深度学习算法进行了优化,使得车道线检测、障碍物检测、语义分割、行人检测等算法性能提升了2倍以上,功耗降低了80%以上。\nAI一体机:昇腾910B也广泛应用于AI一体机中,通过与AI平台软件和各类模型算法的集成,提供分布式并行加速、算子和编译优化、集群级通信优化等关键能力,满足央国企与政府大模型本地化部署的刚需。\n行业应用:昇腾910B的应用范围广泛,包括能源、金融、公共、交通、电信、制造、教育等行业。在这些行业中,昇腾910B提供了智能中枢、昇腾智巡、昇腾智行、昇腾制造等解决方案,助力各行业的智能化升级。\n综上所述,华为昇腾910B以其高性能、低功耗、强大的并行计算能力和广泛的行业应用,成为人工智能领域的重要创新成果。",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-05-31T16:22:21+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_ab7bde7b4364",
+        "url": "https://wenku.csdn.net/answer/6556mpt6p3",
+        "title": "升腾910B dify",
+        "snippet": "### 昇腾 910B 硬件规格 昇腾 910 处理器采用了芯粒(chiplet)技术,包含六个 die: 1 个计算芯粒(包含 32 个 Davinci Core、16 个 CPU Core 和 4 个 DVDP),1 个 IO 芯粒,和 4 个 HBM 芯粒(总计 1.2TB/s 带宽)[^1]。 #### 计算能力 - **Davinci Cores**: 提供强大的 AI 加速功能,支持多种数据类型的高效处理。 - **CPU Cores**: 支持常规控制逻辑运算以及轻量级任务调度。 - **DVDP (Digital Video Data Processing)**: 针对视频流媒体的数据预处理进行了专门设计。 #### 存储带宽 HBM(高带宽内存)提供了高达 1.2 TB/s 的总线带宽,极大地提升了大规模模型训练中的数据传输效率。 ### 性能特点 针对云端训练和推理场景,昇腾 910 进行了一系列针对性优化措施。这些改进不仅提高了单芯片的绝对性能指标,还增强了多节点集群环境下的扩展性和稳定性。 ### 开发工具和支持资源 对于开发者而言,在 ModelArts 平台上可以找到丰富的文档和技术支持来帮助解决训练网络精度调优等问题。具体来说: - **ModelArts** 是华为云提供的全流程一站式AI开发平台,能够有效简化从数据准备到部署上线整个流程的操作复杂度; - **Ascend Studio** 则是一套完整的软件栈解决方案,涵盖了编译调试在内的多个方面,旨在让使用者更便捷地构建高性能的应用程序; 此外,还有其他辅助性的 SDKs 及 API 接口可供选择使用,以便更好地适配不同应用场景的需求[^2]。 ### 设备与主机协作模式 在实际应用环境中,“Device”指的是安装有昇腾 AI 处理器并通过 PCIe 接口连接至服务器端的硬件单元。“H",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-02-21T20:23:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_03561847cac6",
+        "url": "https://www.takungpao.com/news/232108/2025/0522/1088779.html",
+        "title": "﻿昇腾算力“进化” _大公网",
+        "snippet": "图:华为AI处理器Ascend910(昇腾910)。\n昇腾910B\n•美国断供设计软件,华为用自研工具做出昇腾910B,性能接近英伟达A100的90%\n昇腾910C\n•运用“存算一体”技术,数据处理速度比英伟达H100快30%\n•能跑大规模AI模型,性价比高,成本比国外低17%\n昇腾910D\n•加入光计算,省电效果更好,能效比高达国际顶尖的200%",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-05-22T05:02:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_a7ac72c18fc6",
+        "url": "https://xueqiu.com/7517920899/322121857?md5__1038=n4mx2DcDgD0DBDA2xBw%3D%3DGkGKcKw77GYUeD",
+        "title": "寒武纪",
+        "snippet": "{\"_waf_bd8ce2ce37\":\"wEBtEkiZQVuR/nEfXeuR7DMTe0RjyTeAsf0IYDK/T14=\"}\n3EJ9CvTop9bk6/H7t9vaQn2/46Cw69DroCpv3j1lpnghAd/VREDaEEU/6aCE4tpCJ3Pzhobt3dwQT/t5AbR7B7iOFiKFt4/0/anQ3Uwaa638qeq/qZLd69Gvht7LiRY1d4P8jPwrZR5LLBihdgTtP/6ZQiH8K0sIaWK/XuSJFiObqdK7490WYXFzAFiARWkg/7bvr4ARX1D/juui0bC873JQUICh6/Hn6Gg3eAZVc1+xeABZegiw7fGM5YjzKAZT/ur4rildsXNWWC9c64kWL22//I3ovarcEG0teQu/pnhzEWchMPuCoCpn4WCJtl7DoHhBoDW82edxoCxi7j61jhB1weHXu7/cEGnNtb3q+7/dmtq37oKmKlf7TN1MEq+j6Ln0sa3Y3ff1vamhdghXn3r5wfV2RMRVsBIk3Uyvn4q81/r6+i4HV9Hz1NAvVgL5++Pt+K0Z8ncH3BZoOt/Xr4fyLAihYLGaDCXaER1d46oIjYeJTEBM9Y7vpdzq7unyKnH7OfwrV2JrvhUcnIkWE7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkAB\n\n7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkAB\n\n7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkABlVQXlwKE0WHc1a0L1Tr3BZgumVtMShQtGp5U+J5BbZyVrh5D757B7l6WON8AbQzP2Zq9SwhjSamfz8dbQkqmbChdiLJhTLxkYlMUGLzvuGK3UyH3aiC6/ry+90WdQ/xrveJ+9pCX33nprb5/t3cECUo0uaB29xCTeLY3q++oO3h9ff0s44QPXPz8726luj679G66NpCY5vZoIrj5Pbqr9oRP4dzCOTU2kUDe2k+NmFyXrYuCbNpc1i8BWgQf1O5f1bga3oIsntZ7YARdxj3lt+uoai+/dDl2kV5Ofeoipvq7vv1LHPBPzDpMLnaEH1bh4Ky8eTc7r+mfyGtZxfCXcrdTChzq/yM2kUb8Wk+NnleuGIuC1dpZWZr/Ctb6muQubA89SwPkz0iZxLR2hBfwdG8+u3W/tTiodHyoSwlA2fIcMfI2kJD4feoiqHQ/uvcFmKI6fOJsPj60O3c2hAhE2k+NnleuGIuBb9pZWZr3BBvtP7cu+j\n\nR2hBfwdG8+u3W/tTiodHyoSwlA2fIcMfI2kJD4feoiqHQ/uvcFmKI6fOJsPj60O3c2hAhE2k+NnleuGIuBb9pZWZr3BBvtP7cu+jk5fvVs+ys8qAqL1QzBNM5w44WJkF5AbRrAKYreZ3NzTOOFnon2bnw+6/n7PispngSt0o+gBF1HsM+2YrXOK7t3O5qjofv8+X05q34q\n\nfvVs+ys8qAqL1QzBNM5w44WJkF5AbRrAKYreZ3NzTOOFnon2bnw+6/n7PispngSt0o+gBF1HsM+2YrXOK7t3O5qjofv8+X05q34q4kWfymD/KfcpbLcEGdF5a/K1vIqP5c/gBFVhEMF2hF9G/ryKgWrOhgf0eLcEFPM1vq5+rzupn8dp0DcEHc316/i74//ltq70qf2qcXA5fL8f1uiYarjhiTdFi/PaThnMX5Stn5V52htN2agKmERfsHGkkugeHQ8niHPpqAqIcRxJEdo3EJzpMKejdfcEFt4jNan/tzx8UHz+AD/+gRboXYy/xeyJ4uJTFCCcw61p35StH5Z49Z7CbN6Vul8A7opCbRjf1vjKFy8clm/Llnrfl62flntcl/nU3p",
+        "task_id": "task_2",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2025-02-03T06:27:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_c74944dab68a",
+        "url": "https://www.163.com/dy/article/JF273MEN0552KYAK.html",
+        "title": "寒武纪,何时崩盘?疯狂英伟达人工智能_网易订阅",
+        "snippet": "寒武纪在2021年推出了“思元”,推理算力相当于A100的40%,训练性能约为A100的20%。 到了2023年,寒武纪推出了新一代思元590芯片,性能上直接与A100对标。根据百度内部测试结果,思元590支持绝大多数主流模型。在不同模型上性能表现各异,有的模型训练性能非常接近A100,而其他的则仅达到A100的50",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-10-21T21:02:06+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_bd649514edee",
+        "url": "https://www.cnblogs.com/wujianming-110117/p/archive/2024/03/17",
+        "title": "2024 年 3月 17 日 随笔档案 - 吴建明wujianming - 博客园",
+        "snippet": "摘要: 思元370芯片系列芯片概述基于7nm制程工艺,思元370是寒武纪首款采用chiplet(芯粒)技术的AI芯片,集成了390亿个晶体管,最大算力高达256TOPS(INT8),是寒武纪第二代产品思元270算力的2倍。凭借寒武纪最新智能芯片架构MLUarch03,思元370实测性能表现更为优秀。思元37 阅读全文",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-03-17T05:48:11+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_cf37c5040094",
+        "url": "https://caifuhao.eastmoney.com/news/20240729125033679510770",
+        "title": "AI算力与国产GPU市场展望:寒武纪的角色与影响_财富号_东方财富网",
+        "snippet": "基于7nm制程工艺,思元370是寒武纪首款采用chiplet(芯粒)技术的AI芯片,集成了390亿个晶体管,最大算力高达256TOPS(INT8),是寒武纪第二代产品思元270算力的2倍。凭借寒武纪最新智能芯片架构MLUarch03,思元370实测性能表现更为优秀。同时,思元370也是国内第一款公开发布支持LPDDR5内存的云端AI芯片,内存带宽是上一代产品的3倍,访存能效达GDDR6的1.5倍。",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-07-29T12:50:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_6f70e6af67a2",
+        "url": "http://mguba.eastmoney.com/mguba/article/0/1468437311",
+        "title": "寒武纪-U(SH688256)希望唱空的人,担心焦虑的人,花点时间去了解一下-东方财富网股吧",
+        "snippet": "$寒武纪-U(SH688256)$ 希望唱空的人,担心焦虑的人,花点时间去了解一下寒武纪的下一代芯片。思元系列芯片虽比英伟达略显逊色,但在国产芯片里,算最好的了。未来单这一款产品年利润将超60亿元。",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-10-09T20:03:36+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_1849820ea8d9",
+        "url": "http://www.kuanfans.com/product/djsb-copy/1188.html",
+        "title": "寒武纪 思元MLU270-S4",
+        "snippet": "思元270-S4加速卡功耗仅为70W,处理非稀疏人工智能模型的理论峰值性能提升至上一代思元100的4倍,可广泛支持视觉、语音、自然语言处理以及传统机器学习等高度多样化的人工智能应用,帮助AI推理平台实现超高能效比。",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-02-11T21:57:04+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 7,
+    "num_replan": 0,
+    "adversarial_rounds": 0,
+    "final_score": 0.0,
+    "status": "partial",
+    "incomplete_tasks": [
+      "task_1"
+    ],
+    "run_id": "51a6aee28e40417db4c0ebcdd9f89b57",
+    "review_history": [],
+    "review_status": "skipped_incomplete"
+  },
+  "technical_checks": {
+    "report_completed": false,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": false,
+    "no_execution_errors": true,
+    "review_completed": false
+  },
+  "technical_chain_success": false,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 2.094
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "failed",
+      "failure_reason": "Tool 'web_search' failed: 博查AI 网络错误: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2696)"
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "state": "collecting",
+      "elapsed": 9.094
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 9.094
+    },
+    {
+      "state": "done",
+      "elapsed": 13.75
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task_1",
+      "status": "failed",
+      "output": "Tool 'web_search' failed: 博查AI 网络错误: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2696)",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_UDjPiqL0G6yo7K8KJKIP4009",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"NVIDIA AMD Intel AI chip training inference benchmark MLPerf 2024\", \"top_n\": 8}"
+              }
+            },
+            {
+              "id": "call_01_cdaDYozaGwn2WbJqEgGm4942",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"NVIDIA data center GPU market share 2024 AMD Intel AI accelerator\", \"top_n\": 8}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_UDjPiqL0G6yo7K8KJKIP4009",
+          "name": "web_search",
+          "result": {
+            "query": "NVIDIA AMD Intel AI chip training inference benchmark MLPerf 2024",
+            "results": [
+              {
+                "title": "NVIDIA: MLPerf AI Benchmarks",
+                "url": "https://www.nvidia.com/en-us/data-center/resources/mlperf-benchmarks/",
+                "snippet": "Line Card Line Card Line Card MLPerf Benchmarks The NVIDIA AI platform achieves world-class performance and versatility in MLPerf Training, Inference, and HPC benchmarks for the most demanding, real-world AI workloads. What Is MLPerf? MLPerfTM benchmarks—developed by MLCommons, a consortium of AI leaders from academia, research labs, and industry—are designed to provide unbiased evaluations of training and inference performance for hardware, software, and services. They’re all conducted under prescribed conditions.t the state of the art in AI. Inside the MLPerf Benchmarks MLPerf Inference v4.1 measures inference performance on nine different benchmarks, including several large language models (LLMs), text-to-image, natural language processien different benchmarks, including LLM pre-trainin",
+                "published_at": "2024-12-17T14:07:25+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "MLPerf Benchmarks\nThe NVIDIA AI platform achieves world-class performance and versatility in both training and inference, enabled by extreme co-design.\nSee Our Results\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nWhat Is MLPerf?\nMLPerf™ benchmarks are designed to provide unbiased evaluations of training and inference performance for hardware, software, and services. Developed by MLCommons, a consortium of AI leaders from academia, research labs, and industry, these evaluations are all conducted under prescribed conditions. To stay on the cutting edge of industry trends, MLPerf continues to e\n\nd under prescribed conditions. To stay on the cutting edge of industry trends, MLPerf continues to evolve, holding new tests at regular intervals and adding new workloads that represent the state of the art in AI.\nInside the MLPerf Benchmarks\nMLPerf Inference v6.1\nmeasures inference performance across a wide variety of model architectures, including dense and mixture-of-expert (MoE) large language models (LLMs), vision language models, text-to-video models, generative recommenders, and more.\nMLPerf Training v6.0\nmeasures the time to train models to a specified quality level across various types of models, including LLMs, text-to-image, and recommenders.\nReasoning LLMs\nAI models that generate\n\n text prompts.\nDetails\nRecommender\nDelivers personalized results in user-facing services such as social media or ecommerce websites by understanding interactions between users and service items, like products or ads.\nDetails\nGraph Neural Network\nUses neural networks designed to work with data structured as graphs.\nDetails\nSpeech-to-Text\nConverts spoken language into written text.\nDetails\nNVIDIA MLPerf Benchmark Results\nTraining\nInference\nThe NVIDIA platform excelled in delivering the fastest time to train and the highest performance per GPU in MLPerf Training v6 benchmarks. This round, NVIDIA submitted results on both GB200 NVL72 and GB300 NVL72 systems. At the same scale, GB300 NVL72 delive\n\nsubmitted results on both GB200 NVL72 and GB300 NVL72 systems. At the same scale, GB300 NVL72 delivered up to 1.6x faster training than GB200 NVL72. This round added two new MoE pretraining workloads, DeepSeek-V3 671B and GPT-OSS-20B, and NVIDIA set performance records on both. On DeepSeek-V3 671B, NVIDIA scaled to 8,192 GPUs using GB200 NVL72 systems, the largest-scale NVIDIA Blackwell-based submission in MLPerf Training to date.\nNVIDIA Blackwell Platform Raises the Bar for Performance and Scale\nMLPerfTraining v5.0, v5.1, and v6.0 results retrieved from www.mlcommons.org on June 16, 2026. MLPerf GPU scale results from entries 5.0-0004, 5.1-004, 6.0-0001, 6.0-0005, and 6.0-0014. MLPerf Black\n\nerf GPU scale results from entries 5.0-0004, 5.1-004, 6.0-0001, 6.0-0005, and 6.0-0014. MLPerf Blackwell training comparison from the following entries: 6.0-0006, 6.0-0013, 6.0-0017, 6.0-0018, 6.0-0078, and 5.1-0072. The MLPerf name and logo are registered and unregistered trademarks of MLCommons Association in the United States and other countries. All rights reserved. Unauthorized use is strictly prohibited. See www.mlcommons.org for more information.\nAnnual Rhythm and Extreme Co-Design for Sustained Training Leadership\nThe NVIDIA platform delivered the fastest time to train on every MLPerf Training v6 benchmark, with innovations across chips, systems, and software enabling sustained train\n\nTraining v6 benchmark, with innovations across chips, systems, and software enabling sustained training performance leadership, as shown on industry-standard, peer-reviewed performance data.\nMax-Scale Performance\nBenchmark | Time to Train\nDeepSeek-v3 671B | 2.02 minutes\nGPT-OSS-20B | 7.43 minutes\nLlama 3.1 405B | 7.07 minutes\nLlama 2 70B LoRA | 0.40 minutes\nLlama 3.1 8B | 4.46 minutes\nFLUX.1 | 17.1 minutes\nDLRM-dcnv2 | 0.67 minutes\nMLPerf™ Training v6.0 retrieved from www.mlcommons.org on June 16, 2026, from the following entries: 6.0-0005, 6.0-0102, 6.0-0001, 6.0-0102, 6.0-0015, 6.0-0101, and 6.0-0062. The MLPerf name and logo are trademarks of MLCommons Association in the United States and\n\n 6.0-0062. The MLPerf name and logo are trademarks of MLCommons Association in the United States and other countries. All rights reserved. Unauthorized use is strictly prohibited. See www.mlcommons.org for more information.\nNVIDIA Vera Rubin NVL72 Delivers Leading Performance in MLPerf Inference v6.1 Debut\nThree factors are central to AI inference economics: system performance, infrastructure scaling efficiency, and continuous software optimization. Higher performance means more tokens generated, driving higher revenue. Efficient scaling means throughput grows proportionally as hardware is added, requiring fewer resources to serve users. Continuous optimization means more value from infrastr\n\ned, requiring fewer resources to serve users. Continuous optimization means more value from infrastructure already deployed.\nThe NVIDIA platform is purpose-built to advance all three, and MLPerf Inference v6.1 results show how:\nVera Rubin NVL72 debuts with leading performance\n\nll rights reserved. Unauthorized use is strictly prohibited. See www.mlcommons.org for more information.\nThe Technology Behind the Results\nThe complexity of AI demands a tight integration between all aspects of the platform. As demonstrated in MLPerf’s benchmarks, the NVIDIA AI platform delivers leadership performance with the world’s most advanced GPU, powerful and scalable interconnect technologies, and cutting-edge software—an end-to-end solution that can be deployed in the data center, in the cloud, or at the edge with amazing results.\nOptimized Software That Accelerates AI Workflows\nNVIDIA Dynamo is an open source distributed inference-serving framework to deploy models in multi-node en\n\ne and DeepSeek-R1 reasoning tests.\nSeamlessly Deploy Across Multiple Nodes With Dynamo\nLeadership-Class AI Infrastructure\nAchieving world-leading results across training and inference requires infrastructure that’s purpose-built for the world’s most complex AI challenges. The NVIDIA AI platform delivered leading performance powered by the NVIDIA Blackwell and Blackwell Ultra platforms, including the\nNVIDIA GB300 NVL72\nGB200 NVL72\nsystems,\nNVLink\nand NVLink Switch,\nNVIDIA Quantum InfiniBand\nNVIDIA Spectrum-X Ethernet\nscale-out networking. These are at the heart of\nAI factories\npowered by the NVIDIA data center platform, the engine behind our benchmark performance.\nIn addition,\nNVIDIA DGX™ sys\n\nIDIA data center platform, the engine behind our benchmark performance.\nIn addition,\nNVIDIA DGX™ systems\noffer the scalability, rapid deployment, and incredible compute power that enable every enterprise to build leadership-class AI infrastructure.\nLearn More About NVIDIA’s AI Factory Solutions\nLearn more about our data center training and inference performance.\nView Performance\nReasoning LLMs\nMLPerf Inference uses:\nDeepSeek-R1 with samples sourced from the AIME, MATH500, GPQA Diamond, MMLU-Pro, and LiveCodeBench datasets.\nGPT-OSS-120B with samples from the AIME 2024, LivecodeBench v6, and GPQA Diamond datasets.\nVision Language Model\nMLPerf Inference uses the Qwen3-VL-235B-A22B-Instruct mode\n\nti-hot dataset synthesized from the Criteo dataset.\nGraph Neural Network\nMLPerf Inference uses the Illinois Graph Benchmark (IGB) heterogeneous dataset.\nMLPerf Training uses R-GAT with the Illinois Graph Benchmark (IGB) heterogeneous dataset.\nSpeech-to-Text\nMLPerf Inference uses Whisper-Large-V3 with the LibriSpeech dataset.\nServer\n10,756 Tokens/Second\nSingle GPU\nOffline\n3.7X\n11,264 Tokens/Second\nSingle GPU\nAI Superchip\n208B Transistors\n2nd Gen Transformer Engine\nFP4/FP6 Tensor Core\n5th Generation NVLINK\nScales to 576 GPUs\nRAS Engine\n100% In-System Self-Test\nSecure AI\nFull Performance Encryption and TEE\nDecompression Engine\n800 GB/Sec\nProducts\nData Center GPUs\nNVIDIA DGX Platform\nNVIDIA HGX \n\n[CONTENT_TRUNCATED: 11226 chars total; extracted passages, not full page]",
+                "evidence_excerpt": "MLPerf Benchmarks\nThe NVIDIA AI platform achieves world-class performance and versatility in both training and inference, enabled by extreme co-design.\nSee Our Results\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nAbout MLPerf\nBenchmarks\nOur Results\nHow We Do It\nWhat Is MLPerf?\nMLPerf™ benchmarks are designed to provide unbiased evaluations of training and inference performance for hardware, software, and services. Developed by MLCommons, a consortium of AI leaders from academia, research labs, and industry, these evaluations are all conducted under prescribed conditions. To stay on the cutting edge of industry trends, MLPerf continues to e\n\nLPerf Training v6.0\nmeasures the time to train models to a specified quality level across various types of models, including LLMs, text-to-image, and recommenders.\nReasoning LLMs\nAI models that generate\n\n text prompts.\nDetails\nRecommender\nDelivers personalized results in user-facing services such as social media or ecommerce websites by understanding interactions between users and service items, like products or ads.\nDetails\nGraph Neural Network\nUses neural networks designed to work with data structured as graphs.\nDetails\nSpeech-to-Text\nConverts spoken language into written text.\nDetails\nNVIDIA MLPerf Benchmark Results\nTraining\nInference\nThe NVIDIA platform excelled in delivering the fastest\n\nA MLPerf Benchmark Results\nTraining\nInference\nThe NVIDIA platform excelled in delivering the fastest time to train and the highest performance per GPU in MLPerf Training v6 benchmarks. This round, NVIDIA submitted results on both GB200 NVL72 and GB300 NVL72 systems. At the same scale, GB300 NVL72 delive\n\nsubmitted results on both GB200 NVL72 and GB300 NVL72 systems. At the same scale, GB300 NVL72 delivered up to 1.6x faster training than GB200 NVL72. This round added two new MoE pretraining workloads, DeepSeek-V3 671B and GPT-OSS-20B, and NVIDIA set performance records on both. On DeepSe"
+              },
+              {
+                "title": "NVIDIA: MLPerf – KI-Benchmarks",
+                "url": "https://www.nvidia.com/de-de/data-center/resources/mlperf-benchmarks/",
+                "snippet": "Produktübersicht Produktübersicht Produktübersicht MLPerf-Benchmarks Die NVIDIA AI-Plattform erreicht erstklassige Leistung und Vielseitigkeit bei MLPerf Trainings-, Inferenz- und HPC-Benchmarks für die anspruchsvollsten, realen KI-Workloads. Was ist MLPerf? Die MLPerfTM-Benchmarks – entwickelt von MLCommons, einem Konsortium von führenden Akteuren im KI-Bereich aus Wissenschaft, Forschungslaboren und der Wirtschaft – sollen dazu dienen, unvoreingenommene Bewertungen von Trainings- und Inferenzleistung für Hardware, Software und Services vorzunehmen. Sie werden alle unter festgelegten Bedingungen durchgeführt. Um bei den Branchentrends nicht ins Hintertreffen zu geraten, entwickelt sich MLPerf ständig weiter, führt regelmäßig neue Tests durch und fügt neue Workloads hinzu, die dem neuesten",
+                "published_at": "2024-01-01T00:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "NVIDIA Blackwell Doubles LLM Training Performance in MLPerf Training v4.1 | NVIDIA Technical Blog",
+                "url": "https://developer.nvidia.com/blog/nvidia-blackwell-doubles-llm-training-performance-in-mlperf-training-v4-1/",
+                "snippet": "As\nmodels\ngrow\nlarger\nand\nare\ntrained\non\nmore\ndata,\nthey\nbecome\nmore\ncapable,\nmaking\nthem\nmore\nuseful.\nTo\ntrain\nthese\nmodels\nquickly,\nmore\nperformance,\ndelivered\nat\ndata\ncenter\nscale,\nis\nrequired.\nThe\nNVIDIA\nBlackwell\nplatform,\nlaunched\nat\nGTC\n2024\nand\nnow\nin\nfull\nproduction,\nintegrates\nseven\ntypes\nof\nchips:\nGPU,\nCPU,\nDPU,\nNVLink\nSwitch\nchip,\nInfiniBand\nSwitch,\nand\nEthernet\nSwitch.\nThe\nBlackwell\nplatform\ndelivers\na\nlarge\nleap\nin\nper-GPU\nperformance\nand\nis\nset\nto\nenable\nthe\ncreation\nof\neven\nlarger-scale\nAI\nclusters,\nfueling\nthe\ndevelopment\nof\nnext-generation\nLLMs.\nIn\nthe\nlatest\nround\nof\nMLPerf\nTraining\n–\na\nsuite\nof\nAI\ntraining\nbenchmarks\n–\nNVIDIA\nmade\nits\nfirst\nsubmissions\nusing\nthe\nBlackwell\nplatform\nin\nthe\npreview\ncategory\nof\nthe\nbenchmark.\nThese\nresults\ndemonstrated\nlarge\ngains\nper-acce",
+                "published_at": "2024-11-14T00:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "MLPerf 基准测试",
+                "url": "https://www.nvidia.cn/data-center/resources/mlperf-benchmarks/",
+                "snippet": "NVIDIA AI 平台在 MLPerf 训练和推理方面表现出色,并在处理要求极为严苛的现实 AI 工作负载方面展示出先进的性能和通用性。\n 什么是 MLPerf? \nMLPerf™ 基准测试由来自学术界、研究实验室和行业的 AI 领导者联盟 MLCommons 开发,旨在对硬件、软件和服务的训练和推理性能进行无偏评估。它们都在规定的条件下进行。为了保持在行业趋势的前沿,MLPerf 不断发展,定期举行新的测试,并添加代表 AI 技术水平的新工作负载。\n台积电正在推动全球半导体制造领域前沿技术的发展,比如我们最新的 5 纳米节点在工艺技术方面引领市场发展。基于机器学习的光刻和蚀刻建模等创新技术能够显著提高我们的光学邻近效应修正 (OPC) 和蚀刻模拟的准确性。为充分发挥机器学习在模型训练和推理中的潜力,我们正与 NVIDIA 工程团队开展合作,将我们的 Maxwell 模拟和反演光刻技术 (ILT) 引擎移植到 GPU,从而实现显著加速。MLPerf 基准测试是我们决策制定中的一个重要因素。\n— 美国加利福尼亚州圣何塞市台积电 OPC 部门总监 Danping Peng 博士\nMLPerf Inference v4.1  可测量九种不同基准测试的推理性能,包括数个大语言模型 (LLM)、文本转图像、自然语言处理、推荐系统、计算机视觉和医疗图像分割。\nMLPerf Training v4.1  可测量七种不同基准测试的训练时间,包括 LLM 预训练、LLM 微调、文本转图像、图形神经网络 (GNN)、计算机视觉、推荐和自然语言处理。\nMLPerf HPC v3.0  可测量四种不同的科学计算用例的训练性能,包括气候大气河流识别、宇宙学参数预测、量子分子建模和蛋白质结构预测。\n 大语言模型 \n已基于大型数据集进行训练的深度学习算法,可以为多种用例识别、总结、翻译、预测和生成内容",
+                "published_at": "2025-01-08T08:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "Preliminary Results of the MLPerf BERT Inference Benchmark on AMD Instinct GPUs  Practice and Experience in Advanced Research Computing 2024",
+                "url": "https://dl.acm.org/doi/10.1145/3626203.3670589",
+                "snippet": "short-paper Open access Share on PEARC '24: Practice and Experience in Advanced Research Computing 2024: Human Powered Computing Article No.: 59, Pages 1 - 5 0 citation 192 Downloads Metrics Last 12",
+                "published_at": "2024-07-17T09:10:43+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "人工智能与神经网络BenchMark--MLPerf-CSDN博客",
+                "url": "https://blog.csdn.net/andytian1991/article/details/125933064",
+                "snippet": "版权声明:本文为博主原创文章,遵循CC 4.0 BY-SA版权协议,转载请附上原文出处链接和本声明。 5 篇文章 1 订阅 订阅专栏 What is MLPerf MLPerf is a benchmark suite that is used to evaluate training and inference performance of on-premises and cloud platforms. MLPerf is intended as an independent, objective performance yardstick for software frameworks, hardware platforms, and cloud platforms for machine lthat data flows through the system:  Server and offline scenarios are most relevant for data center use cases. while  single-stream and multi-stream scenarios evaluate the workloads of edge devices . stantiation  for training and consists of  eight different workloads  covering a broad diversity of use cases, including vision, language, recommenders, and reinforcement learning. MLPerf Inference v2.0 tested  seven different use cases  across  ",
+                "published_at": "2024-12-04T22:43:11+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "大模型推理BenchMark榜单更新:GPU性能调优要点_amd gpu benchmark-CSDN博客",
+                "url": "https://blog.csdn.net/m0_59235699/article/details/147595474",
+                "snippet": "AMD新发布的MI325X GPU紧咬着NVIDIA H200。CUDA护城河、B200在短期内的优势还在。 还有个问题,就是MI300X和MI325X在xx名单上,在这种情况下分享一些调优方法或者说要点,我觉得应该更有意义——这就是本文的目的。因为许多朋友都知道,就像H20那样,AMD Instinct也有一款针对国内定制的版本。 AI 转型及其对 GenAI、LLM、模型推理与训练新进展的不断增长的需求,强调了对创新 GPU 架构和产品的加速设计和交付的需求。了解 AI 模型在这些 GPU 上的性能对于 AI 部署和采用的持续进步至关重要。然而,由于 AI 模型固有的复杂性以及可能的部署和任务的多样性,对其进行基准测试具有挑战性。从跨行业的角度来解决这个问题,最好有一个可在不同平台和供应商之间进行比较的基准。MLPerf 就是这样一个基准测试,由跨行业 MLCommons 联盟(https://mlcommons.org)创建,AMD 是该联盟的创始成员之一。 MLPerf Inference:Datacenter v5.0 基准测试结果(https://mlcommons.org/benchmarks/inference-datacenter)于2025 年4月2日发布,AMD 再次取得了具有竞争力的成绩,并首次在 AMD Instinct MI325X GPU 上发布。如果您有兴趣使用我们的步骤运行基准测试,请查看我们关于重现 AMD MLPerf Inference v5.0 提交的博客(https://rocm.blogs.amd.com/artificial-intelligence/reproducing-amd-mlperf-inference-submission/README.html)。在此博客中,我们为您提供了优化的幕后视图:您将深入了解我们最新的",
+                "published_at": "2025-04-28T20:50:05+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "AI Training:Newest Google and Nvidia Chips Speed AI Training - IEEE Spectrum",
+                "url": "https://spectrum.ieee.org/ai-training-2669810566",
+                "snippet": "Nvidia , Oracle , Google , Dell and 13 other companies reported how long it takes their computers to train the key neural networks in use today. Among those results were the first glimpse of Nvidia’s nexted in 2023. The benchmark tests, called MLPerf v4.1, consist of six tasks: recommendation, the pre-training of the large language models (LLM) GPT-3 and BERT-large, the fine tuning of the Llama 2 70B large language model, object detection, graph node classification, and image generation. Training GPT-3 is such a mammoth task that it’d be impractical to do the whole thing just to deliver a because they are no longer industrially relevant. MLCommons According to MLPerf’s calculations, AI training on the new suite of benchmarks is improving at about twice the rate one would expect from Moo th",
+                "published_at": "2024-11-13T12:17:41+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 8,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://www.nvidia.com/en-us/data-center/resources/mlperf-benchmarks/",
+                "status": "read",
+                "error": null,
+                "chars": 8073
+              }
+            ]
+          },
+          "arguments": {
+            "query": "NVIDIA AMD Intel AI chip training inference benchmark MLPerf 2024",
+            "top_n": 8
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_cdaDYozaGwn2WbJqEgGm4942",
+          "name": "web_search",
+          "error": "博查AI 网络错误: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2696)"
+        }
+      ]
+    },
+    {
+      "task_id": "task_2",
+      "status": "success",
+      "output": "**检索发现（华为昇腾 / 寒武纪，训练与推理）**\n\n**华为昇腾**\n- 昇腾910B：达芬奇架构、7nm；FP16 约320 TFLOPS、INT8 约640 TOPS（另有资料称FP16 376 TFLOPS、FP32 94 TFLOPS、64GB HBM2E、TDP 400W、PCIe5.0×16、HCCL 392GB/s）。来源：modb.pro/wiki/8248；hangyan.co/charts/3336833002863854761\n- 性能定位：单卡接近A100（约90%–100%），LLM训练效率约A100的80%；与MindSpore配合可近2倍提升。来源：idcsp.com/help/1666.html；takungpao.com/news/232108/2025/0522/1088779.html\n- 生态：CANN/MindSpore、ModelArts、Ascend Studio；行业覆盖能源、金融、交通、电信、制造、教育，AI一体机用于央国企本地化部署。来源：hiascend.csdn.net/68ad4834a6db534ba2c78478.html\n- 910C/910D（传闻级）：910C称比H100快30%、成本低17%；910D称用光计算、能效比达国际顶尖200%——**未经官方证实**。\n\n**寒武纪**\n- 思元370：7nm、chiplet、390亿晶体管、256 TOPS(INT8)，为思元270的2倍；国内首款公开支持LPDDR5的云端AI芯片，带宽为上一代3倍。来源：cnblogs.com/wujianming-110117/p/archive/2024/03/17；caifuhao.eastmoney.com/news/20240729125033679510770\n- 思元590（2023）：对标A100；百度内部测试显示多数主流模型可支持，训练性能部分接近A100、部分仅约A100的50%。来源：163.com/dy/article/JF273MEN0552KYAK.html\n- 思元270-S4：70W，推理向，峰值性能为思元100的4倍。来源：kuanfans.com/product/djsb-copy/1188.html\n- 市场：思元590适配DeepSeek-R1推理端、进入DeepSeek供应商名单（雪球帖，**非官方**）。\n\n**证据缺口**：未取得 hiascend.com / cambricon.com 官方规格页；910B算力数值多源不一致（256/320/376 TFLOPS）；910C/D、思元590具体参数与MLPerf类实测数据缺失；寒武纪生态（Neuware/BANG）与营收市占数据未覆盖。\n\n置信度：0.55",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_9U4HhSWv6L5hyBvlscj50444",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"华为昇腾 AI 芯片 训练 推理 性能 2024 昇腾910B 规格\", \"top_n\": 6}"
+              }
+            },
+            {
+              "id": "call_01_gUsjWdema678xMTCc3J40998",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"寒武纪 思元 AI 芯片 训练 推理 性能 2024 思元590 思元370 规格\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_9U4HhSWv6L5hyBvlscj50444",
+          "name": "web_search",
+          "result": {
+            "query": "华为昇腾 AI 芯片 训练 推理 性能 2024 昇腾910B 规格",
+            "results": [
+              {
+                "title": "昇腾910B",
+                "url": "https://www.modb.pro/wiki/8248",
+                "snippet": "华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构,并集成了数千个处理内核,支持深度学习、推理推断等多种AI计算任务。该芯片具有高达320 TFLOPS的半精度(FP16)计算能力和640 TOPS的整数精度(INT8)计算能力,而其功耗仅为310W,能效比优异。\n用户评价",
+                "published_at": "2025-02-19T19:33:23+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "昇腾910B\n微信扫码\n复制链接\n新浪微博\n分享数说\n采集到收藏夹\n分享到数说\n昇腾910B\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n产品概览\n用户评价\n华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。该芯片具有高达320 TFLOPS的半精度（FP16）计算能力和640 TOPS的整数精度（INT8）计算能力，而其功耗仅为310W，能效比优异。\n用户评价\n词条统计\n创建者：墨天轮福利君\n编辑次数：0\n浏览次数：10737\nAPI调用次数：0\n有奖问卷\n意见反馈\n客服小墨",
+                "evidence_excerpt": "昇腾910B\n微信扫码\n复制链接\n新浪微博\n分享数说\n采集到收藏夹\n分享到数说\n昇腾910B\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n简介：华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。\n产品概览\n用户评价\n华为自主研发的AI芯片升腾910B芯片采用先进的达文西架构，并集成了数千个处理内核，支持深度学习、推理推断等多种AI计算任务。该芯片具有高达320 TFLOPS的半精度（FP16）计算能力和640 TOPS的整数精度（INT8）计算能力，而其功耗仅为310W，能效比优异。\n用户评价\n词条统计\n创建者：墨天轮福利君\n编辑次数：0\n浏览次数：10737\nAPI调用次数：0\n有奖问卷\n意见反馈\n客服小墨"
+              },
+              {
+                "title": "华为昇腾910b与英伟达A100参数性能对比 - 2024年02月-行业研究数据 - 小牛行研",
+                "url": "https://www.hangyan.co/charts/3336833002863854761",
+                "snippet": "华为昇腾芯片为 AI 体系提供强大算力,昇腾 910b 单卡性能接近英伟达 A100。昇腾 910 是一款高性能 AI 芯片,采用了 7nm 工艺制程,集成了数千个达芬奇核心,能够提供高达 256TOPS 的算力,在业界其算力处于领先水平。 相关行业研究图表 微软365商业版收人增量测算核心假设 WPS AI长期空间测算敏感性分析(亿元) 该行政命令发布指示,通过制定指导、培训和最佳实践,防止人工智能被用来加剧司法、医疗保健和住房领域 Bloomberg在金融权益类测试中较大模型表现更优 全球人工智能人才数量占比 通用服务器拆解图(以华为TS200-2280为例) 相关行业研究报告 图表内容 表12:华为昇腾910b与英伟达A100参数性能对比 性能指标 异腾910b 英伟达A100 架构 自研华为达芬奇架构 NVIDIAAmpere架构 峰值算力FP16 376TFlops 312TFlops 峰值算力FP32 94TFlops 19.5TFlops GPU显存 64GBHBM2E 80GBHBM2E CPU-NPUPCIe规格 PCIe5.0×16512GB PCIe4.0×16256GB NPU-NPU带宽 392GB/s HCCL 400GB/s Nvlink 芯片RDMA出口带宽 200GB/sRoCE芯片直出网口 1000Gb-2000Gh/sIB需要通过IB网卡扩展出口 TDP 400W 300W 制程工艺 7nm 7nm",
+                "published_at": "2025-02-24T02:28:02+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "昇腾910B AI处理器在AI训练大型语言模型时的效率是如何实现的？",
+                "url": "https://www.idcsp.com/help/1666.html",
+                "snippet": "本文关键词\n昇腾910B\n 华为910B通常指的是华为昇腾910 AI处理器,它是华为推出的一款高性能AI芯片,专为大规模计算任务和AI训练而设计。昇腾910 AI处理器在发布时被宣称为算力最强的AI芯片之一,具有高计算密度和快速的训练速度,每秒可处理图片1802张,提供强大的AI算力,广泛应用于平安城市、互联网、金融、运营商、交通、电力等行业。\n 昇腾910B AI处理器采用了华为自研的达芬奇架构,提供了多种精度的计算能力,支持FP16、INT8、INT4等。昇腾910B在人工智能推理加速领域展现出色性能和能效比,搭载64GB HBM显存,互联带宽约为400GB/s,功耗为310W。此外,昇腾910B与华为的MindSpore AI计算框架配合使用时,能够实现接近2倍的性能提升,促进AI产业生态的发展。\n 在性能参数上,昇腾910B与英伟达的A100 GPU有诸多对比点。尽管A100在某些参数上可能略高,例如半精度算力和显存容量,但昇腾910B在能效比和特定应用场景下展现出竞争力,特别是在AI训练大型语言模型时,其效率可达到A100的80%,且在某些测试中,性能上已超越A100达20%。华为昇腾910B的推出,不仅满足了国内市场的需求,也向世界展示了中国在高性能计算领域的发展潜力。\n 昇腾910B AI处理器在AI训练大型语言模型时的效率实现主要得益于其高性能的硬件设计和软件优化。昇腾910B采用了华为自研的达芬奇架构,这是一种专为人工智能应用设计的高效能计算架构,并且使用了先进的7纳米工艺制程 。昇腾910B具有高达256TOPS的算力,在业界处于领先水平,同时在功耗方面也进行了优化,达到规格算力所需功耗仅310W,明显低于设计规格的350W 。\n 此外,昇腾910B搭载64GB HBM显存,提供了高速的数据传输能力,互联带宽约为400GB/s,这有助于在处理大型语言模",
+                "published_at": "2024-08-21T22:56:56+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "华为昇腾910B性能及应用场景_推荐算法_算力资源比较多-昇腾社区",
+                "url": "https://hiascend.csdn.net/68ad4834a6db534ba2c78478.html",
+                "snippet": "华为昇腾910B是一款高性能的人工智能处理器芯片,以下是其性能参数及应用的相关信息:\n一、性能参数\n制造工艺:昇腾910B采用了先进的7nm工艺制程,确保了其高效能低功耗的特性。\n核心数量:集成了数千个处理核心,支持深度学习、推理推断等多种人工智能计算任务。\n浮点运算性能:高达256TFLOPS的浮点运算性能,使其能够实现高效的并行计算,从而加速人工智能应用的处理速度。\n精度支持:支持FP16、INT8、INT4等多种精度,半精度(FP16)算力达到320\nTFLOPS,整数精度(INT8)算力达到640\nTOPS。\n架构设计:基于华为自主研发的达芬奇架构,融合了大规模片上异构处理核心,以及高速互连技术,能够实现不同处理核心之间的高效通信和协同计算。\n二、应用\n自动驾驶:昇腾910B的高性能使得它非常适合应用于自动驾驶领域。与百度自动驾驶团队合作,针对昇腾910B的特性对深度学习算法进行了优化,使得车道线检测、障碍物检测、语义分割、行人检测等算法性能提升了2倍以上,功耗降低了80%以上。\nAI一体机:昇腾910B也广泛应用于AI一体机中,通过与AI平台软件和各类模型算法的集成,提供分布式并行加速、算子和编译优化、集群级通信优化等关键能力,满足央国企与政府大模型本地化部署的刚需。\n行业应用:昇腾910B的应用范围广泛,包括能源、金融、公共、交通、电信、制造、教育等行业。在这些行业中,昇腾910B提供了智能中枢、昇腾智巡、昇腾智行、昇腾制造等解决方案,助力各行业的智能化升级。\n综上所述,华为昇腾910B以其高性能、低功耗、强大的并行计算能力和广泛的行业应用,成为人工智能领域的重要创新成果。",
+                "published_at": "2024-05-31T16:22:21+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "升腾910B dify",
+                "url": "https://wenku.csdn.net/answer/6556mpt6p3",
+                "snippet": "### 昇腾 910B 硬件规格 昇腾 910 处理器采用了芯粒(chiplet)技术,包含六个 die: 1 个计算芯粒(包含 32 个 Davinci Core、16 个 CPU Core 和 4 个 DVDP),1 个 IO 芯粒,和 4 个 HBM 芯粒(总计 1.2TB/s 带宽)[^1]。 #### 计算能力 - **Davinci Cores**: 提供强大的 AI 加速功能,支持多种数据类型的高效处理。 - **CPU Cores**: 支持常规控制逻辑运算以及轻量级任务调度。 - **DVDP (Digital Video Data Processing)**: 针对视频流媒体的数据预处理进行了专门设计。 #### 存储带宽 HBM(高带宽内存)提供了高达 1.2 TB/s 的总线带宽,极大地提升了大规模模型训练中的数据传输效率。 ### 性能特点 针对云端训练和推理场景,昇腾 910 进行了一系列针对性优化措施。这些改进不仅提高了单芯片的绝对性能指标,还增强了多节点集群环境下的扩展性和稳定性。 ### 开发工具和支持资源 对于开发者而言,在 ModelArts 平台上可以找到丰富的文档和技术支持来帮助解决训练网络精度调优等问题。具体来说: - **ModelArts** 是华为云提供的全流程一站式AI开发平台,能够有效简化从数据准备到部署上线整个流程的操作复杂度; - **Ascend Studio** 则是一套完整的软件栈解决方案,涵盖了编译调试在内的多个方面,旨在让使用者更便捷地构建高性能的应用程序; 此外,还有其他辅助性的 SDKs 及 API 接口可供选择使用,以便更好地适配不同应用场景的需求[^2]。 ### 设备与主机协作模式 在实际应用环境中,“Device”指的是安装有昇腾 AI 处理器并通过 PCIe 接口连接至服务器端的硬件单元。“H",
+                "published_at": "2025-02-21T20:23:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "﻿昇腾算力“进化” _大公网",
+                "url": "https://www.takungpao.com/news/232108/2025/0522/1088779.html",
+                "snippet": "图:华为AI处理器Ascend910(昇腾910)。\n昇腾910B\n•美国断供设计软件,华为用自研工具做出昇腾910B,性能接近英伟达A100的90%\n昇腾910C\n•运用“存算一体”技术,数据处理速度比英伟达H100快30%\n•能跑大规模AI模型,性价比高,成本比国外低17%\n昇腾910D\n•加入光计算,省电效果更好,能效比高达国际顶尖的200%",
+                "published_at": "2025-05-22T05:02:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 6,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://www.modb.pro/wiki/8248",
+                "status": "read",
+                "error": null,
+                "chars": 391
+              }
+            ]
+          },
+          "arguments": {
+            "query": "华为昇腾 AI 芯片 训练 推理 性能 2024 昇腾910B 规格",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_gUsjWdema678xMTCc3J40998",
+          "name": "web_search",
+          "result": {
+            "query": "寒武纪 思元 AI 芯片 训练 推理 性能 2024 思元590 思元370 规格",
+            "results": [
+              {
+                "title": "寒武纪",
+                "url": "https://xueqiu.com/7517920899/322121857?md5__1038=n4mx2DcDgD0DBDA2xBw%3D%3DGkGKcKw77GYUeD",
+                "snippet": "寒武纪:思元590芯片适配R1推理端,已进入DeepSeek供应商名单。 43  5  打赏作者    1  讨论 5 投诉 回复@米格星球的小星星 去问答广场看看&gt;    仅在正文下讨论 勾选框可设置讨论内容显示范围。讨论内容会自动生成帖子并在站内推荐,勾选「仅在正文下讨论」功能后,讨论内容将仅在当前帖子下讨论区可见。 上传中.取消 支付并发布  全部讨论(5) 最热 最早 lyn2025 02-02 23:09·重庆 哪里的消息 AutoRfg: 进个名单测试而已 用不用另外回事 股价先飞起来  1  1  投诉  拉黑 抱歉,本帖讨论暂时受限 低调的加薪小酒吧 02-03 02:05·湖北  讨论  赞  投诉  拉黑 抱歉,本帖讨论暂时受限 Puynee 02-03 00:16·浙江 为啥哪里都没消息 大妹子厉害  讨论  赞  投诉  拉黑 抱歉,本帖讨论暂时受限 征途共勉 02-02 22:45·江西 可以,国产算力也支持  ...",
+                "published_at": "2025-02-03T06:27:00+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "{\"_waf_bd8ce2ce37\":\"wEBtEkiZQVuR/nEfXeuR7DMTe0RjyTeAsf0IYDK/T14=\"}\n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\n\n[CONTENT_TRUNCATED: 34071 chars total; extracted passages, not full page]",
+                "evidence_excerpt": "{\"_waf_bd8ce2ce37\":\"wEBtEkiZQVuR/nEfXeuR7DMTe0RjyTeAsf0IYDK/T14=\"}\n3EJ9CvTop9bk6/H7t9vaQn2/46Cw69DroCpv3j1lpnghAd/VREDaEEU/6aCE4tpCJ3Pzhobt3dwQT/t5AbR7B7iOFiKFt4/0/anQ3Uwaa638qeq/qZLd69Gvht7LiRY1d4P8jPwrZR5LLBihdgTtP/6ZQiH8K0sIaWK/XuSJFiObqdK7490WYXFzAFiARWkg/7bvr4ARX1D/juui0bC873JQUICh6/Hn6Gg3eAZVc1+xeABZegiw7fGM5YjzKAZT/ur4rildsXNWWC9c64kWL22//I3ovarcEG0teQu/pnhzEWchMPuCoCpn4WCJtl7DoHhBoDW82edxoCxi7j61jhB1weHXu7/cEGnNtb3q+7/dmtq37oKmKlf7TN1MEq+j6Ln0sa3Y3ff1vamhdghXn3r5wfV2RMRVsBIk3Uyvn4q81/r6+i4HV9Hz1NAvVgL5++Pt+K0Z8ncH3BZoOt/Xr4fyLAihYLGaDCXaER1d46oIjYeJTEBM9Y7vpdzq7unyKnH7OfwrV2JrvhUcnIkWE7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkAB\n\n7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkAB\n\n7+1/KfwqYfVoCrAYvV2gmHcQiUasLzjuui5t6GnpvKhqv6qkZHAkcyTzsyDioDyoKX/8/X86LfmtO3j7evSht3Wit7d3ZTFkFkABlVQXlwKE0WHc1a0L1Tr3BZgumVtMShQtGp5U+J5BbZyVrh5D757B7l6WON8AbQzP2Zq9SwhjSamfz8dbQkqmbChdiLJhTLxkYlMUGLzvuGK3UyH3aiC6/ry+90WdQ/xrveJ+9pCX33nprb5/t3cECUo0uaB29xCTeLY3q++oO3h9ff0s44QPXPz8726luj679G66NpCY5vZoIrj5Pbqr9oRP4dzCOTU2kUDe2k+NmFyXrYuCbNpc1i8BWgQf1O5f1bga3oIsntZ7YARdxj3lt+uoai+/dDl2kV5Ofeoipvq7vv1LHPBPzDpMLnaEH1bh4Ky8eTc7r+mfyGtZxfCXcrdTChzq/yM2kUb8Wk+NnleuGIuC1dpZWZr/Ctb6muQubA89SwPkz0iZxLR2hBfwdG8+u3W/tTiodHyoSwlA2fIcMfI2kJD4feoiqHQ/uvcFmKI6fOJsPj60O3c2hAhE2k+NnleuGIuBb9pZWZr3BBvtP7cu+j\n\nR2hBfwdG8+u3W/tTiodHyoSwlA2fIcMfI2kJD4feoiqHQ/uvcFmKI6fOJsPj60O3c2hAhE2k+NnleuGIuBb9pZWZr3BBvtP7cu+jk5fvVs+ys8qAqL1QzBNM5w44WJkF5AbRrAKYreZ3NzTOOFnon2bnw+6/n7PispngSt0o+gBF1HsM+2YrXOK7t3O5qjofv8+X05q34q\n\nfvVs+ys8qAqL1QzBNM5w44WJkF5AbRrAKYreZ3NzTOOFnon2bnw+6/n7PispngSt0o+gBF1HsM+2YrXOK7t3O5qjofv8+X05q34q4kWfymD/KfcpbLcEGdF5a/K1vIqP5c/gBFVhEMF2hF9G/ryKgWrOhgf0eLcEFPM1vq5+rzupn8dp0DcEHc316/i74//ltq70qf2qcXA5fL8f1uiYarjhiTdFi/PaThnMX5Stn5V52htN2agKmERfsHGkkugeHQ8niHPpqAqIcRxJEdo3EJzpMKejdfcEFt4jNan/tzx8UHz+AD/+gRboXYy/xeyJ4uJTFCCcw61p35StH5Z49Z7CbN6Vul8A7opCbRjf1vjKFy8clm/Llnrfl62flntcl/nU3p"
+              },
+              {
+                "title": "寒武纪,何时崩盘?疯狂英伟达人工智能_网易订阅",
+                "url": "https://www.163.com/dy/article/JF273MEN0552KYAK.html",
+                "snippet": "寒武纪在2021年推出了“思元”,推理算力相当于A100的40%,训练性能约为A100的20%。 到了2023年,寒武纪推出了新一代思元590芯片,性能上直接与A100对标。根据百度内部测试结果,思元590支持绝大多数主流模型。在不同模型上性能表现各异,有的模型训练性能非常接近A100,而其他的则仅达到A100的50",
+                "published_at": "2024-10-21T21:02:06+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "2024 年 3月 17 日 随笔档案 - 吴建明wujianming - 博客园",
+                "url": "https://www.cnblogs.com/wujianming-110117/p/archive/2024/03/17",
+                "snippet": "摘要: 思元370芯片系列芯片概述基于7nm制程工艺,思元370是寒武纪首款采用chiplet(芯粒)技术的AI芯片,集成了390亿个晶体管,最大算力高达256TOPS(INT8),是寒武纪第二代产品思元270算力的2倍。凭借寒武纪最新智能芯片架构MLUarch03,思元370实测性能表现更为优秀。思元37 阅读全文",
+                "published_at": "2024-03-17T05:48:11+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "AI算力与国产GPU市场展望:寒武纪的角色与影响_财富号_东方财富网",
+                "url": "https://caifuhao.eastmoney.com/news/20240729125033679510770",
+                "snippet": "基于7nm制程工艺,思元370是寒武纪首款采用chiplet(芯粒)技术的AI芯片,集成了390亿个晶体管,最大算力高达256TOPS(INT8),是寒武纪第二代产品思元270算力的2倍。凭借寒武纪最新智能芯片架构MLUarch03,思元370实测性能表现更为优秀。同时,思元370也是国内第一款公开发布支持LPDDR5内存的云端AI芯片,内存带宽是上一代产品的3倍,访存能效达GDDR6的1.5倍。",
+                "published_at": "2024-07-29T12:50:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "寒武纪-U(SH688256)希望唱空的人,担心焦虑的人,花点时间去了解一下-东方财富网股吧",
+                "url": "http://mguba.eastmoney.com/mguba/article/0/1468437311",
+                "snippet": "$寒武纪-U(SH688256)$ 希望唱空的人,担心焦虑的人,花点时间去了解一下寒武纪的下一代芯片。思元系列芯片虽比英伟达略显逊色,但在国产芯片里,算最好的了。未来单这一款产品年利润将超60亿元。",
+                "published_at": "2024-10-09T20:03:36+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "寒武纪 思元MLU270-S4",
+                "url": "http://www.kuanfans.com/product/djsb-copy/1188.html",
+                "snippet": "思元270-S4加速卡功耗仅为70W,处理非稀疏人工智能模型的理论峰值性能提升至上一代思元100的4倍,可广泛支持视觉、语音、自然语言处理以及传统机器学习等高度多样化的人工智能应用,帮助AI推理平台实现超高能效比。",
+                "published_at": "2025-02-11T21:57:04+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 6,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://xueqiu.com/7517920899/322121857?md5__1038=n4mx2DcDgD0DBDA2xBw%3D%3DGkGKcKw77GYUeD",
+                "status": "read",
+                "error": null,
+                "chars": 8073
+              }
+            ]
+          },
+          "arguments": {
+            "query": "寒武纪 思元 AI 芯片 训练 推理 性能 2024 思元590 思元370 规格",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "**检索发现（华为昇腾 / 寒武纪，训练与推理）**\n\n**华为昇腾**\n- 昇腾910B：达芬奇架构、7nm；FP16 约320 TFLOPS、INT8 约640 TOPS（另有资料称FP16 376 TFLOPS、FP32 94 TFLOPS、64GB HBM2E、TDP 400W、PCIe5.0×16、HCCL 392GB/s）。来源：modb.pro/wiki/8248；hangyan.co/charts/3336833002863854761\n- 性能定位：单卡接近A100（约90%–100%），LLM训练效率约A100的80%；与MindSpore配合可近2倍提升。来源：idcsp.com/help/1666.html；takungpao.com/news/232108/2025/0522/1088779.html\n- 生态：CANN/MindSpore、ModelArts、Ascend Studio；行业覆盖能源、金融、交通、电信、制造、教育，AI一体机用于央国企本地化部署。来源：hiascend.csdn.net/68ad4834a6db534ba2c78478.html\n- 910C/910D（传闻级）：910C称比H100快30%、成本低17%；910D称用光计算、能效比达国际顶尖200%——**未经官方证实**。\n\n**寒武纪**\n- 思元370：7nm、chiplet、390亿晶体管、256 TOPS(INT8)，为思元270的2倍；国内首款公开支持LPDDR5的云端AI芯片，带宽为上一代3倍。来源：cnblogs.com/wujianming-110117/p/archive/2024/03/17；caifuhao.eastmoney.com/news/20240729125033679510770\n- 思元590（2023）：对标A100；百度内部测试显示多数主流模型可支持，训练性能部分接近A100、部分仅约A100的50%。来源：163.com/dy/article/JF273MEN0552KYAK.html\n- 思元270-S4：70W，推理向，峰值性能为思元100的4倍。来源：kuanfans.com/product/djsb-copy/1188.html\n- 市场：思元590适配DeepSeek-R1推理端、进入DeepSeek供应商名单（雪球帖，**非官方**）。\n\n**证据缺口**：未取得 hiascend.com / cambricon.com 官方规格页；910B算力数值多源不一致（256/320/376 TFLOPS）；910C/D、思元590具体参数与MLPerf类实测数据缺失；寒武纪生态（Neuware/BANG）与营收市占数据未覆盖。\n\n置信度：0.55",
+          "tool_calls": []
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 13.796999999998661,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 389,
+        "prompt_tokens": 731,
+        "total_tokens": 1120,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 731
+      },
+      "elapsed_seconds": 2.0940000000045984,
+      "finish_reason": "stop",
+      "content_chars": 1163,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 126,
+        "prompt_tokens": 1393,
+        "total_tokens": 1519,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 497
+      },
+      "elapsed_seconds": 1.0939999999973224,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 147,
+        "prompt_tokens": 1389,
+        "total_tokens": 1536,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 493
+      },
+      "elapsed_seconds": 0.9839999999967404,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 621,
+        "prompt_tokens": 13366,
+        "total_tokens": 13987,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 11830
+      },
+      "elapsed_seconds": 4.171999999998661,
+      "finish_reason": "stop",
+      "content_chars": 1173,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 886,
+        "prompt_tokens": 5745,
+        "total_tokens": 6631,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 5745
+      },
+      "elapsed_seconds": 4.655999999995402,
+      "finish_reason": "stop",
+      "content_chars": 1539,
+      "max_tokens": 4096
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "华为昇腾 AI 芯片 训练 推理 性能 2024 昇腾910B 规格",
+        "top_n": 6
+      },
+      "elapsed_seconds": 0.31300000000192085
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "NVIDIA AMD Intel AI chip training inference benchmark MLPerf 2024",
+        "top_n": 8
+      },
+      "elapsed_seconds": 0.34399999999732245
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://www.modb.pro/wiki/8248",
+        "max_chars": 8000,
+        "query": "华为昇腾 AI 芯片 训练 推理 性能 2024 昇腾910B 规格"
+      },
+      "elapsed_seconds": 0.35899999999674037
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://www.nvidia.com/en-us/data-center/resources/mlperf-benchmarks/",
+        "max_chars": 8000,
+        "query": "NVIDIA AMD Intel AI chip training inference benchmark MLPerf 2024"
+      },
+      "elapsed_seconds": 0.8440000000045984
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "寒武纪 思元 AI 芯片 训练 推理 性能 2024 思元590 思元370 规格",
+        "top_n": 6
+      },
+      "elapsed_seconds": 0.20300000000133878
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://xueqiu.com/7517920899/322121857?md5__1038=n4mx2DcDgD0DBDA2xBw%3D%3DGkGKcKw77GYUeD",
+        "max_chars": 8000,
+        "query": "寒武纪 思元 AI 芯片 训练 推理 性能 2024 思元590 思元370 规格"
+      },
+      "elapsed_seconds": 0.8910000000032596
+    },
+    {
+      "tool": "web_search",
+      "status": "failed",
+      "input": {
+        "query": "NVIDIA data center GPU market share 2024 AMD Intel AI accelerator",
+        "top_n": 8
+      },
+      "elapsed_seconds": 0.18699999999807915
+    }
+  ],
+  "source_fingerprint": "42235c170999d76b3336973857221a72cd3ed09c149bfc0ac2ee451b5611d5f8"
+}

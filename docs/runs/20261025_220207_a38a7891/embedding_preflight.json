@@ -1,0 +1,5 @@
+{
+  "available": true,
+  "backend": "sentence_transformers",
+  "dimensions": 384
+}

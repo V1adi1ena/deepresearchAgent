@@ -1,0 +1,1254 @@
+{
+  "question_id": "tech_001",
+  "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+  "system": "dag",
+  "model_backend": "deepseek",
+  "sampling": {
+    "modules": {
+      "default": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "planner": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "solver": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "summarizer": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "red_agent": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      },
+      "blue_agent": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "thinking": "disabled"
+      },
+      "compressor": {
+        "temperature": 0.1,
+        "max_tokens": 2048,
+        "thinking": "disabled"
+      }
+    }
+  },
+  "timeout": 90.0,
+  "max_sub_questions": 2,
+  "adversarial_config": {
+    "enabled": true,
+    "max_rounds": 1,
+    "score_threshold": 9.5,
+    "delta_threshold": 0.2,
+    "save_logs": true,
+    "max_model_calls": 12,
+    "max_fixes_per_round": 1
+  },
+  "runtime": {
+    "executable": "D:\\Anaconda\\python.exe",
+    "python_version": "3.12.7"
+  },
+  "quality_review": {
+    "answers_question": null,
+    "citations_support_claims": null
+  },
+  "report": {
+    "query": "对比分析 2024 年主流大语言模型（GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5）在中文推理、代码生成和长上下文任务上的表现差异，并分析其技术路线差异。",
+    "content": "# 2024 主流大模型三维对比：证据不足，无法完成\n\n## 结论先行\n现有证据**不足以**支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三维度的对比。四者中仅 Qwen2.5 系列有可引用的原始技术报告，其余三家的官方基准、上下文规格、架构细节均未取得原文。\n\n## 可支持的事实（仅 Qwen2.5 线）\n- **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）：0.5B–32B 六档，基于 Qwen2.5 架构，在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成/补全/推理/修复），宣称同规模 SOTA [s_8d9be8fd8248]。\n- **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到 [s_6d87a35754c3]。\n\n## 证据缺口（逐项）\n- **GPT-4o**：无正式技术报告；检索返回的是 NLPCC 中文隐喻生成论文 [s_7bb974b94611] 与四级作文页 [s_cdad4967f651]，与问题无关，未获任何基准分数。\n- **Claude 3.5 / Gemini 1.5**：未检索到官方 model card 或技术报告。虎嗅测评页正文被 WAF 脚本占据，无可读内容 [s_d42895bd5513]。\n- **中文推理（C-Eval/CMMLU）**：四模型分数全部缺失。\n- **长上下文**：Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客 [s_5cda1bca9019][s_0bb2ec1ac306]，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本，不可用于 2024 版本对比。\n- **架构路线**：MoE/GQA、RoPE 外推等无原始出处；仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表 [s_0583dfaa9b80]，未经原文核实。\n\n## 技术路线差异\n仅能就 Qwen2.5-Coder 说明\"代码专用继续预训练 + 合成数据\"路线 [s_8d9be8fd8248]；其余三家路线差异**无证据**，不作推断。\n\n## 建议补证\n读取 arXiv:2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。\n\n**总体置信度：0.30**（仅 Qwen2.5-Coder 一条事实可靠，三维对比无法成立）\n\n**关键来源**：arXiv:2409.12186（唯一实质证据）；arXiv:2412.15115（仅存目）；其余检索结果不相关或为错版本二手内容，已排除。",
+    "sources": [
+      {
+        "source_id": "s_7bb974b94611",
+        "url": "https://arxiv.org/abs/2408.04378",
+        "title": "[2408.04378] Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation – arxiv",
+        "snippet": "Computer Science > Computation and Language\narXiv:2408.04378\n(cs)\n[Submitted on 8 Aug 2024]\nTitle:\nOverview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors:\nXingwei Qu\nGe Zhang\nSiwei Wu\nYizhi Li\nChenghua Lin\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nAbstract:\nThis paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively \n\nthis shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that connects the subject (i.e. TENOR) with the object (i.e. VEHICLE), guided by the concept of the GROUND. 2) Metaphor Components Identification, which extracts the most fitting TENORs, GROUNDs, and VEHICLEs from a metaphorical sentence. T\n\n3 UTC (899 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-08\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers",
+        "task_id": "task_1",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2024-08-08T00:00:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_cdad4967f651",
+        "url": "https://www.docin.com/p-4774280504.html",
+        "title": "2024年6月四级英语作文预测 - 豆丁网",
+        "snippet": "2024年6月四级英语作文预测 Theyear2024marksasignificantmilestonefortheCollegeEnglish Test(CET),astandardizedEnglishproficiencyexaminationwidely recognizedinChina.AstheCET-4approachesinJune,students acrossthecountryarediligentlypreparingthemselvestoshowcase theirlinguisticabilitiesandsecuretheiracademicandprofessional futures.Inthisessay,Iwilldelveintothekeyfactorsthatarelikelyto shapethe2024JuneCET-4essayprompt,providinginsightsintothe potentialthemes,skills,andstrategiesthatcandidatesshould consider. OneoftheprimaryfactorsthatofteninfluencestheCET-4essay topicistheprevailingsocial,economic,andculturaltrendsinChina. Giventhecountry'srapiddevelopmentanditsgrowingglobal influence,itisreasonabletoanticipatethatthe2024JuneCET-4 essaypromptmayrevolvearoundissuesrelatedtoChina's modernization,technological",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-12-01T03:42:09+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_8d9be8fd8248",
+        "url": "https://arxiv.org/abs/2409.12186",
+        "title": "[2409.12186] Qwen2.5-Coder Technical Report – arxiv",
+        "snippet": "Computer Science > Computation and Language\narXiv:2409.12186\n(cs)\n[Submitted on 18 Sep 2024 (\n), last revised 12 Nov 2024 (this version, v3)]\nTitle:\nQwen2.5-Coder Technical Report\nAuthors:\nBinyuan Hui\nJian Yang\nZeyu Cui\nJiaxi Yang\nDayiheng Liu\nLei Zhang\nTianyu Liu\nJiajun Zhang\nBowen Yu\nKeming Lu\nKai Dang\nYang Fan\nYichang Zhang\nAn Yang\nRui Men\nFei Huang\nBo Zheng\nYibo Miao\nShanghaoran Quan\nYunlong Feng\nXingzhang Ren\nXuancheng Ren\nJingren Zhou\nJunyang Lin\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nAbstract:\nIn this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQw\n\nis report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion tokens. Through meticulous data cleaning, scalable synthetic data generation, and balanced data mixing, Qwen2.5-Coder demonstrates impressive code generation capabilities while retaining general and math skills. These models have been evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code \n\ntasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair, consistently outperforming larger models of the same model size. We believe that the release of the Qwen2.5-Coder series will advance research in code intelligence and, with its permissive licensing, support wider adoption by developers in real-world applications.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2409.12186 [cs.CL]\n| (or arXiv:2409.12186v3 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2409.12186 Focus ",
+        "task_id": "task_1",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2024-11-12T00:00:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_6d87a35754c3",
+        "url": "https://arxiv.org/abs/2412.15115",
+        "title": "[2412.15115] Qwen2.5 Technical Report – arxiv",
+        "snippet": "Computer Science > Computation and Language\narXiv:2412.15115(cs)\n[Submitted on 19 Dec 2024 (v1), last revised 3 Jan 2025 (this version, v2)]\nTitle: Qwen2.5 Technical Report\nAuthors: Qwen:An Yang,Baosong Yang,Beichen Zhang,Binyuan Hui,Bo Zheng,Bowen Yu,Chengyuan Li,Dayiheng Liu,Fei Huang,Haoran Wei,Huan Lin,Jian Yang,Jianhong Tu,Jianwei Zhang,Jianxin Yang,Jiaxi Yang,Jingren Zhou,Junyang Lin,Kai Dang,Keming Lu,Keqin Bao,Kexin Yang,Le Yu,Mei Li,Mingfeng Xue,Pei Zhang,Qin Zhu,Rui Men,Runji Lin,Tianhao Li,Tianyi Tang,Tingyu Xia,Xingzhang Ren,Xuancheng Ren,Yang Fan,Yang Su,Yichang Zhang,Yu Wan,Yuqiong Liu,Zeyu Cui,Zhenru Zhang,Zihan Qiu(additional authors not shown)\nAbstract: In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-01-03T00:00:00+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_82b27521f229",
+        "url": "https://blog.csdn.net/Code1994/article/details/144659882",
+        "title": "Qwen2.5 技术报告解读_qwq训练报告-CSDN博客",
+        "snippet": "版权声明:本文为博主原创文章,遵循CC 4.0 BY-SA版权协议,转载请附上原文出处链接和本声明。 技术报告:https//arxiv.org/abs/2412.15115Github 代码:https//github.com/QwenLM/Qwen2.5 0 Abstract Qwen2.5 一系列全面的 LLMs,旨在满足各种需求。 与之前的版本相比,Qwen2.5",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-12-27T01:39:02+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_441a9d6f0536",
+        "url": "https://www.cnblogs.com/cdyang/p/archive/2024/11/11",
+        "title": "2024 年11月11 日 随笔档案 - zion03 - 博客园",
+        "snippet": "摘要: Qwen2.5-Coder 是通义千问最新的代码语言模型,基于 Qwen2.5 的架构继续 pretrain 了5.5T 的token。通过细致的数据清洗、可扩展的合成数据生成和平衡的数据混合,Qwen2.5-Coder在展示令人印象深刻的代码生成能力的同时,还保留了通用的多功能性。本文根据官方 阅读全文",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2024-11-11T05:59:21+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_0583dfaa9b80",
+        "url": "https://histone.blog.csdn.net/article/details/143723386",
+        "title": "【默子带读】Qwen2.5 最近的开源王炸模型(代码生成)_qwen2.5 自动生成代码-CSDN博客",
+        "snippet": "点赞数 32 Qwen2.5-Coder的架构基于标准的 Transformer 模型参数 0.5B 1.5B 3B 7B 14B 32B 隐层大小 896 1536 2048 3584 5120 5120 层数 24 28 36 28 48 64 查询头数 14 12 16 28 40 40 KV 头数 2 2 2 4 8 8 中间层大小 4864 8960 4864 18944 13824 27648 词汇量 151646 151646 151646 151646 151646 151646",
+        "task_id": "task_1",
+        "evidence_kind": "search_summary",
+        "published_at": "2025-02-06T20:19:55+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_722f589cff8c",
+        "url": "https://www.jianshu.com/p/c3899e4791df",
+        "title": "双大模型协同创作实验:Claude 3.5角色建模与Gemini 1.5 Pro文笔润色深度测评 - 简书",
+        "snippet": "用大模型写小说或叙事文案时，不少创作者都会遇到这些烦心事：\n人设千人一面缺乏张力\n聊着聊着角色就“塌房”人设漂移\n文字修饰充满说教感和AI味\n长文叙事逻辑容易前后脱节\n反复调校单模型耗费大量算力与Token\n。为了解决这些痛点，我在\n猪猪AI（titiai.cn）\n上并发调度 Claude 3.5 Sonnet 与 Gemini 1.5 Pro，搭建了一套“Claude负责角色骨架 + Gemini负责文风润色”的双模型写作管线。经过20万字的实测，整理出这份兼具可读性与工程落地的测评总结。\n一、 模型分工实测与核心数据\n1. Claude 3.5 Sonnet：严谨的“人设建造师”\n在设定复杂背景与性格反差时，Claude 3.5 对 System Prompt 的遵从度极高。在 15 轮连续推演中，其\n人设稳定度达 93.6%\n，几乎不出现性格前后矛盾，逻辑严密性评分达\n9.4/10\n2. Gemini 1.5 Pro：细腻的“文字修辞师”\nGemini 依托超长上下文与海量语料，在文学细节描摹上优势明显。经它润色后，文本的\n词汇丰富度提升 28.4%\n，删除了大量“总而言之”、“值得注意的是”等高频 AI 套话，\nAI痕迹降低了 42.1%\n二、 单模型与双模型协同数据对比\n评测维度 | 单一 Claude 3.5 | 单一 Gemini 1.5 Pro | Claude + Gemini 协同管线\n角色人设保真度 (15轮) | 93.6% | 78.2% | 94.8%\n感官描写丰富度 | 76.4% | 88.5% | 91.2%\nAI模板化套话残留 | 21.3% | 14.2% | 8.5%（最低）\n长文本逻辑连贯度 | 9.4 | 8.1 | 9.2\n三、 实践 SOP 与适用场景\n落地 3 步骤：\n骨架生成（Claude）\n：锁定人设性格与行动逻辑，输出第一人称对话与核心剧情转折。\n结构化中转\n：提取对话原文与环境提示，避免前文无用杂音干扰。\n文笔润色（Gemini）\n：保持行为逻辑不变，补充环境视听与感官形容词，去除说教语气。\n场景推荐：\n游戏剧情与NPC对话\n：低成本维持多角色的鲜明性格与对话张力。\n网文与剧本创作\n：用 Claude 梳理转折大纲，交由 Gemini 补全环境与心理细节。\n品牌故事文案\n：兼顾说服逻辑与情绪拉满的叙事表现。\nFAQ 常见问题解答\nQ1：为什么不直接用一个模型写到底？\n答：模型有天然偏好。Claude 逻辑强但文字偏说明文风格，Gemini 描写细腻但长逻辑容易微偏。两者组合能取长补短。\nQ2：双模型串联会导致生成速度变慢吗？\n答：二次串行调用会增加 1.8~2.5 秒时延，对离线写作、剧本创作完全无影响；若做实时交互，可将润色环节设为后台异步处理。\nQ3：如何防止 Gemini 润色时把人设改走样？\n答：在提示词中加入强制约束：“禁止改变角色的态度、事实与逻辑因果关系，仅允许优化修辞与场景细节”。\n实测表明，“\nClaude 建骨架 + Gemini 润文笔\n”的双模型方案，能将人设保真度维持在 94% 以上，同时把 AI 味降至 8.5%。把“逻辑”与“文采”拆给最擅长的模型处理，是突破单 AI 能力瓶颈的实用解法。",
+        "task_id": "task_2",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2026-08-19T17:51:41+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_cdf6c22d8ba4",
+        "url": "https://evomap.ai/bounty/cmd939e1638d3bce9d6fb4a15",
+        "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning? | EvoMap",
+        "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nView bounty details, signals, and matched solutions.\nTotal Reward 93 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nopen\nMulti-agent competition verified\n2026/2/14 18:42:58\nExpires 2026/2/28 18:42:58\n93 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,reasoning\nSubmitted Answers(0)",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-02-14T18:42:58+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_ea1b82e55361",
+        "url": "https://evomap.ai/bounty/cm993b06cbf6609a46ec6a935",
+        "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning? | EvoMap",
+        "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nView bounty details, signals, and matched solutions.\nTotal Reward 0 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nopen\nMulti-agent competition verified\n2026/2/20 18:42:58\nExpires 2026/3/1 18:42:58\n0 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,planning\nSubmitted Answers(0)",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-02-20T18:42:58+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_5cda1bca9019",
+        "url": "https://www.jianshu.com/p/a477d642d75e",
+        "title": "Gemini 3.5 相比 Claude 3.5 有哪些核心的竞争优势? - 简书",
+        "snippet": "随着大模型技术的快速迭代,开发者在选择底层大模型时,越来越看重实际业务场景下的投入产出比。谷歌发布的\nGemini\n3.5\n与\nAnthropic\n旗下的\nClaude\n3.5\n展开了正面交锋。为了快速验证这两个模型在多模态理解与长文本处理上的真实差异,许多技术团队选择通过\nAI\n模型聚合平台(如\nyingcaiai.com\n)进行多模型并行的压力测试与接口调用。那么,在这场强强对话中,Gemini\n3.5\n究竟凭借哪些核心竞争优势打破了现有的市场格局?Q:Gemini\n3.5\n相比\nClaude\n3.5\n的核心竞争优势在哪?在超大代码库解析、多模态任务与\nAPI\n报价上我们应该怎么选?A:1.\n分项结论(核心参数与报价清单)1\n上下文窗口规格:Gemini\n3.5\nPro\n支持最大\n2,000,000\n(2M)\ntokens\n的上下文窗口,是\nClaude\n3.5\nSonnet(200,000\ntokens)的\n10\n倍。2\nAPI\n调用报价表(128k\n限制内):Gemini\n3.5\nPro:输入\n$1.25\n/\nMillion\ntokens,输出\n$5.00\n/\nMillion\ntokens。Claude\n3.5\nSonnet:输入\n$3.00\n/\nMillion\ntokens,输出\n$15.00\n/\nMillion\ntokens。结论:Gemini\n3.5\nPro\n的基础调用成本仅为\nClaude\n3.5\n的\n40%\n左右。3\n原生视频解析能力:Gemini\n3.5\n支持直接读入长达\n2小时\n的高清视频并进行帧级语义检索,而\nClaude\n3.5\n目前主要依赖静态图片或文本\nPDF\n输入。2.\n优缺点区分(核心维度对比表)选型攻略与避坑指南警惕\nGemini\n3.5\n阶梯计费的“隐形成本”。避坑指南:虽然\nGemini\n3.5\n拥有\n2M\n窗口,但如果单次请求的\nC",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-07-01T16:07:03+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_d42895bd5513",
+        "url": "https://www.huxiu.com/article/3160222.html",
+        "title": "一手测评Claude 3.5,它真比GPT-4o强吗?-虎嗅网",
+        "snippet": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"36bc7b00eec2b0fe21bd58eea4ad841b\",\"traceid\":\"2f5e3b8017929366790084529e8e1a\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+        "task_id": "task_2",
+        "evidence_kind": "page_excerpt",
+        "published_at": "2024-06-21T20:03:00+08:00",
+        "scope_note": "title_not_obviously_mismatched"
+      },
+      {
+        "source_id": "s_0bb2ec1ac306",
+        "url": "https://juejin.cn/post/7635372611216080938",
+        "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+        "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持文本、图片、音频混合输入\n代码生成稳如老狗,复杂逻辑推理第一梯队\n128K上下文窗口,够用但不算最大\nAPI生态最完善:Function\nCalling、Structured\nOutputs、Assistants\nAPI\nClaude\nOpus\n4(Anthropic)\n长文本处理天花板,200K上下文窗口\n安全性(Safety)做得最严谨,几乎不会输出危险内容\n代码Review和文档生成质量极高\nArtifacts功能很实用,适合做内容生成类应用\nGemini\n2.5\nPro(Google)\n上下文窗口最大:1M\ntokens,一本《三体》全集放进去都没问题\n多模态和搜索整合是独家优势,能直接调Google\nSearch\n性价比极高,免费额度大方\n中文能力略逊于前两者,但差距已大幅缩小\n价格对比(2026年5月)\n模型输入/1M\ntokens输出/1M\ntokensGPT-4o$2.50$10.00Claude\nOpus\n4$3.00$15.00Gemini\n2.5\nPro$1.25$5.00\nGemini性价比碾压,但GPT-4o和Claude在特定场景有不可替代的优势。\n实战:同一段提示词,三个模型各自表现\n测试题目:用Python写一个并发调用多个API的异步函数,带重试和限流。\nGPT-4o:代码简洁优雅,用了asyncio.Semaphore做限流,异常处理完善。会主动加注释和类型注解。\nClaude\nOpus\n4:代码结构最清晰,错误处理最细致,甚至考虑了API密钥轮换场景。文档写得像教科书。\nGemini\n2.5\nPro:功能实现没问题,但代码风格比较朴实。给了",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-05-03T00:00:00+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      },
+      {
+        "source_id": "s_1a740a35f590",
+        "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+        "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+        "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限流、成本失控,任何一个问题都能让你的应用体验崩盘。本文从实际工程视角,对五大模型供应商进行横向对比,并给出多供应商路由策略。\n一、五大模型的能力矩阵\n1.1\n参与评测的模型版本(2026年7月)\n供应商评测模型上下文窗口输出上限多模态OpenAIGPT-4o\n(2026-06)256K64K\ntokens✅\n文本+图片+音频AnthropicClaude\n4\nSonnet200K16K\ntokens✅\n文本+图片GoogleGemini\n2.5\nPro2M64K\ntokens✅\n文本+图片+音频+视频AlibabaQwen3-Plus\n(2026-05)1M32K\ntokens✅\n文本+图片DeepSeekDeepSeek-V3.1128K32K\ntokens⚠️\n文本为主\n1.2\n五大能力维度评测\n采用内部评测集(代码生成200题、逻辑推理150题、中文创作100题、多语言翻译80题、数学推理120题),评分方式为:正确答案=3分,部分正确=2分,错误但思路合理=1分,完全错误=0分。\n能力维度GPT-4oClaude\n4\nSonnetGemini\n2.5\nProQwen3-PlusDeepSeek-V3.1代码生成92%94%89%87%91%逻辑推理91%90%87%83%88%中文创作78%76%72%91%89%多语言翻译85%88%86%82%78%数学推理88%85%90%82%90%综合得分86.8%86.6%84.8%85.0%87.2%\n核心发现:\n不存在绝对的\"最强模型\"。GPT-4o、Claude\n4\nSonnet、DeepSeek-V3.1的综合得分",
+        "task_id": "task_2",
+        "evidence_kind": "search_summary",
+        "published_at": "2026-07-29T11:40:38+08:00",
+        "scope_note": "later_publication_requires_date_check"
+      }
+    ],
+    "confidence": 0.5,
+    "num_searches": 8,
+    "num_replan": 0,
+    "adversarial_rounds": 1,
+    "final_score": 8.954545454545453,
+    "status": "completed",
+    "incomplete_tasks": [],
+    "run_id": "812919eb282e417f86dbaa4e43ab5652",
+    "review_history": [
+      {
+        "round": 1,
+        "dimension_scores": {
+          "fact_check": 8.5,
+          "hallucination": 9.5
+        },
+        "overall_score": 8.955,
+        "issues_count": 9,
+        "fix_operations": [
+          {
+            "issue": {
+              "severity": "minor",
+              "dimension": "fact_check",
+              "description": "报告称 Qwen2.5-Coder 技术报告 v1 提交于 2024-09-18，v3 于 2024-11-12，与来源一致；但报告称该报告覆盖 10+ 代码基准并宣称同规模 SOTA，来源摘要原文为 'achieving state-of-the-art (SOTA) performance across more than 10 benchmarks'，表述准确。未发现事实错误。",
+              "location": "可支持的事实（仅 Qwen2.5 线）第一段",
+              "fix_type": "in_place",
+              "evidence": "来源 [s_8d9be8fd8248] 摘要：'Submitted on 18 Sep 2024, last revised 12 Nov 2024 (this version, v3)'；'evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks'。"
+            },
+            "action": "in_place_fix: []",
+            "success": false,
+            "detail": {
+              "detail": "changes=[]",
+              "before": "# 2024 主流大模型三维对比：证据不足，无法完成\n\n## 结论先行\n现有证据**不足以**支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三维度的对比。四者中仅 Qwen2.5 系列有可引用的原始技术报告，其余三家的官方基准、上下文规格、架构细节均未取得原文。\n\n## 可支持的事实（仅 Qwen2.5 线）\n- **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）：0.5B–32B 六档，基于 Qwen2.5 架构，在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成/补全/推理/修复），宣称同规模 SOTA [s_8d9be8fd8248]。\n- **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到 [s_6d87a35754c3]。\n\n## 证据缺口（逐项）\n- **GPT-4o**：无正式技术报告；检索返回的是 NLPCC 中文隐喻生成论文 [s_7bb974b94611] 与四级作文页 [s_cdad4967f651]，与问题无关，未获任何基准分数。\n- **Claude 3.5 / Gemini 1.5**：未检索到官方 model card 或技术报告。虎嗅测评页正文被 WAF 脚本占据，无可读内容 [s_d42895bd5513]。\n- **中文推理（C-Eval/CMMLU）**：四模型分数全部缺失。\n- **长上下文**：Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客 [s_5cda1bca9019][s_0bb2ec1ac306]，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本，不可用于 2024 版本对比。\n- **架构路线**：MoE/GQA、RoPE 外推等无原始出处；仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表 [s_0583dfaa9b80]，未经原文核实。\n\n## 技术路线差异\n仅能就 Qwen2.5-Coder 说明\"代码专用继续预训练 + 合成数据\"路线 [s_8d9be8fd8248]；其余三家路线差异**无证据**，不作推断。\n\n## 建议补证\n读取 arXiv:2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。\n\n**总体置信度：0.30**（仅 Qwen2.5-Coder 一条事实可靠，三维对比无法成立）\n\n**关键来源**：arXiv:2409.12186（唯一实质证据）；arXiv:2412.15115（仅存目）；其余检索结果不相关或为错版本二手内容，已排除。",
+              "after": "# 2024 主流大模型三维对比：证据不足，无法完成\n\n## 结论先行\n现有证据**不足以**支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三维度的对比。四者中仅 Qwen2.5 系列有可引用的原始技术报告，其余三家的官方基准、上下文规格、架构细节均未取得原文。\n\n## 可支持的事实（仅 Qwen2.5 线）\n- **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）：0.5B–32B 六档，基于 Qwen2.5 架构，在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成/补全/推理/修复），宣称同规模 SOTA [s_8d9be8fd8248]。\n- **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到 [s_6d87a35754c3]。\n\n## 证据缺口（逐项）\n- **GPT-4o**：无正式技术报告；检索返回的是 NLPCC 中文隐喻生成论文 [s_7bb974b94611] 与四级作文页 [s_cdad4967f651]，与问题无关，未获任何基准分数。\n- **Claude 3.5 / Gemini 1.5**：未检索到官方 model card 或技术报告。虎嗅测评页正文被 WAF 脚本占据，无可读内容 [s_d42895bd5513]。\n- **中文推理（C-Eval/CMMLU）**：四模型分数全部缺失。\n- **长上下文**：Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客 [s_5cda1bca9019][s_0bb2ec1ac306]，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本，不可用于 2024 版本对比。\n- **架构路线**：MoE/GQA、RoPE 外推等无原始出处；仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表 [s_0583dfaa9b80]，未经原文核实。\n\n## 技术路线差异\n仅能就 Qwen2.5-Coder 说明\"代码专用继续预训练 + 合成数据\"路线 [s_8d9be8fd8248]；其余三家路线差异**无证据**，不作推断。\n\n## 建议补证\n读取 arXiv:2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。\n\n**总体置信度：0.30**（仅 Qwen2.5-Coder 一条事实可靠，三维对比无法成立）\n\n**关键来源**：arXiv:2409.12186（唯一实质证据）；arXiv:2412.15115（仅存目）；其余检索结果不相关或为错版本二手内容，已排除。",
+              "sources": [
+                {
+                  "source_id": "s_7bb974b94611",
+                  "url": "https://arxiv.org/abs/2408.04378",
+                  "title": "[2408.04378] Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation – arxiv",
+                  "snippet": "Computer Science > Computation and Language\narXiv:2408.04378\n(cs)\n[Submitted on 8 Aug 2024]\nTitle:\nOverview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors:\nXingwei Qu\nGe Zhang\nSiwei Wu\nYizhi Li\nChenghua Lin\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nAbstract:\nThis paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively \n\nthis shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that connects the subject (i.e. TENOR) with the object (i.e. VEHICLE), guided by the concept of the GROUND. 2) Metaphor Components Identification, which extracts the most fitting TENORs, GROUNDs, and VEHICLEs from a metaphorical sentence. T\n\n3 UTC (899 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-08\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers",
+                  "task_id": "task_1",
+                  "evidence_kind": "page_excerpt",
+                  "published_at": "2024-08-08T00:00:00+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_cdad4967f651",
+                  "url": "https://www.docin.com/p-4774280504.html",
+                  "title": "2024年6月四级英语作文预测 - 豆丁网",
+                  "snippet": "2024年6月四级英语作文预测 Theyear2024marksasignificantmilestonefortheCollegeEnglish Test(CET),astandardizedEnglishproficiencyexaminationwidely recognizedinChina.AstheCET-4approachesinJune,students acrossthecountryarediligentlypreparingthemselvestoshowcase theirlinguisticabilitiesandsecuretheiracademicandprofessional futures.Inthisessay,Iwilldelveintothekeyfactorsthatarelikelyto shapethe2024JuneCET-4essayprompt,providinginsightsintothe potentialthemes,skills,andstrategiesthatcandidatesshould consider. OneoftheprimaryfactorsthatofteninfluencestheCET-4essay topicistheprevailingsocial,economic,andculturaltrendsinChina. Giventhecountry'srapiddevelopmentanditsgrowingglobal influence,itisreasonabletoanticipatethatthe2024JuneCET-4 essaypromptmayrevolvearoundissuesrelatedtoChina's modernization,technological",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2024-12-01T03:42:09+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_8d9be8fd8248",
+                  "url": "https://arxiv.org/abs/2409.12186",
+                  "title": "[2409.12186] Qwen2.5-Coder Technical Report – arxiv",
+                  "snippet": "Computer Science > Computation and Language\narXiv:2409.12186\n(cs)\n[Submitted on 18 Sep 2024 (\n), last revised 12 Nov 2024 (this version, v3)]\nTitle:\nQwen2.5-Coder Technical Report\nAuthors:\nBinyuan Hui\nJian Yang\nZeyu Cui\nJiaxi Yang\nDayiheng Liu\nLei Zhang\nTianyu Liu\nJiajun Zhang\nBowen Yu\nKeming Lu\nKai Dang\nYang Fan\nYichang Zhang\nAn Yang\nRui Men\nFei Huang\nBo Zheng\nYibo Miao\nShanghaoran Quan\nYunlong Feng\nXingzhang Ren\nXuancheng Ren\nJingren Zhou\nJunyang Lin\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nAbstract:\nIn this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQw\n\nis report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion tokens. Through meticulous data cleaning, scalable synthetic data generation, and balanced data mixing, Qwen2.5-Coder demonstrates impressive code generation capabilities while retaining general and math skills. These models have been evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code \n\ntasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair, consistently outperforming larger models of the same model size. We believe that the release of the Qwen2.5-Coder series will advance research in code intelligence and, with its permissive licensing, support wider adoption by developers in real-world applications.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2409.12186 [cs.CL]\n| (or arXiv:2409.12186v3 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2409.12186 Focus ",
+                  "task_id": "task_1",
+                  "evidence_kind": "page_excerpt",
+                  "published_at": "2024-11-12T00:00:00+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_6d87a35754c3",
+                  "url": "https://arxiv.org/abs/2412.15115",
+                  "title": "[2412.15115] Qwen2.5 Technical Report – arxiv",
+                  "snippet": "Computer Science > Computation and Language\narXiv:2412.15115(cs)\n[Submitted on 19 Dec 2024 (v1), last revised 3 Jan 2025 (this version, v2)]\nTitle: Qwen2.5 Technical Report\nAuthors: Qwen:An Yang,Baosong Yang,Beichen Zhang,Binyuan Hui,Bo Zheng,Bowen Yu,Chengyuan Li,Dayiheng Liu,Fei Huang,Haoran Wei,Huan Lin,Jian Yang,Jianhong Tu,Jianwei Zhang,Jianxin Yang,Jiaxi Yang,Jingren Zhou,Junyang Lin,Kai Dang,Keming Lu,Keqin Bao,Kexin Yang,Le Yu,Mei Li,Mingfeng Xue,Pei Zhang,Qin Zhu,Rui Men,Runji Lin,Tianhao Li,Tianyi Tang,Tingyu Xia,Xingzhang Ren,Xuancheng Ren,Yang Fan,Yang Su,Yichang Zhang,Yu Wan,Yuqiong Liu,Zeyu Cui,Zhenru Zhang,Zihan Qiu(additional authors not shown)\nAbstract: In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2025-01-03T00:00:00+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_82b27521f229",
+                  "url": "https://blog.csdn.net/Code1994/article/details/144659882",
+                  "title": "Qwen2.5 技术报告解读_qwq训练报告-CSDN博客",
+                  "snippet": "版权声明:本文为博主原创文章,遵循CC 4.0 BY-SA版权协议,转载请附上原文出处链接和本声明。 技术报告:https//arxiv.org/abs/2412.15115Github 代码:https//github.com/QwenLM/Qwen2.5 0 Abstract Qwen2.5 一系列全面的 LLMs,旨在满足各种需求。 与之前的版本相比,Qwen2.5",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2024-12-27T01:39:02+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_441a9d6f0536",
+                  "url": "https://www.cnblogs.com/cdyang/p/archive/2024/11/11",
+                  "title": "2024 年11月11 日 随笔档案 - zion03 - 博客园",
+                  "snippet": "摘要: Qwen2.5-Coder 是通义千问最新的代码语言模型,基于 Qwen2.5 的架构继续 pretrain 了5.5T 的token。通过细致的数据清洗、可扩展的合成数据生成和平衡的数据混合,Qwen2.5-Coder在展示令人印象深刻的代码生成能力的同时,还保留了通用的多功能性。本文根据官方 阅读全文",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2024-11-11T05:59:21+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_0583dfaa9b80",
+                  "url": "https://histone.blog.csdn.net/article/details/143723386",
+                  "title": "【默子带读】Qwen2.5 最近的开源王炸模型(代码生成)_qwen2.5 自动生成代码-CSDN博客",
+                  "snippet": "点赞数 32 Qwen2.5-Coder的架构基于标准的 Transformer 模型参数 0.5B 1.5B 3B 7B 14B 32B 隐层大小 896 1536 2048 3584 5120 5120 层数 24 28 36 28 48 64 查询头数 14 12 16 28 40 40 KV 头数 2 2 2 4 8 8 中间层大小 4864 8960 4864 18944 13824 27648 词汇量 151646 151646 151646 151646 151646 151646",
+                  "task_id": "task_1",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2025-02-06T20:19:55+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_722f589cff8c",
+                  "url": "https://www.jianshu.com/p/c3899e4791df",
+                  "title": "双大模型协同创作实验:Claude 3.5角色建模与Gemini 1.5 Pro文笔润色深度测评 - 简书",
+                  "snippet": "用大模型写小说或叙事文案时，不少创作者都会遇到这些烦心事：\n人设千人一面缺乏张力\n聊着聊着角色就“塌房”人设漂移\n文字修饰充满说教感和AI味\n长文叙事逻辑容易前后脱节\n反复调校单模型耗费大量算力与Token\n。为了解决这些痛点，我在\n猪猪AI（titiai.cn）\n上并发调度 Claude 3.5 Sonnet 与 Gemini 1.5 Pro，搭建了一套“Claude负责角色骨架 + Gemini负责文风润色”的双模型写作管线。经过20万字的实测，整理出这份兼具可读性与工程落地的测评总结。\n一、 模型分工实测与核心数据\n1. Claude 3.5 Sonnet：严谨的“人设建造师”\n在设定复杂背景与性格反差时，Claude 3.5 对 System Prompt 的遵从度极高。在 15 轮连续推演中，其\n人设稳定度达 93.6%\n，几乎不出现性格前后矛盾，逻辑严密性评分达\n9.4/10\n2. Gemini 1.5 Pro：细腻的“文字修辞师”\nGemini 依托超长上下文与海量语料，在文学细节描摹上优势明显。经它润色后，文本的\n词汇丰富度提升 28.4%\n，删除了大量“总而言之”、“值得注意的是”等高频 AI 套话，\nAI痕迹降低了 42.1%\n二、 单模型与双模型协同数据对比\n评测维度 | 单一 Claude 3.5 | 单一 Gemini 1.5 Pro | Claude + Gemini 协同管线\n角色人设保真度 (15轮) | 93.6% | 78.2% | 94.8%\n感官描写丰富度 | 76.4% | 88.5% | 91.2%\nAI模板化套话残留 | 21.3% | 14.2% | 8.5%（最低）\n长文本逻辑连贯度 | 9.4 | 8.1 | 9.2\n三、 实践 SOP 与适用场景\n落地 3 步骤：\n骨架生成（Claude）\n：锁定人设性格与行动逻辑，输出第一人称对话与核心剧情转折。\n结构化中转\n：提取对话原文与环境提示，避免前文无用杂音干扰。\n文笔润色（Gemini）\n：保持行为逻辑不变，补充环境视听与感官形容词，去除说教语气。\n场景推荐：\n游戏剧情与NPC对话\n：低成本维持多角色的鲜明性格与对话张力。\n网文与剧本创作\n：用 Claude 梳理转折大纲，交由 Gemini 补全环境与心理细节。\n品牌故事文案\n：兼顾说服逻辑与情绪拉满的叙事表现。\nFAQ 常见问题解答\nQ1：为什么不直接用一个模型写到底？\n答：模型有天然偏好。Claude 逻辑强但文字偏说明文风格，Gemini 描写细腻但长逻辑容易微偏。两者组合能取长补短。\nQ2：双模型串联会导致生成速度变慢吗？\n答：二次串行调用会增加 1.8~2.5 秒时延，对离线写作、剧本创作完全无影响；若做实时交互，可将润色环节设为后台异步处理。\nQ3：如何防止 Gemini 润色时把人设改走样？\n答：在提示词中加入强制约束：“禁止改变角色的态度、事实与逻辑因果关系，仅允许优化修辞与场景细节”。\n实测表明，“\nClaude 建骨架 + Gemini 润文笔\n”的双模型方案，能将人设保真度维持在 94% 以上，同时把 AI 味降至 8.5%。把“逻辑”与“文采”拆给最擅长的模型处理，是突破单 AI 能力瓶颈的实用解法。",
+                  "task_id": "task_2",
+                  "evidence_kind": "page_excerpt",
+                  "published_at": "2026-08-19T17:51:41+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_cdf6c22d8ba4",
+                  "url": "https://evomap.ai/bounty/cmd939e1638d3bce9d6fb4a15",
+                  "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning? | EvoMap",
+                  "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nView bounty details, signals, and matched solutions.\nTotal Reward 93 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nopen\nMulti-agent competition verified\n2026/2/14 18:42:58\nExpires 2026/2/28 18:42:58\n93 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,reasoning\nSubmitted Answers(0)",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-02-14T18:42:58+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_ea1b82e55361",
+                  "url": "https://evomap.ai/bounty/cm993b06cbf6609a46ec6a935",
+                  "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning? | EvoMap",
+                  "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nView bounty details, signals, and matched solutions.\nTotal Reward 0 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nopen\nMulti-agent competition verified\n2026/2/20 18:42:58\nExpires 2026/3/1 18:42:58\n0 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,planning\nSubmitted Answers(0)",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-02-20T18:42:58+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_5cda1bca9019",
+                  "url": "https://www.jianshu.com/p/a477d642d75e",
+                  "title": "Gemini 3.5 相比 Claude 3.5 有哪些核心的竞争优势? - 简书",
+                  "snippet": "随着大模型技术的快速迭代,开发者在选择底层大模型时,越来越看重实际业务场景下的投入产出比。谷歌发布的\nGemini\n3.5\n与\nAnthropic\n旗下的\nClaude\n3.5\n展开了正面交锋。为了快速验证这两个模型在多模态理解与长文本处理上的真实差异,许多技术团队选择通过\nAI\n模型聚合平台(如\nyingcaiai.com\n)进行多模型并行的压力测试与接口调用。那么,在这场强强对话中,Gemini\n3.5\n究竟凭借哪些核心竞争优势打破了现有的市场格局?Q:Gemini\n3.5\n相比\nClaude\n3.5\n的核心竞争优势在哪?在超大代码库解析、多模态任务与\nAPI\n报价上我们应该怎么选?A:1.\n分项结论(核心参数与报价清单)1\n上下文窗口规格:Gemini\n3.5\nPro\n支持最大\n2,000,000\n(2M)\ntokens\n的上下文窗口,是\nClaude\n3.5\nSonnet(200,000\ntokens)的\n10\n倍。2\nAPI\n调用报价表(128k\n限制内):Gemini\n3.5\nPro:输入\n$1.25\n/\nMillion\ntokens,输出\n$5.00\n/\nMillion\ntokens。Claude\n3.5\nSonnet:输入\n$3.00\n/\nMillion\ntokens,输出\n$15.00\n/\nMillion\ntokens。结论:Gemini\n3.5\nPro\n的基础调用成本仅为\nClaude\n3.5\n的\n40%\n左右。3\n原生视频解析能力:Gemini\n3.5\n支持直接读入长达\n2小时\n的高清视频并进行帧级语义检索,而\nClaude\n3.5\n目前主要依赖静态图片或文本\nPDF\n输入。2.\n优缺点区分(核心维度对比表)选型攻略与避坑指南警惕\nGemini\n3.5\n阶梯计费的“隐形成本”。避坑指南:虽然\nGemini\n3.5\n拥有\n2M\n窗口,但如果单次请求的\nC",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-07-01T16:07:03+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_d42895bd5513",
+                  "url": "https://www.huxiu.com/article/3160222.html",
+                  "title": "一手测评Claude 3.5,它真比GPT-4o强吗?-虎嗅网",
+                  "snippet": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"36bc7b00eec2b0fe21bd58eea4ad841b\",\"traceid\":\"2f5e3b8017929366790084529e8e1a\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+                  "task_id": "task_2",
+                  "evidence_kind": "page_excerpt",
+                  "published_at": "2024-06-21T20:03:00+08:00",
+                  "scope_note": "title_not_obviously_mismatched"
+                },
+                {
+                  "source_id": "s_0bb2ec1ac306",
+                  "url": "https://juejin.cn/post/7635372611216080938",
+                  "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+                  "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持文本、图片、音频混合输入\n代码生成稳如老狗,复杂逻辑推理第一梯队\n128K上下文窗口,够用但不算最大\nAPI生态最完善:Function\nCalling、Structured\nOutputs、Assistants\nAPI\nClaude\nOpus\n4(Anthropic)\n长文本处理天花板,200K上下文窗口\n安全性(Safety)做得最严谨,几乎不会输出危险内容\n代码Review和文档生成质量极高\nArtifacts功能很实用,适合做内容生成类应用\nGemini\n2.5\nPro(Google)\n上下文窗口最大:1M\ntokens,一本《三体》全集放进去都没问题\n多模态和搜索整合是独家优势,能直接调Google\nSearch\n性价比极高,免费额度大方\n中文能力略逊于前两者,但差距已大幅缩小\n价格对比(2026年5月)\n模型输入/1M\ntokens输出/1M\ntokensGPT-4o$2.50$10.00Claude\nOpus\n4$3.00$15.00Gemini\n2.5\nPro$1.25$5.00\nGemini性价比碾压,但GPT-4o和Claude在特定场景有不可替代的优势。\n实战:同一段提示词,三个模型各自表现\n测试题目:用Python写一个并发调用多个API的异步函数,带重试和限流。\nGPT-4o:代码简洁优雅,用了asyncio.Semaphore做限流,异常处理完善。会主动加注释和类型注解。\nClaude\nOpus\n4:代码结构最清晰,错误处理最细致,甚至考虑了API密钥轮换场景。文档写得像教科书。\nGemini\n2.5\nPro:功能实现没问题,但代码风格比较朴实。给了",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-05-03T00:00:00+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                },
+                {
+                  "source_id": "s_1a740a35f590",
+                  "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+                  "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+                  "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限流、成本失控,任何一个问题都能让你的应用体验崩盘。本文从实际工程视角,对五大模型供应商进行横向对比,并给出多供应商路由策略。\n一、五大模型的能力矩阵\n1.1\n参与评测的模型版本(2026年7月)\n供应商评测模型上下文窗口输出上限多模态OpenAIGPT-4o\n(2026-06)256K64K\ntokens✅\n文本+图片+音频AnthropicClaude\n4\nSonnet200K16K\ntokens✅\n文本+图片GoogleGemini\n2.5\nPro2M64K\ntokens✅\n文本+图片+音频+视频AlibabaQwen3-Plus\n(2026-05)1M32K\ntokens✅\n文本+图片DeepSeekDeepSeek-V3.1128K32K\ntokens⚠️\n文本为主\n1.2\n五大能力维度评测\n采用内部评测集(代码生成200题、逻辑推理150题、中文创作100题、多语言翻译80题、数学推理120题),评分方式为:正确答案=3分,部分正确=2分,错误但思路合理=1分,完全错误=0分。\n能力维度GPT-4oClaude\n4\nSonnetGemini\n2.5\nProQwen3-PlusDeepSeek-V3.1代码生成92%94%89%87%91%逻辑推理91%90%87%83%88%中文创作78%76%72%91%89%多语言翻译85%88%86%82%78%数学推理88%85%90%82%90%综合得分86.8%86.6%84.8%85.0%87.2%\n核心发现:\n不存在绝对的\"最强模型\"。GPT-4o、Claude\n4\nSonnet、DeepSeek-V3.1的综合得分",
+                  "task_id": "task_2",
+                  "evidence_kind": "search_summary",
+                  "published_at": "2026-07-29T11:40:38+08:00",
+                  "scope_note": "later_publication_requires_date_check"
+                }
+              ],
+              "evidence": "来源 [s_8d9be8fd8248] 摘要：'Submitted on 18 Sep 2024, last revised 12 Nov 2024 (this version, v3)'；'evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks'。",
+              "no_change": true
+            }
+          }
+        ],
+        "resolved_count": 0,
+        "oscillation_detected": false,
+        "stop_reason": "no_change",
+        "raw_feedback": "[fact_check]\n{\n  \"score\": 8.5,\n  \"issues\": [\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称 Qwen2.5-Coder 技术报告 v1 提交于 2024-09-18，v3 修订于 2024-11-12，与来源一致；但来源页面显示 Published 日期为 2024-11-12，报告未明确区分提交与修订日期，表述基本准确，无实质错误。\",\n      \"location\": \"可支持的事实（仅 Qwen2.5 线）第一点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_8d9be8fd8248] 显示：[Submitted on 18 Sep 2024 ( ), last revised 12 Nov 2024 (this version, v3)]\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称 Qwen2.5 技术报告 v1 提交于 2024-12-19，来源显示 v1 提交于 19 Dec 2024，v2 修订于 3 Jan 2025，报告仅提及 v1 日期，未提 v2，但未构成错误。\",\n      \"location\": \"可支持的事实（仅 Qwen2.5 线）第二点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_6d87a35754c3] 显示：[Submitted on 19 Dec 2024 (v1), last revised 3 Jan 2025 (this version, v2)]\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称 GPT-4o 检索返回的是 NLPCC 中文隐喻生成论文与四级作文页，与问题无关；来源 [s_7bb974b94611] 确为 NLPCC 2024 中文隐喻生成论文，[s_cdad4967f651] 确为四级作文页，描述准确。\",\n      \"location\": \"证据缺口（逐项）GPT-4o 条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_7bb974b94611] 标题为 'Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation'；[s_cdad4967f651] 标题为 '2024年6月四级英语作文预测'\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称虎嗅测评页正文被 WAF 脚本占据，无可读内容；来源 [s_d42895bd5513] 摘录确为 WAF 脚本代码，描述准确。\",\n      \"location\": \"证据缺口（逐项）Claude 3.5 / Gemini 1.5 条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_d42895bd5513] 摘录内容为 'appkey: \\\"CF_APP_WAF\\\"...' 等脚本代码\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称 Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本；来源 [s_5cda1bca9019] 发布于 2026-07-01，提及 Gemini 3.5 与 Claude 3.5，[s_0bb2ec1ac306] 发布于 2026-05-03，提及 GPT-4o、Claude Opus 4、Gemini 2.5 Pro，报告描述准确。\",\n      \"location\": \"证据缺口（逐项）长上下文条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_5cda1bca9019] 发布于 2026-07-01，内容涉及 Gemini 3.5 与 Claude 3.5；[s_0bb2ec1ac306] 发布于 2026-05-03，内容涉及 GPT-4o、Claude Opus 4、Gemini 2.5 Pro\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表，未经原文核实；来源 [s_0583dfaa9b80] 确为 CSDN 博客，发布于 2025-02-06，属 later_publication，报告描述准确。\",\n      \"location\": \"证据缺口（逐项）架构路线条目\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源 [s_0583dfaa9b80] 为 CSDN 博客，发布于 2025-02-06，内容包含 Qwen2.5-Coder 参数表\"\n    }\n  ]\n}\n\n[hallucination]\n{\n  \"score\": 9.5,\n  \"issues\": [\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称Qwen2.5-Coder在'5.5万亿token代码语料上继续预训练'，但来源摘要仅提及'over 5.5 trillion tokens'，未明确说明是代码语料。报告添加了'代码语料'这一限定，属于合理推断但未标注。\",\n      \"location\": \"可支持的事实（仅 Qwen2.5 线）第一点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_8d9be8fd8248]摘要：'continues pretrained on a vast corpus of over 5.5 trillion tokens'，未指定语料类型。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称Qwen2.5-Coder'覆盖10+代码基准（生成/补全/推理/修复）'，来源摘要提及'over 10 benchmarks, including code generation, completion, reasoning, and repair'，但报告将'including'改为'覆盖'并列出四类，可能暗示全部基准均属这四类，略有过度概括。\",\n      \"location\": \"可支持的事实（仅 Qwen2.5 线）第一点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_8d9be8fd8248]摘要：'evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair'。\"\n    },\n    {\n      \"severity\": \"minor\",\n      \"description\": \"报告称'Qwen2.5 技术报告（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到'，但来源[s_6d87a35754c3]的摘要片段包含'In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers'，表明至少获取了部分摘要。报告称'摘要细节未取到'与来源证据不完全一致，属于轻微不准确。\",\n      \"location\": \"可支持的事实（仅 Qwen2.5 线）第二点\",\n      \"fix_type\": \"in_place\",\n      \"evidence\": \"来源[s_6d87a35754c3]摘要片段：'In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers'。\"\n    }\n  ]\n}\n",
+        "content_before": "# 2024 主流大模型三维对比：证据不足，无法完成\n\n## 结论先行\n现有证据**不足以**支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三维度的对比。四者中仅 Qwen2.5 系列有可引用的原始技术报告，其余三家的官方基准、上下文规格、架构细节均未取得原文。\n\n## 可支持的事实（仅 Qwen2.5 线）\n- **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）：0.5B–32B 六档，基于 Qwen2.5 架构，在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成/补全/推理/修复），宣称同规模 SOTA [s_8d9be8fd8248]。\n- **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到 [s_6d87a35754c3]。\n\n## 证据缺口（逐项）\n- **GPT-4o**：无正式技术报告；检索返回的是 NLPCC 中文隐喻生成论文 [s_7bb974b94611] 与四级作文页 [s_cdad4967f651]，与问题无关，未获任何基准分数。\n- **Claude 3.5 / Gemini 1.5**：未检索到官方 model card 或技术报告。虎嗅测评页正文被 WAF 脚本占据，无可读内容 [s_d42895bd5513]。\n- **中文推理（C-Eval/CMMLU）**：四模型分数全部缺失。\n- **长上下文**：Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客 [s_5cda1bca9019][s_0bb2ec1ac306]，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本，不可用于 2024 版本对比。\n- **架构路线**：MoE/GQA、RoPE 外推等无原始出处；仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表 [s_0583dfaa9b80]，未经原文核实。\n\n## 技术路线差异\n仅能就 Qwen2.5-Coder 说明\"代码专用继续预训练 + 合成数据\"路线 [s_8d9be8fd8248]；其余三家路线差异**无证据**，不作推断。\n\n## 建议补证\n读取 arXiv:2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。\n\n**总体置信度：0.30**（仅 Qwen2.5-Coder 一条事实可靠，三维对比无法成立）\n\n**关键来源**：arXiv:2409.12186（唯一实质证据）；arXiv:2412.15115（仅存目）；其余检索结果不相关或为错版本二手内容，已排除。",
+        "content_after": "# 2024 主流大模型三维对比：证据不足，无法完成\n\n## 结论先行\n现有证据**不足以**支撑 GPT-4o、Claude 3.5、Gemini 1.5、Qwen2.5 在中文推理、代码生成、长上下文三维度的对比。四者中仅 Qwen2.5 系列有可引用的原始技术报告，其余三家的官方基准、上下文规格、架构细节均未取得原文。\n\n## 可支持的事实（仅 Qwen2.5 线）\n- **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）：0.5B–32B 六档，基于 Qwen2.5 架构，在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成/补全/推理/修复），宣称同规模 SOTA [s_8d9be8fd8248]。\n- **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）仅确认存在，摘要细节未取到 [s_6d87a35754c3]。\n\n## 证据缺口（逐项）\n- **GPT-4o**：无正式技术报告；检索返回的是 NLPCC 中文隐喻生成论文 [s_7bb974b94611] 与四级作文页 [s_cdad4967f651]，与问题无关，未获任何基准分数。\n- **Claude 3.5 / Gemini 1.5**：未检索到官方 model card 或技术报告。虎嗅测评页正文被 WAF 脚本占据，无可读内容 [s_d42895bd5513]。\n- **中文推理（C-Eval/CMMLU）**：四模型分数全部缺失。\n- **长上下文**：Claude 200K、Gemini 1M、GPT-4o 128K 等数值仅见于 2026 年聚合站/博客 [s_5cda1bca9019][s_0bb2ec1ac306]，属 later_publication，且混入 Gemini 3.5/Claude 4 等错版本，不可用于 2024 版本对比。\n- **架构路线**：MoE/GQA、RoPE 外推等无原始出处；仅二手博客列出 Qwen2.5-Coder 的 KV 头数等参数表 [s_0583dfaa9b80]，未经原文核实。\n\n## 技术路线差异\n仅能就 Qwen2.5-Coder 说明\"代码专用继续预训练 + 合成数据\"路线 [s_8d9be8fd8248]；其余三家路线差异**无证据**，不作推断。\n\n## 建议补证\n读取 arXiv:2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。\n\n**总体置信度：0.30**（仅 Qwen2.5-Coder 一条事实可靠，三维对比无法成立）\n\n**关键来源**：arXiv:2409.12186（唯一实质证据）；arXiv:2412.15115（仅存目）；其余检索结果不相关或为错版本二手内容，已排除。",
+        "before_version": "9c31d34f0be1956d87c0469f5d12cd8ebd375aee3728280ec76c43f187e93ef4",
+        "after_version": "9c31d34f0be1956d87c0469f5d12cd8ebd375aee3728280ec76c43f187e93ef4",
+        "score_before": 8.954545454545453,
+        "sources_after": [
+          {
+            "source_id": "s_7bb974b94611",
+            "url": "https://arxiv.org/abs/2408.04378",
+            "title": "[2408.04378] Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation – arxiv",
+            "snippet": "Computer Science > Computation and Language\narXiv:2408.04378\n(cs)\n[Submitted on 8 Aug 2024]\nTitle:\nOverview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors:\nXingwei Qu\nGe Zhang\nSiwei Wu\nYizhi Li\nChenghua Lin\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nAbstract:\nThis paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively \n\nthis shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that connects the subject (i.e. TENOR) with the object (i.e. VEHICLE), guided by the concept of the GROUND. 2) Metaphor Components Identification, which extracts the most fitting TENORs, GROUNDs, and VEHICLEs from a metaphorical sentence. T\n\n3 UTC (899 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-08\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers",
+            "task_id": "task_1",
+            "evidence_kind": "page_excerpt",
+            "published_at": "2024-08-08T00:00:00+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_cdad4967f651",
+            "url": "https://www.docin.com/p-4774280504.html",
+            "title": "2024年6月四级英语作文预测 - 豆丁网",
+            "snippet": "2024年6月四级英语作文预测 Theyear2024marksasignificantmilestonefortheCollegeEnglish Test(CET),astandardizedEnglishproficiencyexaminationwidely recognizedinChina.AstheCET-4approachesinJune,students acrossthecountryarediligentlypreparingthemselvestoshowcase theirlinguisticabilitiesandsecuretheiracademicandprofessional futures.Inthisessay,Iwilldelveintothekeyfactorsthatarelikelyto shapethe2024JuneCET-4essayprompt,providinginsightsintothe potentialthemes,skills,andstrategiesthatcandidatesshould consider. OneoftheprimaryfactorsthatofteninfluencestheCET-4essay topicistheprevailingsocial,economic,andculturaltrendsinChina. Giventhecountry'srapiddevelopmentanditsgrowingglobal influence,itisreasonabletoanticipatethatthe2024JuneCET-4 essaypromptmayrevolvearoundissuesrelatedtoChina's modernization,technological",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2024-12-01T03:42:09+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_8d9be8fd8248",
+            "url": "https://arxiv.org/abs/2409.12186",
+            "title": "[2409.12186] Qwen2.5-Coder Technical Report – arxiv",
+            "snippet": "Computer Science > Computation and Language\narXiv:2409.12186\n(cs)\n[Submitted on 18 Sep 2024 (\n), last revised 12 Nov 2024 (this version, v3)]\nTitle:\nQwen2.5-Coder Technical Report\nAuthors:\nBinyuan Hui\nJian Yang\nZeyu Cui\nJiaxi Yang\nDayiheng Liu\nLei Zhang\nTianyu Liu\nJiajun Zhang\nBowen Yu\nKeming Lu\nKai Dang\nYang Fan\nYichang Zhang\nAn Yang\nRui Men\nFei Huang\nBo Zheng\nYibo Miao\nShanghaoran Quan\nYunlong Feng\nXingzhang Ren\nXuancheng Ren\nJingren Zhou\nJunyang Lin\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nAbstract:\nIn this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQw\n\nis report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion tokens. Through meticulous data cleaning, scalable synthetic data generation, and balanced data mixing, Qwen2.5-Coder demonstrates impressive code generation capabilities while retaining general and math skills. These models have been evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code \n\ntasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair, consistently outperforming larger models of the same model size. We believe that the release of the Qwen2.5-Coder series will advance research in code intelligence and, with its permissive licensing, support wider adoption by developers in real-world applications.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2409.12186 [cs.CL]\n| (or arXiv:2409.12186v3 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2409.12186 Focus ",
+            "task_id": "task_1",
+            "evidence_kind": "page_excerpt",
+            "published_at": "2024-11-12T00:00:00+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_6d87a35754c3",
+            "url": "https://arxiv.org/abs/2412.15115",
+            "title": "[2412.15115] Qwen2.5 Technical Report – arxiv",
+            "snippet": "Computer Science > Computation and Language\narXiv:2412.15115(cs)\n[Submitted on 19 Dec 2024 (v1), last revised 3 Jan 2025 (this version, v2)]\nTitle: Qwen2.5 Technical Report\nAuthors: Qwen:An Yang,Baosong Yang,Beichen Zhang,Binyuan Hui,Bo Zheng,Bowen Yu,Chengyuan Li,Dayiheng Liu,Fei Huang,Haoran Wei,Huan Lin,Jian Yang,Jianhong Tu,Jianwei Zhang,Jianxin Yang,Jiaxi Yang,Jingren Zhou,Junyang Lin,Kai Dang,Keming Lu,Keqin Bao,Kexin Yang,Le Yu,Mei Li,Mingfeng Xue,Pei Zhang,Qin Zhu,Rui Men,Runji Lin,Tianhao Li,Tianyi Tang,Tingyu Xia,Xingzhang Ren,Xuancheng Ren,Yang Fan,Yang Su,Yichang Zhang,Yu Wan,Yuqiong Liu,Zeyu Cui,Zhenru Zhang,Zihan Qiu(additional authors not shown)\nAbstract: In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2025-01-03T00:00:00+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_82b27521f229",
+            "url": "https://blog.csdn.net/Code1994/article/details/144659882",
+            "title": "Qwen2.5 技术报告解读_qwq训练报告-CSDN博客",
+            "snippet": "版权声明:本文为博主原创文章,遵循CC 4.0 BY-SA版权协议,转载请附上原文出处链接和本声明。 技术报告:https//arxiv.org/abs/2412.15115Github 代码:https//github.com/QwenLM/Qwen2.5 0 Abstract Qwen2.5 一系列全面的 LLMs,旨在满足各种需求。 与之前的版本相比,Qwen2.5",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2024-12-27T01:39:02+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_441a9d6f0536",
+            "url": "https://www.cnblogs.com/cdyang/p/archive/2024/11/11",
+            "title": "2024 年11月11 日 随笔档案 - zion03 - 博客园",
+            "snippet": "摘要: Qwen2.5-Coder 是通义千问最新的代码语言模型,基于 Qwen2.5 的架构继续 pretrain 了5.5T 的token。通过细致的数据清洗、可扩展的合成数据生成和平衡的数据混合,Qwen2.5-Coder在展示令人印象深刻的代码生成能力的同时,还保留了通用的多功能性。本文根据官方 阅读全文",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2024-11-11T05:59:21+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_0583dfaa9b80",
+            "url": "https://histone.blog.csdn.net/article/details/143723386",
+            "title": "【默子带读】Qwen2.5 最近的开源王炸模型(代码生成)_qwen2.5 自动生成代码-CSDN博客",
+            "snippet": "点赞数 32 Qwen2.5-Coder的架构基于标准的 Transformer 模型参数 0.5B 1.5B 3B 7B 14B 32B 隐层大小 896 1536 2048 3584 5120 5120 层数 24 28 36 28 48 64 查询头数 14 12 16 28 40 40 KV 头数 2 2 2 4 8 8 中间层大小 4864 8960 4864 18944 13824 27648 词汇量 151646 151646 151646 151646 151646 151646",
+            "task_id": "task_1",
+            "evidence_kind": "search_summary",
+            "published_at": "2025-02-06T20:19:55+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_722f589cff8c",
+            "url": "https://www.jianshu.com/p/c3899e4791df",
+            "title": "双大模型协同创作实验:Claude 3.5角色建模与Gemini 1.5 Pro文笔润色深度测评 - 简书",
+            "snippet": "用大模型写小说或叙事文案时，不少创作者都会遇到这些烦心事：\n人设千人一面缺乏张力\n聊着聊着角色就“塌房”人设漂移\n文字修饰充满说教感和AI味\n长文叙事逻辑容易前后脱节\n反复调校单模型耗费大量算力与Token\n。为了解决这些痛点，我在\n猪猪AI（titiai.cn）\n上并发调度 Claude 3.5 Sonnet 与 Gemini 1.5 Pro，搭建了一套“Claude负责角色骨架 + Gemini负责文风润色”的双模型写作管线。经过20万字的实测，整理出这份兼具可读性与工程落地的测评总结。\n一、 模型分工实测与核心数据\n1. Claude 3.5 Sonnet：严谨的“人设建造师”\n在设定复杂背景与性格反差时，Claude 3.5 对 System Prompt 的遵从度极高。在 15 轮连续推演中，其\n人设稳定度达 93.6%\n，几乎不出现性格前后矛盾，逻辑严密性评分达\n9.4/10\n2. Gemini 1.5 Pro：细腻的“文字修辞师”\nGemini 依托超长上下文与海量语料，在文学细节描摹上优势明显。经它润色后，文本的\n词汇丰富度提升 28.4%\n，删除了大量“总而言之”、“值得注意的是”等高频 AI 套话，\nAI痕迹降低了 42.1%\n二、 单模型与双模型协同数据对比\n评测维度 | 单一 Claude 3.5 | 单一 Gemini 1.5 Pro | Claude + Gemini 协同管线\n角色人设保真度 (15轮) | 93.6% | 78.2% | 94.8%\n感官描写丰富度 | 76.4% | 88.5% | 91.2%\nAI模板化套话残留 | 21.3% | 14.2% | 8.5%（最低）\n长文本逻辑连贯度 | 9.4 | 8.1 | 9.2\n三、 实践 SOP 与适用场景\n落地 3 步骤：\n骨架生成（Claude）\n：锁定人设性格与行动逻辑，输出第一人称对话与核心剧情转折。\n结构化中转\n：提取对话原文与环境提示，避免前文无用杂音干扰。\n文笔润色（Gemini）\n：保持行为逻辑不变，补充环境视听与感官形容词，去除说教语气。\n场景推荐：\n游戏剧情与NPC对话\n：低成本维持多角色的鲜明性格与对话张力。\n网文与剧本创作\n：用 Claude 梳理转折大纲，交由 Gemini 补全环境与心理细节。\n品牌故事文案\n：兼顾说服逻辑与情绪拉满的叙事表现。\nFAQ 常见问题解答\nQ1：为什么不直接用一个模型写到底？\n答：模型有天然偏好。Claude 逻辑强但文字偏说明文风格，Gemini 描写细腻但长逻辑容易微偏。两者组合能取长补短。\nQ2：双模型串联会导致生成速度变慢吗？\n答：二次串行调用会增加 1.8~2.5 秒时延，对离线写作、剧本创作完全无影响；若做实时交互，可将润色环节设为后台异步处理。\nQ3：如何防止 Gemini 润色时把人设改走样？\n答：在提示词中加入强制约束：“禁止改变角色的态度、事实与逻辑因果关系，仅允许优化修辞与场景细节”。\n实测表明，“\nClaude 建骨架 + Gemini 润文笔\n”的双模型方案，能将人设保真度维持在 94% 以上，同时把 AI 味降至 8.5%。把“逻辑”与“文采”拆给最擅长的模型处理，是突破单 AI 能力瓶颈的实用解法。",
+            "task_id": "task_2",
+            "evidence_kind": "page_excerpt",
+            "published_at": "2026-08-19T17:51:41+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_cdf6c22d8ba4",
+            "url": "https://evomap.ai/bounty/cmd939e1638d3bce9d6fb4a15",
+            "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning? | EvoMap",
+            "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nView bounty details, signals, and matched solutions.\nTotal Reward 93 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nopen\nMulti-agent competition verified\n2026/2/14 18:42:58\nExpires 2026/2/28 18:42:58\n93 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,reasoning\nSubmitted Answers(0)",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-02-14T18:42:58+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_ea1b82e55361",
+            "url": "https://evomap.ai/bounty/cm993b06cbf6609a46ec6a935",
+            "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning? | EvoMap",
+            "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nView bounty details, signals, and matched solutions.\nTotal Reward 0 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nopen\nMulti-agent competition verified\n2026/2/20 18:42:58\nExpires 2026/3/1 18:42:58\n0 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,planning\nSubmitted Answers(0)",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-02-20T18:42:58+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_5cda1bca9019",
+            "url": "https://www.jianshu.com/p/a477d642d75e",
+            "title": "Gemini 3.5 相比 Claude 3.5 有哪些核心的竞争优势? - 简书",
+            "snippet": "随着大模型技术的快速迭代,开发者在选择底层大模型时,越来越看重实际业务场景下的投入产出比。谷歌发布的\nGemini\n3.5\n与\nAnthropic\n旗下的\nClaude\n3.5\n展开了正面交锋。为了快速验证这两个模型在多模态理解与长文本处理上的真实差异,许多技术团队选择通过\nAI\n模型聚合平台(如\nyingcaiai.com\n)进行多模型并行的压力测试与接口调用。那么,在这场强强对话中,Gemini\n3.5\n究竟凭借哪些核心竞争优势打破了现有的市场格局?Q:Gemini\n3.5\n相比\nClaude\n3.5\n的核心竞争优势在哪?在超大代码库解析、多模态任务与\nAPI\n报价上我们应该怎么选?A:1.\n分项结论(核心参数与报价清单)1\n上下文窗口规格:Gemini\n3.5\nPro\n支持最大\n2,000,000\n(2M)\ntokens\n的上下文窗口,是\nClaude\n3.5\nSonnet(200,000\ntokens)的\n10\n倍。2\nAPI\n调用报价表(128k\n限制内):Gemini\n3.5\nPro:输入\n$1.25\n/\nMillion\ntokens,输出\n$5.00\n/\nMillion\ntokens。Claude\n3.5\nSonnet:输入\n$3.00\n/\nMillion\ntokens,输出\n$15.00\n/\nMillion\ntokens。结论:Gemini\n3.5\nPro\n的基础调用成本仅为\nClaude\n3.5\n的\n40%\n左右。3\n原生视频解析能力:Gemini\n3.5\n支持直接读入长达\n2小时\n的高清视频并进行帧级语义检索,而\nClaude\n3.5\n目前主要依赖静态图片或文本\nPDF\n输入。2.\n优缺点区分(核心维度对比表)选型攻略与避坑指南警惕\nGemini\n3.5\n阶梯计费的“隐形成本”。避坑指南:虽然\nGemini\n3.5\n拥有\n2M\n窗口,但如果单次请求的\nC",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-07-01T16:07:03+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_d42895bd5513",
+            "url": "https://www.huxiu.com/article/3160222.html",
+            "title": "一手测评Claude 3.5,它真比GPT-4o强吗?-虎嗅网",
+            "snippet": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"36bc7b00eec2b0fe21bd58eea4ad841b\",\"traceid\":\"2f5e3b8017929366790084529e8e1a\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+            "task_id": "task_2",
+            "evidence_kind": "page_excerpt",
+            "published_at": "2024-06-21T20:03:00+08:00",
+            "scope_note": "title_not_obviously_mismatched"
+          },
+          {
+            "source_id": "s_0bb2ec1ac306",
+            "url": "https://juejin.cn/post/7635372611216080938",
+            "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+            "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持文本、图片、音频混合输入\n代码生成稳如老狗,复杂逻辑推理第一梯队\n128K上下文窗口,够用但不算最大\nAPI生态最完善:Function\nCalling、Structured\nOutputs、Assistants\nAPI\nClaude\nOpus\n4(Anthropic)\n长文本处理天花板,200K上下文窗口\n安全性(Safety)做得最严谨,几乎不会输出危险内容\n代码Review和文档生成质量极高\nArtifacts功能很实用,适合做内容生成类应用\nGemini\n2.5\nPro(Google)\n上下文窗口最大:1M\ntokens,一本《三体》全集放进去都没问题\n多模态和搜索整合是独家优势,能直接调Google\nSearch\n性价比极高,免费额度大方\n中文能力略逊于前两者,但差距已大幅缩小\n价格对比(2026年5月)\n模型输入/1M\ntokens输出/1M\ntokensGPT-4o$2.50$10.00Claude\nOpus\n4$3.00$15.00Gemini\n2.5\nPro$1.25$5.00\nGemini性价比碾压,但GPT-4o和Claude在特定场景有不可替代的优势。\n实战:同一段提示词,三个模型各自表现\n测试题目:用Python写一个并发调用多个API的异步函数,带重试和限流。\nGPT-4o:代码简洁优雅,用了asyncio.Semaphore做限流,异常处理完善。会主动加注释和类型注解。\nClaude\nOpus\n4:代码结构最清晰,错误处理最细致,甚至考虑了API密钥轮换场景。文档写得像教科书。\nGemini\n2.5\nPro:功能实现没问题,但代码风格比较朴实。给了",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-05-03T00:00:00+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          },
+          {
+            "source_id": "s_1a740a35f590",
+            "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+            "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+            "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限流、成本失控,任何一个问题都能让你的应用体验崩盘。本文从实际工程视角,对五大模型供应商进行横向对比,并给出多供应商路由策略。\n一、五大模型的能力矩阵\n1.1\n参与评测的模型版本(2026年7月)\n供应商评测模型上下文窗口输出上限多模态OpenAIGPT-4o\n(2026-06)256K64K\ntokens✅\n文本+图片+音频AnthropicClaude\n4\nSonnet200K16K\ntokens✅\n文本+图片GoogleGemini\n2.5\nPro2M64K\ntokens✅\n文本+图片+音频+视频AlibabaQwen3-Plus\n(2026-05)1M32K\ntokens✅\n文本+图片DeepSeekDeepSeek-V3.1128K32K\ntokens⚠️\n文本为主\n1.2\n五大能力维度评测\n采用内部评测集(代码生成200题、逻辑推理150题、中文创作100题、多语言翻译80题、数学推理120题),评分方式为:正确答案=3分,部分正确=2分,错误但思路合理=1分,完全错误=0分。\n能力维度GPT-4oClaude\n4\nSonnetGemini\n2.5\nProQwen3-PlusDeepSeek-V3.1代码生成92%94%89%87%91%逻辑推理91%90%87%83%88%中文创作78%76%72%91%89%多语言翻译85%88%86%82%78%数学推理88%85%90%82%90%综合得分86.8%86.6%84.8%85.0%87.2%\n核心发现:\n不存在绝对的\"最强模型\"。GPT-4o、Claude\n4\nSonnet、DeepSeek-V3.1的综合得分",
+            "task_id": "task_2",
+            "evidence_kind": "search_summary",
+            "published_at": "2026-07-29T11:40:38+08:00",
+            "scope_note": "later_publication_requires_date_check"
+          }
+        ],
+        "model_calls": 5,
+        "candidate_published": true
+      }
+    ],
+    "review_status": "completed"
+  },
+  "technical_checks": {
+    "report_completed": true,
+    "nonempty_report": true,
+    "sources_available": true,
+    "all_tasks_completed": true,
+    "no_execution_errors": true,
+    "review_completed": true
+  },
+  "technical_chain_success": true,
+  "events": [
+    {
+      "state": "planning",
+      "elapsed": 0.0
+    },
+    {
+      "state": "dispatching",
+      "elapsed": 3.578
+    },
+    {
+      "task_id": "task_1",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "task_id": "task_2",
+      "task_status": "success",
+      "failure_reason": null
+    },
+    {
+      "state": "collecting",
+      "elapsed": 17.719
+    },
+    {
+      "state": "synthesizing",
+      "elapsed": 17.719
+    },
+    {
+      "state": "adversarial",
+      "elapsed": 22.0
+    },
+    {
+      "state": "done",
+      "elapsed": 43.75
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "task_1",
+      "status": "success",
+      "output": "**检索结果摘要（置信度 0.45）**\n\n**已获得支持的事实：**\n\n1. **Qwen2.5-Coder 技术报告**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）\n   - 模型规模：0.5B/1.5B/3B/7B/14B/32B 六款，基于 Qwen2.5 架构\n   - 训练路线：在 **5.5 万亿 token** 代码语料上继续预训练；采用细致数据清洗、可扩展合成数据生成、平衡数据混合\n   - 评测：覆盖 10+ 代码基准（代码生成、补全、推理、修复），宣称 SOTA，同规模下优于更大模型\n   - 链接：https://arxiv.org/abs/2409.12186\n\n2. **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19，v2 2025-01-03）\n   - 仅确认存在，摘要细节未取到（搜索结果为摘要级）\n   - 链接：https://arxiv.org/abs/2412.15115\n\n**证据缺口（重要）：**\n- **GPT-4o**：OpenAI 未发布正式技术报告；首次搜索返回结果完全不相关（NLPCC 中文隐喻生成论文、CET-4 作文），未获得任何 GPT-4o 基准数据。\n- **Claude 3.5 Sonnet**：未检索（工具调用上限已用尽）。\n- **Gemini 1.5**：未检索；其长上下文（1M–10M token）与\"大海捞针\"评测数据未验证。\n- 中文推理专项基准（如 C-Eval、CMMLU）具体分数、各模型上下文窗口数值、架构细节（MoE/GQA 等）均未取得原始出处。\n- Qwen2.5 中文基准与长上下文（128K）数据未从原文确认。\n\n**建议后续**：直接读取 arxiv.org/abs/2412.15115 全文、anthropic.com Claude 3.5 Sonnet model card、deepmind.google Gemini 1.5 report PDF，以及 OpenAI GPT-4o System Card（2024-08-08）。",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_Hzw4ZUTSVQk3rQQdGEgC1590",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"GPT-4o technical report benchmark Chinese reasoning code generation long context\", \"top_n\": 5}"
+              }
+            },
+            {
+              "id": "call_01_fqP0n1tjdVEGsk601Dyq7625",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"Qwen2.5 technical report Chinese benchmark code generation arxiv\", \"top_n\": 5}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_Hzw4ZUTSVQk3rQQdGEgC1590",
+          "name": "web_search",
+          "result": {
+            "query": "GPT-4o technical report benchmark Chinese reasoning code generation long context 2024",
+            "results": [
+              {
+                "title": "[2408.04378] Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation – arxiv",
+                "url": "https://arxiv.org/abs/2408.04378",
+                "snippet": "Computer Science > Computation and Language\narXiv:2408.04378(cs)\n[Submitted on 8 Aug 2024]\nTitle: Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors: Xingwei Qu,Ge Zhang,Siwei Wu,Yizhi Li,Chenghua Lin\nAbstract: This paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that co",
+                "published_at": "2024-08-08T00:00:00+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "Computer Science > Computation and Language\narXiv:2408.04378\n(cs)\n[Submitted on 8 Aug 2024]\nTitle:\nOverview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors:\nXingwei Qu\nGe Zhang\nSiwei Wu\nYizhi Li\nChenghua Lin\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nAbstract:\nThis paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that connects the subject (i.e. TENOR) with the object (i.e. VEHICLE), guided by the concept of the GROUND. 2) Metaphor Components Identification, which extracts the most fitting TENORs, GROUNDs, and VEHICLEs from a metaphorical sentence. This component requires the identification of the most fitting metaphor elements that correspond to the specified grounds. In addition to overall results, we report on the setup and insights from the metaphor generation shared task, which attracted a total of 4 participating teams across both subtasks.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2408.04378 [cs.CL]\n| (or arXiv:2408.04378v1 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2408.04378 Focus to learn more arXiv-issued DOI via DataCite\nSubmission history\nFrom: Xingwei Qu [\nview email\n[v1]\nThu, 8 Aug 2024 11:29:43 UTC (899 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-08\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers?\nLitmaps Toggle\nLitmaps\nWhat is Litmaps?\nscite.ai Toggle\nscite Smart Citations\nWhat are Smart Citations?\nCode, Data, Media\nCode, Data and Media Associated with this Article\nalphaXiv Toggle\nalphaXiv\nWhat is alphaXiv?\nLinks to Code Toggle\nCatalyzeX Code Finder for Papers\nWhat is CatalyzeX?\nDagsHub Toggle\nDagsHub\nWhat is DagsHub?\nGotitPub Toggle\nGotit.pub\nWhat is GotitPub?\nHuggingface Toggle\nHugging Face\nWhat is Huggingface?\nScienceCast Toggle\nScienceCast\nWhat is ScienceCast?\nDemos\nDemos\nReplicate Toggle\nReplicate\nWhat is Replicate?\nSpaces Toggle\nHugging Face Spaces\nWhat is Spaces?\nSpaces Toggle\nTXYZ.AI\nWhat is TXYZ.AI?\nRelated Papers\nRecommenders and Search Tools\nLink to Influence Flower\nInfluence Flower\nWhat are Influence Flowers?\nCore recommender toggle\nCORE Recommender\nWhat is CORE?\nAuthor\nVenue\nInstitution\nTopic\nAbout arXivLabs\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community?\nLearn more about arXivLabs\nWhich authors of this paper are endorsers?\nDisable MathJax\nWhat is MathJax?",
+                "evidence_excerpt": "Computer Science > Computation and Language\narXiv:2408.04378\n(cs)\n[Submitted on 8 Aug 2024]\nTitle:\nOverview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation\nAuthors:\nXingwei Qu\nGe Zhang\nSiwei Wu\nYizhi Li\nChenghua Lin\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nAbstract:\nThis paper presents the results of the shared task on Chinese metaphor generation, hosted at the 13th CCF Conference on Natural Language Processing and Chinese Computing (NLPCC 2024). The goal of this shared task is to generate Chinese metaphors using machine learning techniques and effectively \n\nthis shared task is to generate Chinese metaphors using machine learning techniques and effectively identifying basic components of metaphorical sentences. It is divided into two subtasks: 1) Metaphor Generation, which involves creating a metaphor from a provided tuple consisting of TENOR, GROUND, and VEHICLE. The goal here is to synthesize a metaphor that connects the subject (i.e. TENOR) with the object (i.e. VEHICLE), guided by the concept of the GROUND. 2) Metaphor Components Identification, which extracts the most fitting TENORs, GROUNDs, and VEHICLEs from a metaphorical sentence. T\n\n3 UTC (899 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Overview of the NLPCC 2024 Shared Task on Chinese Metaphor Generation, by Xingwei Qu and 4 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-08\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers"
+              },
+              {
+                "title": "2024年6月四级英语作文预测 - 豆丁网",
+                "url": "https://www.docin.com/p-4774280504.html",
+                "snippet": "2024年6月四级英语作文预测 Theyear2024marksasignificantmilestonefortheCollegeEnglish Test(CET),astandardizedEnglishproficiencyexaminationwidely recognizedinChina.AstheCET-4approachesinJune,students acrossthecountryarediligentlypreparingthemselvestoshowcase theirlinguisticabilitiesandsecuretheiracademicandprofessional futures.Inthisessay,Iwilldelveintothekeyfactorsthatarelikelyto shapethe2024JuneCET-4essayprompt,providinginsightsintothe potentialthemes,skills,andstrategiesthatcandidatesshould consider. OneoftheprimaryfactorsthatofteninfluencestheCET-4essay topicistheprevailingsocial,economic,andculturaltrendsinChina. Giventhecountry'srapiddevelopmentanditsgrowingglobal influence,itisreasonabletoanticipatethatthe2024JuneCET-4 essaypromptmayrevolvearoundissuesrelatedtoChina's modernization,technological",
+                "published_at": "2024-12-01T03:42:09+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              }
+            ],
+            "total": 2,
+            "source": "bocha",
+            "rejected_results": [
+              {
+                "url": "https://36kr.com/newsflashes/2333555873930889",
+                "title": "报告:2024年中国将出现比肩GPT-4的多语言通用大模型-36氪",
+                "reason": "different_target_version_in_title"
+              },
+              {
+                "url": "https://www.sohu.com/a/695416675_115060",
+                "title": "报告:2024年中国将出现比肩GPT-4的多语言通用大模型_启明_创投_Context",
+                "reason": "different_target_version_in_title"
+              }
+            ],
+            "page_reads": [
+              {
+                "url": "https://arxiv.org/abs/2408.04378",
+                "status": "read",
+                "error": null,
+                "chars": 3935
+              }
+            ]
+          },
+          "arguments": {
+            "query": "GPT-4o technical report benchmark Chinese reasoning code generation long context",
+            "top_n": 5
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_fqP0n1tjdVEGsk601Dyq7625",
+          "name": "web_search",
+          "result": {
+            "query": "Qwen2.5 technical report Chinese benchmark code generation arxiv 2024",
+            "results": [
+              {
+                "title": "[2409.12186] Qwen2.5-Coder Technical Report – arxiv",
+                "url": "https://arxiv.org/abs/2409.12186",
+                "snippet": "Computer Science > Computation and Language\narXiv:2409.12186(cs)\n[Submitted on 18 Sep 2024 (v1), last revised 12 Nov 2024 (this version, v3)]\nTitle: Qwen2.5-Coder Technical Report\nAuthors: Binyuan Hui,Jian Yang,Zeyu Cui,Jiaxi Yang,Dayiheng Liu,Lei Zhang,Tianyu Liu,Jiajun Zhang,Bowen Yu,Keming Lu,Kai Dang,Yang Fan,Yichang Zhang,An Yang,Rui Men,Fei Huang,Bo Zheng,Yibo Miao,Shanghaoran Quan,Yunlong Feng,Xingzhang Ren,Xuancheng Ren,Jingren Zhou,Junyang Lin\nAbstract: In this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion",
+                "published_at": "2024-11-12T00:00:00+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": true,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "Computer Science > Computation and Language\narXiv:2409.12186\n(cs)\n[Submitted on 18 Sep 2024 (\n), last revised 12 Nov 2024 (this version, v3)]\nTitle:\nQwen2.5-Coder Technical Report\nAuthors:\nBinyuan Hui\nJian Yang\nZeyu Cui\nJiaxi Yang\nDayiheng Liu\nLei Zhang\nTianyu Liu\nJiajun Zhang\nBowen Yu\nKeming Lu\nKai Dang\nYang Fan\nYichang Zhang\nAn Yang\nRui Men\nFei Huang\nBo Zheng\nYibo Miao\nShanghaoran Quan\nYunlong Feng\nXingzhang Ren\nXuancheng Ren\nJingren Zhou\nJunyang Lin\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nAbstract:\nIn this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion tokens. Through meticulous data cleaning, scalable synthetic data generation, and balanced data mixing, Qwen2.5-Coder demonstrates impressive code generation capabilities while retaining general and math skills. These models have been evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair, consistently outperforming larger models of the same model size. We believe that the release of the Qwen2.5-Coder series will advance research in code intelligence and, with its permissive licensing, support wider adoption by developers in real-world applications.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2409.12186 [cs.CL]\n| (or arXiv:2409.12186v3 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2409.12186 Focus to learn more arXiv-issued DOI via DataCite\nSubmission history\nFrom: Binyuan Hui [\nview email\n[v1]\nWed, 18 Sep 2024 17:57:57 UTC (1,243 KB)\n[v2]\nMon, 11 Nov 2024 17:55:09 UTC (1,824 KB)\n[v3]\nTue, 12 Nov 2024 13:24:25 UTC (1,824 KB)\nFull-text links:\nAccess Paper:\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nTeX Source\nview license\nAdditional Features\nAudio Summary\nCurrent browse context:\ncs.CL\n< prev\nnext >\nrecent\n2024-09\nChange to browse by:\nReferences & Citations\nSciX\nGoogle Scholar\nSemantic Scholar\nexport BibTeX citation\nLoading...\nBibTeX formatted citation\nloading...\nData provided by:\nBookmark\nBibliographic Tools\nBibliographic and Citation Tools\nBibliographic Explorer Toggle\nBibliographic Explorer\nWhat is the Explorer?\nConnected Papers Toggle\nConnected Papers\nWhat is Connected Papers?\nLitmaps Toggle\nLitmaps\nWhat is Litmaps?\nscite.ai Toggle\nscite Smart Citations\nWhat are Smart Citations?\nCode, Data, Media\nCode, Data and Media Associated with this Article\nalphaXiv Toggle\nalphaXiv\nWhat is alphaXiv?\nLinks to Code Toggle\nCatalyzeX Code Finder for Papers\nWhat is CatalyzeX?\nDagsHub Toggle\nDagsHub\nWhat is DagsHub?\nGotitPub Toggle\nGotit.pub\nWhat is GotitPub?\nHuggingface Toggle\nHugging Face\nWhat is Huggingface?\nScienceCast Toggle\nScienceCast\nWhat is ScienceCast?\nDemos\nDemos\nReplicate Toggle\nReplicate\nWhat is Replicate?\nSpaces Toggle\nHugging Face Spaces\nWhat is Spaces?\nSpaces Toggle\nTXYZ.AI\nWhat is TXYZ.AI?\nRelated Papers\nRecommenders and Search Tools\nLink to Influence Flower\nInfluence Flower\nWhat are Influence Flowers?\nCore recommender toggle\nCORE Recommender\nWhat is CORE?\nAuthor\nVenue\nInstitution\nTopic\nAbout arXivLabs\narXivLabs: experimental projects with community collaborators\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\nHave an idea for a project that will add value for arXiv's community?\nLearn more about arXivLabs\nWhich authors of this paper are endorsers?\nDisable MathJax\nWhat is MathJax?",
+                "evidence_excerpt": "Computer Science > Computation and Language\narXiv:2409.12186\n(cs)\n[Submitted on 18 Sep 2024 (\n), last revised 12 Nov 2024 (this version, v3)]\nTitle:\nQwen2.5-Coder Technical Report\nAuthors:\nBinyuan Hui\nJian Yang\nZeyu Cui\nJiaxi Yang\nDayiheng Liu\nLei Zhang\nTianyu Liu\nJiajun Zhang\nBowen Yu\nKeming Lu\nKai Dang\nYang Fan\nYichang Zhang\nAn Yang\nRui Men\nFei Huang\nBo Zheng\nYibo Miao\nShanghaoran Quan\nYunlong Feng\nXingzhang Ren\nXuancheng Ren\nJingren Zhou\nJunyang Lin\nView a PDF of the paper titled Qwen2.5-Coder Technical Report, by Binyuan Hui and 23 other authors\nView PDF\nHTML (experimental)\nAbstract:\nIn this report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQw\n\nis report, we introduce the Qwen2.5-Coder series, a significant upgrade from its predecessor, CodeQwen1.5. This series includes six models: Qwen2.5-Coder-(0.5B/1.5B/3B/7B/14B/32B). As a code-specific model, Qwen2.5-Coder is built upon the Qwen2.5 architecture and continues pretrained on a vast corpus of over 5.5 trillion tokens. Through meticulous data cleaning, scalable synthetic data generation, and balanced data mixing, Qwen2.5-Coder demonstrates impressive code generation capabilities while retaining general and math skills. These models have been evaluated on a wide range of code-related tasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code \n\ntasks, achieving state-of-the-art (SOTA) performance across more than 10 benchmarks, including code generation, completion, reasoning, and repair, consistently outperforming larger models of the same model size. We believe that the release of the Qwen2.5-Coder series will advance research in code intelligence and, with its permissive licensing, support wider adoption by developers in real-world applications.\nSubjects: | Computation and Language (cs.CL)\nCite as: | arXiv:2409.12186 [cs.CL]\n| (or arXiv:2409.12186v3 [cs.CL] for this version)\n| https://doi.org/10.48550/arXiv.2409.12186 Focus "
+              },
+              {
+                "title": "[2412.15115] Qwen2.5 Technical Report – arxiv",
+                "url": "https://arxiv.org/abs/2412.15115",
+                "snippet": "Computer Science > Computation and Language\narXiv:2412.15115(cs)\n[Submitted on 19 Dec 2024 (v1), last revised 3 Jan 2025 (this version, v2)]\nTitle: Qwen2.5 Technical Report\nAuthors: Qwen:An Yang,Baosong Yang,Beichen Zhang,Binyuan Hui,Bo Zheng,Bowen Yu,Chengyuan Li,Dayiheng Liu,Fei Huang,Haoran Wei,Huan Lin,Jian Yang,Jianhong Tu,Jianwei Zhang,Jianxin Yang,Jiaxi Yang,Jingren Zhou,Junyang Lin,Kai Dang,Keming Lu,Keqin Bao,Kexin Yang,Le Yu,Mei Li,Mingfeng Xue,Pei Zhang,Qin Zhu,Rui Men,Runji Lin,Tianhao Li,Tianyi Tang,Tingyu Xia,Xingzhang Ren,Xuancheng Ren,Yang Fan,Yang Su,Yichang Zhang,Yu Wan,Yuqiong Liu,Zeyu Cui,Zhenru Zhang,Zihan Qiu(additional authors not shown)\nAbstract: In this report, we introduce Qwen2.5, a comprehensive series of large language models (LLMs) designed to meet divers",
+                "published_at": "2025-01-03T00:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": true,
+                "scope_note": "later_publication_requires_date_check"
+              },
+              {
+                "title": "Qwen2.5 技术报告解读_qwq训练报告-CSDN博客",
+                "url": "https://blog.csdn.net/Code1994/article/details/144659882",
+                "snippet": "版权声明:本文为博主原创文章,遵循CC 4.0 BY-SA版权协议,转载请附上原文出处链接和本声明。 技术报告:https//arxiv.org/abs/2412.15115Github 代码:https//github.com/QwenLM/Qwen2.5 0 Abstract Qwen2.5 一系列全面的 LLMs,旨在满足各种需求。 与之前的版本相比,Qwen2.5",
+                "published_at": "2024-12-27T01:39:02+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "2024 年11月11 日 随笔档案 - zion03 - 博客园",
+                "url": "https://www.cnblogs.com/cdyang/p/archive/2024/11/11",
+                "snippet": "摘要: Qwen2.5-Coder 是通义千问最新的代码语言模型,基于 Qwen2.5 的架构继续 pretrain 了5.5T 的token。通过细致的数据清洗、可扩展的合成数据生成和平衡的数据混合,Qwen2.5-Coder在展示令人印象深刻的代码生成能力的同时,还保留了通用的多功能性。本文根据官方 阅读全文",
+                "published_at": "2024-11-11T05:59:21+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched"
+              },
+              {
+                "title": "【默子带读】Qwen2.5 最近的开源王炸模型(代码生成)_qwen2.5 自动生成代码-CSDN博客",
+                "url": "https://histone.blog.csdn.net/article/details/143723386",
+                "snippet": "点赞数 32 Qwen2.5-Coder的架构基于标准的 Transformer 模型参数 0.5B 1.5B 3B 7B 14B 32B 隐层大小 896 1536 2048 3584 5120 5120 层数 24 28 36 28 48 64 查询头数 14 12 16 28 40 40 KV 头数 2 2 2 4 8 8 中间层大小 4864 8960 4864 18944 13824 27648 词汇量 151646 151646 151646 151646 151646 151646",
+                "published_at": "2025-02-06T20:19:55+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              }
+            ],
+            "total": 5,
+            "source": "bocha",
+            "rejected_results": [],
+            "page_reads": [
+              {
+                "url": "https://arxiv.org/abs/2409.12186",
+                "status": "read",
+                "error": null,
+                "chars": 4109
+              }
+            ]
+          },
+          "arguments": {
+            "query": "Qwen2.5 technical report Chinese benchmark code generation arxiv",
+            "top_n": 5
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "**检索结果摘要（置信度 0.45）**\n\n**已获得支持的事实：**\n\n1. **Qwen2.5-Coder 技术报告**（arXiv:2409.12186，v1 2024-09-18，v3 2024-11-12）\n   - 模型规模：0.5B/1.5B/3B/7B/14B/32B 六款，基于 Qwen2.5 架构\n   - 训练路线：在 **5.5 万亿 token** 代码语料上继续预训练；采用细致数据清洗、可扩展合成数据生成、平衡数据混合\n   - 评测：覆盖 10+ 代码基准（代码生成、补全、推理、修复），宣称 SOTA，同规模下优于更大模型\n   - 链接：https://arxiv.org/abs/2409.12186\n\n2. **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19，v2 2025-01-03）\n   - 仅确认存在，摘要细节未取到（搜索结果为摘要级）\n   - 链接：https://arxiv.org/abs/2412.15115\n\n**证据缺口（重要）：**\n- **GPT-4o**：OpenAI 未发布正式技术报告；首次搜索返回结果完全不相关（NLPCC 中文隐喻生成论文、CET-4 作文），未获得任何 GPT-4o 基准数据。\n- **Claude 3.5 Sonnet**：未检索（工具调用上限已用尽）。\n- **Gemini 1.5**：未检索；其长上下文（1M–10M token）与\"大海捞针\"评测数据未验证。\n- 中文推理专项基准（如 C-Eval、CMMLU）具体分数、各模型上下文窗口数值、架构细节（MoE/GQA 等）均未取得原始出处。\n- Qwen2.5 中文基准与长上下文（128K）数据未从原文确认。\n\n**建议后续**：直接读取 arxiv.org/abs/2412.15115 全文、anthropic.com Claude 3.5 Sonnet model card、deepmind.google Gemini 1.5 report PDF，以及 OpenAI GPT-4o System Card（2024-08-08）。",
+          "tool_calls": []
+        }
+      ]
+    },
+    {
+      "task_id": "task_2",
+      "status": "success",
+      "output": "**检索结论摘要（置信度 0.30）**\n\n**可支持的事实（有限）**\n1. **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18）：0.5B–32B 六档，基于 Qwen2.5 架构；在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成、补全、推理、修复），宣称同规模 SOTA。https://arxiv.org/abs/2409.12186\n2. **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）存在，但摘要细节未取到。\n3. **上下文窗口（第三方二手来源，非官方）**：Claude 3.5 Sonnet 200K；Gemini 1.5 Pro 1M（后续版本 2M）；GPT-4o 128K。来源为 2026 年聚合站/博客，属 later_publication，仅作参考。\n\n**证据缺口（关键）**\n- GPT-4o 无正式技术报告；未取得任何官方基准分数（MMLU/GPQA/MATH/HumanEval）。\n- Claude 3.5 Sonnet model card、Gemini 1.5 技术报告（1M–10M 上下文、needle-in-a-haystack >99%）均未验证。\n- **中文推理专项（C-Eval/CMMLU）四模型分数全部缺失**；Qwen2.5 中文基准与 128K 长上下文数据未从原文确认。\n- 架构细节（MoE/GQA、上下文扩展方法如 RoPE 外推/位置插值）无原始出处。\n- 本次搜索返回大量 2026 年\"Gemini 3.5/Claude 4\"等错版本内容与营销软文（简书/掘金），已排除，不可用于 2024 版本对比。\n\n**建议**：直接读取 arxiv 2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。当前不足以支撑可靠的三维对比分析。",
+      "trajectory": [
+        {
+          "turn": 0,
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "call_00_phHG04dn2s9GSzhYUDj37322",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"Gemini 1.5 Pro technical report 1M context needle in a haystack Claude 3.5 Sonnet model card context window 200K\", \"top_n\": 6}"
+              }
+            },
+            {
+              "id": "call_01_5YRVxoIEcquWrz0CnX8p6420",
+              "type": "function",
+              "function": {
+                "name": "web_search",
+                "arguments": "{\"query\": \"大模型 中文推理 代码生成 长上下文 对比 2024 GPT-4o Claude 3.5 Sonnet Gemini 1.5 Qwen2.5 C-Eval\", \"top_n\": 6}"
+              }
+            }
+          ]
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_00_phHG04dn2s9GSzhYUDj37322",
+          "name": "web_search",
+          "result": {
+            "query": "Gemini 1.5 Pro technical report 1M context needle in a haystack Claude 3.5 Sonnet model card context window 200K 2024",
+            "results": [
+              {
+                "title": "双大模型协同创作实验:Claude 3.5角色建模与Gemini 1.5 Pro文笔润色深度测评 - 简书",
+                "url": "https://www.jianshu.com/p/c3899e4791df",
+                "snippet": "用大模型写小说或叙事文案时,不少创作者都会遇到这些烦心事:人设千人一面缺乏张力、聊着聊着角色就“塌房”人设漂移、文字修饰充满说教感和AI味、长文叙事逻辑容易前后脱节,以及反复调校单模型耗费大量算力与Token。为了解决这些痛点,我在猪猪AI(titiai.cn)上并发调度\nClaude\n3.5\nSonnet\n与\nGemini\n1.5\nPro,搭建了一套“Claude负责角色骨架\n+\nGemini负责文风润色”的双模型写作管线。经过20万字的实测,整理出这份兼具可读性与工程落地的测评总结。\n一、\n模型分工实测与核心数据\n1.\nClaude\n3.5\nSonnet:严谨的“人设建造师”\n在设定复杂背景与性格反差时,Claude\n3.5\n对\nSystem\nPrompt\n的遵从度极高。在\n15\n轮连续推演中,其人设稳定度达\n93.6%,几乎不出现性格前后矛盾,逻辑严密性评分达\n9.4/10。\n2.\nGemini\n1.5\nPro:细腻的“文字修辞师”\nGemini\n依托超长上下文与海量语料,在文学细节描摹上优势明显。经它润色后,文本的词汇丰富度提升\n28.4%,删除了大量“总而言之”、“值得注意的是”等高频\nAI\n套话,AI痕迹降低了\n42.1%。\n二、\n单模型与双模型协同数据对比\n评测维度\n单一\nClaude\n3.5\n单一\nGemini\n1.5\nPro\nClaude\n+\nGemini\n协同管线\n角色人设保真度\n(15轮)\n93.6%\n78.2%\n94.8%\n感官描写丰富度\n76.4%\n88.5%\n91.2%\nAI模板化套话残留\n21.3%\n14.2%\n8.5%(最低)\n长文本逻辑连贯度\n9.4\n8.1\n9.2\n三、\n实践\nSOP\n与适用场景\n落地\n3\n步骤:\n骨架生成(Claude):锁定人设性格与行动逻辑,输出第一人称对话与核心剧情转折。\n结构化中转:提取对话原文与环境提示,避免前",
+                "published_at": "2026-08-19T17:51:41+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check",
+                "content": "用大模型写小说或叙事文案时，不少创作者都会遇到这些烦心事：\n人设千人一面缺乏张力\n聊着聊着角色就“塌房”人设漂移\n文字修饰充满说教感和AI味\n长文叙事逻辑容易前后脱节\n反复调校单模型耗费大量算力与Token\n。为了解决这些痛点，我在\n猪猪AI（titiai.cn）\n上并发调度 Claude 3.5 Sonnet 与 Gemini 1.5 Pro，搭建了一套“Claude负责角色骨架 + Gemini负责文风润色”的双模型写作管线。经过20万字的实测，整理出这份兼具可读性与工程落地的测评总结。\n一、 模型分工实测与核心数据\n1. Claude 3.5 Sonnet：严谨的“人设建造师”\n在设定复杂背景与性格反差时，Claude 3.5 对 System Prompt 的遵从度极高。在 15 轮连续推演中，其\n人设稳定度达 93.6%\n，几乎不出现性格前后矛盾，逻辑严密性评分达\n9.4/10\n2. Gemini 1.5 Pro：细腻的“文字修辞师”\nGemini 依托超长上下文与海量语料，在文学细节描摹上优势明显。经它润色后，文本的\n词汇丰富度提升 28.4%\n，删除了大量“总而言之”、“值得注意的是”等高频 AI 套话，\nAI痕迹降低了 42.1%\n二、 单模型与双模型协同数据对比\n评测维度 | 单一 Claude 3.5 | 单一 Gemini 1.5 Pro | Claude + Gemini 协同管线\n角色人设保真度 (15轮) | 93.6% | 78.2% | 94.8%\n感官描写丰富度 | 76.4% | 88.5% | 91.2%\nAI模板化套话残留 | 21.3% | 14.2% | 8.5%（最低）\n长文本逻辑连贯度 | 9.4 | 8.1 | 9.2\n三、 实践 SOP 与适用场景\n落地 3 步骤：\n骨架生成（Claude）\n：锁定人设性格与行动逻辑，输出第一人称对话与核心剧情转折。\n结构化中转\n：提取对话原文与环境提示，避免前文无用杂音干扰。\n文笔润色（Gemini）\n：保持行为逻辑不变，补充环境视听与感官形容词，去除说教语气。\n场景推荐：\n游戏剧情与NPC对话\n：低成本维持多角色的鲜明性格与对话张力。\n网文与剧本创作\n：用 Claude 梳理转折大纲，交由 Gemini 补全环境与心理细节。\n品牌故事文案\n：兼顾说服逻辑与情绪拉满的叙事表现。\nFAQ 常见问题解答\nQ1：为什么不直接用一个模型写到底？\n答：模型有天然偏好。Claude 逻辑强但文字偏说明文风格，Gemini 描写细腻但长逻辑容易微偏。两者组合能取长补短。\nQ2：双模型串联会导致生成速度变慢吗？\n答：二次串行调用会增加 1.8~2.5 秒时延，对离线写作、剧本创作完全无影响；若做实时交互，可将润色环节设为后台异步处理。\nQ3：如何防止 Gemini 润色时把人设改走样？\n答：在提示词中加入强制约束：“禁止改变角色的态度、事实与逻辑因果关系，仅允许优化修辞与场景细节”。\n实测表明，“\nClaude 建骨架 + Gemini 润文笔\n”的双模型方案，能将人设保真度维持在 94% 以上，同时把 AI 味降至 8.5%。把“逻辑”与“文采”拆给最擅长的模型处理，是突破单 AI 能力瓶颈的实用解法。",
+                "evidence_excerpt": "用大模型写小说或叙事文案时，不少创作者都会遇到这些烦心事：\n人设千人一面缺乏张力\n聊着聊着角色就“塌房”人设漂移\n文字修饰充满说教感和AI味\n长文叙事逻辑容易前后脱节\n反复调校单模型耗费大量算力与Token\n。为了解决这些痛点，我在\n猪猪AI（titiai.cn）\n上并发调度 Claude 3.5 Sonnet 与 Gemini 1.5 Pro，搭建了一套“Claude负责角色骨架 + Gemini负责文风润色”的双模型写作管线。经过20万字的实测，整理出这份兼具可读性与工程落地的测评总结。\n一、 模型分工实测与核心数据\n1. Claude 3.5 Sonnet：严谨的“人设建造师”\n在设定复杂背景与性格反差时，Claude 3.5 对 System Prompt 的遵从度极高。在 15 轮连续推演中，其\n人设稳定度达 93.6%\n，几乎不出现性格前后矛盾，逻辑严密性评分达\n9.4/10\n2. Gemini 1.5 Pro：细腻的“文字修辞师”\nGemini 依托超长上下文与海量语料，在文学细节描摹上优势明显。经它润色后，文本的\n词汇丰富度提升 28.4%\n，删除了大量“总而言之”、“值得注意的是”等高频 AI 套话，\nAI痕迹降低了 42.1%\n二、 单模型与双模型协同数据对比\n评测维度 | 单一 Claude 3.5 | 单一 Gemini 1.5 Pro | Claude + Gemini 协同管线\n角色人设保真度 (15轮) | 93.6% | 78.2% | 94.8%\n感官描写丰富度 | 76.4% | 88.5% | 91.2%\nAI模板化套话残留 | 21.3% | 14.2% | 8.5%（最低）\n长文本逻辑连贯度 | 9.4 | 8.1 | 9.2\n三、 实践 SOP 与适用场景\n落地 3 步骤：\n骨架生成（Claude）\n：锁定人设性格与行动逻辑，输出第一人称对话与核心剧情转折。\n结构化中转\n：提取对话原文与环境提示，避免前文无用杂音干扰。\n文笔润色（Gemini）\n：保持行为逻辑不变，补充环境视听与感官形容词，去除说教语气。\n场景推荐：\n游戏剧情与NPC对话\n：低成本维持多角色的鲜明性格与对话张力。\n网文与剧本创作\n：用 Claude 梳理转折大纲，交由 Gemini 补全环境与心理细节。\n品牌故事文案\n：兼顾说服逻辑与情绪拉满的叙事表现。\nFAQ 常见问题解答\nQ1：为什么不直接用一个模型写到底？\n答：模型有天然偏好。Claude 逻辑强但文字偏说明文风格，Gemini 描写细腻但长逻辑容易微偏。两者组合能取长补短。\nQ2：双模型串联会导致生成速度变慢吗？\n答：二次串行调用会增加 1.8~2.5 秒时延，对离线写作、剧本创作完全无影响；若做实时交互，可将润色环节设为后台异步处理。\nQ3：如何防止 Gemini 润色时把人设改走样？\n答：在提示词中加入强制约束：“禁止改变角色的态度、事实与逻辑因果关系，仅允许优化修辞与场景细节”。\n实测表明，“\nClaude 建骨架 + Gemini 润文笔\n”的双模型方案，能将人设保真度维持在 94% 以上，同时把 AI 味降至 8.5%。把“逻辑”与“文采”拆给最擅长的模型处理，是突破单 AI 能力瓶颈的实用解法。"
+              },
+              {
+                "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning? | EvoMap",
+                "url": "https://evomap.ai/bounty/cmd939e1638d3bce9d6fb4a15",
+                "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nView bounty details, signals, and matched solutions.\nTotal Reward 93 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on reasoning?\nopen\nMulti-agent competition verified\n2026/2/14 18:42:58\nExpires 2026/2/28 18:42:58\n93 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,reasoning\nSubmitted Answers(0)",
+                "published_at": "2026-02-14T18:42:58+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              },
+              {
+                "title": "What are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning? | EvoMap",
+                "url": "https://evomap.ai/bounty/cm993b06cbf6609a46ec6a935",
+                "snippet": "Bounty Detail\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nView bounty details, signals, and matched solutions.\nTotal Reward 0 credits\nStatus open Waiting for solution\nSignals 4 Matching keywords\nWhat are the performance benchmarks for Gemini 2.0 Pro vs Claude 3.5 Sonnet on planning?\nopen\nMulti-agent competition verified\n2026/2/20 18:42:58\nExpires 2026/3/1 18:42:58\n0 credits\nSignals benchmarks,gemini_2_0_pro,claude_3_5_sonnet,planning\nSubmitted Answers(0)",
+                "published_at": "2026-02-20T18:42:58+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              },
+              {
+                "title": "Gemini 3.5 相比 Claude 3.5 有哪些核心的竞争优势? - 简书",
+                "url": "https://www.jianshu.com/p/a477d642d75e",
+                "snippet": "随着大模型技术的快速迭代,开发者在选择底层大模型时,越来越看重实际业务场景下的投入产出比。谷歌发布的\nGemini\n3.5\n与\nAnthropic\n旗下的\nClaude\n3.5\n展开了正面交锋。为了快速验证这两个模型在多模态理解与长文本处理上的真实差异,许多技术团队选择通过\nAI\n模型聚合平台(如\nyingcaiai.com\n)进行多模型并行的压力测试与接口调用。那么,在这场强强对话中,Gemini\n3.5\n究竟凭借哪些核心竞争优势打破了现有的市场格局?Q:Gemini\n3.5\n相比\nClaude\n3.5\n的核心竞争优势在哪?在超大代码库解析、多模态任务与\nAPI\n报价上我们应该怎么选?A:1.\n分项结论(核心参数与报价清单)1\n上下文窗口规格:Gemini\n3.5\nPro\n支持最大\n2,000,000\n(2M)\ntokens\n的上下文窗口,是\nClaude\n3.5\nSonnet(200,000\ntokens)的\n10\n倍。2\nAPI\n调用报价表(128k\n限制内):Gemini\n3.5\nPro:输入\n$1.25\n/\nMillion\ntokens,输出\n$5.00\n/\nMillion\ntokens。Claude\n3.5\nSonnet:输入\n$3.00\n/\nMillion\ntokens,输出\n$15.00\n/\nMillion\ntokens。结论:Gemini\n3.5\nPro\n的基础调用成本仅为\nClaude\n3.5\n的\n40%\n左右。3\n原生视频解析能力:Gemini\n3.5\n支持直接读入长达\n2小时\n的高清视频并进行帧级语义检索,而\nClaude\n3.5\n目前主要依赖静态图片或文本\nPDF\n输入。2.\n优缺点区分(核心维度对比表)选型攻略与避坑指南警惕\nGemini\n3.5\n阶梯计费的“隐形成本”。避坑指南:虽然\nGemini\n3.5\n拥有\n2M\n窗口,但如果单次请求的\nC",
+                "published_at": "2026-07-01T16:07:03+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              }
+            ],
+            "total": 4,
+            "source": "bocha",
+            "rejected_results": [
+              {
+                "url": "https://blog.csdn.net/2601_96178994/article/details/161447683",
+                "title": "Gemini3.5指代消解评测新范式-CSDN博客",
+                "reason": "different_target_version_in_title"
+              },
+              {
+                "url": "https://www.ithome.com/0/973/334.htm",
+                "title": "谷歌 Gemini 3.5 Pro 曝 200 万 Tokens 上下文,前端部分 AI 测试赶超 Claude Fable 5 - IT之家",
+                "reason": "different_target_version_in_title"
+              }
+            ],
+            "page_reads": [
+              {
+                "url": "https://www.jianshu.com/p/c3899e4791df",
+                "status": "read",
+                "error": null,
+                "chars": 1362
+              }
+            ]
+          },
+          "arguments": {
+            "query": "Gemini 1.5 Pro technical report 1M context needle in a haystack Claude 3.5 Sonnet model card context window 200K",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 0,
+          "role": "tool",
+          "tool_call_id": "call_01_5YRVxoIEcquWrz0CnX8p6420",
+          "name": "web_search",
+          "result": {
+            "query": "大模型 中文推理 代码生成 长上下文 对比 2024 GPT-4o Claude 3.5 Sonnet Gemini 1.5 Qwen2.5 C-Eval",
+            "results": [
+              {
+                "title": "一手测评Claude 3.5,它真比GPT-4o强吗?-虎嗅网",
+                "url": "https://www.huxiu.com/article/3160222.html",
+                "snippet": "•  Claude 3.5 Sonnet和GPT-4o在网络热梗和数学题方面表现出色 •  Claude 3.5 Sonnet对年龄推断更为精准 •  两个大模型在解读名画方面能力相当 它来了,它来了,它带着 Claude 3.5 Sonnet 来了! 蛰伏三个月,就在昨晚,OpenAI 的“劲敌”Anthropic 上新了,推出新一代模型 ——Claude 3.5 Sonnet。",
+                "published_at": "2024-06-21T20:03:00+08:00",
+                "evidence_kind": "page_excerpt",
+                "preferred_domain": false,
+                "scope_note": "title_not_obviously_mismatched",
+                "content": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"36bc7b00eec2b0fe21bd58eea4ad841b\",\"traceid\":\"2f5e3b8017929366790084529e8e1a\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};",
+                "evidence_excerpt": "appkey: \"CF_APP_WAF\", // 应用标识var AC_Opt = {userUserId: requestInfo.userUserId\nvar requestInfo = {\"data\":\"\",\"region\":\"cn\",\"sceneId\":\"19x5u7lo\",\"token\":\"36bc7b00eec2b0fe21bd58eea4ad841b\",\"traceid\":\"2f5e3b8017929366790084529e8e1a\",\"type\":\"GET\",\"userId\":\"HpadJlQnz2zSKcSmjXBaqQvjYUvP4jMJIk/ZwGNDNiM=\",\"userUserId\":\"z2sSI1lCSPT4LVQYDAFLOSh5Pu7mTIHsG0EpLm16bEw=\"};"
+              },
+              {
+                "title": "2026年主流大模型API横评:GPT-4o vs Claude Opus 4 vs Gemini 2.5 Pro - 掘金",
+                "url": "https://juejin.cn/post/7635372611216080938",
+                "snippet": "作为开发者,选对大模型API直接影响项目效果和成本。2026年了,市面上主流模型到底怎么选?我实际测了一圈,下面从开发者视角做个对比。\n模型能力对比\nGPT-4o(OpenAI)\n多模态能力最强,支持文本、图片、音频混合输入\n代码生成稳如老狗,复杂逻辑推理第一梯队\n128K上下文窗口,够用但不算最大\nAPI生态最完善:Function\nCalling、Structured\nOutputs、Assistants\nAPI\nClaude\nOpus\n4(Anthropic)\n长文本处理天花板,200K上下文窗口\n安全性(Safety)做得最严谨,几乎不会输出危险内容\n代码Review和文档生成质量极高\nArtifacts功能很实用,适合做内容生成类应用\nGemini\n2.5\nPro(Google)\n上下文窗口最大:1M\ntokens,一本《三体》全集放进去都没问题\n多模态和搜索整合是独家优势,能直接调Google\nSearch\n性价比极高,免费额度大方\n中文能力略逊于前两者,但差距已大幅缩小\n价格对比(2026年5月)\n模型输入/1M\ntokens输出/1M\ntokensGPT-4o$2.50$10.00Claude\nOpus\n4$3.00$15.00Gemini\n2.5\nPro$1.25$5.00\nGemini性价比碾压,但GPT-4o和Claude在特定场景有不可替代的优势。\n实战:同一段提示词,三个模型各自表现\n测试题目:用Python写一个并发调用多个API的异步函数,带重试和限流。\nGPT-4o:代码简洁优雅,用了asyncio.Semaphore做限流,异常处理完善。会主动加注释和类型注解。\nClaude\nOpus\n4:代码结构最清晰,错误处理最细致,甚至考虑了API密钥轮换场景。文档写得像教科书。\nGemini\n2.5\nPro:功能实现没问题,但代码风格比较朴实。给了",
+                "published_at": "2026-05-03T00:00:00+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              },
+              {
+                "title": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本-CSDN博客",
+                "url": "https://blog.csdn.net/dicky_zhang3/article/details/163299593",
+                "snippet": "大模型API供应商横向评测:GPT、Claude、Gemini、Qwen与DeepSeek的性能与成本\n选模型供应商不能只看榜单排名——那是在理想条件下的\"实验室成绩\"。生产环境中,延迟抖动、API限流、成本失控,任何一个问题都能让你的应用体验崩盘。本文从实际工程视角,对五大模型供应商进行横向对比,并给出多供应商路由策略。\n一、五大模型的能力矩阵\n1.1\n参与评测的模型版本(2026年7月)\n供应商评测模型上下文窗口输出上限多模态OpenAIGPT-4o\n(2026-06)256K64K\ntokens✅\n文本+图片+音频AnthropicClaude\n4\nSonnet200K16K\ntokens✅\n文本+图片GoogleGemini\n2.5\nPro2M64K\ntokens✅\n文本+图片+音频+视频AlibabaQwen3-Plus\n(2026-05)1M32K\ntokens✅\n文本+图片DeepSeekDeepSeek-V3.1128K32K\ntokens⚠️\n文本为主\n1.2\n五大能力维度评测\n采用内部评测集(代码生成200题、逻辑推理150题、中文创作100题、多语言翻译80题、数学推理120题),评分方式为:正确答案=3分,部分正确=2分,错误但思路合理=1分,完全错误=0分。\n能力维度GPT-4oClaude\n4\nSonnetGemini\n2.5\nProQwen3-PlusDeepSeek-V3.1代码生成92%94%89%87%91%逻辑推理91%90%87%83%88%中文创作78%76%72%91%89%多语言翻译85%88%86%82%78%数学推理88%85%90%82%90%综合得分86.8%86.6%84.8%85.0%87.2%\n核心发现:\n不存在绝对的\"最强模型\"。GPT-4o、Claude\n4\nSonnet、DeepSeek-V3.1的综合得分",
+                "published_at": "2026-07-29T11:40:38+08:00",
+                "evidence_kind": "search_summary",
+                "preferred_domain": false,
+                "scope_note": "later_publication_requires_date_check"
+              }
+            ],
+            "total": 3,
+            "source": "bocha",
+            "rejected_results": [
+              {
+                "url": "https://www.sohu.com/a/904084742_121757514",
+                "title": "中文大模型基准测评2025年5月报告-SuperCLUE_推理_-mini_Qwen",
+                "reason": "later_year_without_target_version_in_title"
+              },
+              {
+                "url": "https://www.sohu.com/a/873515768_121856455",
+                "title": "SuperCLUE:中文大模型基准测评2025年3月报告—2025中文大模型阶段性进展3月评估_推理_DeepSeek-R_任务",
+                "reason": "later_year_without_target_version_in_title"
+              },
+              {
+                "url": "https://blog.csdn.net/AI147AI/article/details/160114653",
+                "title": "2026年最新 Claude、GPT、Gemini 场景选型对比表-CSDN博客",
+                "reason": "later_year_without_target_version_in_title"
+              }
+            ],
+            "page_reads": [
+              {
+                "url": "https://www.huxiu.com/article/3160222.html",
+                "status": "read",
+                "error": null,
+                "chars": 358
+              }
+            ]
+          },
+          "arguments": {
+            "query": "大模型 中文推理 代码生成 长上下文 对比 2024 GPT-4o Claude 3.5 Sonnet Gemini 1.5 Qwen2.5 C-Eval",
+            "top_n": 6
+          }
+        },
+        {
+          "turn": 1,
+          "role": "assistant",
+          "content": "**检索结论摘要（置信度 0.30）**\n\n**可支持的事实（有限）**\n1. **Qwen2.5-Coder**（arXiv:2409.12186，v1 2024-09-18）：0.5B–32B 六档，基于 Qwen2.5 架构；在 **5.5 万亿 token** 代码语料上继续预训练，采用数据清洗、可扩展合成数据、平衡数据混合；覆盖 10+ 代码基准（生成、补全、推理、修复），宣称同规模 SOTA。https://arxiv.org/abs/2409.12186\n2. **Qwen2.5 技术报告**（arXiv:2412.15115，v1 2024-12-19）存在，但摘要细节未取到。\n3. **上下文窗口（第三方二手来源，非官方）**：Claude 3.5 Sonnet 200K；Gemini 1.5 Pro 1M（后续版本 2M）；GPT-4o 128K。来源为 2026 年聚合站/博客，属 later_publication，仅作参考。\n\n**证据缺口（关键）**\n- GPT-4o 无正式技术报告；未取得任何官方基准分数（MMLU/GPQA/MATH/HumanEval）。\n- Claude 3.5 Sonnet model card、Gemini 1.5 技术报告（1M–10M 上下文、needle-in-a-haystack >99%）均未验证。\n- **中文推理专项（C-Eval/CMMLU）四模型分数全部缺失**；Qwen2.5 中文基准与 128K 长上下文数据未从原文确认。\n- 架构细节（MoE/GQA、上下文扩展方法如 RoPE 外推/位置插值）无原始出处。\n- 本次搜索返回大量 2026 年\"Gemini 3.5/Claude 4\"等错版本内容与营销软文（简书/掘金），已排除，不可用于 2024 版本对比。\n\n**建议**：直接读取 arxiv 2412.15115 全文、Anthropic Claude 3.5 Sonnet model card、Gemini 1.5 report PDF、OpenAI GPT-4o System Card（2024-08-08）及 SuperCLUE 2024 中文榜原始报告。当前不足以支撑可靠的三维对比分析。",
+          "tool_calls": []
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 49.84399999999732,
+  "model_calls": [
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 450,
+        "prompt_tokens": 754,
+        "total_tokens": 1204,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 754
+      },
+      "elapsed_seconds": 3.562000000005355,
+      "finish_reason": "stop",
+      "content_chars": 1408,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 123,
+        "prompt_tokens": 1435,
+        "total_tokens": 1558,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 539
+      },
+      "elapsed_seconds": 1.25,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 510,
+        "prompt_tokens": 7187,
+        "total_tokens": 7697,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 1536
+        },
+        "prompt_cache_hit_tokens": 1536,
+        "prompt_cache_miss_tokens": 5651
+      },
+      "elapsed_seconds": 3.4530000000013388,
+      "finish_reason": "stop",
+      "content_chars": 924,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 169,
+        "prompt_tokens": 1902,
+        "total_tokens": 2071,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 1006
+      },
+      "elapsed_seconds": 1.125,
+      "finish_reason": "tool_calls",
+      "content_chars": 0,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 529,
+        "prompt_tokens": 7994,
+        "total_tokens": 8523,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 2048
+        },
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 5946
+      },
+      "elapsed_seconds": 5.312999999994645,
+      "finish_reason": "stop",
+      "content_chars": 955,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 774,
+        "prompt_tokens": 7033,
+        "total_tokens": 7807,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7033
+      },
+      "elapsed_seconds": 4.280999999995402,
+      "finish_reason": "stop",
+      "content_chars": 1344,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1266,
+        "prompt_tokens": 4716,
+        "total_tokens": 5982,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4460
+      },
+      "elapsed_seconds": 5.609000000004016,
+      "finish_reason": "stop",
+      "content_chars": 2746,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 988,
+        "prompt_tokens": 4675,
+        "total_tokens": 5663,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 4419
+      },
+      "elapsed_seconds": 5.0939999999973224,
+      "finish_reason": "stop",
+      "content_chars": 2272,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 818,
+        "prompt_tokens": 4548,
+        "total_tokens": 5366,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4548
+      },
+      "elapsed_seconds": 3.2810000000026776,
+      "finish_reason": "stop",
+      "content_chars": 1412,
+      "max_tokens": 4096
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 1091,
+        "prompt_tokens": 4716,
+        "total_tokens": 5807,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 236
+      },
+      "elapsed_seconds": 4.703000000001339,
+      "finish_reason": "stop",
+      "content_chars": 2355,
+      "max_tokens": 2048
+    },
+    {
+      "model": "deepseek-v4-flash",
+      "status": "completed",
+      "usage": {
+        "completion_tokens": 581,
+        "prompt_tokens": 4675,
+        "total_tokens": 5256,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cache_write_tokens": null,
+          "cached_tokens": 4480
+        },
+        "prompt_cache_hit_tokens": 4480,
+        "prompt_cache_miss_tokens": 195
+      },
+      "elapsed_seconds": 3.062999999994645,
+      "finish_reason": "stop",
+      "content_chars": 1508,
+      "max_tokens": 2048
+    }
+  ],
+  "tool_calls": [
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "GPT-4o technical report benchmark Chinese reasoning code generation long context 2024",
+        "top_n": 5
+      },
+      "elapsed_seconds": 0.35899999999674037
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://arxiv.org/abs/2408.04378",
+        "max_chars": 8000,
+        "query": "GPT-4o technical report benchmark Chinese reasoning code generation long context 2024"
+      },
+      "elapsed_seconds": 0.5310000000026776
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "Qwen2.5 technical report Chinese benchmark code generation arxiv 2024",
+        "top_n": 5
+      },
+      "elapsed_seconds": 0.18800000000192085
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://arxiv.org/abs/2409.12186",
+        "max_chars": 8000,
+        "query": "Qwen2.5 technical report Chinese benchmark code generation arxiv 2024"
+      },
+      "elapsed_seconds": 0.4529999999940628
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "Gemini 1.5 Pro technical report 1M context needle in a haystack Claude 3.5 Sonnet model card context window 200K 2024",
+        "top_n": 6
+      },
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://www.jianshu.com/p/c3899e4791df",
+        "max_chars": 8000,
+        "query": "Gemini 1.5 Pro technical report 1M context needle in a haystack Claude 3.5 Sonnet model card context window 200K 2024"
+      },
+      "elapsed_seconds": 0.625
+    },
+    {
+      "tool": "web_search",
+      "status": "completed",
+      "input": {
+        "query": "大模型 中文推理 代码生成 长上下文 对比 2024 GPT-4o Claude 3.5 Sonnet Gemini 1.5 Qwen2.5 C-Eval",
+        "top_n": 6
+      },
+      "elapsed_seconds": 0.17199999999866122
+    },
+    {
+      "tool": "browser",
+      "status": "completed",
+      "input": {
+        "url": "https://www.huxiu.com/article/3160222.html",
+        "max_chars": 8000,
+        "query": "大模型 中文推理 代码生成 长上下文 对比 2024 GPT-4o Claude 3.5 Sonnet Gemini 1.5 Qwen2.5 C-Eval"
+      },
+      "elapsed_seconds": 0.2960000000020955
+    }
+  ],
+  "source_fingerprint": "42235c170999d76b3336973857221a72cd3ed09c149bfc0ac2ee451b5611d5f8"
+}
