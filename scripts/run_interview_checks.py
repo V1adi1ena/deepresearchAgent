@@ -78,11 +78,12 @@ def main():
     parser.add_argument("--count", type=int, default=5, help="Real-chain checks (existing queries)")
     parser.add_argument("--compare", type=int, default=3, help="Existing queries compared against fixed retrieval")
     parser.add_argument("--timeout", type=float, default=90)
+    parser.add_argument("--max-tasks", type=int, default=2, help="Maximum research subtasks per query")
     parser.add_argument("--question-id", help="Run only this existing benchmark question (for targeted reruns)")
     parser.add_argument("--output", type=Path, default=ROOT / "docs/runs")
     args = parser.parse_args()
-    if args.count < 1 or args.compare < 0 or args.timeout <= 0:
-        parser.error("count/timeout must be positive; compare must be nonnegative")
+    if args.count < 1 or args.compare < 0 or args.timeout <= 0 or args.max_tasks < 1:
+        parser.error("count/timeout/max-tasks must be positive; compare must be nonnegative")
     run_dir = args.output.resolve() / (time.strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:8])
     run_dir.mkdir(parents=True)
     base = load_config()
@@ -96,10 +97,11 @@ def main():
         for name, tokens in (("default", 4096), ("planner", 2048), ("solver", 2048),
                              ("summarizer", 4096), ("red_agent", 2048),
                              ("blue_agent", 4096), ("compressor", 2048))}}
+    base["model"]["backend_sampling"]["modules"]["planner"]["max_tokens"] = max(2048, args.max_tasks * 1024)
     base.setdefault("tools", {}).update(allowed=["web_search", "browser"])
     base["tools"].setdefault("web_search", {})["mock_mode"] = False
     base.setdefault("orchestrator", {}).update(global_timeout_seconds=args.timeout, max_concurrent=2,
-        max_sub_questions=2, max_replan_rounds=0, max_subagent_retries=0)
+        max_sub_questions=args.max_tasks, max_replan_rounds=0, max_subagent_retries=0)
     base.setdefault("adversarial", {}).update(enabled=not args.smoke, max_rounds=1, max_model_calls=12,
                                              max_fixes_per_round=1)
     base.setdefault("memory", {})["enabled"] = not args.smoke
@@ -149,7 +151,7 @@ def main():
             started = time.monotonic()
             record = {"question_id": question["id"], "query": question["query"], "system": system,
                 "model_backend": backend, "sampling": cfg["model"]["backend_sampling"],
-                "timeout": args.timeout, "max_sub_questions": 2,
+                "timeout": args.timeout, "max_sub_questions": args.max_tasks,
                 "adversarial_config": cfg["adversarial"],
                 "runtime": {"executable": sys.executable, "python_version": sys.version.split()[0]},
                 "quality_review": {"answers_question": None, "citations_support_claims": None}}
