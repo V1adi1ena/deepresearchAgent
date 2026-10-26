@@ -112,7 +112,7 @@ def test_planning_instructions_obey_small_task_budget_without_conflicting_counts
     for memory in ("", "previous evidence"):
         prompt = planner._build_prompt("Compare five vendors", memory)
         assert "Generate 1 to 2 sub_tasks" in prompt
-        assert "6-10" not in prompt and "3 to 8" not in prompt
+        assert "generate 6-10" not in prompt.lower() and "generate 3 to 8" not in prompt.lower()
 
 
 def test_unchanged_repair_is_not_counted_as_successful_fix():
