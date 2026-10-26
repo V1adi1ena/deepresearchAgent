@@ -21,6 +21,7 @@ import time
 from datetime import date
 from typing import Any
 from ..utils.retrieval import filter_search_results, evidence_excerpt
+from ..utils.sources import extract_sources
 from ..utils.async_call import request_deadline
 
 from .base_agent import BaseAgent
@@ -77,7 +78,7 @@ class ResearcherAgent(BaseAgent):
         retrieval = {"scope": context.get("query") or task.description,
                      "hints": task.search_hints + ["site:" + d for d in task.preferred_domains],
                      "domains": task.preferred_domains,
-                     "searches": 0, "reads": 0}
+                     "searches": 0, "reads": 0, "finalize": False}
 
         # 查询可行性判断：如果任务明显无法通过网络搜索获得答案，直接基于已知信息分析
         if self._is_non_searchable(task, context):
@@ -151,7 +152,8 @@ class ResearcherAgent(BaseAgent):
                     allowed = [tool for tool in self.tools
                                if not (tool.name == "web_search" and retrieval["searches"] >= 2)
                                and not (tool.name == "browser" and retrieval["reads"] >= 2)]
-                    policy.tools = [tool.get_openai_tool_schema() for tool in allowed] or None
+                    policy.tools = ([tool.get_openai_tool_schema() for tool in allowed]
+                                    if not retrieval["finalize"] else []) or None
                 response = await call_sync(policy, messages)
             except RuntimeError as e:
                 # 上下文长度超限等致命错误
@@ -183,15 +185,14 @@ class ResearcherAgent(BaseAgent):
                 if not content.strip():
                     return AgentResult(task.task_id, AgentStatus.FAILED,
                         output="Research returned empty model output", trajectory=trajectory, confidence=0.0)
-                if not any(t.get("role") == "tool" and t.get("result") for t in trajectory):
+                if not any(t.get("role") == "tool" for t in trajectory):
                     messages.append({"role": "user", "content": "No evidence has been retrieved. Call an available search tool before answering."})
                     continue
-                # B方案：检测 LLM 回复是否包含明显的工具失败说明
-                if self._is_tool_failure_explanation(content):
+                if not any(extract_sources(t.get("result")) for t in trajectory if t.get("role") == "tool"):
                     return AgentResult(
                         task_id=task.task_id,
                         status=AgentStatus.FAILED,
-                        output=content,
+                        output="No usable retrieved sources. " + content,
                         trajectory=trajectory,
                         token_usage=total_tokens,
                         confidence=0.0,
@@ -218,24 +219,10 @@ class ResearcherAgent(BaseAgent):
 
                 result = await self._retrieve(tool_name, args, retrieval)
 
-                # B方案：检测工具返回结果是否包含 error 字段
-                if isinstance(result, dict) and result.get("error"):
-                    error_msg = result["error"]
-                    trajectory.append({
-                        "turn": turn,
-                        "role": "tool",
-                        "tool_call_id": tc.get("id", ""),
-                        "name": tool_name,
-                        "error": error_msg,
-                    })
-                    return AgentResult(
-                        task_id=task.task_id,
-                        status=AgentStatus.FAILED,
-                        output=f"Tool '{tool_name}' failed: {error_msg}",
-                        trajectory=trajectory,
-                        token_usage=total_tokens,
-                        confidence=0.0,
-                    )
+                # Preserve earlier evidence and complete every tool-call pairing,
+                # even when a later read fails or a batch exceeds its budget.
+                if isinstance(result, dict) and result.get("budget_exhausted"):
+                    retrieval["finalize"] = True
 
                 tool_results.append({
                     "tool_call_id": tc.get("id", ""),
@@ -249,10 +236,11 @@ class ResearcherAgent(BaseAgent):
                     "name": tool_name,
                     "result": result,
                     "arguments": args,
+                    **({"error": result["error"]} if isinstance(result, dict) and result.get("error") else {}),
                 })
 
             # Empty search results may still leave budget to read a publisher URL.
-            force_summary = retrieval["searches"] >= 2 and retrieval["reads"] >= 2
+            force_summary = retrieval["finalize"] or (retrieval["searches"] >= 2 and retrieval["reads"] >= 2)
 
             # 将 assistant message 和 tool results 追加到 messages
             assistant_msg = {
@@ -443,7 +431,7 @@ class ResearcherAgent(BaseAgent):
 
     async def _read_source(self, url, query, state):
         if state["reads"] >= 2:
-            return {"error": "Page-read budget exhausted"}
+            return {"error": "Page-read budget exhausted", "budget_exhausted": True}
         state["reads"] += 1
         args = {"url": url, "max_chars": 8000}
         if "query" in inspect.signature(self.tool_map["browser"].execute).parameters:
@@ -464,7 +452,7 @@ class ResearcherAgent(BaseAgent):
         if tool_name != "web_search":
             return await self._execute_tool(tool_name, args)
         if state["searches"] >= 2:
-            return {"error": "Search budget exhausted"}
+            return {"error": "Search budget exhausted", "budget_exhausted": True}
         state["searches"] += 1
         args = dict(args)
         query = args.get("query") or " ".join(state["hints"]) or state["scope"]
@@ -508,23 +496,6 @@ class ResearcherAgent(BaseAgent):
             return await tool.execute(**args)
         except Exception as e:
             return {"error": f"{type(e).__name__}: {e}"}
-
-    def _is_tool_failure_explanation(self, content: str) -> bool:
-        """检测 LLM 回复是否是工具失败的解释说明而非真实研究结果。
-
-        常见模式：额度用完、无法连接、无法搜索等。
-        """
-        if not content:
-            return False
-        c = content.lower()
-        failure_keywords = [
-            "无法通过", "无法执行", "无法使用", "无法获取", "无法访问",
-            "额度已用尽", "配额已用完", "额度已用完", "搜索配额",
-            "cannot search", "unable to search", "quota exceeded",
-            "api key", "额度不足", "余额不足", "余额为", "余额：0",
-            "网络错误", "连接失败", "无法连接到",
-        ]
-        return any(kw in c for kw in failure_keywords)
 
     def _extract_confidence(self, content: str) -> float:
         """从输出文本中尝试提取置信度分数。"""

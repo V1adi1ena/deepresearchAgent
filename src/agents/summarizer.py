@@ -77,8 +77,13 @@ class SummarizerAgent(BaseAgent):
         sources = result_sources(results)
         # Keep structured evidence valid, giving read passages more space than
         # provider summaries; full records remain in the report and task trace.
-        prompt_sources = [{**s, "snippet": s["snippet"][:2000 if s.get("evidence_kind") == "page_excerpt" else 500]}
-                          for s in sources]
+        prompt_sources = [{**s, "snippet": ""} for s in sources]
+        excerpt_budget = max(0, 30000 - len(prompt) - len(json.dumps(prompt_sources, ensure_ascii=False)))
+        weights = [4 if s.get("evidence_kind") == "page_excerpt" else 1 for s in sources]
+        unit_budget = excerpt_budget // max(1, sum(weights))
+        for view, source, weight in zip(prompt_sources, sources, weights):
+            limit = min(2000 if weight == 4 else 500, unit_budget * weight)
+            view["snippet"] = source["snippet"][:limit]
         prompt += "\n# Retrieved sources\n" + json.dumps(prompt_sources, ensure_ascii=False)
         messages = [
             {"role": "system", "content": self._system_prompt()},
