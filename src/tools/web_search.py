@@ -188,11 +188,11 @@ class WebSearchTool(BaseWebSearchTool):
                 # 无运行中的事件循环，忽略
                 pass
 
-    async def execute(self, query: str, top_n: int = 5) -> dict[str, Any]:
+    async def execute(self, query: str, top_n: int = 5, domains: list[str] | None = None) -> dict[str, Any]:
         if self.backend == "bing":
             return await self._bing_execute(query, top_n)
         if self.backend == "bocha":
-            return await self._bocha_execute(query, top_n)
+            return await self._bocha_execute(query, top_n, domains)
         if self.backend == "metaso":
             return await self._metaso_execute(query, top_n)
         return await self._serpapi_execute(query, top_n)
@@ -309,7 +309,7 @@ class WebSearchTool(BaseWebSearchTool):
             "source": "bing",
         }
 
-    async def _bocha_execute(self, query: str, top_n: int) -> dict[str, Any]:
+    async def _bocha_execute(self, query: str, top_n: int, domains: list[str] | None = None) -> dict[str, Any]:
         """博查AI搜索后端。
 
         文档: https://open.bochaai.com
@@ -329,6 +329,8 @@ class WebSearchTool(BaseWebSearchTool):
             "freshness": "noLimit",
             "count": top_n,
         }
+        if domains:
+            payload["include"] = "|".join(domains)
         headers = {
             "Authorization": f"Bearer {self.bocha_key}",
             "Content-Type": "application/json",
@@ -368,7 +370,9 @@ class WebSearchTool(BaseWebSearchTool):
             results.append({
                 "title": item.get("name", ""),
                 "url": item.get("url", ""),
-                "snippet": item.get("snippet", ""),
+                "snippet": (item.get("summary") or item.get("snippet", ""))[:2000],
+                "published_at": item.get("datePublished", ""),
+                "evidence_kind": "search_summary" if item.get("summary") else "search_snippet",
             })
 
         # 结构 B: /v1/ai-search → data.messages[] content 里含引用

@@ -11,6 +11,7 @@ Red Agent 的职责是对研究报告进行多维度"攻击"，找出事实错�
 """
 from __future__ import annotations
 from src.utils.async_call import call_model
+from src.utils.sources import cited_sources
 import copy
 import math
 
@@ -41,7 +42,8 @@ SYSTEM_RED_AGENT = (
     "你是一位极其严苛的研究报告审查员（Red Agent）。你的任务是以批判性思维深度审查研究报告，"
     "找出所有事实错误、幻觉、逻辑漏洞、来源缺陷和覆盖缺失。你必须基于客观证据给出评分，"
     "不能因报告写作流畅而放松标准。评分标准要严格——多数研究报告默认只有 5-6 分而非 8-9 分。"
-    "输出必须是严格的 JSON 格式。"
+    "输出必须是严格的 JSON 格式。每个维度最多返回 3 项最高优先级、互不重复的问题，"
+    "每项使用简短位置和证据片段，避免重复整段报告。问题列表不是全量清单，不得因只列三项而提高分数。"
 )
 
 # --- 维度 1: 事实核查 ---
@@ -294,7 +296,7 @@ class RedAgent:
             raise RuntimeError("Report exceeds full-review input limit; original retained")
         content_truncated = report.content
         
-        sources_text = self._format_sources(report.sources)
+        sources_text = self._format_sources(cited_sources(report.content, report.sources))
 
         for dim, prompt_template in DIMENSION_PROMPTS.items():
             if dim not in self.dimensions:
@@ -341,8 +343,8 @@ class RedAgent:
         for i, s in enumerate(sources[:max_items], 1):
             title = s.get("title", "未知标题")
             url = s.get("url", "")
-            snippet = s.get("snippet", "")[:300]  # 截断 snippet
-            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nSnippet: {snippet}\n")
+            snippet = s.get("snippet", "")[:2000]
+            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nEvidence kind: {s.get('evidence_kind', 'search_snippet')}\nPublished: {s.get('published_at', '')}; scope: {s.get('scope_note', 'not_checked')}\nExcerpt: {snippet}\n")
         if max_items is not None and len(sources) > max_items:
             lines.append(f"... 还有 {len(sources) - max_items} 个来源未显示")
         return "\n".join(lines)

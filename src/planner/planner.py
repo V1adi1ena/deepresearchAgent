@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import re
+from datetime import date
 from typing import Any
 
 from .dag import DAG, DAGCycleError
@@ -50,7 +51,8 @@ Return a JSON object with this exact structure (no markdown, no extra text):
       "timeout_seconds": 120,
       "priority": 1,
       "expected_type": "factual",
-      "search_hints": ["keyword1", "keyword2"]
+      "search_hints": ["keyword1", "keyword2"],
+      "preferred_domains": []
     }}
   ]
 }}
@@ -64,8 +66,10 @@ Return a JSON object with this exact structure (no markdown, no extra text):
 6. Verification tasks should depend on analysis tasks
 7. Use concise but clear descriptions
 8. CRITICAL — RELEVANCE CONSTRAINT: Each sub-task description MUST directly address the research question. If the user asks about 'internship/job application', do NOT generate tasks about 'technology trends', 'annual news summary', or 'science breakthroughs'.
-9. The search_hints field MUST contain keywords directly from the query. Do NOT invent unrelated keywords.
+9. search_hints MUST contain 1-2 usable, focused search queries with the exact requested entity/model versions and time scope. Prefer official technical reports, model cards, original papers, or filings. Where known, use a publisher's site: domain; never invent source URLs or assume a preferred domain proves a claim.
 10. Prefer specific, actionable queries over broad, vague ones.
+11. preferred_domains lists known publisher/institution domains relevant to this task (up to 6). Leave empty if unknown. When nonempty, search_hints MUST use site: constraints with the correct publisher for each query; order preferred_domains to correspond to those queries. Keep each query short: entity/version + report/benchmark + site, not every evaluation dimension. These are retrieval preferences, never factual guarantees.
+12. HARD RETRIEVAL BUDGET: each task has at most TWO search queries and TWO page reads. Assign at most TWO requested entities to each task; spread entities across the available tasks. Do not put all entities in one task and spend another on generic synthesis/comparison, which is already done by the final summarizer. Preserve requested dates/versions; later extensions are not interchangeable with original releases.
 
 ## Anti-examples (DO NOT do this)
 - Query: "How to find an internship at a big tech company" → BAD tasks: "2025 technology trends", "annual science news", "latest AI breakthroughs"
@@ -243,7 +247,8 @@ class Planner:
                 "New tasks should fill gaps and avoid duplicating existing coverage."
             )
         limit = getattr(self, "max_tasks", 8)
-        return INITIAL_PLAN_PROMPT.format(query=query, memory_context=memory or "None", max_tasks=limit) + extra_hint
+        return (f"Current date: {date.today().isoformat()}. Use this date for current/latest requests; do not assume last year.\n"
+                + INITIAL_PLAN_PROMPT.format(query=query, memory_context=memory or "None", max_tasks=limit) + extra_hint)
 
     def _parse_plan(self, json_str: str, preserved_tasks=None) -> DAG:
         """健壮性 JSON 解析：处理 markdown 代码块、多余换行等噪声。
@@ -361,6 +366,8 @@ class Planner:
             priority=int(item.get("priority", 1)),
             expected_type=item.get("expected_type", "factual"),
             search_hints=list(item.get("search_hints", [])),
+            preferred_domains=[domain for domain in item.get("preferred_domains", [])
+                               if isinstance(domain, str) and re.fullmatch(r"[A-Za-z0-9.-]+\.[A-Za-z]{2,}", domain)][:6],
         )
 
     def get_task_map_from_dag(self, dag: DAG, raw_json: str) -> dict[str, SubTask]:

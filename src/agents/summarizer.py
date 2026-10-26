@@ -74,7 +74,12 @@ class SummarizerAgent(BaseAgent):
             compressed = await call_sync(compressor.compress, texts, query)
             prompt = "# Question\n" + query + "\n# Findings\n" + "\n".join(compressed)
         # Stable evidence records stay outside compression, and generated URLs are not new sources.
-        prompt += "\n# Retrieved sources\n" + json.dumps(result_sources(results), ensure_ascii=False)
+        sources = result_sources(results)
+        # Keep structured evidence valid, giving read passages more space than
+        # provider summaries; full records remain in the report and task trace.
+        prompt_sources = [{**s, "snippet": s["snippet"][:2000 if s.get("evidence_kind") == "page_excerpt" else 500]}
+                          for s in sources]
+        prompt += "\n# Retrieved sources\n" + json.dumps(prompt_sources, ensure_ascii=False)
         messages = [
             {"role": "system", "content": self._system_prompt()},
             {"role": "user", "content": prompt},
@@ -120,6 +125,9 @@ class SummarizerAgent(BaseAgent):
             "Your task is to integrate multiple research findings into a coherent, well-structured report. "
             "Use Markdown formatting. Cite sources explicitly. "
             "Use only the supplied evidence. State gaps explicitly; do not invent facts to meet a length target. "
+            "Sources marked search_snippet/search_summary have not been read as page text; page_excerpt contains retrieved verbatim passages, not an independent truth guarantee. "
+            "Respect source publication dates and scope_note: later extensions or renamed versions must not stand in for a requested historical release. A later retrospective is usable only for explicitly supported historical facts. "
+            "Do not promote a secondary site's claim into an official benchmark, or mix different model sizes/versions or evaluation settings. "
             f"Keep the entire report, including references, under {target_chars} characters. "
             "Prioritize the answer, supported comparisons and evidence gaps; avoid repetitive background or restating the question. "
             "Use compact inline source IDs and list only sources actually cited, not the full retrieved inventory. "

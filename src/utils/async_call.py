@@ -22,12 +22,17 @@ def track_tool(tool):
     async def execute(*args, **kwargs):
         calls = tool_call_records.get()
         record = {"tool": tool.name, "status": "running"}
+        bound = inspect.signature(original).bind(*args, **kwargs)
+        record["input"] = {key: value for key, value in bound.arguments.items()
+                           if key in ("query", "url", "top_n", "max_chars", "domains")}
         started = time.monotonic()
         if calls is not None:
             calls.append(record)
         try:
             result = await original(*args, **kwargs)
-            record["status"] = "failed" if isinstance(result, dict) and result.get("error") else "completed"
+            failed = (isinstance(result, dict) and result.get("error")) or (
+                tool.name == "browser" and isinstance(result, str) and result.startswith(("[Browser Error]", "[Browser Warning]")))
+            record["status"] = "failed" if failed else "completed"
             return result
         except asyncio.CancelledError:
             record["status"] = "cancelled"

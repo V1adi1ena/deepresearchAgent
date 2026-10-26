@@ -87,6 +87,7 @@ class SubTask:
     priority: int = 1
     expected_type: str = "factual"  # factual | analytical | comparative | temporal
     search_hints: list[str] = field(default_factory=list)
+    preferred_domains: list[str] = field(default_factory=list)
 
 
 @dataclass

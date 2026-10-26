@@ -10,7 +10,7 @@ Blue Agent 接收 Red Agent 的 Verdict，按优先级排序并执行三类修�
 """
 from __future__ import annotations
 from src.utils.async_call import call_model, model_budget
-from src.utils.sources import extract_sources
+from src.utils.sources import extract_sources, cited_sources
 
 import copy
 from typing import Any
@@ -291,7 +291,7 @@ class BlueAgent:
         prompt = PROMPT_IN_PLACE_FIX
         prompt = prompt.replace("{issue_desc}", issue.description)
         prompt = prompt.replace("{content}", self._truncate_content(report.content))
-        prompt = prompt.replace("{sources}", self._format_sources(report.sources))
+        prompt = prompt.replace("{sources}", self._format_sources(cited_sources(report.content, report.sources)))
         messages = [
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
@@ -425,7 +425,7 @@ class BlueAgent:
         prompt = prompt.replace("{original}", self._truncate_content(original))
         prompt = prompt.replace("{revised}", self._truncate_content(revised))
         prompt = prompt.replace("{fixes}", fixes_text)
-        prompt += "\nAuthoritative evidence for checking corrections (the original may be wrong):\n" + self._format_sources(sources or [])
+        prompt += "\nAuthoritative evidence for checking corrections (the original may be wrong):\n" + self._format_sources(cited_sources(original + "\n" + revised, sources or []))
         messages = [
             {"role": "system", "content": SYSTEM_BLUE_AGENT},
             {"role": "user", "content": prompt},
@@ -462,8 +462,8 @@ class BlueAgent:
         for i, s in enumerate(sources[:max_items], 1):
             title = s.get("title", "未知标题")
             url = s.get("url", "")
-            snippet = s.get("snippet", "")[:300]
-            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nSnippet: {snippet}\n")
+            snippet = s.get("snippet", "")[:2000]
+            lines.append(f"[{s.get('source_id', i)}] {title}\nURL: {url}\nEvidence kind: {s.get('evidence_kind', 'search_snippet')}\nPublished: {s.get('published_at', '')}; scope: {s.get('scope_note', 'not_checked')}\nExcerpt: {snippet}\n")
         if max_items is not None and len(sources) > max_items:
             lines.append(f"... 还有 {len(sources) - max_items} 个来源未显示")
         return "\n".join(lines)

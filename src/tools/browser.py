@@ -49,7 +49,7 @@ class BaseBrowserTool(ABC):
     )
 
     @abstractmethod
-    async def execute(self, url: str, max_chars: int = _DEFAULT_MAX_CHARS) -> str:
+    async def execute(self, url: str, max_chars: int = _DEFAULT_MAX_CHARS, query: str = "") -> str:
         """打开 URL，提取正文。
 
         Args:
@@ -106,7 +106,7 @@ class BrowserTool(BaseBrowserTool):
             "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         )
 
-    async def execute(self, url: str, max_chars: int = _DEFAULT_MAX_CHARS) -> str:
+    async def execute(self, url: str, max_chars: int = _DEFAULT_MAX_CHARS, query: str = "") -> str:
         if not url.startswith(("http://", "https://")):
             return f"[Browser Error] Invalid URL: {url}. URL must start with http:// or https://"
 
@@ -114,9 +114,16 @@ class BrowserTool(BaseBrowserTool):
             html = await self._fetch(url)
             text = self._extract_text(html)
             text = self._clean_text(text)
+            if ("CF_APP_WAF" in text and "requestInfo" in text) or (
+                len(text) < 1000 and any(marker in text.lower() for marker in
+                    ("enable javascript and cookies to continue", "checking your browser", "just a moment..."))):
+                return "[Browser Error] Challenge page returned instead of article text"
 
             if len(text) > max_chars:
-                text = text[:max_chars] + f"\n\n[CONTENT_TRUNCATED: {len(text)} chars total, showing first {max_chars}]"
+                from ..utils.retrieval import evidence_excerpt
+                length = len(text)
+                text = evidence_excerpt(text, query, max_chars) if query else text[:max_chars]
+                text += f"\n\n[CONTENT_TRUNCATED: {length} chars total; extracted passages, not full page]"
 
             return text if text else "[Browser Warning] No meaningful content extracted from the page."
 
@@ -133,6 +140,8 @@ class BrowserTool(BaseBrowserTool):
         ) as session:
             async with session.get(url, allow_redirects=True) as resp:
                 resp.raise_for_status()
+                if "application/pdf" in resp.headers.get("Content-Type", "").lower():
+                    raise ValueError("PDF extraction is unavailable in browser; use an HTML source instead")
                 # 尝试自动检测编码
                 charset = resp.charset or "utf-8"
                 return await resp.text(encoding=charset)
@@ -146,6 +155,12 @@ class BrowserTool(BaseBrowserTool):
             return self._fallback_extract(html)
 
         soup = BeautifulSoup(html, "html.parser")
+
+        # Preserve table cell/row associations before flattening the page text.
+        for row in soup.find_all("tr"):
+            cells = row.find_all(["th", "td"])
+            if cells:
+                row.replace_with("\n" + " | ".join(cell.get_text(" ", strip=True) for cell in cells) + "\n")
 
         # 移除噪声标签
         for tag_name in _NOISE_TAGS:

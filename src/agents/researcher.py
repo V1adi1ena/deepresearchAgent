@@ -13,8 +13,15 @@ from __future__ import annotations
 from ..utils.async_call import call_sync
 
 import asyncio
+import copy
 import json
+import inspect
+import re
+import time
+from datetime import date
 from typing import Any
+from ..utils.retrieval import filter_search_results, evidence_excerpt
+from ..utils.async_call import request_deadline
 
 from .base_agent import BaseAgent
 from ..orchestrator.schemas import SubTask, AgentResult, AgentStatus
@@ -67,6 +74,10 @@ class ResearcherAgent(BaseAgent):
 
         # 构建任务描述
         task_desc = self._build_task_prompt(task, context)
+        retrieval = {"scope": context.get("query") or task.description,
+                     "hints": task.search_hints + ["site:" + d for d in task.preferred_domains],
+                     "domains": task.preferred_domains,
+                     "searches": 0, "reads": 0}
 
         # 查询可行性判断：如果任务明显无法通过网络搜索获得答案，直接基于已知信息分析
         if self._is_non_searchable(task, context):
@@ -134,7 +145,14 @@ class ResearcherAgent(BaseAgent):
                 if compressor:
                     # Only tool payloads are compressed: roles, call IDs and pairings stay intact.
                     messages = await call_sync(compressor.compress_messages, messages, task.description)
-                response = await call_sync(self.policy, messages)
+                policy = self.policy
+                if hasattr(policy, "tools"):
+                    policy = copy.copy(policy)
+                    allowed = [tool for tool in self.tools
+                               if not (tool.name == "web_search" and retrieval["searches"] >= 2)
+                               and not (tool.name == "browser" and retrieval["reads"] >= 2)]
+                    policy.tools = [tool.get_openai_tool_schema() for tool in allowed] or None
+                response = await call_sync(policy, messages)
             except RuntimeError as e:
                 # 上下文长度超限等致命错误
                 trajectory.append({"turn": turn, "error": str(e)})
@@ -198,7 +216,7 @@ class ResearcherAgent(BaseAgent):
                 except json.JSONDecodeError:
                     args = {}
 
-                result = await self._execute_tool(tool_name, args)
+                result = await self._retrieve(tool_name, args, retrieval)
 
                 # B方案：检测工具返回结果是否包含 error 字段
                 if isinstance(result, dict) and result.get("error"):
@@ -230,26 +248,11 @@ class ResearcherAgent(BaseAgent):
                     "tool_call_id": tc.get("id", ""),
                     "name": tool_name,
                     "result": result,
+                    "arguments": args,
                 })
 
-            # 检测搜索结果是否全为空（工具返回了但无有效内容）
-            all_empty = True
-            for tr in tool_results:
-                if tr["name"] == "web_search":
-                    res = tr["result"]
-                    if isinstance(res, dict) and res.get("results"):
-                        for r in res["results"]:
-                            if r.get("snippet", "").strip():
-                                all_empty = False
-                                break
-            
-            # 如果已搜索 2+ 轮或搜索结果全空，强制要求总结
-            search_count = sum(1 for t in trajectory if t.get("role") == "tool" and t.get("name") == "web_search")
-            force_summary = False
-            if search_count >= 2:
-                force_summary = True
-            if all_empty and tool_results:
-                force_summary = True
+            # Empty search results may still leave budget to read a publisher URL.
+            force_summary = retrieval["searches"] >= 2 and retrieval["reads"] >= 2
 
             # 将 assistant message 和 tool results 追加到 messages
             assistant_msg = {
@@ -288,6 +291,7 @@ class ResearcherAgent(BaseAgent):
         target_chars = max(256, getattr(self.policy, "max_tokens", 2048) // 3)
         return (
             "You are a meticulous research assistant. "
+            f"Current date: {date.today().isoformat()}. Interpret current/latest relative to this date. "
             "Your job is to gather and analyze information using the RIGHT tool for each task. "
             f"Keep the final subtask findings under {target_chars} characters. "
             "Return supported facts, source links and evidence gaps; do not write a full report for a subtask. "
@@ -311,11 +315,14 @@ class ResearcherAgent(BaseAgent):
             "2. Choose the RIGHT tool based on the task type. You can use MULTIPLE tools in sequence.\n"
             "3. For most research tasks, START with web_search or arxiv_reader.\n"
             "4. If search results are too short, use browser to read the full article.\n"
+            "Search exact requested versions and dates, preferably one entity per query. Use official reports/model cards/original studies, not newer-version roundups. "
+            "web_search results with evidence_kind=page_excerpt already include retrieved page passages; use those passages and do not reopen the same URL. "
+            "A preferred_domain flag is only a routing hint, not a factual guarantee. "
             "5. If the task involves numbers/calculations, use calculator or code_sandbox.\n"
-            "6. You may call tools AT MOST 2 times total. After that you MUST summarize.\n"
+            "6. Budget: at most 2 searches and 2 page reads. Automatic page reads in web_search consume the page-read budget.\n"
             "7. Only after gathering information, provide a concise summary with a confidence score (0-1).\n"
             "8. NEVER greet the user or ask what they want to search — just execute immediately.\n"
-            "9. If you have already performed 2 tool calls, do NOT call more — write the final summary now."
+            "9. After both search and page-read budgets are used, summarize. If search finds nothing, you may read a known publisher URL, but cite it only after a successful fetch."
         )
 
     def _system_prompt_direct_analysis(self) -> str:
@@ -411,7 +418,7 @@ class ResearcherAgent(BaseAgent):
             "2. Review the results.",
             f"3. If needed, call '{primary_tool}' ONE MORE time with a refined query.",
             "   You may call tools AT MOST 2 times total. After the 2nd call, you MUST write the final summary.",
-            "4. If search results are too short, you may use 'browser' to read the full article (counts as 1 tool call).",
+            "4. Search results may already contain read page passages. If not, use remaining page-read budget to read a publisher URL.",
             "5. If calculations are needed, use 'calculator' or 'code_sandbox' (counts as 1 tool call).",
             "6. Finally, summarize your findings in Chinese with a confidence score (0-1).",
             "7. DO NOT greet the user or ask clarifying questions — just execute immediately.",
@@ -419,6 +426,8 @@ class ResearcherAgent(BaseAgent):
         ])
         if task.search_hints:
             lines.insert(1, f"Search hints (MUST use these as primary keywords): {', '.join(task.search_hints)}")
+        if task.preferred_domains:
+            lines.append("Preferred publisher domains: " + ", ".join(task.preferred_domains))
         keys = list(dict.fromkeys([f"dep:{dep}" for dep in task.dependencies] + task.context_keys + ["research_memory"]))
         if keys:
             ctx_parts = []
@@ -431,6 +440,64 @@ class ResearcherAgent(BaseAgent):
                 lines.append("\n## Context:")
                 lines.extend(ctx_parts)
         return "\n".join(lines)
+
+    async def _read_source(self, url, query, state):
+        if state["reads"] >= 2:
+            return {"error": "Page-read budget exhausted"}
+        state["reads"] += 1
+        args = {"url": url, "max_chars": 8000}
+        if "query" in inspect.signature(self.tool_map["browser"].execute).parameters:
+            args["query"] = query
+        remaining = (request_deadline.get() or (time.monotonic() + 12)) - time.monotonic()
+        try:
+            raw = await asyncio.wait_for(self._execute_tool("browser", args), max(0, min(12, remaining)))
+        except asyncio.TimeoutError:
+            return {"error": "Page read timed out"}
+        if not isinstance(raw, str) or not raw.strip() or raw.startswith(("[Browser Error]", "[Browser Warning]")):
+            return {"error": raw if isinstance(raw, str) else "No extracted page text"}
+        return {"url": url, "content": raw, "evidence_excerpt": evidence_excerpt(raw, query),
+                "evidence_kind": "page_excerpt"}
+
+    async def _retrieve(self, tool_name, args, state):
+        if tool_name == "browser" and "browser" in self.tool_map:
+            return await self._read_source(args.get("url", ""), state["scope"], state)
+        if tool_name != "web_search":
+            return await self._execute_tool(tool_name, args)
+        if state["searches"] >= 2:
+            return {"error": "Search budget exhausted"}
+        state["searches"] += 1
+        args = dict(args)
+        query = args.get("query") or " ".join(state["hints"]) or state["scope"]
+        planned = [hint for hint in state["hints"] if "site:" in hint and len(hint.split()) > 1]
+        if "site:" not in query and state["searches"] <= len(planned):
+            query = planned[state["searches"] - 1]
+        if "site:" not in query and len(state.get("domains", [])) == 1:
+            domains = state["domains"]
+            query += " site:" + domains[0]
+        years = re.findall(r"(?<!\d)(?:19|20)\d{2}(?!\d)", state["scope"])
+        if years and not any(year in query for year in years):
+            query += " " + " ".join(dict.fromkeys(years))
+        args["query"] = query
+        domains = re.findall(r"site:([A-Za-z0-9.-]+)", query) or state.get("domains", [])
+        if domains and "domains" in inspect.signature(self.tool_map["web_search"].execute).parameters:
+            args["domains"] = domains
+        result = filter_search_results(await self._execute_tool(tool_name, args), state["scope"], state["hints"], domains)
+        if not isinstance(result, dict) or result.get("error") or "browser" not in self.tool_map:
+            return result
+        reads = []
+        for item in result.get("results", []):
+            if state["reads"] >= 2:
+                break
+            if not item.get("url", "").startswith(("https://", "http://")):
+                continue
+            page = await self._read_source(item["url"], query, state)
+            reads.append({"url": item["url"], "status": "failed" if page.get("error") else "read",
+                          "error": page.get("error"), "chars": len(page.get("content", ""))})
+            if not page.get("error"):
+                item.update(page)
+                break
+        result["page_reads"] = reads
+        return result
 
     async def _execute_tool(self, tool_name: str, args: dict) -> dict:
         """调用具体工具实例。"""
